@@ -5,6 +5,11 @@ import Center from  '@/center'
 import Main from  '@/view/main/main'
 import Allsend from '@/view/message/allsend' //消息群发
 import Msglist from '@/view/message/list' //消息群发
+import Funlist from '@/view/user/funlist'  //粉丝列表
+import Lablist from '@/view/user/lablist'  //用户标签管理
+import Mlist from '@/view/material/list' //图文素材库
+import Publist from '@/view/account/publist' //公众号列表
+import Setting from '@/view/account/setting' //个人设置
 Vue.use(Router)
 
 export default new Router({
@@ -17,18 +22,14 @@ export default new Router({
     },*/
     {
       path:'/',
-      name:'Main',
+      name:'main',
       component:Main,
-    },
-    {
-      path:'/',
-      name:'Center',
-      component:Center,
       children:[ 
         {
           name: 'message',
           path: 'message',
-          component: Main,
+          redirect:'message/allsend',
+          component: Center,
           children:[
               {
                 path:'allsend',
@@ -38,6 +39,50 @@ export default new Router({
                 path:'list',
                 component:Msglist
               }
+          ]
+        },
+        {
+          name:'user',
+          path:'user',
+          redirect:'user/funlist',
+          component:Center,
+          children:[
+            {
+              path:'funlist',
+              component:Funlist
+            },
+            {
+              path:'lablist',
+              component:Lablist
+            }
+          ]
+        },
+        {
+          name:'material',
+          path:'material',
+          redirect:'material/list',
+          component:Center,
+          children:[
+            {
+              path:'list',
+              component:Mlist
+            },
+          ]
+        },
+        {
+          name:'account',
+          path:'account',
+          redirect:'account/publist',
+          component:Center,
+          children:[
+            {
+              path:'publist',
+              component:Publist
+            },
+            {
+              path:'setting',
+              component:Setting
+            }
           ]
         }
      ]
