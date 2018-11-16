@@ -1,13 +1,13 @@
 <template>
     <div class="material-items">
         <el-button type="primary">同步图文素材</el-button>
-        <div class="list">
+        <div class="news-list">
             <div class="items">
                 <dl>
-                    <dt>
+                    <dd class="first">
                         <img src="../../assets/1.png" />
                         <p>哈哈哈哈哈哈哈哈哈哈哈哈哈哈</p>
-                    </dt>
+                    </dd>
                     <dd>
                         <span>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</span>
                         <img src="../../assets/0.jpg" />
@@ -32,10 +32,10 @@
             </div>
             <div class="items">
                 <dl>
-                    <dt>
+                    <dd class="first">
                         <img src="../../assets/1.png" />
                         <p>哈哈哈哈哈哈哈哈哈哈哈哈哈哈</p>
-                    </dt>
+                    </dd>
                     <dd>
                         <span>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</span>
                         <img src="../../assets/0.jpg" />

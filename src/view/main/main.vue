@@ -17,7 +17,7 @@
                 <el-submenu index="2">
                     <template slot="title"><i class="el-icon-menu"></i>用户管理</template>
                     <el-menu-item-group>
-                       <router-link to="/user/funlist"> <el-menu-item index="2-1">粉丝列表</el-menu-item></router-link>
+                       <router-link to="/user/fanlist"> <el-menu-item index="2-1">粉丝列表</el-menu-item></router-link>
                        <router-link to="/user/lablist"><el-menu-item index="2-2">标签管理</el-menu-item></router-link>
                     </el-menu-item-group>
                 </el-submenu>
@@ -39,23 +39,21 @@
         <el-container>
             <el-header class="user-center" >
                  <div></div>
-                 <div  class="right">
-                    <a href="">切换帐号</a>
-                    <el-badge :value="100" :max="10" class="item ">
-                        <i class="el-icon-messag"></i>
-                    </el-badge>
-                    <div>
-                        <img src="" />
-                        <label>jimiyang</label>
-                    </div>
+                 <div class="right">
+                    <el-tooltip class="item" effect="dark"  placement="bottom">
+                        <div slot="content">当前帐号：{{name}}</div>
+                        <a href="javascript:" class="cur" @click="change">切换帐号</a>
+                    </el-tooltip>
+                    <a href="javascript:" class="exit">退出帐号</a>
                  </div>
             </el-header>
             <router-view></router-view>
         </el-container>
+        <accountArea :open.sync="isopen"></accountArea>
     </el-container>
 </template>
 <script>
-
+    import accountArea from  './account'
     export default{
         data(){
             return{
@@ -63,6 +61,13 @@
                 imgurl:'../../assets/0.jpg',
                 name:'橘子社',
                 funcount:1000,
+                isopen:false,
+            }
+        },
+        components:{accountArea},
+        methods:{
+            change(){
+                this.isopen = true
             }
         }
     }

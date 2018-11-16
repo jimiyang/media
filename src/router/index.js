@@ -5,13 +5,12 @@ import Center from  '@/center'
 import Main from  '@/view/main/main'
 import Allsend from '@/view/message/allsend' //消息群发
 import Msglist from '@/view/message/list' //消息群发
-import Funlist from '@/view/user/funlist'  //粉丝列表
+import Fanlist from '@/view/user/fanlist'  //粉丝列表
 import Lablist from '@/view/user/lablist'  //用户标签管理
 import Mlist from '@/view/material/list' //图文素材库
 import Publist from '@/view/account/publist' //公众号列表
 import Setting from '@/view/account/setting' //个人设置
 Vue.use(Router)
-
 export default new Router({
   mode:'history',
   routes: [
@@ -44,12 +43,12 @@ export default new Router({
         {
           name:'user',
           path:'user',
-          redirect:'user/funlist',
+          redirect:'user/fanlist',
           component:Center,
           children:[
             {
-              path:'funlist',
-              component:Funlist
+              path:'fanlist',
+              component:Fanlist
             },
             {
               path:'lablist',
