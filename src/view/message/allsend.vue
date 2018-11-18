@@ -12,7 +12,7 @@
                     <span>需要发给同时拥有A和B标签的粉丝？</span>
                 </h1>
                 <ul class="lab-blocks" >
-                    <li v-for="item in labList" :class="item.id==index ? 'checked':''" @click="selLab(item.id)">{{item.name}}</li>
+                    <li v-for="(item,i) in labList" :key="i" :class="item.id==index ? 'checked':''"  @click="selLab(item.id)">{{item.name}}</li>
                 </ul>
                 <h1 class="title">定时发送及原创校验</h1>
                 <div class="ant-items">
@@ -37,7 +37,7 @@
                 <div class="news-list">
                     <div class="items">
                         <dl>
-                            <dd v-for="(items,i) in newsData" v-if="i==0" class="first">
+                            <dd v-for= "(items,i) in newsData" :key="i" v-if="i==0"   class="first" >
                                 <img src="../../assets/1.png" />
                                 <p>哈哈哈哈哈哈哈哈哈哈哈哈哈哈</p>
                             </dd>
@@ -56,7 +56,7 @@
             <span>预计发送人数：{{sendNum}}</span>
         </div>
         <el-dialog  title="提示"  :visible.sync="dialogVisible"  @close='closeDialog'  width="600">
-            <selmaterial :hide.sync="ishide" :id.sync="getId"></selmaterial>
+            <selmaterial  :id.sync="getId"></selmaterial>
             <span slot="footer" class="dialog-footer">
                 <el-button @click="dialogVisible = false">取 消</el-button>
                 <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
@@ -66,9 +66,12 @@
 </template>
 <script>
     import selmaterial from './selmaterial'  
+    import api from  '../../api/get.js'
+    console.log(api)
     export default{
         data(){
             return{
+                api,
                 timingChecked:false,
                 reprintChecked:true,
                 sendNum:20, //发送人数
@@ -88,7 +91,12 @@
             }
         },
         components:{selmaterial},
-        created(){},
+        created(){
+            let parmas = {page:1,size:10,memberId:60587,status:1}
+            //this.api.getList(parmas).then((rs)=>{
+                //console.log(rs)
+            //})
+        },
         methods:{
             closeDialog(){
                 this.newsData=5;

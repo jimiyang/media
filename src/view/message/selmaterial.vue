@@ -23,7 +23,7 @@
                 <a href="" class="white-btn">同步</a>
                 <div class="masonry"> 
                     <div class="item"> 
-                       <div class="layer" :class="{hide:ishide}"></div>
+                       <div class="layer" :class="{show:currentindex === 1}"></div>
                        <h1 class="date">
                           <span><img src="../../assets/wx-ico.jpg" />2018年8月8日更新</span>
                           <a href="">查看连接</a>
@@ -44,7 +44,7 @@
                        </dl>
                     </div>
                     <div class="item"> 
-                      <div class="layer" :class="{hide:ishide}"></div>
+                      <div class="layer" :class="{show:currentindex === 2}"></div>
                        <h1 class="date">
                             <span><img src="../../assets/wx-ico.jpg" />2018年8月8日更新</span><a href="">查看连接</a>
                        </h1>
@@ -68,25 +68,33 @@
    export default{
       data(){
          return{
-            ishide:true,
             text:'',
-            content:''
+            content:'',
+            currentindex: ''
          }
       },
-      props:["hide","id"],
+      props:["id"],
       methods:{
          change(){
             alert();
          },
          selSendcon(id){
-            this.$emit('update:hide',false);
+           
+            this.currentindex=id
+            console.log(this.currentindex)
+            //this.$emit('update:hide',false);
             this.$emit('update:id',id)
          }
       },
       watch:{
-         hide(val){
-				this.ishide = val;
-			}
+         //hide(val){
+				//this.ishide = val;
+			//}
       }
    }
 </script>
+
+<style scoped>
+   .layer{display:none;}
+   .layer.show{display: block}
+</style>

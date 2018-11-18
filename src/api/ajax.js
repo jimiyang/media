@@ -1,17 +1,18 @@
 import axios from 'axios'
-const url = '/'
+const url = 'http://tclub.lx123.com/'
 let ajax = axios.create({
-   baseURL:url
+  baseURL:url
 })
 ajax.interceptors.request.use(function(config){
-     return config;
-   },function(error){
-     return Promise.reject(error);
+  return config;
+},function(error){
+  return Promise.reject(error);
 })
 ajax.interceptors.response.use(function(response){
-     //return response;
-	 return Promise.resolve(response);
-   },function(error){
-     return Promise.reject(error);
+  //return response;
+  return Promise.resolve(response);
+},function(error){
+  return Promise.reject(error);
 })
+
 export {ajax}
