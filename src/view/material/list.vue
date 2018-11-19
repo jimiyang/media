@@ -5,24 +5,24 @@
             <div class="items">
                 <dl>
                     <dd class="first">
-                        <img src="../../assets/1.png" />
+                        <img src="/static/images/1.png" />
                         <p>哈哈哈哈哈哈哈哈哈哈哈哈哈哈</p>
                     </dd>
                     <dd>
                         <span>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</span>
-                        <img src="../../assets/0.jpg" />
+                        <img src="/static/images/0.jpg" />
                     </dd>
                     <dd>
                         <span>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</span>
-                        <img src="../../assets/0.jpg" />
+                        <img src="/static/images/0.jpg" />
                     </dd>
                     <dd>
                         <span>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</span>
-                        <img src="../../assets/0.jpg" />
+                        <img src="/static/images/0.jpg" />
                     </dd>
                     <dd>
                         <span>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</span>
-                        <img src="../../assets/0.jpg" />
+                        <img src="/static/images/0.jpg" />
                     </dd>
                 </dl>
                 <div class="time">
@@ -33,24 +33,24 @@
             <div class="items">
                 <dl>
                     <dd class="first">
-                        <img src="../../assets/1.png" />
+                        <img src="/static/images/1.png" />
                         <p>哈哈哈哈哈哈哈哈哈哈哈哈哈哈</p>
                     </dd>
                     <dd>
                         <span>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</span>
-                        <img src="../../assets/0.jpg" />
+                        <img src="/static/images/0.jpg" />
                     </dd>
                     <dd>
                         <span>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</span>
-                        <img src="../../assets/0.jpg" />
+                        <img src="/static/images/0.jpg" />
                     </dd>
                     <dd>
                         <span>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</span>
-                        <img src="../../assets/0.jpg" />
+                        <img src="/static/images/0.jpg" />
                     </dd>
                     <dd>
                         <span>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</span>
-                        <img src="../../assets/0.jpg" />
+                        <img src="/static/images/0.jpg" />
                     </dd>
                 </dl>
                 <div class="time">

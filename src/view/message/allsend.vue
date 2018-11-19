@@ -12,7 +12,7 @@
                     <span>需要发给同时拥有A和B标签的粉丝？</span>
                 </h1>
                 <ul class="lab-blocks" >
-                    <li v-for="(item,i) in labList" :key="i" :class="item.id==index ? 'checked':''"  @click="selLab(item.id)">{{item.name}}</li>
+                    <li v-for="(item,i) in labList" :key="i" :class="{checked:item.id==index}"   @click="selLab(item.id)">{{item.name}}</li>
                 </ul>
                 <h1 class="title">定时发送及原创校验</h1>
                 <div class="ant-items">
@@ -21,8 +21,8 @@
                         <el-switch  v-model="timingChecked"  active-color="#4993ff"  inactive-color="#E0E0E0"></el-switch>
                         配合关注时间设置，可实现自动化的定期发送效果。
                         <el-tooltip  effect="dark"  placement="top">
-                                <div slot="content">举例：选择关注时间为下周二的粉丝，定时<br/>发送时间设置为下周三，即可实现下周二关<br/>注的粉丝自动在下周三收到群发消息推送。</div>
-                                <el-button>如何操作？</el-button>
+                            <div slot="content">举例：选择关注时间为下周二的粉丝，定时<br/>发送时间设置为下周三，即可实现下周二关<br/>注的粉丝自动在下周三收到群发消息推送。</div>
+                            <el-button>如何操作？</el-button>
                         </el-tooltip>
                     </div>
                     <div>
@@ -35,18 +35,19 @@
             <div class="preview-blocks">
                 <h1 class="title">微信预览器</h1>
                 <div class="news-list">
-                    <div class="items">
+                    <div class="txt-temp">{{message}}</div>
+                    <!--<div class="items">
                         <dl>
                             <dd v-for= "(items,i) in newsData" :key="i" v-if="i==0"   class="first" >
-                                <img src="../../assets/1.png" />
+                                <img src="/static/images/1.png" />
                                 <p>哈哈哈哈哈哈哈哈哈哈哈哈哈哈</p>
                             </dd>
                             <dd v-else>
                                 <span>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</span>
-                                <img src="../../assets/0.jpg" />
+                                <img src="/static/images/0.jpg" />
                             </dd>
                         </dl>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
@@ -55,8 +56,8 @@
             <a href="javascript:" class="blue-btn" @click="sendSubmit">立即高级群发</a>
             <span>预计发送人数：{{sendNum}}</span>
         </div>
-        <el-dialog  title="提示"  :visible.sync="dialogVisible"  @close='closeDialog'  width="600">
-            <selmaterial  :id.sync="getId"></selmaterial>
+        <el-dialog  title="选择群发内容"  :visible.sync="dialogVisible"  @close='closeDialog'  width="600">
+            <selmaterial  :id.sync="getId" :current.sync="cur" :message.sync="message"></selmaterial>
             <span slot="footer" class="dialog-footer">
                 <el-button @click="dialogVisible = false">取 消</el-button>
                 <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
@@ -65,9 +66,9 @@
     </div>
 </template>
 <script>
-    import selmaterial from './selmaterial'  
+    import selmaterial from '../../components/selmaterial.vue'
     import api from  '../../api/get.js'
-    console.log(api)
+    //console.log(api.getList)
     export default{
         data(){
             return{
@@ -82,6 +83,8 @@
                 index:1,
                 newsData:0,
                 current:0,
+                cur:0,
+                message:'',
                 labList:[{id:1,name:"所有粉丝"},
                     {id:2,name:"星标组"},
                     {id:3,name:"电商"},
@@ -96,10 +99,13 @@
             //this.api.getList(parmas).then((rs)=>{
                 //console.log(rs)
             //})
+            this.$store.state.test = "2222"
+           // console.log(this.$store.state.test)
         },
         methods:{
             closeDialog(){
                 this.newsData=5;
+                console.log(this.cur)
             },
             selLab(id){
                 this.index=id;
@@ -109,6 +115,11 @@
             },
             sendSubmit(){ //高级群发
                
+            }
+        },
+        watch:{
+            message(val){
+                this.message =val
             }
         }
     }

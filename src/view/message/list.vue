@@ -4,7 +4,7 @@
             <el-table-column   prop="content"  label="发送内容" ></el-table-column>
             <el-table-column   prop="type"  label="发送方式"   >
                 <template slot="header" slot-scope="slot">
-                   发送方式<img src="../../assets/filter-ico.png" />
+                   发送方式<img src="/static/images/filter-ico.png" />
                 </template>
             </el-table-column>
             <el-table-column   prop="number"  label="目标人数"  ></el-table-column>
@@ -15,12 +15,12 @@
             </el-table-column>
             <el-table-column   prop="time"  label="发送时间" >
                  <template slot="header" slot-scope="slot">
-                   发送时间<img src="../../assets/filter-ico.png" />
+                   发送时间<img src="/static/images/filter-ico.png" />
                 </template>
             </el-table-column>
             <el-table-column  label="操作"  width="180">
                 <template slot-scope="scope">
-                    <el-button @click="handleClick(scope.row)" type="text" size="small">详情</el-button>
+                    <el-button @click="handleClick(scope.row.id)" type="text" size="small">详情</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -31,9 +31,14 @@
         data(){
             return{
                 tableData:[
-                    {content:"啊",type:"111",number:"23",state:0,time:"2018-01-20 10:20:20"},
-                    {content:"啊1111",type:"111",number:"23",state:1,time:"2018-01-20 10:20:20"}
+                    {id:1,content:"啊",type:"111",number:"23",state:0,time:"2018-01-20 10:20:20"},
+                    {id:2,content:"啊1111",type:"112",number:"23",state:1,time:"2018-01-20 10:20:20"}
                 ]
+            }
+        },
+        methods:{
+            handleClick(index){
+                alert(index)
             }
         }
     }

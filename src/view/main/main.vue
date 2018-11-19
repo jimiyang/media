@@ -1,9 +1,10 @@
 <template>
      <el-container class="sec">
         <el-aside width="200px">
-            <div class="img-blocks"> <img :src="{imgurl}" /></div>
+            <div class="img-blocks"> <img :src="imgurl" />
+            </div>
             <div class="wx-name">
-                {{name}}<img src="../../assets/rz.png" />
+                {{name}}<img src="/static/images/rz.png" />
             </div>
             <div class="fun-num">粉丝数{{funcount}}</div>
             <el-menu class="menu-blocks" :default-openeds="['1']" :default-active="currentMenu">
@@ -31,7 +32,6 @@
                     <template slot="title"><i class="el-icon-setting"></i>帐号设置</template>
                     <el-menu-item-group>
                         <router-link to="/account/publist"><el-menu-item index="4-1">公众号列表</el-menu-item></router-link>
-                        <router-link to="/account/setting"><el-menu-item index="4-2">个人设置</el-menu-item></router-link>
                     </el-menu-item-group>
                 </el-submenu>
             </el-menu>
@@ -44,7 +44,15 @@
                         <div slot="content">当前帐号：{{name}}</div>
                         <a href="javascript:" class="cur" @click="change">切换帐号</a>
                     </el-tooltip>
-                    <a href="javascript:" class="exit">退出帐号</a>
+                    <el-popover style="display:none;"  placement="bottom" class="user-name"  width="200"  v-model="visible2">
+                        <p>这是一段内容这是一段内容确定删除吗？</p>
+                        <div style="text-align: right; margin: 0">
+                            <el-button size="mini" type="text" @click="visible2 = false">取消</el-button>
+                            <el-button type="primary" size="mini" @click="visible2 = false">确定</el-button>
+                        </div>
+                        <el-button slot="reference"><img src="/static/images/0.jpg" />吉米小绵羊</el-button>
+                    </el-popover>
+                   <router-link to="/" class="exit" >退出帐号</router-link>
                  </div>
             </el-header>
             <router-view></router-view>
@@ -58,10 +66,11 @@
         data(){
             return{
                 currentMenu: 'allsend',
-                imgurl:'../../assets/0.jpg',
+                imgurl:'/static/images/0.jpg',
                 name:'橘子社',
                 funcount:1000,
                 isopen:false,
+                visible2:''
             }
         },
         components:{accountArea},

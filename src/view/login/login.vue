@@ -7,14 +7,14 @@
 		<ul class="user-info">
 			<li>
 				<div class="txt">
-					<input type="text" class="ipt name-ico" v-model="form.name"  placeholder="请输入用户名" />
+					<input type="text" class="ipt name-ico" v-model="username"  placeholder="请输入用户名" />
 				</div>
 			</li>
 			<li>
-				<input type="password" class="ipt pwd-ico" v-model="form.pwd" placeholder="请输入密码"/>
+				<input type="password" class="ipt pwd-ico" v-model="userpwd" placeholder="请输入密码"/>
 			</li>
 			<li class="btn-submit">
-				<input type="button" class="blue-btn" value="登录" @click="submit"/>
+				<input type="button" class="blue-btn" :plain="true" value="登录" @click="submit"/>
 			</li>
 			<li class="find-pwd g-tr">
 				<a href="">忘记密码?</a>
@@ -26,11 +26,14 @@
 	</div>
 </template>
 <script>
+	import loginapi from  '../../api/loginapi.js'
 	export default{
 		data(){
 			return{
 				isactive:0,
-				form:{}
+				username:'',
+				userpwd:'',
+				loginapi:loginapi
 			}
 		},
 		methods:{
@@ -38,8 +41,26 @@
 				this.isactive = index;
 			},
 			submit(){
-				console.log(this.form)
-				this.$router.push({"path":"Main"});
+				if(this.username=="" || this.userpwd==""){
+					this.$message({
+						message: '请输入用户名或密码',
+						center: true,
+						type:'warning'
+					});
+				}else{
+					//this.$router.push({"path":"/Main"});
+					let params = {"userName":"51club","passWord":"123456abc"}	
+					this.loginapi.userLogin(params).then((rs)=>{
+						console.log(rs)
+					})
+				}
+				//this.$router.replace('/Main')
+				
+			}
+		},
+		watch:{
+			username(val){
+				//console.log(val)
 			}
 		}
 	}

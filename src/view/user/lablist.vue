@@ -9,7 +9,6 @@
             <el-table-column   prop="trriger"  label="触发行为"></el-table-column>
             <el-table-column  label="操作"  width="180">
                 <template slot-scope="scope">
-                    <el-button @click="handleClick(scope.row)" type="text" size="small">配置行为</el-button>|
                     <el-button @click="handleClick(scope.row)" type="text" size="small">删除</el-button>
                 </template>
             </el-table-column>
@@ -21,6 +20,11 @@
         data(){
             return{
                 tableData:[{labname:"星标组",id:"2",count:333,trriger:"未设定"}]
+            }
+        },
+        methods:{
+            handleClick(id){
+                
             }
         }
     }
