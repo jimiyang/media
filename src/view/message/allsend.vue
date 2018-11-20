@@ -7,7 +7,7 @@
                     <p>请注意这种情况，如果某个粉丝身上有3个标签，群发3个标签他就会收到3次推送。</p>
                 </div>
                 <h1 class="title">设置群发内容</h1>
-                <a href="javascript:" class="white-btn select" @click="dialogVisible = true">选择群发内容</a>
+                <a href="javascript:" class="white-btn select" @click="selectContent">选择群发内容</a>
                 <h1 class="title">选择群发对象
                     <span>需要发给同时拥有A和B标签的粉丝？</span>
                 </h1>
@@ -35,8 +35,8 @@
             <div class="preview-blocks">
                 <h1 class="title">微信预览器</h1>
                 <div class="news-list">
-                    <div class="txt-temp">{{message}}</div>
-                    <!--<div class="items">
+                    <div class="txt-temp blocks" :class="{show:cur==0}">{{message}}</div>
+                    <div class="items blocks" :class="{show:cur==1}">
                         <dl>
                             <dd v-for= "(items,i) in newsData" :key="i" v-if="i==0"   class="first" >
                                 <img src="/static/images/1.png" />
@@ -47,7 +47,7 @@
                                 <img src="/static/images/0.jpg" />
                             </dd>
                         </dl>
-                    </div>-->
+                    </div>
                 </div>
             </div>
         </div>
@@ -67,12 +67,9 @@
 </template>
 <script>
     import selmaterial from '../../components/selmaterial.vue'
-    import api from  '../../api/get.js'
-    //console.log(api.getList)
     export default{
         data(){
             return{
-                api,
                 timingChecked:false,
                 reprintChecked:true,
                 sendNum:20, //发送人数
@@ -83,7 +80,7 @@
                 index:1,
                 newsData:0,
                 current:0,
-                cur:0,
+                cur:'',
                 message:'',
                 labList:[{id:1,name:"所有粉丝"},
                     {id:2,name:"星标组"},
@@ -101,11 +98,15 @@
             //})
             this.$store.state.test = "2222"
            // console.log(this.$store.state.test)
+           console.log(this.cur)
         },
         methods:{
+            selectContent(){
+                this.dialogVisible = true 
+            },
             closeDialog(){
                 this.newsData=5;
-                console.log(this.cur)
+                //console.log(this.cur)
             },
             selLab(id){
                 this.index=id;

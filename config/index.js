@@ -18,15 +18,15 @@ module.exports = {
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
     //vue-cli使用这个功能是借助http-proxy-middleware插件，一般解决跨域请求api
-    /* proxyTable: {
-      '/': {
-        target: 'http://192.168.19.45:8000',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/': '/'
-        }
+    proxyTable: {
+      '/api/': {
+          target: "http://testnmweb.liantuobank.cn",
+          changeOrigin: true, // 可否跨域
+          pathRewrite: {
+          '^/api/': '' // 重写接口
+          }
       }
-    }, */
+    },
     cssSourceMap: false,
     // Use Eslint Loader?
     // If true, your code will be linted during bundling and

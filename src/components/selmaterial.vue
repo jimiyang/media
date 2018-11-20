@@ -90,6 +90,7 @@
       watch:{
          current(val){
             this.cur = val
+            console.log(val)
          },
          text(val){
             this.$emit('update:message',val)
