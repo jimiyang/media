@@ -15,10 +15,8 @@
     export default{
         data(){
             return{
+                dialogVisible:false
             }
-        },
-        watch:{
-            
         }
     }
 </script>

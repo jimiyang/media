@@ -94,6 +94,7 @@
          },
          text(val){
             this.$emit('update:message',val)
+            this.$emit('update:current',0)
          }
          //hide(val){
 				//this.ishide = val;

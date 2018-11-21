@@ -4,7 +4,7 @@
             <div class="img-blocks"> <img :src="imgurl" />
             </div>
             <div class="wx-name">
-                {{name}}<img src="/static/images/rz.png" />
+                {{name}}<!--<img src="/static/images/rz.png" />-->
             </div>
             <div class="fun-num">粉丝数{{funcount}}</div>
             <el-menu class="menu-blocks" :default-openeds="['1','2','3','4']" :default-active="currentMenu">

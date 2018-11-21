@@ -10,7 +10,7 @@
             <el-table-column   prop="number"  label="目标人数"  ></el-table-column>
             <el-table-column   prop="state"  label="发送状态" >
                 <template slot-scope="scope">
-                    <span class="dot-ico" :class="scope.row.state==1 ? 'on' : '' ">{{scope.row.state == 0 ? "取消发送" : "发送完毕" }}</span>
+                    <span class="dot-ico" :class="{on:scope.row.state==1}">{{scope.row.state == 0 ? "取消发送" : "发送完毕" }}</span>
                 </template>
             </el-table-column>
             <el-table-column   prop="time"  label="发送时间" >

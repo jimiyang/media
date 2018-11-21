@@ -69,19 +69,24 @@
         }],
         data: [{
           value: '选项1',
-          label: '黄金糕'
+          label: '黄金糕',
+          key: '黄金糕'
         }, {
           value: '选项2',
-          label: '双皮奶'
+          label: '双皮奶',
+          key: '黄金糕'
         }, {
           value: '选项3',
-          label: '蚵仔煎'
+          label: '蚵仔煎',
+          key: '黄金糕'
         }, {
           value: '选项4',
-          label: '龙须面'
+          label: '龙须面',
+          key: '黄金糕'
         }, {
           value: '选项5',
-          label: '北京烤鸭'
+          label: '北京烤鸭',
+          key: '黄金糕'
         }],
         options: [{
           value: 'zhinan',

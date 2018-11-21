@@ -26,13 +26,14 @@
 	</div>
 </template>
 <script>
-	import {login} from '../../api/api.js'
+	import loginapi from '../../api/loginapi.js'
 	export default{
 		data(){
 			return{
+				loginapi:loginapi,
 				isactive:0,
-				userName:'51club',
-				passWord:''
+				userName:'TMMD',
+				passWord:'123@abc'
 			}
 		},
 		methods:{
@@ -44,8 +45,7 @@
 					"userName":this.userName,
 					"passWord":this.passWord
 				}
-				login(params).then((rs)=>{
-					console.log(rs.data)
+				this.loginapi.userLogin(params).then((rs)=>{
 					if(rs.data.returnCode=="F"){
 						this.$message({
 							message: `${rs.data.returnMsg}`,

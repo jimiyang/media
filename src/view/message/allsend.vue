@@ -38,7 +38,7 @@
                     <div class="txt-temp blocks" :class="{show:cur==0}">{{message}}</div>
                     <div class="items blocks" :class="{show:cur==1}">
                         <dl>
-                            <dd v-for= "(items,i) in newsData" :key="i" v-if="i==0"   class="first" >
+                            <dd v-for= "(items,i) in newsData" :key="i"  v-if="i==0"   class="first" >
                                 <img src="/static/images/1.png" />
                                 <p>哈哈哈哈哈哈哈哈哈哈哈哈哈哈</p>
                             </dd>
@@ -80,7 +80,7 @@
                 index:1,
                 newsData:0,
                 current:0,
-                cur:'',
+                cur:-1,
                 message:'',
                 labList:[{id:1,name:"所有粉丝"},
                     {id:2,name:"星标组"},
@@ -93,12 +93,8 @@
         components:{selmaterial},
         created(){
             let parmas = {page:1,size:10,memberId:60587,status:1}
-            //this.api.getList(parmas).then((rs)=>{
-                //console.log(rs)
-            //})
             this.$store.state.test = "2222"
            // console.log(this.$store.state.test)
-           console.log(this.cur)
         },
         methods:{
             selectContent(){
@@ -106,7 +102,6 @@
             },
             closeDialog(){
                 this.newsData=5;
-                //console.log(this.cur)
             },
             selLab(id){
                 this.index=id;

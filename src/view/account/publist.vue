@@ -1,24 +1,60 @@
 <template>
     <div>
-        <el-table class="tab-list" ref="multipleTable" :data="tableData3"   style="width:100%;">
-            <el-table-column   type="selection" width="55"></el-table-column>
-            <el-table-column   prop="name"  label="公众号名称" ></el-table-column>
-            <el-table-column   prop="area"  label="帐号类型"   ></el-table-column>
-            <el-table-column   prop="source"  label="授权时间"></el-table-column>
-            <el-table-column   prop="longtime"  label="粉丝数"></el-table-column>
-            <el-table-column   prop="num"  label="操作">
+        <el-table class="tab-list" ref="multipleTable" :data="pnumberList" >
+            <el-table-column   type="selection" prop="appid" width="55"></el-table-column>
+            <el-table-column   prop="nickName"  label="公众号名称" ></el-table-column>
+            <el-table-column   prop="serviceTypeInfo"  label="帐号类型"   >
                 <template slot-scope="scope">
-                    <el-button @click="handleClick(scope.row)" type="text" size="small">授权</el-button>
+                    <span>{{scope.row.serviceTypeInfo==0 ? "订阅号" : "服务号"}}</span>
+                </template>
+            </el-table-column>
+            <el-table-column   prop="authorizationDate"  label="授权时间">
+                <template slot-scope="scope">
+                    <span  v-if="text=='解除授权'"> 
+                         {{scope.row.authorizationDate}}<a href="javascript:" class="blue-color"  @click="authorizationEvent(scope.row.appid)">{{text}}</a>
+                    </span>
+                </template>
+            </el-table-column>
+            <el-table-column   prop="fansCount"  label="粉丝数"></el-table-column>
+            <el-table-column  label="操作">
+                <template slot-scope="scope">
+                    <el-button @click="handleClick(scope.row.appid)" type="text" size="small">切换</el-button>
                 </template>
             </el-table-column>
         </el-table>
     </div>
 </template>
 <<script>
+    import  pubnumapi from '../../api/pubnumapi.js'
     export default{
         data(){
             return{
-                tableData3:[]
+                publicapi : pubnumapi,
+                pnumberList:[],
+                text:'解除授权'
+            }
+        },
+        created(){
+            //console.log(window.localStorage.getItem('changeLogin'))
+            this.publicapi.getList().then((rs)=>{
+                if(rs.returnCode=="F"){
+                    this.$message({
+							message: `${rs.returnMsg}`,
+							center: true,
+							type:'error'
+						});
+                }else{
+                    this.pnumberList = rs.data
+                }
+            })
+        },
+        methods:{
+            //重新/解除授权
+            authorizationEvent(item){
+               // this.publicapi.quitAuth({"appId":item}).then((rs) =>{
+                    //console.log(rs)
+                //})
+                this.text='重新授权'
             }
         }
     }

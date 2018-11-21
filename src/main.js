@@ -7,12 +7,12 @@ import store from './router/store'
 import axios from 'axios'
 Vue.use(ElementUI)
 /* eslint-disable  */
-require ('!style-loader!css-loader!less-loader!../static/less/style.less') 
+//require ('!style-loader!css-loader!less-loader!../static/less/style.less') 
 Vue.config.productionTip = false
 Vue.prototype.$ajax = axios
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requireAuth)){ // 判断该路由是否需要登录权限
-    if (window.localStorage.getItem('changeLogin')==100) { // 判断当前的token是否存在 ； 登录存入的token
+    if (window.localStorage.getItem('changeLogin')==100) { // 
       next();
     }
     else {
