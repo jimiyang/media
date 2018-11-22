@@ -12,8 +12,8 @@ ajax.interceptors.request.use(function(config) {
   return Promise.reject(error)
 })
 ajax.interceptors.response.use(function(response){
-  return response;
-},function(error) {
+  return response
+} ,function (error) {
   return Promise.reject(error)
 })
 export {ajax}

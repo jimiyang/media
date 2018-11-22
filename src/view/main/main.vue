@@ -4,9 +4,9 @@
             <div class="img-blocks"> <img :src="imgurl" />
             </div>
             <div class="wx-name">
-                {{name}}<!--<img src="/static/images/rz.png" />-->
+                {{name}} <span>{{isAuth == 0 ? "未认证" : "已认证"}}</span>
             </div>
-            <div class="fun-num">粉丝数{{funcount}}</div>
+            <div class="fun-num">{{serviceTypeInfo==1 ? "订阅号" : "服务号"}}</div>
             <el-menu class="menu-blocks" :default-openeds="['1','2','3','4']" :default-active="currentMenu">
                 <el-submenu index="1">
                     <template slot="title"><i class="el-icon-message"></i>消息管理</template>
@@ -45,7 +45,7 @@
                         <a href="javascript:" class="cur" @click="change">切换帐号</a>
                     </el-tooltip>
                     <div class="user-name">
-                        <img src="/static/images/0.jpg" />{{this.userName}}
+                        <img :src="imgurl" />{{this.userName}}
                     </div>
                    <router-link to="/" class="exit" >退出帐号</router-link>
                  </div>
@@ -57,19 +57,30 @@
 </template>
 <script>
     import accountArea from  './account'
+    import bus from '../../until/eventbus.js'
     export default{
         data(){
             return{
-                userName:window.localStorage.getItem('userName'),
+                userName:JSON.parse(window.localStorage.getItem("appInfo")).userName,
                 currentMenu: 'allsend',
-                imgurl:'/static/images/0.jpg',
-                name:'橘子社',
+                imgurl:JSON.parse(window.localStorage.getItem("appInfo")).headImg,
+                name:JSON.parse(window.localStorage.getItem("appInfo")).nickName,
+                isAuth : '', //是否认证
+                serviceTypeInfo :'', //1:订阅号2:服务号
                 funcount:1000,
                 isopen:false,
                 visible2:''
             }
         },
-        created(){},
+        created(){
+           bus.$on("ischange",obj => {
+               this.name = obj.nickName
+               this.userName = obj.userName
+               this.imgurl = obj.headImg
+               this.isAuth = obj.isAuth
+               this.serviceTypeInfo = obj.serviceTypeInfo
+           })
+         },
         components:{accountArea},
         methods:{
             change(){

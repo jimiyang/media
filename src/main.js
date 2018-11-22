@@ -5,8 +5,9 @@ import App from './App'
 import router from './router/index'
 import store from './router/store'
 import axios from 'axios'
-import '../static/js/public.js'
+import common from '../static/js/public.js'
 Vue.use(ElementUI)
+Vue.use(common)
 /* eslint-disable  */
 require ('!style-loader!css-loader!less-loader!../static/less/style.less') 
 Vue.config.productionTip = false
