@@ -24,8 +24,7 @@ export default {
         }
     },
     created(){
-        console.log(this.$common)
-
+        console.log(this.$common.getDate(new Date()))
     },
     methods:{
         syncData(){
