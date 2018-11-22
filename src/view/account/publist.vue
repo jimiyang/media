@@ -10,8 +10,12 @@
             </el-table-column>
             <el-table-column   prop="authorizationDate"  label="授权时间">
                 <template slot-scope="scope">
-                    <span  v-if="text=='解除授权'"> 
+                    {{scope.row.authorizationDate}}
+                    <span  v-if="scope.row.authorizationDate!=null"> 
                          {{scope.row.authorizationDate}}<a href="javascript:" class="blue-color"  @click="authorizationEvent(scope.row.appid)">{{text}}</a>
+                    </span>
+                    <span v-else>
+                        {{new Date()}}<a href="javascript:" class="blue-color">{{text}}</a>
                     </span>
                 </template>
             </el-table-column>
@@ -36,7 +40,9 @@
         },
         created(){
             //console.log(window.localStorage.getItem('changeLogin'))
+            console.log(getDate(new Date()))
             this.publicapi.getList().then((rs)=>{
+                console.log(rs.data)
                 if(rs.returnCode=="F"){
                     this.$message({
 							message: `${rs.returnMsg}`,
@@ -54,6 +60,7 @@
                // this.publicapi.quitAuth({"appId":item}).then((rs) =>{
                     //console.log(rs)
                 //})
+
                 this.text='重新授权'
             }
         }

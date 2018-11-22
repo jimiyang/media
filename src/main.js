@@ -5,9 +5,10 @@ import App from './App'
 import router from './router/index'
 import store from './router/store'
 import axios from 'axios'
+import '../static/js/public.js'
 Vue.use(ElementUI)
 /* eslint-disable  */
-//require ('!style-loader!css-loader!less-loader!../static/less/style.less') 
+require ('!style-loader!css-loader!less-loader!../static/less/style.less') 
 Vue.config.productionTip = false
 Vue.prototype.$ajax = axios
 router.beforeEach((to, from, next) => {
