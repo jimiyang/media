@@ -8,16 +8,16 @@
                 </template>
             </el-table-column>
             <el-table-column   prop="authorizationDate"  label="授权时间">
-                <template slot-scope="scope" >
-                    <span  :index = "scope.index"> 
-                         {{scope.row.authorizationDate!=null? scope.row.authorizationDate: '--' }}
-                         <a href="javascript:" class="blue-color"  @click="authorizationEvent(scope)">
-                             {{scope.row.authorizationDate!=null? '解除授权': '重新授权' }}
+                <template slot-scope="scope">
+                    <span  v-if="scope.row.authorizationDate!=null"> 
+                         {{scope.row.authorizationDate!=null ? scope.row.authorizationDate: '--' }}
+                         <a href="javascript:" class="blue-color"  @click="authorizationEvent(scope.row)">
+                             {{text}}
                          </a>
                     </span>
-                    <!--<span>
-                         <a href="javascript:" class="blue-color"  @click="goAuthor(scope.row.appid)">{{text}}</a>
-                    </span>-->
+                    <span v-else>
+                         --<a href="javascript:" class="blue-color">重新授权</a>
+                    </span>
                 </template>
             </el-table-column>
             <el-table-column   prop="fansCount"  label="粉丝数"></el-table-column>
@@ -57,17 +57,26 @@
             })
         },
         methods:{
-            //解除授权
+            // 解除授权
             authorizationEvent(item){
-               // this.publicapi.quitAuth({"appId":item}).then((rs) =>{
-                    //console.log(rs)
-                //})
-                if(item.authorizationDate!=null){
-                     this.text='重新授权'
-                }
-               
+                cosole.log(item.appId)
+                this.publicapi.quitAuth({"appId":item.appId}).then((rs) =>{
+                    if(rs.returnCode=="F"){
+                        this.$message({
+                            message: `${rs.returnMsg}`,
+                            center: true,
+                            type:'error'
+                        });
+                    }else{
+                        if(item.authorizationDate!=null){
+                            this.text='重新授权'
+                            item.authorizationDate = '--'
+                        }
+                    }
+                })
             },
-           switchApp(id){
+           switchApp(id){ // 切换
+               console.log(`appId---${id}`)
                this.publicapi.switchApp({"appId":id}).then((rs)=> {
                    if(rs.returnCode=="F"){
                         this.$message({
@@ -77,8 +86,7 @@
                         });
                     }else{
                         window.localStorage.setItem("appInfo",JSON.stringify(rs.data))
-                        console.log(JSON.parse(window.localStorage.getItem("appInfo")))
-                        bus.$emit("ischange",JSON.parse(window.localStorage.getItem("appInfo")))
+                        bus.$emit("ischange",JSON.parse(window.localStorage.getItem("appInfo"))) // 中间件
                     }
                })
            }

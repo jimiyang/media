@@ -25,7 +25,7 @@ export default new Router({
       meta: {
         requireAuth: true // 判断是否需要登录
       },
-      children: [ 
+      children:[ 
         {
           name: '/message',
           path: '/message',

@@ -1,60 +1,63 @@
 import { ajax as axios } from './api'
-getList() {
-  return axios.get("/wechat/tag/list")
+/* 标签管理 star */
+function getList (params) {
+  return axios.get('/wechat/tag/list', {params : params})
     .then((response) => {
-        return response.data
+      return response.data
     })
 }
-addTag(params) {
-  return axios.post('/wechat/tag/add',{params : params})
+function addTag (params) {
+  return axios.post('/wechat/tag/add',params)
     .then((response) => {
-        return response.data
+      return response.data
     })
 }
-updateLab(params) {
-  return axios.post('/wechat/tag/update',{params : params})
+function updateLab (params) {
+  return axios.post('/wechat/tag/update',params)
     .then((response) => {
-        return response.data
+      return response.data
     })
 }
-deleteTag(params) {
-  return axios.get('/wechat/tag/delete',{params : params })
+function deleteTag (params) {
+  return axios.get('/wechat/tag/delete', {params : params})
     .then((response) => {
-        return response.data
+      return response.data
     })
 }
-
-getFanslist(params) {
+/* 标签管理 end */
+/* 粉丝管理 star */
+function getFanslist (params) {
   return axios.get('/wechat/fans/list', {params : params})
     .then((response) => {
-        return response.data
+      return response.data
     })
 }
-batchAddtag(params) {
-  return axios.post('/wechat/fans/batchAddTags',{params : params})
+function batchAddtag (params) {
+  return axios.post('/wechat/fans/batchAddTags',params)
     .then((response) => {
-        return response.data
+      return response.data
     })
 }
-batchDeltag(params) {
-  return axios.post('/wechat/fans/batchDelTags',{params : params})
+function batchDeltag (params) {
+  return axios.post('/wechat/fans/batchDelTags',params)
     .then((response) => {
-        return response.data
+      return response.data
     })
 }
-refreshUserlist() {
-  return axios.get('/wechat/fans/refreshWechatUserList')
+function refreshUserlist (params) {
+  return axios.get('/wechat/fans/refreshWechatUserList', {params : params})
     .then((response) => {
-        return response.data
+      return response.data
     })
 }
+/* 粉丝管理 end */
 export default{
-    getList,
-    addTag,
-    updateLab,
-    deleteTag,
-    getFanslist,
-    batchAddtag,
-    batchDeltag,
-    refreshUserlist
+  getList,
+  addTag,
+  updateLab,
+  deleteTag,
+  getFanslist,
+  batchAddtag,
+  batchDeltag,
+  refreshUserlist
 }

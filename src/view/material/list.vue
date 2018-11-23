@@ -5,11 +5,11 @@
             <div class="items"  v-for="(item,index) in materialData" :key = "index">
                 <dl>
                     <dd :class="{first : i == 0}" v-for="(data,i) in item.wechatArticleList" :key = "i">
-                        <span>{{data.title}}</span>
-                        <img src="/static/images/1.png" />
+                        <span><a :href="data.url" target="_blank">{{data.title}}</a></span>
+                        <img :src="data.thumbMediaId " />
                     </dd>
                 </dl>
-                <div class="time">08月16日 18：00</div>
+                <div class="time">{{$common.getDate(item.updateTime,false)}}</div>
             </div>
         </div>
     </div>
@@ -20,11 +20,13 @@ export default {
     data(){
         return{
             materialapi : materialapi,
+            href:'',
+            src:'',
             materialData: []
         }
     },
     created(){
-        console.log(this.$common.getDate(new Date()))
+        
     },
     methods:{
         syncData(){

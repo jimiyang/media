@@ -32,41 +32,56 @@
             </div>
         </div>
         <div class="ant-btn">
-            <a href="" class="blue-btn">搜索</a>
-            <a href="" class="white-btn">重置</a>
+            <a href="javacript:" class="blue-btn" @click="searchUser">搜索</a>
+            <a href="javacript:" class="white-btn" @click="reset">重置</a>
         </div>
         <div class="count">搜索到{{funcount}}个粉丝</div>
         <div class="opeart-btn">
-            <a href="" class="blue-btn">同步数据</a>
-            <a href="" class="white-btn">批量操作</a>
+            <a href="javacript:" class="blue-btn" @click="updateUser">同步数据</a>
+            <a href="javacript:" class="white-btn" @click="operation">批量操作</a>
         </div>
-        <el-table class="tab-list" ref="multipleTable" :data="tableData3"   style="width:100%;">
+        <el-table class="tab-list" ref="multipleTable" :data="fansData"   style="width:100%;">
             <el-table-column   type="selection" width="55"></el-table-column>
-            <el-table-column   prop="name"  label="粉丝昵称" ></el-table-column>
-            <el-table-column   prop="area"  label="地域"   ></el-table-column>
-            <el-table-column   prop="source"  label="关注来源"></el-table-column>
-            <el-table-column   prop="longtime"  label="关注时长"></el-table-column>
-            <el-table-column   prop="num"  label="互动数"></el-table-column>
-            <el-table-column   prop="time"  label="上次互动时间"></el-table-column>
+            <el-table-column   prop="nickName"  label="用户昵称" ></el-table-column>
+            <el-table-column   prop="city"  label="地域" >
+              <template slot-scope="scope"> 
+                {{scope.row.country}}  {{scope.row.province}}  {{scope.row.city }}  
+              </template>
+            </el-table-column>
+            <el-table-column   prop="subscribeScene"  label="关注来源"></el-table-column>
+            <el-table-column   prop="subscribeTimeLengthStr"  label="关注时长"></el-table-column>
+            <el-table-column   prop="interactiveCount"  label="互动数"></el-table-column>
+            <el-table-column   prop="lastInteractDate"  label="上次互动时间"></el-table-column>
         </el-table>
+        <div class="pagination">
+            <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page.sync="search.currentPage"
+                :page-sizes="[10, 20, 30, 40]"
+                :page-size.sync="search.pageSize"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="totalCount">
+            </el-pagination>
+        </div>
     </div>
 </template>
 <script>
+  import userapi from '../../api/userapi'
   export default {
     data() {
       return {
+        userapi:userapi,
         input:"",
         value5:[],
         sex:"",
         funcount:1000,
-        tableData3: [{
-          name: '吉米小绵羊',
-          area: '佛罗伦萨',
-          source: '支付后关注',
-          longtime:'几秒',
-          num:1,
-          time:'2018-11-15 16:05'
-        }],
+        fansData: [],
+        search:{
+          currentPage:1,
+          pageSize:10
+        },
+        totalCount:0,
         data: [{
           value: '选项1',
           label: '黄金糕',
@@ -181,7 +196,31 @@
         selectedOptions: []
       };
     },
+    created(){
+       this.loadList()
+    },
     methods: {
+      loadList(){
+         this.userapi.getFanslist(this.search).then(rs => {
+             if(rs.returnCode == "F"){
+                this.$message({
+                  type: 'error',
+                  message: `${rs.returnMsg}`
+                })
+             }else{
+                this.totalCount =  rs.data.totalNum
+                this.fansData = rs.data.items
+             }
+         })
+      },
+      handleSizeChange(val){
+          this.search.pageSize = val
+          this.loadList()
+      },
+      handleCurrentChange(val){
+           this.search.currentPage = val
+           this.loadList()
+      },
       handleChange(value) {
         
       }

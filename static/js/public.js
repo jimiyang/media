@@ -1,6 +1,6 @@
 import Vue from 'vue'
 let obj = {
-   getDate (time) {
+   getDate (time,flag) {
     let date = new Date( time )   
     let y = date.getFullYear()    
     let m = date.getMonth() + 1    
@@ -13,7 +13,8 @@ let obj = {
     let second = date.getSeconds()  
     minute = minute < 10 ? ('0' + minute) : minute    
     second = second < 10 ? ('0' + second) : second  
-    return `${y}-${m}-${d}-${h}:${minute}:${second}`
+    let str =  flag ? `${y}-${m}-${d}  ${h}:${minute}:${second}` : `${m}月${d}日  ${h}:${minute} `
+    return str
   }
 }
 // prototype封装

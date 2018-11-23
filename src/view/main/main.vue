@@ -50,7 +50,7 @@
                    <router-link to="/" class="exit" >退出帐号</router-link>
                  </div>
             </el-header>
-            <router-view></router-view>
+            <div class="view-content"><router-view></router-view></div>
         </el-container>
         <accountArea :open.sync="isopen"></accountArea>
     </el-container>
@@ -65,8 +65,8 @@
                 currentMenu: 'allsend',
                 imgurl:JSON.parse(window.localStorage.getItem("appInfo")).headImg,
                 name:JSON.parse(window.localStorage.getItem("appInfo")).nickName,
-                isAuth : '', //是否认证
-                serviceTypeInfo :'', //1:订阅号2:服务号
+                isAuth :JSON.parse(window.localStorage.getItem("appInfo")).isAuth, //是否认证
+                serviceTypeInfo :JSON.parse(window.localStorage.getItem("appInfo")).serviceTypeInfo, //1:订阅号2:服务号
                 funcount:1000,
                 isopen:false,
                 visible2:''
