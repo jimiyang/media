@@ -1,35 +1,36 @@
 <template>
     <div class="fun-items">
         <div class="search-box">
-            <div class="items">粉丝名称：<el-input v-model="input" placeholder="请输入粉丝名称或openid" style="width:200px;"></el-input></div>
+            <div class="items">openId: <el-input v-model="search.openId" placeholder="请输入openid" style="width:200px;"></el-input></div>
+            <div class="items">粉丝名称：<el-input v-model="search.nickName" placeholder="请输入粉丝名称" style="width:200px;"></el-input></div>
             <div class="items">微信标签：
-                <el-select v-model="value5" multiple placeholder="微信标签">
+                <el-select v-model="search.userTag" multiple placeholder="微信标签">
                     <el-option
-                    v-for="item in data"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
+                    v-for="item in tagData"
+                    :key="item.name"
+                    :label="item.name"
+                    :value="item.name">
                     </el-option>
                 </el-select>
             </div>
             <div class="items">性别：
-                <el-select v-model="sex" placeholder="请选择">
+                <el-select v-model="search.sex" placeholder="请选择">
                     <el-option
                     v-for="item in options"
-                    :key="item.value"
+                    :key="item.label"
                     :label="item.label"
                     :value="item.value">
                     </el-option>
                 </el-select>
             </div>
-            <div class="items">
+            <!--<div class="items">
                 粉丝地域：
                 <el-cascader
                     :options="options"
-                    v-model="selectedOptions"
+                    v-model="search.selectedOptions"
                     @change="handleChange">
                 </el-cascader>
-            </div>
+            </div>-->
         </div>
         <div class="ant-btn">
             <a href="javacript:" class="blue-btn" @click="searchUser">搜索</a>
@@ -72,16 +73,19 @@
     data() {
       return {
         userapi:userapi,
-        input:"",
-        value5:[],
-        sex:"",
         funcount:1000,
         fansData: [],
         search:{
+          openId:"",
+          nickName:"",
+          tagIdList:[],
+          sex:0,
+          selectedOptions: [],
           currentPage:1,
           pageSize:10
         },
         totalCount:0,
+        tagData:[],
         data: [{
           value: '选项1',
           label: '黄金糕',
@@ -103,101 +107,18 @@
           label: '北京烤鸭',
           key: '黄金糕'
         }],
-        options: [{
-          value: 'zhinan',
-          label: '指南',
-          children: [{
-            value: 'shejiyuanze',
-            label: '设计原则',
-            children: [{
-              value: 'yizhi',
-              label: '一致'
-            }]
-          }, {
-            value: 'daohang',
-            label: '导航',
-            children: [{
-              value: 'cexiangdaohang',
-              label: '侧向导航'
-            }]
-          }]
-        }, {
-          value: 'zujian',
-          label: '组件',
-          children: [{
-            value: 'basic',
-            label: 'Basic',
-            children: [{
-              value: 'layout',
-              label: 'Layout 布局'
-            }, {
-              value: 'color',
-              label: 'Color 色彩'
-            }]
-          }, {
-            value: 'form',
-            label: 'Form',
-            children: [{
-              value: 'radio',
-              label: 'Radio 单选框'
-            }]
-          }, {
-            value: 'data',
-            label: 'Data',
-            children: [{
-              value: 'table',
-              label: 'Table 表格'
-            }, {
-              value: 'tag',
-              label: 'Tag 标签'
-            }, {
-              value: 'progress',
-              label: 'Progress 进度条'
-            }, {
-              value: 'tree',
-              label: 'Tree 树形控件'
-            }, {
-              value: 'pagination',
-              label: 'Pagination 分页'
-            }, {
-              value: 'badge',
-              label: 'Badge 标记'
-            }]
-          }, {
-            value: 'notice',
-            label: 'Notice',
-            children: [{
-              value: 'alert',
-              label: 'Alert 警告'
-            }]
-          }, {
-            value: 'navigation',
-            label: 'Navigation',
-            children: [{
-              value: 'menu',
-              label: 'NavMenu 导航菜单'
-            }]
-          }, {
-            value: 'others',
-            label: 'Others',
-            children: [{
-              value: 'dialog',
-              label: 'Dialog 对话框'
-            }]
-          }]
-        }, {
-          value: 'ziyuan',
-          label: '资源',
-          children: [{
-            value: 'axure',
-            label: 'Axure Components'
-          }]
-        }],
-        selectedOptions: []
-      };
+        options: [
+          {value: 0,label: '未知'},
+          {value: 1,label: '男'},
+          {value: 2,label: '女'}
+        ]
+      }
     },
     created(){
        this.loadList()
+       this.userapi.getList().then(rs => {
+         this.tagData = rs.data.items
+       })
     },
     methods: {
       loadList(){
@@ -212,6 +133,19 @@
                 this.fansData = rs.data.items
              }
          })
+      },
+      searchUser(){
+        console.log(this.search)
+        this.loadList()
+      },
+      reset(){
+
+      },
+      updateUser(){
+
+      },
+      operation(){
+
       },
       handleSizeChange(val){
           this.search.pageSize = val
