@@ -67,6 +67,7 @@
 </template>
 <script>
     import selmaterial from '../../components/selmaterial.vue'
+    import userapi from '../../api/userapi'
     export default{
         data(){
             return{
@@ -94,7 +95,9 @@
         created(){
             let parmas = {page:1,size:10,memberId:60587,status:1}
             this.$store.state.test = "2222"
-           // console.log(this.$store.state.test)
+            userapi.getList().then(rs => {
+                this.labList = rs.data.items
+            })
         },
         methods:{
             selectContent(){

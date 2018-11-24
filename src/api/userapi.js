@@ -27,7 +27,7 @@ function deleteTag (params) {
 /* 标签管理 end */
 /* 粉丝管理 star */
 function getFanslist (params) {
-  return axios.get('/wechat/fans/list', {params : params})
+  return axios.post('/wechat/fans/list', params)
     .then((response) => {
       return response.data
     })

@@ -73,7 +73,7 @@
             }
         },
         created(){
-           bus.$emit("ischange")
+           console.log(bus)
            bus.$on("ischange",obj => {
                this.name = obj.nickName
                this.userName = obj.userName

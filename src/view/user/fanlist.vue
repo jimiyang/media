@@ -4,12 +4,12 @@
             <div class="items">openId: <el-input v-model="search.openId" placeholder="请输入openid" style="width:200px;"></el-input></div>
             <div class="items">粉丝名称：<el-input v-model="search.nickName" placeholder="请输入粉丝名称" style="width:200px;"></el-input></div>
             <div class="items">微信标签：
-                <el-select v-model="search.userTag" multiple placeholder="微信标签">
+                <el-select v-model="search.tagIdList" multiple  placeholder="微信标签">
                     <el-option
-                    v-for="item in tagData"
-                    :key="item.name"
-                    :label="item.name"
-                    :value="item.name">
+                      v-for="item in tagData"
+                      :key="item.id"
+                      :label="item.name"
+                      :value="item.id">
                     </el-option>
                 </el-select>
             </div>
@@ -78,8 +78,8 @@
         search:{
           openId:"",
           nickName:"",
-          tagIdList:[],
-          sex:0,
+          tagIdList:"",
+          sex:-1,
           selectedOptions: [],
           currentPage:1,
           pageSize:10
@@ -108,7 +108,8 @@
           key: '黄金糕'
         }],
         options: [
-          {value: 0,label: '未知'},
+          {value: -1,label: '全部'},
+          {value: 0,label: '未知'},
           {value: 1,label: '男'},
           {value: 2,label: '女'}
         ]
@@ -122,6 +123,7 @@
     },
     methods: {
       loadList(){
+        console.log(this.search)
          this.userapi.getFanslist(this.search).then(rs => {
              if(rs.returnCode == "F"){
                 this.$message({
@@ -129,13 +131,13 @@
                   message: `${rs.returnMsg}`
                 })
              }else{
+                console.log(rs)
                 this.totalCount =  rs.data.totalNum
                 this.fansData = rs.data.items
              }
          })
       },
       searchUser(){
-        console.log(this.search)
         this.loadList()
       },
       reset(){
