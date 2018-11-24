@@ -96,7 +96,14 @@
             let parmas = {page:1,size:10,memberId:60587,status:1}
             this.$store.state.test = "2222"
             userapi.getList().then(rs => {
-                this.labList = rs.data.items
+                if(rs.returnCode == "F"){
+                    this.$message({
+                    type: 'error',
+                    message: `${rs.returnMsg}`
+                    })
+                }else{
+                    this.labList = rs.data.items
+                }
             })
         },
         methods:{

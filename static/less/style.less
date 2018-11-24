@@ -122,53 +122,59 @@ textarea{outline: none;}
         font-size:12px;
     }
 }
-.account-list{
-    position: fixed;right:0;top:0;bottom:0;background:#fff;max-width: 480px;min-width: 320px;
-    width: 25%;-webkit-transform: translate3d(100%,0,0);transform: translate3d(100%,0,0); transition: 0.8s;
-    .title{
-        display: flex;justify-content: space-between;align-items:center;
-        padding: 15px;border-bottom: 1px solid #f3f3f3;text-align:center;
-        &>div{
+.tips-content{
+    .layers{position: fixed;left:0;top:0;right:0;height: 100%;background:#000;opacity:0.4;z-index:9;display: none;}
+    .layers.show{display: block;}
+    .account-list{
+        position: fixed;right:0;top:0;bottom:0;background:#fff;max-width: 480px;min-width: 320px;
+        width: 25%;-webkit-transform: translate3d(100%,0,0);transform: translate3d(100%,0,0); transition: 0.8s;
+        z-index:100;
+        .title{
             display: flex;justify-content: space-between;align-items:center;
-            span{
-                margin: 0;height: 22px;line-height: 20px;color: rgba(0, 0, 0, 0.65);display: inline-block;transition: all 0.3s ease;cursor: pointer;
-                border: 1px solid #d9d9d9;border-left: 0;
-                background: #fff; padding: 0 12px; position: relative;
-                &:first-child{
-                    border-radius: 2px 0 0 2px;border-left: 1px solid #d9d9d9;
+            padding: 15px;border-bottom: 1px solid #f3f3f3;text-align:center;
+            &>div{
+                display: flex;justify-content: space-between;align-items:center;
+                span{
+                    margin: 0;height: 22px;line-height: 20px;color: rgba(0, 0, 0, 0.65);display: inline-block;transition: all 0.3s ease;cursor: pointer;
+                    border: 1px solid #d9d9d9;border-left: 0;
+                    background: #fff; padding: 0 12px; position: relative;
+                    &:first-child{
+                        border-radius: 2px 0 0 2px;border-left: 1px solid #d9d9d9;
+                    }
+                }
+                .checked{border-color: #75adff;
+                    box-shadow: -1px 0 0 0 #75adff;
+                    color: #75adff}
+            }
+            .back{color:rgb(86, 86, 86);cursor: pointer;}
+            .add{color: #3092ff;}
+        }
+        .list{
+            flex-grow: 1;overflow: auto;padding: 15px;
+            li{
+                overflow: hidden;cursor: pointer;padding: 10px;
+                display: -webkit-box;display: -webkit-flex;
+                display: -ms-flexbox; display: flex;position:relative;
+                &:after{
+                    position: absolute;right:28px;top:30px;content:'';
+                    border-right:1px solid #999;border-top:1px solid #999;
+                    transform: rotate(45deg);width:8px;height: 8px;
+                }
+                &:hover{ background:#f6f7f8;}
+                -webkit-align-items: center;-webkit-box-align: center;-ms-flex-align: center;align-items: center;
+                img{width: 50px;height: 50px; margin-right: 10px;}
+                &>div{
+                    h1{font-size: 14px;font-weight: bolder;}
+                    p{color: #565656;}
                 }
             }
-            .checked{border-color: #75adff;
-                box-shadow: -1px 0 0 0 #75adff;
-                color: #75adff}
-        }
-        .back{color:rgb(86, 86, 86);cursor: pointer;}
-        .add{color: #3092ff;}
-    }
-    .list{
-        flex-grow: 1;overflow: auto;padding: 15px;
-        li{
-            overflow: hidden;cursor: pointer;padding: 10px;
-            display: -webkit-box;display: -webkit-flex;
-            display: -ms-flexbox; display: flex;position:relative;
-            &:after{
-                position: absolute;right:28px;top:30px;content:'';
-                border-right:1px solid #999;border-top:1px solid #999;
-                transform: rotate(45deg);width:8px;height: 8px;
-            }
-            &:hover{ background:#f6f7f8;}
-            -webkit-align-items: center;-webkit-box-align: center;-ms-flex-align: center;align-items: center;
-            img{width: 50px;height: 50px; margin-right: 10px;}
-            &>div{
-                h1{font-size: 14px;font-weight: bolder;}
-                p{color: #565656;}
-            }
         }
     }
+    .open{
+        -webkit-transform: translate3d(0,0,0);transform: translate3d(0,0,0); 
+    }
 }
-.open{
-    -webkit-transform: translate3d(0,0,0);transform: translate3d(0,0,0); 
-}
+
 
 .login-blocks{
 	width:300px;height:300px;
@@ -405,10 +411,32 @@ textarea{outline: none;}
             width:8px;height:8px;background:#d9d9d9;;border-radius:50%;display: inline-block;
         }
     }
-    .on{
+    .loading{
+        &:after{
+            background: #fff3cf;
+        }
+    }
+    .success{
         &:after{
             background: #00a854;
         }
+    }
+    .msg-content{
+        padding:20px 0;
+        .el-steps{border-bottom:1px solid #f6f7f8;padding:10px 30px;
+            .el-step__title{font-size:12px;}
+        }
+        .list{
+            li{padding:10px 0;color:rgba(0, 0, 0, 0.65);font-size:12px;
+                .el-select{width:70%;}
+            }
+            .wrap{
+                display: flex;align-items: center; justify-content: left;
+            }
+        }
+       .btn-box{
+           a{margin-right:5%;}
+       }
     }
 }
 /*粉丝列表*/
@@ -426,10 +454,17 @@ textarea{outline: none;}
         }
     }
     .count{
-        padding: 15px 20px; border-bottom: 1px solid rgb(233, 233, 233); overflow: hidden;line-height: 28px;
+        padding:10px 0; border-bottom: 1px solid rgb(233, 233, 233); overflow: hidden;
     }
-    .opeart-btn{padding: 15px 20px;
-        &>a{margin-right:30px;}
+    .opeart-btn{padding:10px 0;
+        &>a{margin-right:30px;padding-top:5px;padding-bottom:5px;}
+    }
+    .opeartiontag-box{
+        height: 300px;
+        li{
+            display: flex;justify-content:left;align-items: center;padding:10px 0;
+            label.name{display: block;padding-right:5%;}
+       }
     }
 }
 /*标签管理*/

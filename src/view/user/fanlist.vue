@@ -36,12 +36,12 @@
             <a href="javacript:" class="blue-btn" @click="searchUser">搜索</a>
             <a href="javacript:" class="white-btn" @click="reset">重置</a>
         </div>
-        <div class="count">搜索到{{funcount}}个粉丝</div>
+        <div class="count">搜索到{{totalCount}}个粉丝</div>
         <div class="opeart-btn">
             <a href="javacript:" class="blue-btn" @click="updateUser">同步数据</a>
             <a href="javacript:" class="white-btn" @click="operation">批量操作</a>
         </div>
-        <el-table class="tab-list" ref="multipleTable" :data="fansData"   style="width:100%;">
+        <el-table class="tab-list" ref="multipleTable" :data="fansData"   @selection-change="checkEvent"  style="width:100%;">
             <el-table-column   type="selection" width="55"></el-table-column>
             <el-table-column   prop="nickName"  label="用户昵称" ></el-table-column>
             <el-table-column   prop="city"  label="地域" >
@@ -65,6 +65,40 @@
                 :total="totalCount">
             </el-pagination>
         </div>
+        <el-dialog title="批量操作"  :visible.sync="dialogVisible"  width="40%"   :before-close="handleClose">
+          <ul class="opeartiontag-box">
+              <li>
+                 <label class="name">目标粉丝：</label>
+                 <div>
+                   <template>
+                     <el-radio v-model="radio" label="0">已勾选的粉丝{{checkedCount}}位</el-radio>
+                     <el-radio v-model="radio" label="1">未勾选的粉丝{{nocheckCount}}位</el-radio>
+                   </template>
+                 </div>
+              </li>
+              <li>
+                 <label  class="name">操作内容：</label>
+                 <div>添加标签</div>
+              </li>
+              <li>
+                 <label  class="name">设置内容：</label>
+                 <div>
+                   <el-select v-model="selectTag"  placeholder="请选择" width="100%">
+                     <el-option
+                      v-for="item in tagData"
+                      :key="item.id"
+                      :label="item.name"
+                      :value="item.id">
+                    </el-option>
+                  </el-select>
+                 </div>
+              </li>
+          </ul>
+          <span slot="footer" class="dialog-footer">
+            <el-button @click="dialogVisible = false">取 消</el-button>
+            <el-button type="primary"  @click="addTag">确 定</el-button>
+          </span>
+      </el-dialog>
     </div>
 </template>
 <script>
@@ -73,12 +107,12 @@
     data() {
       return {
         userapi:userapi,
-        funcount:1000,
+        dialogVisible:false,
         fansData: [],
         search:{
           openId:"",
           nickName:"",
-          tagIdList:"",
+          tagIdList:[],
           sex:-1,
           selectedOptions: [],
           currentPage:1,
@@ -86,44 +120,28 @@
         },
         totalCount:0,
         tagData:[],
-        data: [{
-          value: '选项1',
-          label: '黄金糕',
-          key: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶',
-          key: '黄金糕'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎',
-          key: '黄金糕'
-        }, {
-          value: '选项4',
-          label: '龙须面',
-          key: '黄金糕'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭',
-          key: '黄金糕'
-        }],
+        radio:'0',
+        selectTag:"",
+        checkedCount:0,
+        nocheckCount:0,
+        appidList:[], // 批量打标签传入的appid
+        tagList:[], // 批量打标签传入的标签值
         options: [
-          {value: -1,label: '全部'},
-          {value: 0,label: '未知'},
+          {value: -1,label: '全部'},
+          {value: 0,label: '未知'},
           {value: 1,label: '男'},
           {value: 2,label: '女'}
         ]
       }
     },
     created(){
-       this.loadList()
+       this.loadList()  
        this.userapi.getList().then(rs => {
          this.tagData = rs.data.items
        })
     },
     methods: {
       loadList(){
-        console.log(this.search)
          this.userapi.getFanslist(this.search).then(rs => {
              if(rs.returnCode == "F"){
                 this.$message({
@@ -131,7 +149,6 @@
                   message: `${rs.returnMsg}`
                 })
              }else{
-                console.log(rs)
                 this.totalCount =  rs.data.totalNum
                 this.fansData = rs.data.items
              }
@@ -141,13 +158,61 @@
         this.loadList()
       },
       reset(){
-
+        this.search = {
+          openId:"",
+          nickName:"",
+          tagIdList:[],
+          sex:-1,
+        }
       },
-      updateUser(){
-
+      checkEvent(node){
+        this.checkedCount = node.length
+        this.nocheckCount = (this.totalCount - node.length)
+        for(let i=0;i<node.length;i++){
+           this.appidList.push(node[i].openId)
+        }
+      },
+      addTag(){ //批量打标签
+         let params={
+            tagIdList:this.selectTag,
+            openIdList:this.appidList,
+            tagrgetFansFlag:this.radio,
+            ...this.search
+         }
+        console.log(params)
+        this.userapi.batchAddtag(params).then(rs => {
+               if(rs.returnCode == "F"){
+                  this.$message({
+                    type: 'error',
+                    message: `${rs.returnMsg}`
+                  })
+              }else{
+                  this.$message({
+                    type: 'success',
+                    message: `批量操作成功`
+                  })
+                  this.dialogVisible = false
+                  this.loadList() 
+              }
+         })
+      },
+      handleClose(){
+         this.dialogVisible = false
+      },
+      updateUser(){ //同步粉丝数据
+        this.userapi.refreshUserlist().then(rs => {
+             if(rs.returnCode == "F"){
+                this.$message({
+                  type: 'error',
+                  message: `${rs.returnMsg}`
+                })
+             }else{
+                this.loadList()
+             }
+        })
       },
       operation(){
-
+         this.dialogVisible = true
       },
       handleSizeChange(val){
           this.search.pageSize = val

@@ -68,12 +68,11 @@
                 isAuth :JSON.parse(window.localStorage.getItem("appInfo")).isAuth, //是否认证
                 serviceTypeInfo :JSON.parse(window.localStorage.getItem("appInfo")).serviceTypeInfo, //1:订阅号2:服务号
                 funcount:1000,
-                isopen:false,
+                isopen:true,
                 visible2:''
             }
         },
         created(){
-           console.log(bus)
            bus.$on("ischange",obj => {
                this.name = obj.nickName
                this.userName = obj.userName

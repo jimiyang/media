@@ -1,7 +1,7 @@
 import Vue from 'vue'
 let obj = {
-   getDate (time,flag) {
-    let date = new Date( time )   
+  getDate (time, flag) {
+    let date = new Date (time)   
     let y = date.getFullYear()    
     let m = date.getMonth() + 1    
     m = m < 10 ? ('0' + m) : m    
@@ -15,6 +15,23 @@ let obj = {
     second = second < 10 ? ('0' + second) : second  
     let str =  flag ? `${y}-${m}-${d}  ${h}:${minute}:${second}` : `${m}月${d}日  ${h}:${minute} `
     return str
+  },
+  msgTypelist (name) {
+    let Data = [
+      {id: "mpnews", name: "图文消息"},
+      {id: "text", name: "文本消息"},
+      {id: "image", name: "图片"},
+      {id: "voice", name: "语音"},
+      {id: "video", name: "视频"},
+      {id: "wxcard", name: "卡券"}
+    ]
+    let tname = ""
+    for (let i= 0;i< Data.length;i++) {
+      if(Data[i].id===name) {
+        tname = Data[i].name
+      }
+    }
+    return tname
   }
 }
 // prototype封装
