@@ -25,9 +25,7 @@ export default {
             materialData: []
         }
     },
-    created(){
-        
-    },
+    created(){},
     methods:{
         syncData(){
             this.materialapi.getList().then(rs => {
@@ -48,7 +46,7 @@ export default {
                             });
                         }else{
                            this.materialData = rs.data.items
-                            console.log(rs.data.items)
+                           console.log(rs.data.items)
                         }
                     })
                 }

@@ -315,6 +315,19 @@ textarea{outline: none;}
         }
         &>span{color:#999;}
     }
+    .userlist-box{
+       border:1px solid #000;
+        .search-box{padding:20px 0;}
+        .personal-col{
+            &>img{width:50px;height:50px;vertical-align: middle;border:1px solid #f6f7f8;margin-left:10px;}
+            .list{
+                .el-checkbox-group{width:33.3333%;padding:10px;
+                    .el-checkbox{margin-bottom:20px;}
+                    .checkbox{margin-left:0;margin-bottom:10px;}
+                }
+            }
+        }
+    }
 }
 .material-list{
     display: flex;align-items: flex-start;
@@ -366,7 +379,7 @@ textarea{outline: none;}
         .item { 
             width:210px;border:1px solid #e6e6e6;margin-bottom: 10px; break-inside: avoid;position: relative;
             .layer{
-                position: absolute;left:0;right:0;top:34px;background:#000;height:100%;z-index:9999;opacity: 0.4;
+                position: absolute;left:0;right:0;top:34px;background:#000;height:80%;z-index:9999;opacity: 0.4;
                 text-align:center;display:none;
                 img{position: absolute;left:50%;top:50%;margin-left:-10px;margin-top:-7px;z-index:10000;}
             }
@@ -381,20 +394,23 @@ textarea{outline: none;}
                     }
                 }
             }
-            dl{
-               
-                dt{
-                    position: relative;height:104px; padding:10px;margin-bottom:20px;
-                    p{position: absolute;left:10px;right:10px;bottom:-10px;background: #000;
-                        padding:0 9px;height:27px;line-height:27px;color:#fff;
+            dl{ 
+                dd.first{
+                    position: relative;height:104px; padding:10px;margin-bottom:20px;border-top:none;
+                    div{position: absolute;left:10px;right:10px;bottom:0;background: #000;
+                        padding:0 9px;height:27px;line-height:27px;width:90%;
                         opacity: 0.4;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;
+                        &> a{color:#fff;font-size:12px;}
                     }
                     img{width:100%;height:104px;}
                 }
                 dd{
-                    display: flex;margin-top:10px;border-top:1px solid #e6e6e6;padding:10px;
-                    align-items: center;
-                    &>div{color:#212121;}
+                    display: flex;margin-top:10px;border-top:1px solid #e6e6e6;padding:10px;align-items: center;
+                    &> div{
+                        overflow: hidden; text-overflow: ellipsis;white-space: nowrap;width:154px;
+                        &>a{color:#212121;font-size:12px;display:inline-block;}
+                    }
+                    
                     img{height: 38px; width: 38px; background-color: #f4f4f8;}
                 }
             }
@@ -407,19 +423,14 @@ textarea{outline: none;}
     .dot-ico{
         position: relative;padding-left:15px;
         &:after{
-            position: absolute;left:0;top:6px;content:'';
-            width:8px;height:8px;background:#d9d9d9;;border-radius:50%;display: inline-block;
+            position: absolute;left:0;top:6px;content:'';width:8px;height:8px;background:#d9d9d9;border-radius:50%;display: inline-block;
         }
     }
     .loading{
-        &:after{
-            background: #fff3cf;
-        }
+        &:after{background: #fff3cf;}
     }
     .success{
-        &:after{
-            background: #00a854;
-        }
+        &:after{background: #00a854;}
     }
     .msg-content{
         padding:20px 0;
@@ -438,6 +449,9 @@ textarea{outline: none;}
            a{margin-right:5%;}
        }
     }
+    .tab-list{
+        & >a{color:#4993ff;}
+    }
 }
 /*粉丝列表*/
 .fun-items{
@@ -453,9 +467,7 @@ textarea{outline: none;}
             margin:0 30px;
         }
     }
-    .count{
-        padding:10px 0; border-bottom: 1px solid rgb(233, 233, 233); overflow: hidden;
-    }
+    .count{padding:10px 0; border-bottom: 1px solid rgb(233, 233, 233); overflow: hidden;}
     .opeart-btn{padding:10px 0;
         &>a{margin-right:30px;padding-top:5px;padding-bottom:5px;}
     }

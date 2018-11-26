@@ -16,10 +16,10 @@ let obj = {
     let str =  flag ? `${y}-${m}-${d}  ${h}:${minute}:${second}` : `${m}月${d}日  ${h}:${minute} `
     return str
   },
-  msgTypelist (name) {
+  msgTypelist (name, type) {
     let Data = [
-      {id: "mpnews", name: "图文消息"},
       {id: "text", name: "文本消息"},
+      {id: "mpnews", name: "图文消息"},
       {id: "image", name: "图片"},
       {id: "voice", name: "语音"},
       {id: "video", name: "视频"},
@@ -27,8 +27,14 @@ let obj = {
     ]
     let tname = ""
     for (let i= 0;i< Data.length;i++) {
-      if(Data[i].id===name) {
-        tname = Data[i].name
+      if (type == 0) {
+        if (Data[i].id===name) {
+          tname = Data[i].name
+        }
+      } else if (type === 1) {
+        if ( i==name) {
+          tname = Data[i].id
+        }
       }
     }
     return tname

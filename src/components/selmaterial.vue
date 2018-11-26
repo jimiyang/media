@@ -21,84 +21,87 @@
             </div>
             <div class="image-text"  :class="{show:cur == 1}"> 
                 <div class="notice">仅显示微图文消息</div>
-                <a href="" class="white-btn">同步</a>
+                <a href="javascript:" class="white-btn" @click = "syncData">同步</a>
                 <div class="masonry"> 
-                    <div class="item"> 
-                       <div class="layer" :class="{show:currentindex === 1}"><img src="/static/images/right-ico.png" /></div>
+                    <div class="item" v-for="(node,index) in materialData" :key = "index"> 
+                       <div class="layer" :class="{show:currentindex === index}"><img src="/static/images/right-ico.png" /></div>
                        <h1 class="date">
-                          <span><img src="/static/images/wx-ico.jpg" />2018年8月8日更新</span>
-                          <a href="">查看连接</a>
+                          <span><img src="/static/images/wx-ico.jpg" />{{$common.getDate(node.updateTime,false)}}更新</span>
+                          <a href="javascript:">查看连接</a>
                        </h1>
-                       <dl class="ant-col" @click="selSendcon(1)">
-                         <dt> 
-                            <img class="lazy" src="/static/images/1.png" alt="" />
-                            <p>八大明星助阵！微信支付微信支付微信支付</p>
-                         </dt>
-                         <dd>
-                            <div>另类变形记！富二代落魄后，竟凭一只狗翻身逆袭……</div>
-                            <img src="/static/images/1.png" />
-                         </dd>
-                         <dd>
-                            <div>另类变形记！富二代落魄后，竟凭一只狗翻身逆袭……</div>
-                            <img src="/static/images/1.png" />
+                       <dl class="ant-col" @click="selSendcon(index,node.wxMediaId)">
+                         <dd :class="{first: i == 0}"  v-for="(item, i) in node.wechatArticleList" :key = "i" > 
+                            <div><a :href="item.url" target="_blank">{{item.title}}</a></div>
+                            <img class="lazy" :src="node.thumbMediaUrl" alt="" />
                          </dd>
                        </dl>
                     </div>
-                    <div class="item"> 
-                      <div class="layer" :class="{show:currentindex === 2}"><img src="/static/images/right-ico.png" /></div>
-                       <h1 class="date">
-                            <span><img src="/static/images/wx-ico.jpg" />2018年8月8日更新</span><a href="">查看连接</a>
-                       </h1>
-                       <dl  class="ant-col" @click="selSendcon(2)">
-                         <dt> <img class="lazy" src="/static/images/5.jpg" alt="" /></dt>
-                         <dd>
-                            <div>另类变形记！富二代落魄后，竟凭一只狗翻身逆袭……</div>
-                         </dd>
-                         <dd>
-                            <div>另类变形记！富二代落魄后，竟凭一只狗翻身逆袭……</div>
-                             <img src="/static/images/1.png" />
-                         </dd>
-                       </dl>
-                    </div> 
                 </div>
                 <a  href="javascript:" class="load-more">加载更多...</a>
             </div>
         </div>
 </template>
 <script>
+   import materialapi from  '../api/materialapi'
    export default{
       data(){
          return{
+            materialapi: materialapi,
             text:'',
             content:'',
             currentindex: '',
             typeData:["文字","图文消息","图片","语音","视频"],
-            cur:0
+            cur:0,
+            materialData:[]
          }
       },
-      props:["current","message","id"],
+      props:["current","message","mediaid"],
+      created(){
+         
+      },
       methods:{
+         syncData() {
+            this.materialapi.getList().then(rs => {
+                if(rs.returnCode == "F") {
+                    this.$message({
+                        message: `${rs.returnMsg}`,
+                        center: true,
+                        type:'error'
+                    });
+                }else{
+                    let params ={"types":"news"}
+                    this.materialapi.getMediaListByType(params).then(rs => {
+                        if(rs.returnCode == "F"){
+                             this.$message({
+                                message: `${rs.returnMsg}`,
+                                center: true,
+                                type:'error'
+                            });
+                        }else{
+                           this.materialData = rs.data.items
+                           console.log(this.materialData)
+                        }
+                    })
+                }
+            })
+         },
          selType(index){ //选择群发类型
             this.cur =  index 
             this.$emit('update:current',index)
          },
-         selSendcon(id){
+         selSendcon(id,mediaid){
             this.currentindex=id
-            this.$emit('update:id',id)
+            this.$emit('update:mediaid',mediaid)
          }
       },
       watch:{
          current(val){
             this.cur = val
-            console.log(val)
          },
          text(val){
             this.$emit('update:message',val)
             this.$emit('update:current',0)
          }
-         //hide(val){
-				//this.ishide = val;
-			//}
       }
    }
 </script>

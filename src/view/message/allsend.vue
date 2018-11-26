@@ -12,7 +12,7 @@
                     <span>需要发给同时拥有A和B标签的粉丝？</span>
                 </h1>
                 <ul class="lab-blocks" >
-                    <li v-for="(item,i) in labList" :key="i" :class="{checked:item.id==index}"   @click="selLab(item.id)">{{item.name}}</li>
+                    <li v-for="(item,i) in labList"  :key="i" :class="{checked:i==index}"   @click="selLab(i)">{{item.name}}</li>
                 </ul>
                 <h1 class="title">定时发送及原创校验</h1>
                 <div class="ant-items">
@@ -27,7 +27,7 @@
                     </div>
                     <div>
                         <label>转载形式</label>
-                        <el-switch  v-model="reprintChecked"  active-color="#4993ff"  inactive-color="#E0E0E0"></el-switch>
+                        <el-switch  v-model="groupMessage.sendIgnoreReprint"  active-color="#4993ff"  inactive-color="#E0E0E0"></el-switch>
                         当群发内容被微信判定为转载时，将自动替换为原文章内容发送且注明转载来源。
                     </div>
                 </div>
@@ -35,12 +35,12 @@
             <div class="preview-blocks">
                 <h1 class="title">微信预览器</h1>
                 <div class="news-list">
-                    <div class="txt-temp blocks" :class="{show:cur==0}">{{message}}</div>
+                    <div class="txt-temp blocks" :class="{show:cur==0}">{{groupMessage.content}}</div>
                     <div class="items blocks" :class="{show:cur==1}">
                         <dl>
                             <dd v-for= "(items,i) in newsData" :key="i"  v-if="i==0"   class="first" >
                                 <img src="/static/images/1.png" />
-                                <p>哈哈哈哈哈哈哈哈哈哈哈哈哈哈</p>
+                                <span>哈哈哈哈哈哈哈哈哈哈哈哈哈哈</span>
                             </dd>
                             <dd v-else>
                                 <span>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</span>
@@ -57,41 +57,53 @@
             <span>预计发送人数：{{sendNum}}</span>
         </div>
         <el-dialog  title="选择群发内容"  :visible.sync="dialogVisible"  @close='closeDialog'  width="600">
-            <selmaterial  :id.sync="getId" :current.sync="cur" :message.sync="message"></selmaterial>
+            <selmaterial  :mediaid.sync="groupMessage.mediaId" :current.sync="current" :message.sync="groupMessage.content"></selmaterial>
             <span slot="footer" class="dialog-footer">
                 <el-button @click="dialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+                <el-button type="primary"  @click="sendContent">确 定</el-button>
+            </span>
+        </el-dialog>
+        <el-dialog title="选择发送对象" :visible.sync="dialog"  @close='closeDialog'  width="600">
+             <userlist></userlist>
+             <span slot="footer" class="dialog-footer">
+                <el-button @click="dialogVisible = false">取 消</el-button>
+                <el-button type="primary"  @click="sendUser">确 定</el-button>
             </span>
         </el-dialog>
     </div>
 </template>
 <script>
     import selmaterial from '../../components/selmaterial.vue'
+    import userlist from  '../../components/userlist.vue'
     import userapi from '../../api/userapi'
+    import msgapi from  '../../api/msgapi'
+import fanlistVue from '../user/fanlist.vue';
     export default{
         data(){
             return{
+                msgapi: msgapi,
                 timingChecked:false,
                 reprintChecked:true,
                 sendNum:20, //发送人数
                 html:'',
                 dialogVisible: false,
+                dialog:false,
                 ishide:true,
-                getId:'',
-                index:1,
+                index:0,
                 newsData:0,
-                current:0,
+                current:0,//当前要发送的消息类型[图文，消息，语音，视频]
                 cur:-1,
-                message:'',
-                labList:[{id:1,name:"所有粉丝"},
-                    {id:2,name:"星标组"},
-                    {id:3,name:"电商"},
-                    {id:4,name:"游戏"},
-                    {id:5,name:"男"},
-                    {id:6,name:"女"}]
+                labList:[],
+                groupMessage:{
+                    mediaId: '',
+                    isToAll:true,
+                    tagId:'',
+                    content:''
+                    //sendDate:new Date()
+                }
             }
         },
-        components:{selmaterial},
+        components:{selmaterial,userlist},
         created(){
             let parmas = {page:1,size:10,memberId:60587,status:1}
             this.$store.state.test = "2222"
@@ -103,8 +115,10 @@
                     })
                 }else{
                     this.labList = rs.data.items
+                    this.groupMessage.tagId = this.labList[0].wxTagId
                 }
             })
+            console.log(new Date())
         },
         methods:{
             selectContent(){
@@ -116,16 +130,55 @@
             selLab(id){
                 this.index=id;
             },
+            sendContent(){
+                this.dialogVisible =false
+                this.cur = this.current
+                if(this.current!=0){
+                    this.groupMessage.content=""
+                }
+                console.log(this.current)
+                console.log(this.groupMessage.mediaId)
+            },
+            sendUser(){
+                
+            },
             phonePreview(){ //手机预览
-                console.log(this.getId)
+               // console.log(this.getId)
+               alert(0)
+                this.dialog = true
+                /*this.msgapi.preview().then(rs => {
+                    if(rs.returnCode == "F"){
+                        this.$message({
+                            type: 'error',
+                            message: `${rs.returnMsg}`
+                        })
+                    }else{
+                        console.log(rs)
+                    }
+               })*/
             },
             sendSubmit(){ //高级群发
-               
+               let params={
+                   ...this.groupMessage,
+                   msgtype:this.$common.msgTypelist(this.current,1),
+                   sendIgnoreReprint: this.reprintChecked ==false ? 0 :1
+               }
+               console.log(params)
+               this.msgapi.batchMessage(params).then(rs => {
+                    if(rs.returnCode == "F"){
+                        this.$message({
+                            type: 'error',
+                            message: `${rs.returnMsg}`
+                        })
+                    }else{
+                        console.log(rs)
+                    }
+               })
             }
         },
         watch:{
-            message(val){
-                this.message =val
+            content(val){
+                this.content =val
             }
         }
     }
