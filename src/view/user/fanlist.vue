@@ -86,9 +86,9 @@
                    <el-select v-model="selectTag" clearable placeholder="请选择">
                     <el-option
                       v-for="item in tagData"
-                      :key="item.wxTagId"
+                      :key="item.id"
                       :label="item.name"
-                      :value="item.wxTagId">
+                      :value="item.id">
                     </el-option>
                   </el-select>
                  </div>
