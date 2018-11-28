@@ -12,14 +12,14 @@ import Mlist from '@/view/material/list' // 图文素材库
 import Publist from '@/view/account/publist' // 公众号列表
 Vue.use(Router)
 export default new Router({
-  //mode: 'history',
+  // mode: 'history',
   routes: [
     {
       path: '/',
       name: '',
       component: Login,
       hidden: true
-    }, 
+    },
     {
       path: '/404',
       name: '',
@@ -33,63 +33,62 @@ export default new Router({
       meta: {
         requireAuth: true // 判断是否需要登录
       },
-      children:[ 
-        {
-          name: '/message',
-          path: '/message',
-          redirect: '/message/allsend',
-          component: Center,
-          children: [
-            {
-              path: 'allsend',
-              component: Allsend
-            },
-            {
-              path: 'list',
-              component: Msglist
-            }
-          ]
-        },
-        {
-          name: '/user',
-          path: '/user',
-          redirect: '/user/fanlist',
-          component: Center,
-          children: [
-            {
-              path: 'fanlist',
-              component: Fanlist
-            },
-            {
-              path: 'lablist',
-              component: Lablist
-            }
-          ]
-        },
-        {
-          name: '/material',
-          path: '/material',
-          redirect: '/material/list',
-          component: Center,
-          children: [
-            {
-              path: 'list',
-              component: Mlist
-            }
-          ]
-        },
-        {
-          name: '/account',
-          path: '/account',
-          redirect: '/account/publist',
-          component: Center,
-          children: [
-            {
-              path: 'publist',
-              component: Publist
-            }
-          ]
-        }
+      children: [{
+        name: '/message',
+        path: '/message',
+        redirect: '/message/allsend',
+        component: Center,
+        children: [
+          {
+            path: 'allsend',
+            component: Allsend
+          },
+          {
+            path: 'list',
+            component: Msglist
+          }
+        ]
+      },
+      {
+        name: '/user',
+        path: '/user',
+        redirect: '/user/fanlist',
+        component: Center,
+        children: [
+          {
+            path: 'fanlist',
+            component: Fanlist
+          },
+          {
+            path: 'lablist',
+            component: Lablist
+          }
+        ]
+      },
+      {
+        name: '/material',
+        path: '/material',
+        redirect: '/material/list',
+        component: Center,
+        children: [
+          {
+            path: 'list',
+            component: Mlist
+          }
+        ]
+      },
+      {
+        name: '/account',
+        path: '/account',
+        redirect: '/account/publist',
+        component: Center,
+        children: [
+          {
+            path: 'publist',
+            component: Publist
+          }
+        ]
+      }
       ]
     }
   ],

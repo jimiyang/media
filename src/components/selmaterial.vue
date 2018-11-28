@@ -43,27 +43,27 @@
 </template>
 <script>
    import materialapi from  '../api/materialapi'
-   export default{
-      data(){
-         return{
-            materialapi: materialapi,
-            text:'',
-            content:'',
-            currentindex: '',
-            typeData:["文字","图文消息","图片","语音","视频"],
-            cur:0,
-            moreContent:'加载更多图文素材...',
-            flag:false,// 判断是否合并查询数组同步功能
-            materialData:[],
-            totalNum:0,
-            totalPage:1,
-            search:{
-               "type":"news",
-               "currentPage":1,
-               "pageSize":5
-            }
+export default{
+   data(){
+      return{
+         materialapi: materialapi,
+         text: '',
+         content: '',
+         currentindex: '',
+         typeData: ["文字","图文消息","图片","语音","视频"],
+         cur: 0,
+         moreContent: '加载更多图文素材...',
+         flag: false,// 判断是否合并查询数组同步功能
+         materialData: [],
+         totalNum: 0,
+         totalPage:1,
+         search:{
+            "type": "news",
+            "currentPage": 1,
+            "pageSize": 5
          }
-      },
+      }
+   },
       props:["current","message","mediaid"],
       created(){
          this.loadList()

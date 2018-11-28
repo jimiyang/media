@@ -4,7 +4,7 @@
             <el-table-column   prop="nickName"  label="公众号名称" ></el-table-column>
             <el-table-column   prop="serviceTypeInfo"  label="帐号类型"   >
                 <template slot-scope="scope">
-                    <span>{{scope.row.serviceTypeInfo==0 ? "订阅号" : "服务号"}}</span>
+                    <span>{{scope.row.serviceTypeInfo === 0 ? "订阅号" : "服务号"}}</span>
                 </template>
             </el-table-column>
             <el-table-column   prop="authorizationDate"  label="授权时间">
@@ -30,89 +30,89 @@
     </div>
 </template>
 <<script>
-    import  pubnumapi from '../../api/pubnumapi.js'
-    import bus from '../../until/eventbus.js'
-    export default{
-        data(){
-            return{
-                publicapi : pubnumapi,
-                pnumberList:[],
-                time:'',
-                index:0,
-                text:'解除授权'
+  import  pubnumapi from '../../api/pubnumapi.js'
+  import bus from '../../until/eventbus.js'
+  export default{
+    data(){
+      return{
+       publicapi : pubnumapi,
+       pnumberList:[],
+       time:'',
+       index:0,
+       text:'解除授权'
+      }
+    },
+    created(){
+        //console.log(window.localStorage.getItem('changeLogin'))
+        this.loadList()
+    },
+    methods:{
+        loadList(){
+            this.publicapi.getList().then((rs)=>{
+            if(rs.returnCode === "F"){
+                this.$message({
+                    message: `${rs.returnMsg}`,
+                    center: true,
+                    type:'error'
+                });
+                if(rs.errorCode === "000005"){
+                    this.$router.push({path:'/'})
+                }
+            }else{
+                this.pnumberList = rs.data
             }
+            })
         },
-        created(){
-            //console.log(window.localStorage.getItem('changeLogin'))
-           this.loadList()
-        },
-        methods:{
-            loadList(){
-              this.publicapi.getList().then((rs)=>{
-                if(rs.returnCode=="F"){
+        // 解除授权
+        authorizationEvent(item){
+            console.log(item.appid)
+            this.publicapi.quitAuth({"appId":item.appid}).then((rs) =>{
+                if(rs.returnCode === "F"){
                     this.$message({
                         message: `${rs.returnMsg}`,
                         center: true,
                         type:'error'
                     });
-                    if(rs.errorCode=="000005"){
+                    if(rs.errorCode === "000005"){
                         this.$router.push({path:'/'})
                     }
                 }else{
-                    this.pnumberList = rs.data
+                    //if(item.authorizationDate!=null){
+                        // this.text='重新授权'
+                        //item.authorizationDate = '--'
+                    //  }
+                    this.$message({
+                        message: `${rs.returnMsg}`,
+                        center: true,
+                        type:'success'
+                    });
+                        this.loadList()
                 }
-              })
-            },
-            // 解除授权
-            authorizationEvent(item){
-                console.log(item.appid)
-                this.publicapi.quitAuth({"appId":item.appid}).then((rs) =>{
-                    if(rs.returnCode=="F"){
-                        this.$message({
-                            message: `${rs.returnMsg}`,
-                            center: true,
-                            type:'error'
-                        });
-                        if(rs.errorCode=="000005"){
-                            this.$router.push({path:'/'})
-                        }
-                    }else{
-                        //if(item.authorizationDate!=null){
-                           // this.text='重新授权'
-                            //item.authorizationDate = '--'
-                      //  }
-                        this.$message({
-                            message: `${rs.returnMsg}`,
-                            center: true,
-                            type:'success'
-                        });
-                         this.loadList()
+            })
+        },
+    switchApp(id){ // 切换
+            console.log(`appId---${id}`)
+            this.publicapi.switchApp({"appId":id}).then((rs)=> {
+                if(rs.returnCode === "F"){
+                    this.$message({
+                        message: `${rs.returnMsg}`,
+                        center: true,
+                        type:'error'
+                    });
+                    if(rs.errorCode === "000005"){
+                        this.$router.push({path:'/'})
                     }
-                })
-            },
-           switchApp(id){ // 切换
-               console.log(`appId---${id}`)
-               this.publicapi.switchApp({"appId":id}).then((rs)=> {
-                   if(rs.returnCode=="F"){
-                        this.$message({
-                            message: `${rs.returnMsg}`,
-                            center: true,
-                            type:'error'
-                        });
-                        if(rs.errorCode=="000005"){
-                            this.$router.push({path:'/'})
-                        }
-                    }else{
-                        this.$message({
-                            message: `${rs.returnMsg}`,
-                            center: true,
-                            type:'success'
-                        });
-                        window.localStorage.setItem("appInfo",JSON.stringify(rs.data))
-                        bus.$emit("ischange",JSON.parse(window.localStorage.getItem("appInfo"))) // 中间件
-                    }
-               })
-           }
+                }else{
+                    this.$message({
+                        message: `${rs.returnMsg}`,
+                        center: true,
+                        type:'success'
+                    });
+                    window.localStorage.setItem("appInfo",JSON.stringify(rs.data))
+                    bus.$emit("ischange",JSON.parse(window.localStorage.getItem("appInfo"))) // 中间件
         }
+      })
     }
+  }
+}
 </script>

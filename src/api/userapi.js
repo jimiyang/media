@@ -51,7 +51,7 @@ function batchDeltag (params) {
     })
 }
 function refreshUserlist (params) {
-  return axios.get('/wechat/fans/refreshWechatUserList', {params : params})
+  return axios.get('/wechat/fans/refreshWechatUserList', { params: params })
     .then((response) => {
       return response.data
     })

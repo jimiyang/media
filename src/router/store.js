@@ -7,7 +7,7 @@ export default new Vuex.Store({
 }, 
 mutations: {
     changeLogin (state , data) {
-        state.isLogin = data
+      state.isLogin = data
     }
 
 }, // update  data

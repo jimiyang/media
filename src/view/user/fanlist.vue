@@ -45,8 +45,8 @@
             <el-table-column   type="selection" width="55"></el-table-column>
             <el-table-column   prop="nickName"  label="用户昵称" ></el-table-column>
             <el-table-column   prop="city"  label="地域" >
-              <template slot-scope="scope"> 
-                {{scope.row.country}}  {{scope.row.province}}  {{scope.row.city }}  
+              <template slot-scope="scope">
+                {{scope.row.country}}{{scope.row.province}}{{scope.row.city}}
               </template>
             </el-table-column>
             <el-table-column   prop="subscribeScene"  label="关注来源"></el-table-column>
@@ -106,50 +106,49 @@
   export default {
     data() {
       return {
-        userapi:userapi,
-        dialogVisible:false,
+        userapi: userapi,
+        dialogVisible: false,
         fansData: [],
-        search:{
-          openId:"",
-          nickName:"",
-          tagIdList:[],
-          sex:-1,
+        search: {
+          openId: '',
+          nickName: '',
+          tagIdList: [],
+          sex: -1,
           selectedOptions: [],
-          currentPage:1,
-          pageSize:10
-        },
-        totalCount:0,
-        tagData:[], 
-        radio:'0',
-        selectTag:"",
-        checkedCount:0,
-        nocheckCount:0,
-        appidList:[], // 批量打标签传入的appid
-        options: [
-          {value: -1,label: '全部'},
-          {value: 0,label: '未知'},
-          {value: 1,label: '男'},
-          {value: 2,label: '女'}
-        ]
-      }
+          currentPage: 1,
+          pageSize: 10
+      },
+      totalCount: 0,
+      tagData: [], 
+      radio: '0',
+      selectTag: '',
+      checkedCount: 0,
+      nocheckCount: 0,
+      appidList: [], // 批量打标签传入的appid
+      options: [
+        {value: -1, label: '全部'},
+        {value: 0, label: '未知'},
+        {value: 1, label: '男'},
+        {value: 2, label: '女'}]
+    }
     },
-    created(){
-       this.loadList()  
-       this.userapi.getList().then(rs => {
-         this.tagData = rs.data.items
-         console.log(this.tagData)
-       })
-    },
-    methods: {
+  created () {
+    this.loadList()  
+    this.userapi.getList().then(rs => {
+      this.tagData = rs.data.items
+      console.log(this.tagData)
+    })
+  },
+     methods: {
       loadList(){
          this.userapi.getFanslist(this.search).then(rs => {
              console.log(rs)
-             if(rs.returnCode == "F"){
+             if(rs.returnCode === "F"){
                 this.$message({
                   type: 'error',
                   message: `${rs.returnMsg}`
                 })
-                if(rs.errorCode=="000005"){
+                if(rs.errorCode === "000005"){
                   this.$router.push({path:'/'})
                 }
              }else{
@@ -172,7 +171,7 @@
       checkEvent(node){
         this.checkedCount = node.length
         this.nocheckCount = (this.totalCount - node.length)
-        for(let i=0;i<node.length;i++){
+        for(let i = 0;i<node.length;i++){
            this.appidList.push(node[i].openId)
         }
       },
@@ -186,12 +185,12 @@
         console.log(this.selectTag)
         console.log(params)
         this.userapi.batchAddtag(params).then(rs => {
-               if(rs.returnCode == "F"){
+               if(rs.returnCode === "F"){
                   this.$message({
                     type: 'error',
                     message: `${rs.returnMsg}`
                   })
-                  if(rs.errorCode=="000005"){
+                  if(rs.errorCode === "000005"){
                     this.$router.push({path:'/'})
                   }
               }else{
@@ -209,12 +208,12 @@
       },
       updateUser(){ //同步粉丝数据
         this.userapi.refreshUserlist().then(rs => {
-             if(rs.returnCode == "F"){
+             if(rs.returnCode === "F"){
                 this.$message({
                   type: 'error',
                   message: `${rs.returnMsg}`
                 })
-                if(rs.errorCode=="000005"){
+                if(rs.errorCode === "000005"){
                   this.$router.push({path:'/'})
                 }
              }else{
@@ -226,14 +225,14 @@
              }
         })
       },
-      operation(){
+      operation() {
          this.dialogVisible = true
       },
-      handleSizeChange(val){
+      handleSizeChange(val) {
           this.search.pageSize = val
           this.loadList()
       },
-      handleCurrentChange(val){
+      handleCurrentChange(val) {
            this.search.currentPage = val
            this.loadList()
       },

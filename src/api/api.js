@@ -1,19 +1,19 @@
 import axios from 'axios'
 let base = ''
-if (window.location.hostname==='localhost') {
+if (window.location.hostname === 'localhost') {
   base = '/api'
 }
 let ajax = axios.create({
   baseURL: base
 })
-ajax.interceptors.request.use(function(config) {
+ajax.interceptors.request.use(function (config) {
   return config
 }, function (error) {
   return Promise.reject(error)
 })
-ajax.interceptors.response.use(function(response){
+ajax.interceptors.response.use(function (response) {
   return response
-} ,function (error) {
+}, function (error) {
   return Promise.reject(error)
 })
 export {ajax}
