@@ -76,102 +76,102 @@
     </div>
 </template>
 <script>
-    import messageapi from  '../../api/msgapi'
-    //import fanlistVue from '../user/fanlist.vue'
-    export default{
-        data(){
-            return{
-                messageapi : messageapi,
-                dialogVisible : false,
-                messageData : [],
-                totalCount:0,
-                search:{
-                    currentPage:1,
-                    pageSize:5
-                },
-                marteralId:'', //图文id
-                detail:{
-                   //wechatArticleList : []
-                },
-                selectVal:''
-            }
+import messageapi from  '../../api/msgapi'
+//import fanlistVue from '../user/fanlist.vue'
+export default{
+data(){
+    return{
+        messageapi : messageapi,
+        dialogVisible : false,
+        messageData : [],
+        totalCount:0,
+        search:{
+            currentPage:1,
+            pageSize:5
         },
-        created(){
-           this.loadList()
+        marteralId:'', //图文id
+        detail:{
+            //wechatArticleList : []
         },
-        methods:{
-            loadList(){
-               this.messageapi.getMsgSendRecordList(this.search).then(rs => {
-                    if(rs.returnCode == "F"){
-                       this.$message({
-                          type: 'error',
-                          message: `${rs.returnMsg}`
-                        })
-                        if(rs.errorCode=="000005"){
-                          this.$router.push({path:'/'})
-                        }
-                    }else{
-                        this.messageData =  rs.data.items
-                        this.totalCount = rs.data.totalNum
+        selectVal:''
+    }
+},
+created(){
+    this.loadList()
+},
+    methods:{
+        loadList(){
+            this.messageapi.getMsgSendRecordList(this.search).then(rs => {
+                if(rs.returnCode == "F"){
+                    this.$message({
+                        type: 'error',
+                        message: `${rs.returnMsg}`
+                    })
+                    if(rs.errorCode=="000005"){
+                        this.$router.push({path:'/'})
                     }
-               })
-            },
-            detailEvent(id){
-                this.dialogVisible = true
-                this.messageapi.getMsgSendRecordByid({id:id}).then(rs => {
+                }else{
+                    this.messageData =  rs.data.items
+                    this.totalCount = rs.data.totalNum
+                }
+            })
+        },
+detailEvent(id){
+    this.dialogVisible = true
+    this.messageapi.getMsgSendRecordByid({id: id}).then(rs => {
+    if (rs.returnCode === 'F') {
+        this.$message({
+        type: 'error',
+        message: `${rs.returnMsg}`
+        })
+        if (rs.errorCode === '000005') {
+        this.$router.push({path:'/'})
+        }
+    } else {
+    this.detail = rs.data
+    this.detail.wechatMediaResponse = rs.data.wechatMediaResponse.wechatArticleList
+    console.log(this.detail)
+    }
+            })
+        },
+        delMsg(){
+            if(this.selectVal!="" && (this.detail.sendStatus+1)>2){
+                this.messageapi.deleteNewsRecord({msg_id : this.detail.msgId}).then(rs => {
                     if(rs.returnCode == "F"){
                         this.$message({
-                          type: 'error',
-                          message: `${rs.returnMsg}`
+                            type: 'error',
+                            message: `${rs.returnMsg}`
                         })
                         if(rs.errorCode=="000005"){
-                          this.$router.push({path:'/'})
+                            this.$router.push({path:'/'})
                         }
-                     }else{
-                        this.detail = rs.data
-                        this.detail.wechatMediaResponse = rs.data.wechatMediaResponse.wechatArticleList
-                        console.log(this.detail)
+                    }else{
+                        this.$message({
+                            type: 'success',
+                            message: `${rs.returnMsg}`
+                        })
+                        this.dialogVisible = false
+                        this.loadList()
                     }
                 })
-            },
-            delMsg(){
-                if(this.selectVal!="" && (this.detail.sendStatus+1)>2){
-                    this.messageapi.deleteNewsRecord({msg_id : this.detail.msgId}).then(rs => {
-                        if(rs.returnCode == "F"){
-                            this.$message({
-                                type: 'error',
-                                message: `${rs.returnMsg}`
-                            })
-                            if(rs.errorCode=="000005"){
-                                this.$router.push({path:'/'})
-                            }
-                        }else{
-                            this.$message({
-                                type: 'success',
-                                message: `${rs.returnMsg}`
-                            })
-                            this.dialogVisible = false
-                            this.loadList()
-                        }
-                    })
-                }else{
-                    this.$message({
-                        type: 'warning',
-                        message: `该条图文还未发送成功，请重新发送！`
-                    })
-                }
-            },
-            handleClose(){
-                this.dialogVisible = false
-            },
-            handleSizeChange(val){
-                this.search.pageSize = val
-                this.loadList()
-            },
-            handleCurrentChange(val){
-                this.search.currentPage = val
-                this.loadList()
+            }else{
+                this.$message({
+                    type: 'warning',
+                    message: `该条图文还未发送成功，请重新发送！`
+                })
             }
+        },
+        handleClose(){
+            this.dialogVisible = false
+        },
+        handleSizeChange(val){
+            this.search.pageSize = val
+            this.loadList()
+        },
+        handleCurrentChange(val){
+            this.search.currentPage = val
+            this.loadList()
         }
     }
+}
 </script>

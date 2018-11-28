@@ -102,9 +102,9 @@
     </div>
 </template>
 <script>
-  import userapi from '../../api/userapi'
-  export default {
-    data() {
+import userapi from '../../api/userapi'
+export default {
+  data () {
       return {
         userapi: userapi,
         dialogVisible: false,
@@ -140,43 +140,43 @@
     })
   },
      methods: {
-      loadList(){
+      loadList () {
          this.userapi.getFanslist(this.search).then(rs => {
              console.log(rs)
-             if(rs.returnCode === "F"){
+             if (rs.returnCode === 'F') {
                 this.$message({
                   type: 'error',
                   message: `${rs.returnMsg}`
                 })
-                if(rs.errorCode === "000005"){
-                  this.$router.push({path:'/'})
+                if(rs.errorCode === '000005') {
+                  this.$router.push({path: '/'})
                 }
-             }else{
+             } else {
                 this.totalCount =  rs.data.totalNum
                 this.fansData = rs.data.items
              }
          })
       },
-      searchUser(){
+      searchUser () {
         this.loadList()
       },
-      reset(){
+      reset () {
         this.search = {
-          openId:"",
-          nickName:"",
-          tagIdList:[],
-          sex:-1,
+          openId: '',
+          nickName: '',
+          tagIdList: [],
+          sex: -1,
         }
       },
-      checkEvent(node){
+      checkEvent (node) {
         this.checkedCount = node.length
         this.nocheckCount = (this.totalCount - node.length)
-        for(let i = 0;i<node.length;i++){
+        for(let i = 0;i<node.length;i++) {
            this.appidList.push(node[i].openId)
         }
       },
-      addTag(){ //批量打标签
-         let params={
+      addTag () { 
+         let params = {
             tagId:this.selectTag,
             openIdList:this.appidList,
             tagrgetFansFlag:this.radio,
@@ -185,15 +185,15 @@
         console.log(this.selectTag)
         console.log(params)
         this.userapi.batchAddtag(params).then(rs => {
-               if(rs.returnCode === "F"){
+               if (rs.returnCode === 'F') {
                   this.$message({
                     type: 'error',
                     message: `${rs.returnMsg}`
                   })
-                  if(rs.errorCode === "000005"){
+                  if (rs.errorCode === '000005') {
                     this.$router.push({path:'/'})
                   }
-              }else{
+              } else {
                   this.$message({
                     type: 'success',
                     message: `批量操作成功`
@@ -208,15 +208,15 @@
       },
       updateUser(){ //同步粉丝数据
         this.userapi.refreshUserlist().then(rs => {
-             if(rs.returnCode === "F"){
+             if (rs.returnCode === 'F') {
                 this.$message({
                   type: 'error',
                   message: `${rs.returnMsg}`
                 })
-                if(rs.errorCode === "000005"){
-                  this.$router.push({path:'/'})
+                if (rs.errorCode === '000005') {
+                  this.$router.push({path: '/'})
                 }
-             }else{
+             } else {
                this.$message({
                   type: 'success',
                   message: `数据同步成功！`
@@ -225,20 +225,21 @@
              }
         })
       },
-      operation() {
+      operation () {
          this.dialogVisible = true
       },
-      handleSizeChange(val) {
+      handleSizeChange (val) {
           this.search.pageSize = val
           this.loadList()
       },
-      handleCurrentChange(val) {
+      handleCurrentChange (val) {
            this.search.currentPage = val
            this.loadList()
       },
-      handleChange(value) {
+      handleChange (value) {
         
       }
     }
   };
 </script>
+

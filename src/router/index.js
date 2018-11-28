@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from '@/view/login/login' 
+import Login from '@/view/login/login'
 import NotFound from '../view/404.vue'
 import Center from '@/center'
 import Main from '@/view/main/main'
