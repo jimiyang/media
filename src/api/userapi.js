@@ -7,13 +7,13 @@ function getList (params) {
     })
 }
 function addTag (params) {
-  return axios.post('/wechat/tag/add',params)
+  return axios.post('/wechat/tag/add', params)
     .then((response) => {
       return response.data
     })
 }
 function updateLab (params) {
-  return axios.post('/wechat/tag/update',params)
+  return axios.post('/wechat/tag/update', params)
     .then((response) => {
       return response.data
     })
@@ -32,14 +32,20 @@ function getFanslist (params) {
       return response.data
     })
 }
+function getTagfanslistByid (params) {
+  return axios.post('/wechat/fans/getByAppidAndTagid', params)
+    .then((response) => {
+      return response.data
+    })
+}
 function batchAddtag (params) {
-  return axios.post('/wechat/fans/batchAddTags',params)
+  return axios.post('/wechat/fans/batchAddTags', params)
     .then((response) => {
       return response.data
     })
 }
 function batchDeltag (params) {
-  return axios.post('/wechat/fans/batchDelTags',params)
+  return axios.post('/wechat/fans/batchDelTags', params)
     .then((response) => {
       return response.data
     })
@@ -57,6 +63,7 @@ export default{
   updateLab,
   deleteTag,
   getFanslist,
+  getTagfanslistByid,
   batchAddtag,
   batchDeltag,
   refreshUserlist

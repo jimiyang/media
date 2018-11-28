@@ -12,7 +12,7 @@
                     <span>需要发给同时拥有A和B标签的粉丝？</span>
                 </h1>
                 <ul class="lab-blocks" >
-                    <li v-for="(item,i) in labList"  :key="i" :class="{checked:i==index}"   @click="selLab(i)">{{item.name}}</li>
+                    <li v-for="(item,i) in labList"  :key="i" :class="{checked:i==index}"   @click="selLab(i,item.wxTagId)">{{item.name}}</li>
                 </ul>
                 <h1 class="title">定时发送及原创校验</h1>
                 <div class="ant-items">
@@ -24,6 +24,9 @@
                             <div slot="content">举例：选择关注时间为下周二的粉丝，定时<br/>发送时间设置为下周三，即可实现下周二关<br/>注的粉丝自动在下周三收到群发消息推送。</div>
                             <el-button>如何操作？</el-button>
                         </el-tooltip>
+                    </div>
+                    <div class="block" :class="{show:timingChecked==true}">
+                        <label>请选择具体时间</label><el-date-picker  v-model="groupMessage.sendDate"  type="datetime"  placeholder="选择日期时间"></el-date-picker>
                     </div>
                     <div>
                         <label>转载形式</label>
@@ -38,13 +41,11 @@
                     <div class="txt-temp blocks" :class="{show:cur==0}">{{groupMessage.content}}</div>
                     <div class="items blocks" :class="{show:cur==1}">
                         <dl>
-                            <dd v-for= "(items,i) in newsData" :key="i"  v-if="i==0"   class="first" >
-                                <img src="/static/images/1.png" />
-                                <span>哈哈哈哈哈哈哈哈哈哈哈哈哈哈</span>
-                            </dd>
-                            <dd v-else>
-                                <span>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</span>
-                                <img src="/static/images/0.jpg" />
+                            <dd v-for= "(item,i) in wechatArticleList" :key="i"  :class="{first:i==0}" >
+                               <a :href="item.url" target="_blank">
+                                  <span>{{item.title}}</span>
+                                  <img :src="item.thumbMediaUrl" />
+                                </a>
                             </dd>
                         </dl>
                     </div>
@@ -64,9 +65,9 @@
             </span>
         </el-dialog>
         <el-dialog title="选择发送对象" :visible.sync="dialog"  @close='closeDialog'  width="600">
-             <userlist></userlist>
+             <userlist :checkedUserData.sync="checkedUserData"></userlist>
              <span slot="footer" class="dialog-footer">
-                <el-button @click="dialogVisible = false">取 消</el-button>
+                <el-button @click="dialog = false">取 消</el-button>
                 <el-button type="primary"  @click="sendUser">确 定</el-button>
             </span>
         </el-dialog>
@@ -77,20 +78,19 @@
     import userlist from  '../../components/userlist.vue'
     import userapi from '../../api/userapi'
     import msgapi from  '../../api/msgapi'
-import fanlistVue from '../user/fanlist.vue';
+    import materialapi from  '../../api/materialapi'
+    import bus from '../../until/eventbus.js'
     export default{
         data(){
             return{
                 msgapi: msgapi,
                 timingChecked:false,
                 reprintChecked:true,
-                sendNum:20, //发送人数
-                html:'',
                 dialogVisible: false,
                 dialog:false,
                 ishide:true,
                 index:0,
-                newsData:0,
+                wechatArticleList:[],
                 current:0,//当前要发送的消息类型[图文，消息，语音，视频]
                 cur:-1,
                 labList:[],
@@ -98,37 +98,46 @@ import fanlistVue from '../user/fanlist.vue';
                     mediaId: '',
                     isToAll:true,
                     tagId:'',
-                    content:''
-                    //sendDate:new Date()
-                }
+                    content:'',
+                    sendDate: new Date().getTime()
+                },
+                tagSearch:{
+                    currentPage:1,
+                    pageSize:5
+                },
+                checkedUserData:[],
+                sendNum:0 // 发送人数
             }
         },
         components:{selmaterial,userlist},
         created(){
-            let parmas = {page:1,size:10,memberId:60587,status:1}
-            this.$store.state.test = "2222"
             userapi.getList().then(rs => {
                 if(rs.returnCode == "F"){
                     this.$message({
-                    type: 'error',
-                    message: `${rs.returnMsg}`
+                      type: 'error',
+                      message: `${rs.returnMsg}`
                     })
+                    if(rs.errorCode=="00005"){
+                        this.$router.push({path:'/'})
+                    }
                 }else{
                     this.labList = rs.data.items
                     this.groupMessage.tagId = this.labList[0].wxTagId
+                    console.log(this.labList)
                 }
             })
-            console.log(new Date())
         },
         methods:{
             selectContent(){
                 this.dialogVisible = true 
             },
             closeDialog(){
-                this.newsData=5;
+                 this.dialogVisible = false
+                 this.dialog = false 
             },
-            selLab(id){
-                this.index=id;
+            selLab(id,tagid){
+                this.index=id
+                this.groupMessage.tagId = tagid
             },
             sendContent(){
                 this.dialogVisible =false
@@ -138,31 +147,81 @@ import fanlistVue from '../user/fanlist.vue';
                 }
                 console.log(this.current)
                 console.log(this.groupMessage.mediaId)
+                materialapi.getMediaByWxMediaId({wxMediaId:this.groupMessage.mediaId}).then(rs => {
+                    if(rs.returnCode == "F"){
+                        this.$message({
+                        type: 'error',
+                        message: `${rs.returnMsg}`
+                        })
+                        if(rs.errorCode=="00005"){
+                            this.$router.push({path:'/'})
+                        }
+                    }else{
+                        this.wechatArticleList =rs.data.wechatArticleList
+                        console.log(this.wechatArticleList)
+                    }  
+                })
             },
-            sendUser(){
-                
-            },
-            phonePreview(){ //手机预览
-               // console.log(this.getId)
-               alert(0)
-                this.dialog = true
-                /*this.msgapi.preview().then(rs => {
+            sendUser(){//手机预览并发送
+                this.dialog = false
+                console.log(this.checkedUserData)
+                let params ={
+                    touser:this.checkedUserData[0].openId,
+                    sendIgnoreReprint: this.reprintChecked ==false ? 0 :1,
+                    content:this.groupMessage.content,
+                    media_id: this.groupMessage.mediaId,
+                    msgtype:this.$common.msgTypelist(this.current,1)
+                }
+                console.log(params)
+                this.msgapi.preview(params).then(rs => {
                     if(rs.returnCode == "F"){
                         this.$message({
                             type: 'error',
                             message: `${rs.returnMsg}`
                         })
+                        if(rs.errorCode=="00005"){
+                            this.$router.push({path:'/'})
+                        }
                     }else{
-                        console.log(rs)
+                        this.$message({
+                            type: 'success',
+                            message: `手机发送成功！`
+                        })
                     }
-               })*/
+               })
+            },
+            phonePreview(){ //手机预览选择发送对象
+                this.dialog = true
+                let params = {
+                    tagId : this.groupMessage.tagId
+                }
+                console.log(params)
+                userapi.getTagfanslistByid(params).then(rs => {
+                   if(rs.returnCode == "F"){
+                        this.$message({
+                            type: 'error',
+                            message: `${rs.returnMsg}`
+                        })
+                        if(rs.errorCode=="00005"){
+                            this.$router.push({path:'/'})
+                        }
+                    }else{
+                        this.sendNum = rs.data.totalNum
+                        bus.$emit("node",rs.data.items)
+                    }
+                })
+                
             },
             sendSubmit(){ //高级群发
+               if(this.timingChecked==false){
+                   this.groupMessage.sendDate = null
+               }
                let params={
                    ...this.groupMessage,
                    msgtype:this.$common.msgTypelist(this.current,1),
                    sendIgnoreReprint: this.reprintChecked ==false ? 0 :1
                }
+               
                console.log(params)
                this.msgapi.batchMessage(params).then(rs => {
                     if(rs.returnCode == "F"){
@@ -170,8 +229,14 @@ import fanlistVue from '../user/fanlist.vue';
                             type: 'error',
                             message: `${rs.returnMsg}`
                         })
+                        if(rs.errorCode=="00005"){
+                            this.$router.push({path:'/'})
+                        }
                     }else{
-                        console.log(rs)
+                        this.$message({
+                            type: 'success',
+                            message: `群发成功！`
+                        })
                     }
                })
             }

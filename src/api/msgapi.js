@@ -9,7 +9,6 @@ function getMsgSendRecordList (params) {
 function getMsgSendRecordByid (params) {
   return axios.post('/wechat/batchMessage/getMsgSendRecordById', params)
     .then((repsonse) => {
-      
       return repsonse.data
     })
 }
@@ -22,6 +21,7 @@ function preview (params) {
 function deleteNewsRecord (params) {
   return axios.post('/wechat/batchMessage/deleteNewsRecord', params)
     .then((repsonse) => {
+      console.log(params)
       return repsonse.data
     })
 }
@@ -33,4 +33,4 @@ function batchMessage (params) {
 }
 export default{
   getMsgSendRecordList, getMsgSendRecordByid, preview, deleteNewsRecord, batchMessage
-} 
+}

@@ -41,7 +41,7 @@
         </div>
         <el-dialog   title="群发内容详情"  :visible.sync="dialogVisible"  width="50%"  :before-close="handleClose">
             <div class="msg-content">
-                <el-steps :active="detail.sendStatus" finish-status="success">
+                <el-steps :active="detail.sendStatus+1" finish-status="success">
                     <el-step title="创建任务"></el-step>
                     <el-step title="微信发送中"></el-step>
                     <el-step title="群发完毕"></el-step>
@@ -107,6 +107,9 @@
                           type: 'error',
                           message: `${rs.returnMsg}`
                         })
+                        if(rs.errorCode=="00005"){
+                          this.$router.push({path:'/'})
+                        }
                     }else{
                         this.messageData =  rs.data.items
                         this.totalCount = rs.data.totalNum
@@ -118,9 +121,12 @@
                 this.messageapi.getMsgSendRecordByid({id:id}).then(rs => {
                     if(rs.returnCode == "F"){
                         this.$message({
-                            type: 'error',
-                            message: `${rs.returnMsg}`
-                            })
+                          type: 'error',
+                          message: `${rs.returnMsg}`
+                        })
+                        if(rs.errorCode=="00005"){
+                          this.$router.push({path:'/'})
+                        }
                      }else{
                         this.detail = rs.data
                         this.detail.wechatMediaResponse = rs.data.wechatMediaResponse.wechatArticleList
@@ -129,14 +135,16 @@
                 })
             },
             delMsg(){
-                if(this.selectVal!=""){
-                    console.log(this.detail.msgId)
-                    this.messageapi.deleteNewsRecord({msgId : this.detail.msgId}).then(rs => {
+                if(this.selectVal!="" && (this.detail.sendStatus+1)>2){
+                    this.messageapi.deleteNewsRecord({msg_id : this.detail.msgId}).then(rs => {
                         if(rs.returnCode == "F"){
                             this.$message({
                                 type: 'error',
                                 message: `${rs.returnMsg}`
                             })
+                            if(rs.errorCode=="00005"){
+                                this.$router.push({path:'/'})
+                            }
                         }else{
                             this.$message({
                                 type: 'success',
@@ -145,6 +153,11 @@
                             this.dialogVisible = false
                             this.loadList()
                         }
+                    })
+                }else{
+                    this.$message({
+                        type: 'warning',
+                        message: `该条图文还未发送成功，请重新发送！`
                     })
                 }
             },

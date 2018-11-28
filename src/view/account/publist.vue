@@ -44,7 +44,11 @@
         },
         created(){
             //console.log(window.localStorage.getItem('changeLogin'))
-            this.publicapi.getList().then((rs)=>{
+           this.loadList()
+        },
+        methods:{
+            loadList(){
+              this.publicapi.getList().then((rs)=>{
                 if(rs.returnCode=="F"){
                     this.$message({
                         message: `${rs.returnMsg}`,
@@ -54,24 +58,32 @@
                 }else{
                     this.pnumberList = rs.data
                 }
-            })
-        },
-        methods:{
+              })
+            },
             // 解除授权
             authorizationEvent(item){
-                cosole.log(item.appId)
-                this.publicapi.quitAuth({"appId":item.appId}).then((rs) =>{
+                console.log(item.appid)
+                this.publicapi.quitAuth({"appId":item.appid}).then((rs) =>{
                     if(rs.returnCode=="F"){
                         this.$message({
                             message: `${rs.returnMsg}`,
                             center: true,
                             type:'error'
                         });
-                    }else{
-                        if(item.authorizationDate!=null){
-                            this.text='重新授权'
-                            item.authorizationDate = '--'
+                        if(rs.errorCode=="00005"){
+                            this.$router.push({path:'/'})
                         }
+                    }else{
+                        //if(item.authorizationDate!=null){
+                           // this.text='重新授权'
+                            //item.authorizationDate = '--'
+                      //  }
+                        this.$message({
+                            message: `${rs.returnMsg}`,
+                            center: true,
+                            type:'success'
+                        });
+                         this.loadList()
                     }
                 })
             },
@@ -84,6 +96,9 @@
                             center: true,
                             type:'error'
                         });
+                        if(rs.errorCode=="00005"){
+                            this.$router.push({path:'/'})
+                        }
                     }else{
                         window.localStorage.setItem("appInfo",JSON.stringify(rs.data))
                         bus.$emit("ischange",JSON.parse(window.localStorage.getItem("appInfo"))) // 中间件

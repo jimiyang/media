@@ -1,15 +1,15 @@
 <template>
     <div class="userlist-box">
         <div class="search-box">
-              <el-autocomplete  v-model="state4"   :fetch-suggestions="querySearchAsync"   placeholder="请输入内容"  @select="searchUser"></el-autocomplete>
+              搜索用户：<el-input  v-model="state4"    placeholder="请输入用户昵称" style="width:200px"></el-input>
+              <el-button type="primary"   @click="searchUser">搜索</el-button>
         </div>
         <template>
-            <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
-            <div style="margin: 15px 0;"></div>
+            <!--<el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>-->
             <div class="list">
-                <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
-                    <el-checkbox class="checkbox" v-for="city in cities" :label="city" :key="city">
-                        <div class="personal-col">吉米小绵羊<img src="../../../static/images/0.jpg" /></div>
+                <el-checkbox-group v-model="checkedPersonal" @change="handleCheckedCitiesChange">
+                    <el-checkbox class="checkbox" v-for="(item,index) in restaurants" :label="item" :key="index">
+                        <div class="personal-col">{{item.nickName}}<img :src = "item.headImgUrl" /></div>
                     </el-checkbox>
                 </el-checkbox-group>
             </div>
@@ -17,42 +17,46 @@
     </div>
 </template>
 <script>
+import bus from '../until/eventbus.js'
 export default {
     data(){
         return{
             state4: "",
             checkAll: false,
-            checkedCities: ['上海', '北京'],
-            cities: ['上海', '北京', '广州', '深圳'],
+            checkedPersonal: [],
             isIndeterminate: true,
-            restaurants: []
+            allUserList:[],
+            restaurants:[] //该标签下所有用户
         }
     },
+    props:["checkedUserData"],
+    created(){
+        bus.$on("node",obj => {
+            this.allUserList = obj
+            this.restaurants = obj
+        })
+    },
     methods: {
-      querySearchAsync(queryString, cb) {
-        var restaurants = this.restaurants;
-        var results = queryString ? restaurants.filter(this.createStateFilter(queryString)) : restaurants;
-        clearTimeout(this.timeout);
-        this.timeout = setTimeout(() => {
-          cb(results);
-        }, 3000 * Math.random());
-      },
-      createStateFilter(queryString) {
-        return (state) => {
-          return (state.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
-        };
-      },
       searchUser(){
-
+          let node = []
+          this.allUserList.forEach((rs,i) => {
+                if(rs.nickName.indexOf(this.state4)>=0){
+                    node.push(rs)
+                }
+            });
+          this.restaurants = node
+          this.$emit("update:checkedUserData", this.restaurants)
       },
-      handleCheckAllChange(val) {
-        this.checkedCities = val ? cityOptions : [];
-        this.isIndeterminate = false;
-      },
+      /*handleCheckAllChange(val) {
+        this.checkedPersonal = val ? this.restaurants : []
+        this.isIndeterminate = false
+        this.$emit("update:checkedUserData", this.checkedPersonal)
+      },*/
       handleCheckedCitiesChange(value) {
-        let checkedCount = value.length;
-        this.checkAll = checkedCount === this.cities.length;
-        this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
+        let checkedCount = value.length
+        this.checkAll = checkedCount === this.restaurants.length
+        this.isIndeterminate = checkedCount > 0 && checkedCount < this.restaurants.length
+        this.$emit("update:checkedUserData", value)
       }
     }
 }

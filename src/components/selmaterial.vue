@@ -21,7 +21,7 @@
             </div>
             <div class="image-text"  :class="{show:cur == 1}"> 
                 <div class="notice">仅显示微图文消息</div>
-                <a href="javascript:" class="white-btn" @click = "syncData">同步</a>
+                <a href="javascript:" class="white-btn" @click = "syncData()">同步</a>
                 <div class="masonry"> 
                     <div class="item" v-for="(node,index) in materialData" :key = "index"> 
                        <div class="layer" :class="{show:currentindex === index}"><img src="/static/images/right-ico.png" /></div>
@@ -37,7 +37,7 @@
                        </dl>
                     </div>
                 </div>
-                <a  href="javascript:" class="load-more">加载更多...</a>
+                <a  href="javascript:" class="load-more" @click="moreEvent" v-if="totalNum > search.pageSize">{{moreContent}}</a>
             </div>
         </div>
 </template>
@@ -52,15 +52,45 @@
             currentindex: '',
             typeData:["文字","图文消息","图片","语音","视频"],
             cur:0,
-            materialData:[]
+            moreContent:'加载更多图文素材...',
+            flag:false,// 判断是否合并查询数组同步功能
+            materialData:[],
+            totalNum:0,
+            totalPage:1,
+            search:{
+               "type":"news",
+               "currentPage":1,
+               "pageSize":5
+            }
          }
       },
       props:["current","message","mediaid"],
       created(){
-         
+         this.loadList()
       },
       methods:{
+         loadList(){
+            this.materialapi.getMediaListByType(this.search).then(rs => {
+               if(rs.returnCode == "F"){
+                     this.$message({
+                        message: `${rs.returnMsg}`,
+                        center: true,
+                        type:'error'
+                     });
+               }else{
+                  if(this.flag == false){
+                        this.materialData = rs.data.items.concat(this.materialData)
+                    }else{
+                        this.materialData = rs.data.items 
+                    }
+                  this.totalNum = rs.data.totalNum
+                  this.totalPage = rs.data.totalPage
+                  console.log(rs.data)
+               }
+            })
+         },
          syncData() {
+            this.flag =true
             this.materialapi.getList().then(rs => {
                 if(rs.returnCode == "F") {
                     this.$message({
@@ -69,21 +99,27 @@
                         type:'error'
                     });
                 }else{
-                    let params ={"types":"news"}
-                    this.materialapi.getMediaListByType(params).then(rs => {
-                        if(rs.returnCode == "F"){
-                             this.$message({
-                                message: `${rs.returnMsg}`,
-                                center: true,
-                                type:'error'
-                            });
-                        }else{
-                           this.materialData = rs.data.items
-                           console.log(this.materialData)
-                        }
-                    })
+                    this.search.currentPage = 1
+                    this.loadList()
                 }
             })
+         },
+         moreEvent(){
+            if(this.search.currentPage>=this.totalPage) {
+               this.search.currentPage = this.totalPage
+               this.moreContent = "已经是最后一页了"
+                this.$message({
+                    message: `已经是最后一页了！`,
+                    center: true,
+                    type:'warning'
+                });
+           }else{
+             this.search.currentPage = this.search.currentPage + 1
+             if(this.search.currentPage == this.totalPage){
+                    this.moreContent = "已经是最后一页了"
+             }
+             this.loadList()
+           }
          },
          selType(index){ //选择群发类型
             this.cur =  index 

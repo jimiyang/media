@@ -52,6 +52,9 @@
 							center: true,
 							type:'warning'
 						});
+						if(rs.errorCode=="00005"){
+                            this.$router.push({path:'/'})
+                        }
 					}else{
 						//this.$store.commit('changeLogin','100')   //登录后改变状态
 						window.localStorage.setItem('changeLogin',100) 
@@ -69,5 +72,5 @@
 	}
 </script>
 <style>
-	body{background:#f6f7f8;}
+	body{background:#fff;}
 </style>

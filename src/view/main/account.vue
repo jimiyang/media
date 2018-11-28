@@ -45,6 +45,9 @@
                         type: 'error',
                         message: `${rs.returnMsg}`
                     })
+                    if(rs.errorCode=="00005"){
+                        this.$router.push({path:'/'})
+                    }
                 }else{
                     this.Data = rs.data
                     console.log( rs.data)
@@ -68,6 +71,9 @@
                             center: true,
                             type:'error'
                         });
+                        if(rs.errorCode=="00005"){
+                            this.$router.push({path:'/'})
+                        }
                     }else{
                         this.isopen = false 
                          this.$emit('update:open',false)

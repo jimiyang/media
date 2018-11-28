@@ -9,7 +9,6 @@ function getList (params) {
 function quitAuth (params) {
   return axios.get('/wechat/wechatAuthorizer/quitAuth', { params : params })
     .then((response) => {
-     
       return response.data
     })
 }

@@ -83,20 +83,20 @@
               <li>
                  <label  class="name">设置内容：</label>
                  <div>
-                   <el-select v-model="selectTag"  placeholder="请选择" width="100%">
-                     <el-option
+                   <el-select v-model="selectTag" clearable placeholder="请选择">
+                    <el-option
                       v-for="item in tagData"
-                      :key="item.id"
+                      :key="item.wxTagId"
                       :label="item.name"
-                      :value="item.id">
+                      :value="item.wxTagId">
                     </el-option>
                   </el-select>
                  </div>
               </li>
           </ul>
           <span slot="footer" class="dialog-footer">
-            <el-button @click="dialogVisible = false">取 消</el-button>
-            <el-button type="primary"  @click="addTag">确 定</el-button>
+             <el-button @click="dialogVisible = false">取 消</el-button>
+             <el-button type="primary"  @click="addTag">确 定</el-button>
           </span>
       </el-dialog>
     </div>
@@ -119,13 +119,12 @@
           pageSize:10
         },
         totalCount:0,
-        tagData:[],
+        tagData:[], 
         radio:'0',
         selectTag:"",
         checkedCount:0,
         nocheckCount:0,
         appidList:[], // 批量打标签传入的appid
-        tagList:[], // 批量打标签传入的标签值
         options: [
           {value: -1,label: '全部'},
           {value: 0,label: '未知'},
@@ -138,16 +137,21 @@
        this.loadList()  
        this.userapi.getList().then(rs => {
          this.tagData = rs.data.items
+         console.log(this.tagData)
        })
     },
     methods: {
       loadList(){
          this.userapi.getFanslist(this.search).then(rs => {
+             console.log(rs.returnCode)
              if(rs.returnCode == "F"){
                 this.$message({
                   type: 'error',
                   message: `${rs.returnMsg}`
                 })
+                if(rs.errorCode=="00005"){
+                  this.$router.push({path:'/'})
+                }
              }else{
                 this.totalCount =  rs.data.totalNum
                 this.fansData = rs.data.items
@@ -174,11 +178,12 @@
       },
       addTag(){ //批量打标签
          let params={
-            tagIdList:this.selectTag,
+            tagId:this.selectTag,
             openIdList:this.appidList,
             tagrgetFansFlag:this.radio,
             ...this.search
          }
+        console.log(this.selectTag)
         console.log(params)
         this.userapi.batchAddtag(params).then(rs => {
                if(rs.returnCode == "F"){
@@ -186,6 +191,9 @@
                     type: 'error',
                     message: `${rs.returnMsg}`
                   })
+                  if(rs.errorCode=="00005"){
+                    this.$router.push({path:'/'})
+                  }
               }else{
                   this.$message({
                     type: 'success',
@@ -206,6 +214,9 @@
                   type: 'error',
                   message: `${rs.returnMsg}`
                 })
+                if(rs.errorCode=="00005"){
+                  this.$router.push({path:'/'})
+                }
              }else{
                 this.loadList()
              }

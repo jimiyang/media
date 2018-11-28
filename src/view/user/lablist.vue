@@ -65,13 +65,15 @@
                 this.userapi.getList(this.search).then(rs => {
                     if(rs.returnCode == "F") {
                         this.$message({
-                        type: 'error',
-                        message: `${rs.returnMsg}`
+                          type: 'error',
+                          message: `${rs.returnMsg}`
                         })
+                        if(rs.errorCode=="00005"){
+                          this.$router.push({path:'/'})
+                        }
                     }else{
                         this.totalCount = rs.data.totalNum
                         this.tagData = rs.data.items
-                        
                     }
                 })
             },
@@ -100,6 +102,9 @@
                               type: 'error',
                               message: `${rs.returnMsg}`
                             })
+                            if(rs.errorCode=="00005"){
+                             this.$router.push({path:'/'})
+                            }
                         }else{
                             this.$message({
                                 type: 'success',
@@ -115,9 +120,12 @@
                      this.userapi.addTag({"name":this.labName}).then(rs => {
                         if(rs.returnCode == "F") {
                             this.$message({
-                                type: 'error',
-                                message: `${rs.returnMsg}`
+                              type: 'error',
+                              message: `${rs.returnMsg}`
                             })
+                            if(rs.errorCode=="00005"){
+                              this.$router.push({path:'/'})
+                            }
                         }else{
                             this.$message({
                                 type: 'success',
@@ -138,6 +146,9 @@
                                 type: 'error',
                                 message: `${rs.returnMsg}`
                             })
+                            if(rs.errorCode=="00005"){
+                              this.$router.push({path:'/'})
+                            }
                         }else{
                             this.$message({
                                 type: 'success',
