@@ -5,7 +5,7 @@
               <el-button type="primary"   @click="searchUser">搜索</el-button>
         </div>
         <template>
-            <!--<el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>-->
+            <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
             <div class="list">
                 <el-checkbox-group v-model="checkedPersonal" @change="handleCheckedCitiesChange">
                     <el-checkbox class="checkbox" v-for="(item,index) in restaurants" :label="item" :key="index">
@@ -47,11 +47,11 @@ export default {
           this.restaurants = node
           this.$emit("update:checkedUserData", this.restaurants)
       },
-      /*handleCheckAllChange(val) {
+      handleCheckAllChange(val) {
         this.checkedPersonal = val ? this.restaurants : []
         this.isIndeterminate = false
         this.$emit("update:checkedUserData", this.checkedPersonal)
-      },*/
+      },
       handleCheckedCitiesChange(value) {
         let checkedCount = value.length
         this.checkAll = checkedCount === this.restaurants.length

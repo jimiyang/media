@@ -61,7 +61,7 @@ export default {
                         center: true,
                         type:'error'
                     });
-                    if(rs.errorCode=="00005"){
+                    if(rs.errorCode=="000005"){
                         this.$router.push({path:'/'})
                     }
                 }else{
@@ -87,7 +87,7 @@ export default {
                         center: true,
                         type:'error'
                     });
-                    if(rs.errorCode=="00005"){
+                    if(rs.errorCode=="000005"){
                         this.$router.push({path:'/'})
                     }
                 }else{

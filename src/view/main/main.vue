@@ -38,7 +38,6 @@
         </el-aside>
         <el-container>
             <el-header class="user-center" >
-                 <div></div>
                  <div class="right">
                     <el-tooltip class="item" effect="dark"  placement="bottom">
                         <div slot="content">当前帐号：{{name}}</div>

@@ -107,7 +107,7 @@
                           type: 'error',
                           message: `${rs.returnMsg}`
                         })
-                        if(rs.errorCode=="00005"){
+                        if(rs.errorCode=="000005"){
                           this.$router.push({path:'/'})
                         }
                     }else{
@@ -124,7 +124,7 @@
                           type: 'error',
                           message: `${rs.returnMsg}`
                         })
-                        if(rs.errorCode=="00005"){
+                        if(rs.errorCode=="000005"){
                           this.$router.push({path:'/'})
                         }
                      }else{
@@ -142,7 +142,7 @@
                                 type: 'error',
                                 message: `${rs.returnMsg}`
                             })
-                            if(rs.errorCode=="00005"){
+                            if(rs.errorCode=="000005"){
                                 this.$router.push({path:'/'})
                             }
                         }else{

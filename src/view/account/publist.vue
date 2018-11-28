@@ -23,7 +23,7 @@
             <el-table-column   prop="fansCount"  label="粉丝数"></el-table-column>
             <el-table-column  label="操作">
                 <template slot-scope="scope">
-                    <el-button @click="switchApp(scope.row.appid)" type="text" size="small">切换</el-button>
+                    <el-button @click="switchApp(scope.row.appId)" type="text" size="small">切换</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -55,6 +55,9 @@
                         center: true,
                         type:'error'
                     });
+                    if(rs.errorCode=="000005"){
+                        this.$router.push({path:'/'})
+                    }
                 }else{
                     this.pnumberList = rs.data
                 }
@@ -70,7 +73,7 @@
                             center: true,
                             type:'error'
                         });
-                        if(rs.errorCode=="00005"){
+                        if(rs.errorCode=="000005"){
                             this.$router.push({path:'/'})
                         }
                     }else{
@@ -96,10 +99,15 @@
                             center: true,
                             type:'error'
                         });
-                        if(rs.errorCode=="00005"){
+                        if(rs.errorCode=="000005"){
                             this.$router.push({path:'/'})
                         }
                     }else{
+                        this.$message({
+                            message: `${rs.returnMsg}`,
+                            center: true,
+                            type:'success'
+                        });
                         window.localStorage.setItem("appInfo",JSON.stringify(rs.data))
                         bus.$emit("ischange",JSON.parse(window.localStorage.getItem("appInfo"))) // 中间件
                     }

@@ -33,13 +33,13 @@
             </div>-->
         </div>
         <div class="ant-btn">
-            <a href="javacript:" class="blue-btn" @click="searchUser">搜索</a>
-            <a href="javacript:" class="white-btn" @click="reset">重置</a>
+            <a href="javascript:" class="blue-btn" @click="searchUser">搜索</a>
+            <a href="javascript:" class="white-btn" @click="reset">重置</a>
         </div>
         <div class="count">搜索到{{totalCount}}个粉丝</div>
         <div class="opeart-btn">
-            <a href="javacript:" class="blue-btn" @click="updateUser">同步数据</a>
-            <a href="javacript:" class="white-btn" @click="operation">批量操作</a>
+            <a href="javascript:" class="blue-btn" @click="updateUser">同步数据</a>
+            <a href="javascript:" class="white-btn" @click="operation">批量操作</a>
         </div>
         <el-table class="tab-list" ref="multipleTable" :data="fansData"   @selection-change="checkEvent"  style="width:100%;">
             <el-table-column   type="selection" width="55"></el-table-column>
@@ -143,13 +143,13 @@
     methods: {
       loadList(){
          this.userapi.getFanslist(this.search).then(rs => {
-             console.log(rs.returnCode)
+             console.log(rs)
              if(rs.returnCode == "F"){
                 this.$message({
                   type: 'error',
                   message: `${rs.returnMsg}`
                 })
-                if(rs.errorCode=="00005"){
+                if(rs.errorCode=="000005"){
                   this.$router.push({path:'/'})
                 }
              }else{
@@ -191,7 +191,7 @@
                     type: 'error',
                     message: `${rs.returnMsg}`
                   })
-                  if(rs.errorCode=="00005"){
+                  if(rs.errorCode=="000005"){
                     this.$router.push({path:'/'})
                   }
               }else{
@@ -214,10 +214,14 @@
                   type: 'error',
                   message: `${rs.returnMsg}`
                 })
-                if(rs.errorCode=="00005"){
+                if(rs.errorCode=="000005"){
                   this.$router.push({path:'/'})
                 }
              }else{
+               this.$message({
+                  type: 'success',
+                  message: `数据同步成功！`
+                })
                 this.loadList()
              }
         })

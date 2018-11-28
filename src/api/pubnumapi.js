@@ -13,7 +13,13 @@ function quitAuth (params) {
     })
 }
 function switchApp (params) {
-  return axios.get('/wechat/wechatAuthorizer/switchApp',{params:params})
+  return axios.get('/wechat/wechatAuthorizer/switchApp', {params: params})
+    .then((response) => {
+      return response.data
+    })
+}
+function switchList () {
+  return axios.get('/wechat/wechatAuthorizer/switchList')
     .then((response) => {
       return response.data
     })
@@ -21,5 +27,6 @@ function switchApp (params) {
 export default { 
   getList,
   quitAuth,
-  switchApp
+  switchApp,
+  switchList
 }

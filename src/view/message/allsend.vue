@@ -57,7 +57,7 @@
             <a href="javascript:" class="blue-btn" @click="sendSubmit">立即高级群发</a>
             <span>预计发送人数：{{sendNum}}</span>
         </div>
-        <el-dialog  title="选择群发内容"  :visible.sync="dialogVisible"  @close='closeDialog'  width="600">
+        <el-dialog  title="选择群发内容"  :visible.sync="dialogVisible"  @close='closeDialog' width="35%">
             <selmaterial  :mediaid.sync="groupMessage.mediaId" :current.sync="current" :message.sync="groupMessage.content"></selmaterial>
             <span slot="footer" class="dialog-footer">
                 <el-button @click="dialogVisible = false">取 消</el-button>
@@ -147,31 +147,37 @@
                 }
                 console.log(this.current)
                 console.log(this.groupMessage.mediaId)
-                materialapi.getMediaByWxMediaId({wxMediaId:this.groupMessage.mediaId}).then(rs => {
-                    if(rs.returnCode == "F"){
-                        this.$message({
-                        type: 'error',
-                        message: `${rs.returnMsg}`
-                        })
-                        if(rs.errorCode=="00005"){
-                            this.$router.push({path:'/'})
-                        }
-                    }else{
-                        this.wechatArticleList =rs.data.wechatArticleList
-                        console.log(this.wechatArticleList)
-                    }  
-                })
+                if(this.groupMessage.mediaId!=""){
+                    materialapi.getMediaByWxMediaId({wxMediaId:this.groupMessage.mediaId}).then(rs => {
+                        if(rs.returnCode == "F"){
+                            this.$message({
+                            type: 'error',
+                            message: `${rs.returnMsg}`
+                            })
+                            if(rs.errorCode=="00005"){
+                                this.$router.push({path:'/'})
+                            }
+                        }else{
+                            this.wechatArticleList =rs.data.wechatArticleList
+                            console.log(this.wechatArticleList)
+                        }  
+                    })
+                }
             },
             sendUser(){//手机预览并发送
                 this.dialog = false
-                console.log(this.checkedUserData)
+                let arrOpenid=[]
+                for(let i=0;i < this.checkedUserData.length;i++){
+                    arrOpenid.push(this.checkedUserData[i].openId)
+                }
                 let params ={
-                    touser:this.checkedUserData[0].openId,
+                    touserList:arrOpenid,
                     sendIgnoreReprint: this.reprintChecked ==false ? 0 :1,
                     content:this.groupMessage.content,
                     media_id: this.groupMessage.mediaId,
                     msgtype:this.$common.msgTypelist(this.current,1)
                 }
+
                 console.log(params)
                 this.msgapi.preview(params).then(rs => {
                     if(rs.returnCode == "F"){
@@ -179,7 +185,7 @@
                             type: 'error',
                             message: `${rs.returnMsg}`
                         })
-                        if(rs.errorCode=="00005"){
+                        if(rs.errorCode=="000005"){
                             this.$router.push({path:'/'})
                         }
                     }else{
@@ -202,7 +208,7 @@
                             type: 'error',
                             message: `${rs.returnMsg}`
                         })
-                        if(rs.errorCode=="00005"){
+                        if(rs.errorCode=="000005"){
                             this.$router.push({path:'/'})
                         }
                     }else{
@@ -229,7 +235,7 @@
                             type: 'error',
                             message: `${rs.returnMsg}`
                         })
-                        if(rs.errorCode=="00005"){
+                        if(rs.errorCode=="000005"){
                             this.$router.push({path:'/'})
                         }
                     }else{

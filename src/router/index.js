@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/view/login/login' 
+import NotFound from '../view/404.vue'
 import Center from '@/center'
 import Main from '@/view/main/main'
 import Allsend from '@/view/message/allsend' // 消息群发
@@ -11,13 +12,20 @@ import Mlist from '@/view/material/list' // 图文素材库
 import Publist from '@/view/account/publist' // 公众号列表
 Vue.use(Router)
 export default new Router({
-  mode: 'history',
+  //mode: 'history',
   routes: [
     {
       path: '/',
-      name: 'Login',
-      component: Login
+      name: '',
+      component: Login,
+      hidden: true
     }, 
+    {
+      path: '/404',
+      name: '',
+      component: NotFound,
+      hidden: true
+    },
     {
       path: '/main',
       name: 'main',
