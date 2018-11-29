@@ -78,27 +78,27 @@
 <script>
 import messageapi from  '../../api/msgapi'
 //import fanlistVue from '../user/fanlist.vue'
-export default{
-data(){
-    return{
-        messageapi : messageapi,
-        dialogVisible : false,
-        messageData : [],
-        totalCount:0,
-        search:{
-            currentPage:1,
-            pageSize:5
-        },
-        marteralId:'', //图文id
-        detail:{
-            //wechatArticleList : []
-        },
-        selectVal:''
-    }
-},
-created(){
-    this.loadList()
-},
+export default {
+    data() {
+        return {
+            messageapi: messageapi,
+            dialogVisible : false,
+            messageData: [],
+            totalCount:0,
+            search:{
+                currentPage:1,
+                pageSize:5
+            },
+            marteralId:'', //图文id
+            detail:{
+                //wechatArticleList : []
+            },
+            selectVal:''
+        }
+    },
+    created(){
+        this.loadList()
+    },
     methods:{
         loadList(){
             this.messageapi.getMsgSendRecordList(this.search).then(rs => {
