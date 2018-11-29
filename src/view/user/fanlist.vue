@@ -5,12 +5,7 @@
             <div class="items">粉丝名称：<el-input v-model="search.nickName" placeholder="请输入粉丝名称" style="width:200px;"></el-input></div>
             <div class="items">微信标签：
                 <el-select v-model="search.tagIdList" multiple  placeholder="微信标签">
-                    <el-option
-                      v-for="item in tagData"
-                      :key="item.id"
-                      :label="item.name"
-                      :value="item.id">
-                    </el-option>
+                    <el-option  v-for="item in tagData" :key= "item.id" :label= "item.name" :value= "item.id"></el-option>
                 </el-select>
             </div>
             <div class="items">性别：

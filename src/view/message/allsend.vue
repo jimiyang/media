@@ -7,12 +7,12 @@
                     <p>请注意这种情况，如果某个粉丝身上有3个标签，群发3个标签他就会收到3次推送。</p>
                 </div>
                 <h1 class="title">设置群发内容</h1>
-                <a href="javascript:" class="white-btn select" @click="selectContent">选择群发内容</a>
+                <a href="javascript:" class="white-btn select" @click= "selectContent">选择群发内容</a>
                 <h1 class="title">选择群发对象
                     <span>需要发给同时拥有A和B标签的粉丝？</span>
                 </h1>
                 <ul class="lab-blocks" >
-                    <li v-for="(item,i) in labList"  :key="i" :class="{checked:i==index}"   @click="selLab(i,item.wxTagId)">{{item.name}}</li>
+                    <li v-for= "(item,i) in labList"  :key="i" :class= "{checked:i === index}"   @click= "selLab(i,item.wxTagId)">{{item.name}}</li>
                 </ul>
                 <h1 class="title">定时发送及原创校验</h1>
                 <div class="ant-items">
@@ -25,7 +25,7 @@
                             <el-button>如何操作？</el-button>
                         </el-tooltip>
                     </div>
-                    <div class="block" :class="{show:timingChecked==true}">
+                    <div class="block" :class= "{show:timingChecked === true}">
                         <label>请选择具体时间</label><el-date-picker  v-model="groupMessage.sendDate"  type="datetime"  placeholder="选择日期时间"></el-date-picker>
                     </div>
                     <div>

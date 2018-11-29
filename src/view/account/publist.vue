@@ -36,10 +36,10 @@ export default{
     data(){
       return{
        publicapi : pubnumapi,
-       pnumberList:[],
-       time:'',
-       index:0,
-       text:'解除授权'
+       pnumberList: [],
+       time: '',
+       index: 0,
+       text: '解除授权'
       }
     },
     created(){

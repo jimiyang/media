@@ -1,4 +1,4 @@
-import {ajax as axios} from './api'
+import { ajax as axios } from './api'
 function getMsgSendRecordList (params) {
   return axios.post('/wechat/batchMessage/getMsgSendRecordList', params)
     .then((repsonse) => {

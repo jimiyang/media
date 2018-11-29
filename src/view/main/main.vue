@@ -1,12 +1,12 @@
 <template>
      <el-container class="sec">
         <el-aside width="200px">
-            <div class="img-blocks"> <img :src="imgurl" />
+            <div class="img-blocks"> <img :src = "imgurl" />
             </div>
             <div class="wx-name">
-                {{name}} <span>{{isAuth == 0 ? "未认证" : "已认证"}}</span>
+                {{name}} <span>{{isAuth === 0 ? "未认证" : "已认证"}}</span>
             </div>
-            <div class="fun-num">{{serviceTypeInfo==1 ? "订阅号" : "服务号"}}</div>
+            <div class="fun-num">{{serviceTypeInfo === 1 ? "订阅号" : "服务号"}}</div>
             <el-menu class="menu-blocks" :default-openeds="['1','2','3','4']" :default-active="currentMenu">
                 <el-submenu index="1">
                     <template slot="title"><i class="el-icon-message"></i>消息管理</template>

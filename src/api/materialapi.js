@@ -1,4 +1,4 @@
-import {ajax as axios} from './api'
+import { ajax as axios } from './api'
 function getList () {
   return axios.post('/wechat/material/synchronizationMediaList')
     .then((response) => {

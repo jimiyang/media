@@ -1,8 +1,8 @@
 <template>
     <div class="userlist-box">
         <div class="search-box">
-              搜索用户：<el-input  v-model="state4"    placeholder="请输入用户昵称" style="width:200px"></el-input>
-              <el-button type="primary"   @click="searchUser">搜索</el-button>
+              搜索用户：<el-input  v-model="name"    placeholder="请输入用户昵称" style="width:200px"></el-input>
+              <el-button type="primary" @click = "searchUser">搜索</el-button>
         </div>
         <template>
             <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
@@ -21,7 +21,7 @@ import bus from '../until/eventbus.js'
 export default {
     data(){
         return{
-            state4: "",
+            name: "",
             checkAll: false,
             checkedPersonal: [],
             isIndeterminate: true,
@@ -37,10 +37,10 @@ export default {
         })
     },
     methods: {
-      searchUser(){
+      searchUser () {
           let node = []
           this.allUserList.forEach((rs,i) => {
-                if(rs.nickName.indexOf(this.state4)>=0){
+                if(rs.nickName.indexOf(this.name)>=0){
                     node.push(rs)
                 }
             });

@@ -1,4 +1,4 @@
-import {ajax as axios} from './api'
+import { ajax as axios } from './api'
 // 登录
 function userLogin (params) {
   return axios('/login', { params: params })
@@ -6,4 +6,5 @@ function userLogin (params) {
       return response
     })
 }
-export default{userLogin}
+export default{ userLogin }
+

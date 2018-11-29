@@ -1,8 +1,8 @@
 <template>
 	<div class="login-blocks">
 		<div class="type">
-			<a href="javascript:" :class="{active:isactive==0}" @click="changeLogintype(0)">密码登录</a>
-			<a href="javascript:" :class="{active:isactive==1}" @click="changeLogintype(1)">扫码登录</a>
+			<a href="javascript:" :class = "{active:isactive === 0}" @click= "changeLogintype(0)">密码登录</a>
+			<a href="javascript:" :class = "{active:isactive === 1}" @click= "changeLogintype(1)">扫码登录</a>
 		</div>
 		<ul class="user-info">
 			<li>

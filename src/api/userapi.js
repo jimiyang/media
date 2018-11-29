@@ -1,7 +1,7 @@
 import { ajax as axios } from './api'
 /* 标签管理 star */
 function getList (params) {
-  return axios.get('/wechat/tag/list', {params : params})
+  return axios.get('/wechat/tag/list', { params: params })
     .then((response) => {
       return response.data
     })
@@ -19,7 +19,7 @@ function updateLab (params) {
     })
 }
 function deleteTag (params) {
-  return axios.get('/wechat/tag/delete', {params : params})
+  return axios.get('/wechat/tag/delete', { params: params })
     .then((response) => {
       return response.data
     })
