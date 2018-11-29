@@ -100,21 +100,21 @@
 import userapi from '../../api/userapi'
 export default {
   data () {
-      return {
-        userapi: userapi,
-        dialogVisible: false,
-        fansData: [],
-        search: {
-          openId: '',
-          nickName: '',
-          tagIdList: [],
-          sex: -1,
-          selectedOptions: [],
-          currentPage: 1,
-          pageSize: 10
+    return {
+      userapi: userapi,
+      dialogVisible: false,
+      fansData: [],
+      search: {
+        openId: '',
+        nickName: '',
+        tagIdList: [],
+        sex: -1,
+        selectedOptions: [],
+        currentPage: 1,
+        pageSize: 10
       },
       totalCount: 0,
-      tagData: [], 
+      tagData: [],
       radio: '0',
       selectTag: '',
       checkedCount: 0,
@@ -124,117 +124,115 @@ export default {
         {value: -1, label: '全部'},
         {value: 0, label: '未知'},
         {value: 1, label: '男'},
-        {value: 2, label: '女'}]
+        {value: 2, label: '女'}
+      ]
     }
-    },
+  },
   created () {
-    this.loadList()  
+    this.loadList()
     this.userapi.getList().then(rs => {
       this.tagData = rs.data.items
       console.log(this.tagData)
     })
   },
-     methods: {
-      loadList () {
-         this.userapi.getFanslist(this.search).then(rs => {
-             console.log(rs)
-             if (rs.returnCode === 'F') {
-                this.$message({
-                  type: 'error',
-                  message: `${rs.returnMsg}`
-                })
-                if(rs.errorCode === '000005') {
-                  this.$router.push({path: '/'})
-                }
-             } else {
-                this.totalCount =  rs.data.totalNum
-                this.fansData = rs.data.items
-             }
-         })
-      },
-      searchUser () {
-        this.loadList()
-      },
-      reset () {
-        this.search = {
-          openId: '',
-          nickName: '',
-          tagIdList: [],
-          sex: -1,
+  methods: {
+    loadList () {
+      this.userapi.getFanslist(this.search).then(rs => {
+        console.log(rs)
+        if (rs.returnCode === 'F') {
+          this.$message({
+            type: 'error',
+            message: `${rs.returnMsg}`
+          })
+          if (rs.errorCode === '000005') {
+            this.$router.push({path: '/'})
+          }
+        } else {
+          this.totalCount = rs.data.totalNum
+          this.fansData = rs.data.items
         }
-      },
-      checkEvent (node) {
-        this.checkedCount = node.length
-        this.nocheckCount = (this.totalCount - node.length)
-        for(let i = 0;i<node.length;i++) {
-           this.appidList.push(node[i].openId)
-        }
-      },
-      addTag () { 
-         let params = {
-            tagId:this.selectTag,
-            openIdList:this.appidList,
-            tagrgetFansFlag:this.radio,
-            ...this.search
-         }
-        console.log(this.selectTag)
-        console.log(params)
-        this.userapi.batchAddtag(params).then(rs => {
-               if (rs.returnCode === 'F') {
-                  this.$message({
-                    type: 'error',
-                    message: `${rs.returnMsg}`
-                  })
-                  if (rs.errorCode === '000005') {
-                    this.$router.push({path:'/'})
-                  }
-              } else {
-                  this.$message({
-                    type: 'success',
-                    message: `批量操作成功`
-                  })
-                  this.dialogVisible = false
-                  this.loadList() 
-              }
-         })
-      },
-      handleClose(){
-         this.dialogVisible = false
-      },
-      updateUser(){ //同步粉丝数据
-        this.userapi.refreshUserlist().then(rs => {
-             if (rs.returnCode === 'F') {
-                this.$message({
-                  type: 'error',
-                  message: `${rs.returnMsg}`
-                })
-                if (rs.errorCode === '000005') {
-                  this.$router.push({path: '/'})
-                }
-             } else {
-               this.$message({
-                  type: 'success',
-                  message: `数据同步成功！`
-                })
-                this.loadList()
-             }
-        })
-      },
-      operation () {
-         this.dialogVisible = true
-      },
-      handleSizeChange (val) {
-          this.search.pageSize = val
-          this.loadList()
-      },
-      handleCurrentChange (val) {
-           this.search.currentPage = val
-           this.loadList()
-      },
-      handleChange (value) {
-        
+      })
+    },
+    searchUser () {
+      this.loadList()
+    },
+    reset () {
+      this.search = {
+        openId: '',
+        nickName: '',
+        tagIdList: [],
+        sex: -1
       }
-    }
-  };
+    },
+    checkEvent (node) {
+      this.checkedCount = node.length
+      this.nocheckCount = (this.totalCount - node.length)
+      for (let i = 0; i < node.length; i++) {
+        this.appidList.push(node[i].openId)
+      }
+    },
+    addTag () {
+      let params = {
+        tagId: this.selectTag,
+        openIdList: this.appidList,
+        tagrgetFansFlag: this.radio
+      }
+      Object.assign(params, this.search)
+      console.log(this.selectTag)
+      console.log(params)
+      this.userapi.batchAddtag(params).then(rs => {
+        if (rs.returnCode === 'F') {
+          this.$message({
+            type: 'error',
+            message: `${rs.returnMsg}`
+          })
+          if (rs.errorCode === '000005') {
+            this.$router.push({path: '/'})
+          }
+        } else {
+          this.$message({
+            type: 'success',
+            message: `批量操作成功`
+          })
+          this.dialogVisible = false
+          this.loadList()
+        }
+      })
+    },
+    handleClose () {
+      this.dialogVisible = false
+    },
+    updateUser () { // 同步粉丝数据
+      this.userapi.refreshUserlist().then(rs => {
+        if (rs.returnCode === 'F') {
+          this.$message({
+            type: 'error',
+            message: `${rs.returnMsg}`
+          })
+          if (rs.errorCode === '000005') {
+            this.$router.push({path: '/'})
+          }
+        } else {
+          this.$message({
+            type: 'success',
+            message: `数据同步成功！`
+          })
+          this.loadList()
+        }
+      })
+    },
+    operation () {
+      this.dialogVisible = true
+    },
+    handleSizeChange (val) {
+      this.search.pageSize = val
+      this.loadList()
+    },
+    handleCurrentChange (val) {
+      this.search.currentPage = val
+      this.loadList()
+    },
+    handleChange (value) {}
+  }
+}
 </script>
-

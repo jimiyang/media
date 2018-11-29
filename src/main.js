@@ -15,7 +15,7 @@ Vue.prototype.$ajax = axios
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requireAuth)){ // 判断该路由是否需要登录权限
     if (window.localStorage.getItem('changeLogin')==100) { // 
-      next();
+      next()
     }
     else {
       next ({
@@ -27,8 +27,8 @@ router.beforeEach((to, from, next) => {
   else {
    next()
   }
- }) 
-  new Vue({
+}) 
+new Vue({
   el: '#app',
   router,
   store,

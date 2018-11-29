@@ -30,80 +30,80 @@
     </div>
 </template>
 <script>
-import  pubnumapi from '../../api/pubnumapi.js'
+import pubnumapi from '../../api/pubnumapi.js'
 import bus from '../../until/eventbus.js'
 export default{
-    data(){
-      return{
-       publicapi : pubnumapi,
-       pnumberList: [],
-       time: '',
-       index: 0,
-       text: '解除授权'
-      }
-    },
-    created(){
+  data () {
+    return {
+      publicapi: pubnumapi,
+      pnumberList: [],
+      time: '',
+      index: 0,
+      text: '解除授权'
+    }
+  },
+  created () {
         // console.log(window.localStorage.getItem('changeLogin'))
-        this.loadList()
+    this.loadList()
+  },
+  methods: {
+    loadList () {
+      this.publicapi.getList().then((rs) => {
+        if (rs.returnCode === 'F') {
+          this.$message({
+            message: `${rs.returnMsg}`,
+            center: true,
+            type: 'error'
+          })
+          if (rs.errorCode === '000005') {
+            this.$router.push({path: '/'})
+          }
+        } else {
+          this.pnumberList = rs.data
+        }
+      })
     },
-    methods:{
-        loadList(){
-            this.publicapi.getList().then((rs)=>{
-                if(rs.returnCode === 'F'){
-                    this.$message({
-                        message: `${rs.returnMsg}`,
-                        center: true,
-                        type:'error'
-                    });
-                    if(rs.errorCode === '000005'){
-                        this.$router.push({path:'/'})
-                    }
-                }else{
-                    this.pnumberList = rs.data
-                }
-            })
-        },
         // 解除授权
-        authorizationEvent(item){
-        console.log(item.appid)
-        this.publicapi.quitAuth({'appId':item.appid}).then((rs) => {
-        if(rs.returnCode === 'F') {
-              this.$message({
-                message: `${rs.returnMsg}`,
-                center: true,
-                type:'error'
-              })
-              if(rs.errorCode === '000005') {
-                this.$router.push({path:'/'})
-              }
+    authorizationEvent (item) {
+      console.log(item.appid)
+      this.publicapi.quitAuth({'appId': item.appid}).then((rs) => {
+        if (rs.returnCode === 'F') {
+          this.$message({
+            message: `${rs.returnMsg}`,
+            center: true,
+            type: 'error'
+          })
+          if (rs.errorCode === '000005') {
+            this.$router.push({path: '/'})
+          }
         } else {
           this.$message({
             message: `${rs.returnMsg}`,
             center: true,
-            type:'success'
+            type: 'success'
           })
           this.loadList()
         }
       })
     },
     switchApp (id) { // 切换
-      this.publicapi.switchApp({'appId': id}).then((rs)=> {
-            if (rs.returnCode === 'F') {
-            this.$message({
-                message: `${rs.returnMsg}`,
-                center: true,
-                type:'error'
-            })
-            if (rs.errorCode === '000005') {
-                this.$router.push({path:'/'})
-              }
-            } else {
-         this.$message({
+      this.publicapi.switchApp({'appId': id}).then((rs) => {
+        if (rs.returnCode === 'F') {
+          this.$message({
+            message: `${rs.returnMsg}`,
+            center: true,
+            type: 'error'
+          })
+          if (rs.errorCode === '000005') {
+            this.$router.push({path: '/'})
+          }
+        } else {
+          this.$message({
             message: `${rs.returnMsg}`,
             center: true,
             type: 'success'
-    })
-          window.localStorage.setItem('appInfo',JSON.stringify(rs.data))
+          })
+          window.localStorage.setItem('appInfo', JSON.stringify(rs.data))
           bus.$emit('ischange', JSON.parse(window.localStorage.getItem('appInfo'))) // 中间件
         }
       })

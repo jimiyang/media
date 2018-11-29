@@ -75,182 +75,180 @@
 </template>
 <script>
     import selmaterial from '../../components/selmaterial.vue'
-    import userlist from  '../../components/userlist.vue'
+    import userlist from '../../components/userlist.vue'
     import userapi from '../../api/userapi'
-    import msgapi from  '../../api/msgapi'
-    import materialapi from  '../../api/materialapi'
+    import msgapi from '../../api/msgapi'
+    import materialapi from '../../api/materialapi'
     import bus from '../../until/eventbus.js'
     export default {
-        data () {
-            return {
-                msgapi: msgapi,
-                timingChecked: false,
-                reprintChecked: true,
-                dialogVisible: false,
-                dialog: false,
-                ishide: true,
-                index: 0,
-                wechatArticleList: [],
-                current: 0,//当前要发送的消息类型[图文，消息，语音，视频]
-                cur: -1,
-                labList: [],
-                groupMessage: {
-                    mediaId: '',
-                    isToAll: true,
-                    tagId: '',
-                    content: '',
-                    sendDate: new Date().getTime()
-                },
-                tagSearch: {
-                    currentPage: 1,
-                    pageSize: 5
-                },
-                checkedUserData: [],
-                sendNum: 0 // 发送人数
-            }
-        },
-        components: {selmaterial, userlist},
-        created() {
-            userapi.getList().then(rs => {
-                if(rs.returnCode === 'F') {
-                    this.$message({
-                      type: 'error',
-                      message: `${rs.returnMsg}`
-                    })
-                    if(rs.errorCode === '000005') {
-                        this.$router.push({path:'/'})
-                    }
-                } else {
-                    this.labList = rs.data.items
-                    this.groupMessage.tagId = this.labList[0].wxTagId
-                    console.log(this.labList)
-                }
-            })
-        },
-        methods:{
-            selectContent() {
-                this.dialogVisible = true 
-            },
-            closeDialog() {
-                 this.dialogVisible = false
-                 this.dialog = false 
-            },
-            selLab(id, tagid) {
-                this.index=id
-                this.groupMessage.tagId = tagid
-            },
-            sendContent() {
-                this.dialogVisible =false
-                this.cur = this.current
-                if(this.current!=0){
-                    this.groupMessage.content=''
-                }
-                console.log(this.current)
-                console.log(this.groupMessage.mediaId)
-                if(this.groupMessage.mediaId!=''){
-                    materialapi.getMediaByWxMediaId({wxMediaId:this.groupMessage.mediaId}).then(rs => {
-                        if(rs.returnCode === 'F'){
-                            this.$message({
-                            type: 'error',
-                            message: `${rs.returnMsg}`
-                            })
-                            if(rs.errorCode === '00005'){
-                                this.$router.push({path:'/'})
-                            }
-                        }else{
-                            this.wechatArticleList =rs.data.wechatArticleList
-                            console.log(this.wechatArticleList)
-                        }  
-                    })
-                }
-            },
-            sendUser() {//手机预览并发送
-                this.dialog = false
-                let arrOpenid=[]
-                for(let i=0;i < this.checkedUserData.length;i++){
-                    arrOpenid.push(this.checkedUserData[i].openId)
-                }
-                let params ={
-                    touserList:arrOpenid,
-                    sendIgnoreReprint: this.reprintChecked ==false ? 0 :1,
-                    content:this.groupMessage.content,
-                    media_id: this.groupMessage.mediaId,
-                    msgtype:this.$common.msgTypelist(this.current,1)
-                }
-
-                console.log(params)
-                this.msgapi.preview(params).then(rs => {
-                    if(rs.returnCode === 'F'){
-                        this.$message({
-                            type: 'error',
-                            message: `${rs.returnMsg}`
-                        })
-                        if(rs.errorCode === '000005') {
-                            this.$router.push({path:'/'})
-                        }
-                    } else {
-                        this.$message({
-                            type: 'success',
-                            message: `手机发送成功！`
-                        })
-                    }
-               })
-            },
-            phonePreview() { //手机预览选择发送对象
-                this.dialog = true
-                let params = {
-                    tagId : this.groupMessage.tagId
-                }
-                console.log(params)
-                userapi.getTagfanslistByid(params).then(rs => {
-                   if(rs.returnCode === 'F'){
-                        this.$message({
-                            type: 'error',
-                            message: `${rs.returnMsg}`
-                        })
-                        if(rs.errorCode === '000005'){
-                            this.$router.push({path:'/'})
-                        }
-                    }else{
-                        this.sendNum = rs.data.totalNum
-                        bus.$emit("node",rs.data.items)
-                    }
-                })
-                
-            },
-            sendSubmit() { //高级群发
-               if(this.timingChecked==false){
-                   this.groupMessage.sendDate = null
-               }
-               let params={
-                   ...this.groupMessage,
-                   msgtype:this.$common.msgTypelist(this.current,1),
-                   sendIgnoreReprint: this.reprintChecked ==false ? 0 :1
-               }
-               
-               console.log(params)
-               this.msgapi.batchMessage(params).then(rs => {
-                    if(rs.returnCode === 'F'){
-                        this.$message({
-                            type: 'error',
-                            message: `${rs.returnMsg}`
-                        })
-                        if(rs.errorCode === '000005'){
-                            this.$router.push({path:'/'})
-                        }
-                    } else {
-                        this.$message({
-                            type: 'success',
-                            message: `群发成功！`
-                        })
-                    }
-               })
-            }
-        },
-        watch:{
-            content(val){
-                this.content =val
-            }
+      data () {
+        return {
+          msgapi: msgapi,
+          timingChecked: false,
+          reprintChecked: true,
+          dialogVisible: false,
+          dialog: false,
+          ishide: true,
+          index: 0,
+          wechatArticleList: [],
+          current: 0, // 当前要发送的消息类型[图文，消息，语音，视频]
+          cur: -1,
+          labList: [],
+          groupMessage: {
+            mediaId: '',
+            isToAll: true,
+            tagId: '',
+            content: '',
+            sendDate: new Date().getTime()
+          },
+          tagSearch: {
+            currentPage: 1,
+            pageSize: 5
+          },
+          checkedUserData: [],
+          sendNum: 0 // 发送人数
         }
+      },
+      components: {selmaterial, userlist},
+      created () {
+        userapi.getList().then(rs => {
+          if (rs.returnCode === 'F') {
+            this.$message({
+              type: 'error',
+              message: `${rs.returnMsg}`
+            })
+            if (rs.errorCode === '000005') {
+              this.$router.push({path: '/'})
+            }
+          } else {
+            this.labList = rs.data.items
+            this.groupMessage.tagId = this.labList[0].wxTagId
+            console.log(this.labList)
+          }
+        })
+      },
+      methods: {
+        selectContent () {
+          this.dialogVisible = true
+        },
+        closeDialog () {
+          this.dialogVisible = false
+          this.dialog = false
+        },
+        selLab (id, tagid) {
+          this.index = id
+          this.groupMessage.tagId = tagid
+        },
+        sendContent () {
+          this.dialogVisible = false
+          this.cur = this.current
+          if (this.current !== 0) {
+            this.groupMessage.content = ''
+          }
+          console.log(this.current)
+          console.log(this.groupMessage.mediaId)
+          if (this.groupMessage.mediaId !== '') {
+            materialapi.getMediaByWxMediaId({wxMediaId: this.groupMessage.mediaId}).then(rs => {
+              if (rs.returnCode === 'F') {
+                this.$message({
+                  type: 'error',
+                  message: `${rs.returnMsg}`
+                })
+                if (rs.errorCode === '00005') {
+                  this.$router.push({path: '/'})
+                }
+              } else {
+                this.wechatArticleList = rs.data.wechatArticleList
+                console.log(this.wechatArticleList)
+              }
+            })
+          }
+        },
+        sendUser () { // 手机预览并发送
+          this.dialog = false
+          let arrOpenid = []
+          for (let i = 0; i < this.checkedUserData.length; i++) {
+            arrOpenid.push(this.checkedUserData[i].openId)
+          }
+          let params = {
+            touserList: arrOpenid,
+            sendIgnoreReprint: this.reprintChecked === false ? 0 : 1,
+            content: this.groupMessage.content,
+            media_id: this.groupMessage.mediaId,
+            msgtype: this.$common.msgTypelist(this.current, 1)
+          }
+
+          console.log(params)
+          this.msgapi.preview(params).then(rs => {
+            if (rs.returnCode === 'F') {
+              this.$message({
+                type: 'error',
+                message: `${rs.returnMsg}`
+              })
+              if (rs.errorCode === '000005') {
+                this.$router.push({path: '/'})
+              }
+            } else {
+              this.$message({
+                type: 'success',
+                message: `手机发送成功！`
+              })
+            }
+          })
+        },
+        phonePreview () { // 手机预览选择发送对象
+          this.dialog = true
+          let params = {
+            tagId: this.groupMessage.tagId
+          }
+          console.log(params)
+          userapi.getTagfanslistByid(params).then(rs => {
+            if (rs.returnCode === 'F') {
+              this.$message({
+                type: 'error',
+                message: `${rs.returnMsg}`
+              })
+              if (rs.errorCode === '000005') {
+                this.$router.push({path: '/'})
+              }
+            } else {
+              this.sendNum = rs.data.totalNum
+              bus.$emit('node', rs.data.items)
+            }
+          })
+        },
+        sendSubmit () { // 高级群发
+          if (this.timingChecked === false) {
+            this.groupMessage.sendDate = null
+          }
+          let params = {
+            ...this.groupMessage,
+            msgtype: this.$common.msgTypelist(this.current, 1),
+            sendIgnoreReprint: this.reprintChecked === false ? 0 : 1
+          }
+          console.log(params)
+          this.msgapi.batchMessage(params).then(rs => {
+            if (rs.returnCode === 'F') {
+              this.$message({
+                type: 'error',
+                message: `${rs.returnMsg}`
+              })
+              if (rs.errorCode === '000005') {
+                this.$router.push({path: '/'})
+              }
+            } else {
+              this.$message({
+                type: 'success',
+                message: `群发成功！`
+              })
+            }
+          })
+        }
+      },
+      watch: {
+        content (val) {
+          this.content = val
+        }
+      }
     }
 </script>

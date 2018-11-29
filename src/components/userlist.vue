@@ -19,45 +19,45 @@
 <script>
 import bus from '../until/eventbus.js'
 export default {
-    data(){
-        return{
-            name: "",
-            checkAll: false,
-            checkedPersonal: [],
-            isIndeterminate: true,
-            allUserList:[],
-            restaurants:[] //该标签下所有用户
-        }
-    },
-    props:["checkedUserData"],
-    created(){
-        bus.$on("node",obj => {
-            this.allUserList = obj
-            this.restaurants = obj
-        })
-    },
-    methods: {
-      searchUser () {
-          let node = []
-          this.allUserList.forEach((rs,i) => {
-                if(rs.nickName.indexOf(this.name)>=0){
-                    node.push(rs)
-                }
-            });
-          this.restaurants = node
-          this.$emit("update:checkedUserData", this.restaurants)
-      },
-      handleCheckAllChange(val) {
-        this.checkedPersonal = val ? this.restaurants : []
-        this.isIndeterminate = false
-        this.$emit("update:checkedUserData", this.checkedPersonal)
-      },
-      handleCheckedCitiesChange(value) {
-        let checkedCount = value.length
-        this.checkAll = checkedCount === this.restaurants.length
-        this.isIndeterminate = checkedCount > 0 && checkedCount < this.restaurants.length
-        this.$emit("update:checkedUserData", value)
-      }
+  data () {
+    return {
+      name: '',
+      checkAll: false,
+      checkedPersonal: [],
+      isIndeterminate: true,
+      allUserList: [],
+      restaurants: [] // 该标签下所有用户
     }
+  },
+  props: ['checkedUserData'],
+  created () {
+    bus.$on('node', obj => {
+      this.allUserList = obj
+      this.restaurants = obj
+    })
+  },
+  methods: {
+    searchUser () {
+      let node = []
+      this.allUserList.forEach((rs, i) => {
+        if (rs.nickName.indexOf(this.name) >= 0) {
+          node.push(rs)
+        }
+      })
+      this.restaurants = node
+      this.$emit('update:checkedUserData', this.restaurants)
+    },
+    handleCheckAllChange (val) {
+      this.checkedPersonal = val ? this.restaurants : []
+      this.isIndeterminate = false
+      this.$emit('update:checkedUserData', this.checkedPersonal)
+    },
+    handleCheckedCitiesChange (value) {
+      let checkedCount = value.length
+      this.checkAll = checkedCount === this.restaurants.length
+      this.isIndeterminate = checkedCount > 0 && checkedCount < this.restaurants.length
+      this.$emit('update:checkedUserData', value)
+    }
+  }
 }
 </script>

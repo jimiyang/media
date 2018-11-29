@@ -38,136 +38,136 @@
 import cLab from '../../components/createLab.vue'
 import userapi from '../../api/userapi'
 export default{
-    data(){
-        return{
-            userapi : userapi,
-            dialogVisible: false,
-            labName:'',
-            tagId:'',
-            type:0,
-            tagData:[],
-            totalCount:0,
-            search:{
-                currentPage  : 1,
-                pageSize : 5
-            },
-            params:''
-        }
-    },
-    components:{cLab},
-    created(){
-        console.log(JSON.parse(window.localStorage.getItem('appInfo')).appId)
-        this.loadList()
-    },
-    methods:{
-        loadList(){
-            this.userapi.getList(this.search).then(rs => {
-                if(rs.returnCode === 'F') {
-                    this.$message({
-                        type: 'error',
-                        message: `${rs.returnMsg}`
-                    })
-                    if(rs.errorCode === '000005'){
-                        this.$router.push({path:'/'})
-                    }
-                }else{
-                    this.totalCount = rs.data.totalNum
-                    this.tagData = rs.data.items
-                }
-            })
-        },
-        handleSizeChange(val) {
-            this.search.pageSize = val
-            this.loadList(this.search)
-        },
-        handleCurrentChange(val) {
-            this.search.currentPage = val
-            this.loadList(this.search)
-        },
-        createLab(){
-            this.type = 0
-            this.dialogVisible = true
-            this.labName = ''
-        },
-        delTag(id){
-            this.$confirm('是否继续删除该标签?', '操作', {
-                confirmButtonText: '确定',
-                cancelButtonText: '取消',
-                type: 'warning'
-            }).then(() => {
-                this.userapi.deleteTag({'id' : id}).then(rs => {
-                    if(rs.returnCode === 'F') {
-                        this.$message({
-                            type: 'error',
-                            message: `${rs.returnMsg}`
-                        })
-                        if(rs.errorCode === '000005'){
-                            this.$router.push({path:'/'})
-                        }
-                    }else{
-                        this.$message({
-                            type: 'success',
-                            message: '删除成功!'
-                        })
-                        this.loadList()
-                    }
-                })
-            })
-        },
-        addTag () {
-                if(this.type == 0) {
-                    this.userapi.addTag({'name':this.labName}).then(rs => {
-                    if(rs.returnCode === 'F') {
-                        this.$message({
-                            type: 'error',
-                            message: `${rs.returnMsg}`
-                        })
-                        if(rs.errorCode === '000005'){
-                            this.$router.push({path:'/'})
-                        }
-                    } else {
-                        this.$message({
-                            type: 'success',
-                            message: `${rs.returnMsg}`
-                        })
-                        this.dialogVisible = false
-                        this.loadList()
-                    }
-                })
-                } else {
-                let params ={
-                    "name": this.labName,
-                    "id": this.tagId 
-                }
-                this.userapi.updateLab(params).then(rs => {
-                    if(rs.returnCode === 'F') {
-                        this.$message({
-                            type: 'error',
-                            message: `${rs.returnMsg}`
-                        })
-                        if(rs.errorCode === '000005'){
-                            this.$router.push({path:'/'})
-                        }
-                    }else{
-                        this.$message({
-                            type: 'success',
-                            message: `${rs.returnMsg}`
-                        })
-                        this.dialogVisible = false
-                        this.loadList()
-                    }
-                })
-                }
-        },
-        editTag(item){
-            this.type = 1
-            this.dialogVisible = true
-            this.labName = item.name
-            this.tagId = item.id
-        },
-        handleClose(done){
-            done()     
-        }
+  data () {
+    return {
+      userapi: userapi,
+      dialogVisible: false,
+      labName: '',
+      tagId: '',
+      type: 0,
+      tagData: [],
+      totalCount: 0,
+      search: {
+        currentPage: 1,
+        pageSize: 5
+      },
+      params: ''
     }
+  },
+  components: {cLab},
+  created () {
+    console.log(JSON.parse(window.localStorage.getItem('appInfo')).appId)
+    this.loadList()
+  },
+  methods: {
+    loadList () {
+      this.userapi.getList(this.search).then(rs => {
+        if (rs.returnCode === 'F') {
+          this.$message({
+            type: 'error',
+            message: `${rs.returnMsg}`
+          })
+          if (rs.errorCode === '000005') {
+            this.$router.push({path: '/'})
+          }
+        } else {
+          this.totalCount = rs.data.totalNum
+          this.tagData = rs.data.items
+        }
+      })
+    },
+    handleSizeChange (val) {
+      this.search.pageSize = val
+      this.loadList(this.search)
+    },
+    handleCurrentChange (val) {
+      this.search.currentPage = val
+      this.loadList(this.search)
+    },
+    createLab () {
+      this.type = 0
+      this.dialogVisible = true
+      this.labName = ''
+    },
+    delTag (id) {
+      this.$confirm('是否继续删除该标签?', '操作', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.userapi.deleteTag({'id': id}).then(rs => {
+          if (rs.returnCode === 'F') {
+            this.$message({
+              type: 'error',
+              message: `${rs.returnMsg}`
+            })
+            if (rs.errorCode === '000005') {
+              this.$router.push({path: '/'})
+            }
+          } else {
+            this.$message({
+              type: 'success',
+              message: '删除成功!'
+            })
+            this.loadList()
+          }
+        })
+      })
+    },
+    addTag () {
+      if (this.type === 0) {
+        this.userapi.addTag({'name': this.labName}).then(rs => {
+          if (rs.returnCode === 'F') {
+            this.$message({
+              type: 'error',
+              message: `${rs.returnMsg}`
+            })
+            if (rs.errorCode === '000005') {
+              this.$router.push({path: '/'})
+            }
+          } else {
+            this.$message({
+              type: 'success',
+              message: `${rs.returnMsg}`
+            })
+            this.dialogVisible = false
+            this.loadList()
+          }
+        })
+      } else {
+        let params = {
+          'name': this.labName,
+          'id': this.tagId
+        }
+        this.userapi.updateLab(params).then(rs => {
+          if (rs.returnCode === 'F') {
+            this.$message({
+              type: 'error',
+              message: `${rs.returnMsg}`
+            })
+            if (rs.errorCode === '000005') {
+              this.$router.push({path: '/'})
+            }
+          } else {
+            this.$message({
+              type: 'success',
+              message: `${rs.returnMsg}`
+            })
+            this.dialogVisible = false
+            this.loadList()
+          }
+        })
+      }
+    },
+    editTag (item) {
+      this.type = 1
+      this.dialogVisible = true
+      this.labName = item.name
+      this.tagId = item.id
+    },
+    handleClose (done) {
+      done()
+    }
+  }
 }
 </script>

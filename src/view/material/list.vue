@@ -16,85 +16,85 @@
     </div>
 </template>
 <script>
-import materialapi from  '../../api/materialapi'
+import materialapi from '../../api/materialapi'
 export default {
-    data () {
-        return{
-            materialapi : materialapi,
-            message: '加载更多图文素材...',
-            flag: false,
-            materialData: [],
-            totalNum: 0,
-            totalPage: 1,
-            search:{
-                'type': 'news',
-                'currentPage': 1,
-                'pageSize': 5
-            }
-        }
-    },
-    created(){
-        this.getMeadiaList()
-    },
-    methods:{
-        moreEvent(){
-           if(this.search.currentPage>=this.totalPage) {
-               this.search.currentPage = this.totalPage
-                this.$message({
-                    message: `已经是最后一页了！`,
-                    center: true,
-                    type:'warning'
-                });
-           }else{
-             this.search.currentPage = this.search.currentPage + 1
-             if(this.search.currentPage == this.totalPage){
-                    this.message = "已经是最后一页了"
-             }
-             this.getMeadiaList()
-           }
-        },
-        getMeadiaList(){
-            this.materialapi.getMediaListByType(this.search).then(rs => {
-                if(rs.returnCode === 'F'){
-                    this.$message({
-                        message: `${rs.returnMsg}`,
-                        center: true,
-                        type:'error'
-                    });
-                    if(rs.errorCode === '000005'){
-                        this.$router.push({path:'/'})
-                    }
-                }else{
-                    console.log(this.flag)
-                    if(this.flag == false){
-                         this.materialData = rs.data.items.concat(this.materialData)
-                    }else{
-                         this.materialData = rs.data.items 
-                    }
-                    this.totalNum = rs.data.totalNum
-                    this.totalPage = rs.data.totalPage
-                    console.log(rs.data.items.concat(this.materialData))
-                }
-            })
-        },
-        syncData(){
-            this.flag = true 
-            this.search.currentPage = 1
-            this.materialapi.getList().then(rs => {
-                if(rs.returnCode === 'F') {
-                    this.$message({
-                        message: `${rs.returnMsg}`,
-                        center: true,
-                        type:'error'
-                    });
-                    if(rs.errorCode === '000005'){
-                        this.$router.push({path:'/'})
-                    }
-                }else{
-                   this.getMeadiaList()
-                }
-            })
-        }
+  data () {
+    return {
+      materialapi: materialapi,
+      message: '加载更多图文素材...',
+      flag: false,
+      materialData: [],
+      totalNum: 0,
+      totalPage: 1,
+      search: {
+        'type': 'news',
+        'currentPage': 1,
+        'pageSize': 5
+      }
     }
+  },
+  created () {
+    this.getMeadiaList()
+  },
+  methods: {
+    moreEvent () {
+      if (this.search.currentPage >= this.totalPage) {
+        this.search.currentPage = this.totalPage
+        this.$message({
+          message: `已经是最后一页了！`,
+          center: true,
+          type: 'warning'
+        })
+      } else {
+        this.search.currentPage = this.search.currentPage + 1
+        if (this.search.currentPage === this.totalPage) {
+          this.message = '已经是最后一页了'
+        }
+        this.getMeadiaList()
+      }
+    },
+    getMeadiaList () {
+      this.materialapi.getMediaListByType(this.search).then(rs => {
+        if (rs.returnCode === 'F') {
+          this.$message({
+            message: `${rs.returnMsg}`,
+            center: true,
+            type: 'error'
+          })
+          if (rs.errorCode === '000005') {
+            this.$router.push({path: '/'})
+          }
+        } else {
+          console.log(this.flag)
+          if (this.flag === false) {
+            this.materialData = rs.data.items.concat(this.materialData)
+          } else {
+            this.materialData = rs.data.items
+          }
+          this.totalNum = rs.data.totalNum
+          this.totalPage = rs.data.totalPage
+          console.log(rs.data.items.concat(this.materialData))
+        }
+      })
+    },
+    syncData () {
+      this.flag = true
+      this.search.currentPage = 1
+      this.materialapi.getList().then(rs => {
+        if (rs.returnCode === 'F') {
+          this.$message({
+            message: `${rs.returnMsg}`,
+            center: true,
+            type: 'error'
+          })
+          if (rs.errorCode === '000005') {
+            this.$router.push({path: '/'})
+          }
+        } else {
+          this.getMeadiaList()
+        }
+      })
+    }
+  }
 }
 </script>

@@ -54,36 +54,36 @@
     </el-container>
 </template>
 <script>
-import accountArea from  './account'
+import accountArea from './account'
 import bus from '../../until/eventbus.js'
-    export default {
-        data () {
-            return {
-                userName: JSON.parse(window.localStorage.getItem('appInfo')).userName,
-                currentMenu: 'allsend',
-                imgurl: JSON.parse(window.localStorage.getItem('appInfo')).headImg,
-                name: JSON.parse(window.localStorage.getItem('appInfo')).nickName,
-                isAuth: JSON.parse(window.localStorage.getItem('appInfo')).isAuth, //是否认证
-                serviceTypeInfo: JSON.parse(window.localStorage.getItem('appInfo')).serviceTypeInfo, //1:订阅号2:服务号
-                funcount: 1000,
-                isopen: true,
-                visible2: ''
-            }
-        },
-        created(){
-           bus.$on('ischange',obj => {
-               this.name = obj.nickName
-               this.userName = obj.userName
-               this.imgurl = obj.headImg
-               this.isAuth = obj.isAuth
-               this.serviceTypeInfo = obj.serviceTypeInfo
-           })
-         },
-        components:{accountArea},
-        methods:{
-            change(){
-                this.isopen = true
-            }
-        }
+export default {
+  data () {
+    return {
+      userName: JSON.parse(window.localStorage.getItem('appInfo')).userName,
+      currentMenu: 'allsend',
+      imgurl: JSON.parse(window.localStorage.getItem('appInfo')).headImg,
+      name: JSON.parse(window.localStorage.getItem('appInfo')).nickName,
+      isAuth: JSON.parse(window.localStorage.getItem('appInfo')).isAuth, // 是否认证
+      serviceTypeInfo: JSON.parse(window.localStorage.getItem('appInfo')).serviceTypeInfo, // 1:订阅号2:服务号
+      funcount: 1000,
+      isopen: true,
+      visible2: ''
     }
+  },
+  created () {
+    bus.$on('ischange', obj => {
+      this.name = obj.nickName
+      this.userName = obj.userName
+      this.imgurl = obj.headImg
+      this.isAuth = obj.isAuth
+      this.serviceTypeInfo = obj.serviceTypeInfo
+    })
+  },
+  components: {accountArea},
+  methods: {
+    change () {
+      this.isopen = true
+    }
+  }
+}
 </script>
