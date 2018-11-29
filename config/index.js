@@ -32,7 +32,7 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/Home': {
+      '/api/': {
         target: 'http://testnmweb.liantuobank.cn',
         changeOrigin: true,
         pathRewrite: {
