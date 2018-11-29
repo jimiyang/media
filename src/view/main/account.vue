@@ -28,24 +28,24 @@
     export default{
         data(){
             return{
-                name:'公众号',
-                ischecked:0,
-                isopen:true,
-                isShow:false,
-                Data:[],
-                imgurl:"",
+                name: '公众号',
+                ischecked: 0,
+                isopen: true,
+                isShow: false,
+                Data: [],
+                imgurl: '',
                 publicapi : publicapi
             }
         },
         props:['open'],
         created(){
             this.publicapi.switchList().then(rs => {
-                if(rs.returnCode == "F"){
+                if(rs.returnCode === 'F'){
                     this.$message({
                         type: 'error',
                         message: `${rs.returnMsg}`
                     })
-                    if(rs.errorCode=="000005"){
+                    if(rs.errorCode === '000005'){
                         this.$router.push({path:'/'})
                     }
                 }else{
@@ -72,22 +72,22 @@
                     return false
                 }
                 console.log(item)
-                this.publicapi.switchApp({"appId":item.appId}).then((rs)=> {
-                   if(rs.returnCode=="F"){
+                this.publicapi.switchApp({'appId':item.appId}).then((rs)=> {
+                   if(rs.returnCode === 'F'){
                         this.$message({
                             message: `${rs.returnMsg}`,
                             center: true,
                             type:'error'
                         });
-                        if(rs.errorCode=="000005"){
+                        if(rs.errorCode === '000005'){
                             this.$router.push({path:'/'})
                         }
                     }else{
                         this.isopen = false 
                         this.$emit('update:open',false)
-                        window.localStorage.setItem("appInfo",JSON.stringify(rs.data))
-                        console.log(JSON.parse(window.localStorage.getItem("appInfo")))
-                        bus.$emit("ischange",JSON.parse(window.localStorage.getItem("appInfo"))) // 中间件
+                        window.localStorage.setItem('appInfo',JSON.stringify(rs.data))
+                        console.log(JSON.parse(window.localStorage.getItem('appInfo')))
+                        bus.$emit('ischange',JSON.parse(window.localStorage.getItem('appInfo'))) // 中间件
                     }
                })
             }

@@ -28,33 +28,33 @@
 <script>
 	import loginapi from '../../api/loginapi.js'
 	export default{
-		data(){
+		data() {
 			return{
-				loginapi:loginapi,
-				isactive:0,
-				userName:'TMMD',
-				passWord:'123@abc'
+				loginapi: loginapi,
+				isactive: 0,
+				userName: 'TMMD',
+				passWord: '123@abc'
 			}
 		},
 		methods:{
-			changeLogintype(index){
+			changeLogintype(index) {
 				this.isactive = index;
 			},
-			submit(){
+			submit() {
 				let params = {
 					"userName":this.userName,
 					"passWord":this.passWord
 				}
-				this.loginapi.userLogin(params).then((rs)=>{
-					if(rs.data.returnCode=="F"){
+				this.loginapi.userLogin(params).then((rs)=> {
+					if(rs.data.returnCode === 'F'){
 						this.$message({
 							message: `${rs.data.returnMsg}`,
 							center: true,
 							type:'warning'
 						});
-						if(rs.errorCode=="000005"){
-                            this.$router.push({path:'/'})
-                        }
+						if(rs.errorCode === '000005'){
+								this.$router.push({path:'/'})
+						}
 					}else{
 						//this.$store.commit('changeLogin','100')   //登录后改变状态
 						window.localStorage.setItem('changeLogin',100) 

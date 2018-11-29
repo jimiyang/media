@@ -1,6 +1,6 @@
 <template>
     <div class="msg-list">
-        <el-table class="tab-list" :data="messageData"  style="width:100%;">
+        <el-table class="tab-list" :data= "messageData"  style="width:100%;">
             <el-table-column   prop="sendContent"  label="发送内容" ></el-table-column>
             <el-table-column   prop="msgtype"  label="发送方式"   >
                 <template slot="header" slot-scope="slot">
@@ -84,94 +84,94 @@ data(){
         messageapi : messageapi,
         dialogVisible : false,
         messageData : [],
-        totalCount:0,
-        search:{
+        totalCount: 0,
+        search: {
             currentPage:1,
             pageSize:5
         },
-        marteralId:'', //图文id
-        detail:{
+        marteralId: '', //图文id
+        detail: {
             //wechatArticleList : []
         },
         selectVal:''
     }
 },
-created(){
+created() {
     this.loadList()
 },
-    methods:{
-        loadList(){
-            this.messageapi.getMsgSendRecordList(this.search).then(rs => {
-                if(rs.returnCode == "F"){
+methods:{
+    loadList(){
+        this.messageapi.getMsgSendRecordList(this.search).then(rs => {
+            if(rs.returnCode === 'F'){
+                this.$message({
+                    type: 'error',
+                    message: `${rs.returnMsg}`
+                })
+                if(rs.errorCode === '000005'){
+                    this.$router.push({path:'/'})
+                }
+            }else{
+                this.messageData =  rs.data.items
+                this.totalCount = rs.data.totalNum
+            }
+        })
+    },
+detailEvent(id){
+this.dialogVisible = true
+this.messageapi.getMsgSendRecordByid({id: id}).then(rs => {
+if (rs.returnCode === 'F') {
+    this.$message({
+    type: 'error',
+    message: `${rs.returnMsg}`
+    })
+    if (rs.errorCode === '000005') {
+    this.$router.push({path:'/'})
+    }
+} else {
+this.detail = rs.data
+this.detail.wechatMediaResponse = rs.data.wechatMediaResponse.wechatArticleList
+console.log(this.detail)
+}
+        })
+    },
+    delMsg(){
+        if(this.selectVal!='' && (this.detail.sendStatus+1)>2) {
+            this.messageapi.deleteNewsRecord({msg_id : this.detail.msgId}).then(rs => {
+                if(rs.returnCode === 'F'){
                     this.$message({
                         type: 'error',
                         message: `${rs.returnMsg}`
                     })
-                    if(rs.errorCode=="000005"){
+                    if(rs.errorCode === '000005'){
                         this.$router.push({path:'/'})
                     }
                 }else{
-                    this.messageData =  rs.data.items
-                    this.totalCount = rs.data.totalNum
+                    this.$message({
+                        type: 'success',
+                        message: `${rs.returnMsg}`
+                    })
+                    this.dialogVisible = false
+                    this.loadList()
                 }
             })
-        },
-detailEvent(id){
-    this.dialogVisible = true
-    this.messageapi.getMsgSendRecordByid({id: id}).then(rs => {
-    if (rs.returnCode === 'F') {
-        this.$message({
-        type: 'error',
-        message: `${rs.returnMsg}`
-        })
-        if (rs.errorCode === '000005') {
-        this.$router.push({path:'/'})
-        }
-    } else {
-    this.detail = rs.data
-    this.detail.wechatMediaResponse = rs.data.wechatMediaResponse.wechatArticleList
-    console.log(this.detail)
-    }
+        }else{
+            this.$message({
+                type: 'warning',
+                message: `该条图文还未发送成功，请重新发送！`
             })
-        },
-        delMsg(){
-            if(this.selectVal!="" && (this.detail.sendStatus+1)>2){
-                this.messageapi.deleteNewsRecord({msg_id : this.detail.msgId}).then(rs => {
-                    if(rs.returnCode == "F"){
-                        this.$message({
-                            type: 'error',
-                            message: `${rs.returnMsg}`
-                        })
-                        if(rs.errorCode=="000005"){
-                            this.$router.push({path:'/'})
-                        }
-                    }else{
-                        this.$message({
-                            type: 'success',
-                            message: `${rs.returnMsg}`
-                        })
-                        this.dialogVisible = false
-                        this.loadList()
-                    }
-                })
-            }else{
-                this.$message({
-                    type: 'warning',
-                    message: `该条图文还未发送成功，请重新发送！`
-                })
-            }
-        },
-        handleClose(){
-            this.dialogVisible = false
-        },
-        handleSizeChange(val){
-            this.search.pageSize = val
-            this.loadList()
-        },
-        handleCurrentChange(val){
-            this.search.currentPage = val
-            this.loadList()
         }
+    },
+    handleClose() {
+        this.dialogVisible = false
+    },
+    handleSizeChange(val) {
+        this.search.pageSize = val
+        this.loadList()
+    },
+    handleCurrentChange(val) {
+        this.search.currentPage = val
+        this.loadList()
     }
+}
 }
 </script>

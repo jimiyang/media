@@ -1,35 +1,35 @@
 <template>
     <div class="lab-mange">
-         <a href="javascript:" class="blue-btn" @click="createLab">创建新标签</a>
+         <a href="javascript:" class="blue-btn" @click= "createLab">创建新标签</a>
          <div class="warning">你在本平台的操作将自动同步至公众平台，但是在公众平台或其他微信第三方的操作不会自动同步，需进入粉丝列表手动点击同步才能保证数据与公众平台一致。</div>
-         <el-table class="tab-list" :data="tagData"   style="width:100%;">
+         <el-table class="tab-list" :data= "tagData"   style="width:100%;">
             <el-table-column   prop="name"  label="标签名称" ></el-table-column>
             <el-table-column   prop="id"  label="标签ID"   ></el-table-column>
             <el-table-column   prop="fansCount"  label="粉丝人数" sortable ></el-table-column>
             <el-table-column   prop="wxTagId"  label="微信标签id"></el-table-column>
             <el-table-column  label="操作"  width="180">
                 <template slot-scope="scope">
-                    <el-button @click="editTag(scope.row)" type="text" size="small">编辑</el-button>
-                    <el-button @click="delTag(scope.row.id)" type="text" size="small">删除</el-button>
+                    <el-button @click= "editTag(scope.row)" type="text" size="small">编辑</el-button>
+                    <el-button @click= "delTag(scope.row.id)" type="text" size="small">删除</el-button>
                 </template>
             </el-table-column>
         </el-table>
         <div class="pagination">
             <el-pagination
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page.sync="search.currentPage"
-                :page-sizes="[5, 10, 20, 30, 40]"
-                :page-size.sync="search.pageSize"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="totalCount">
+                @size-change= "handleSizeChange"
+                @current-change= "handleCurrentChange"
+                :current-page.sync= "search.currentPage"
+                :page-sizes= "[5, 10, 20, 30, 40]"
+                :page-size.sync= "search.pageSize"
+                layout= "total, sizes, prev, pager, next, jumper"
+                :total= "totalCount">
             </el-pagination>
         </div>
-        <el-dialog   title="提示"   :visible.sync="dialogVisible"  width="40%"  :before-close="handleClose">
-            <div class="content">标签名称：<input type="text" v-model="labName" class="ipttxt"/></div>
+        <el-dialog   title="提示"   :visible.sync= "dialogVisible"  width="40%"  :before-close= "handleClose">
+            <div class="content">标签名称：<input type="text" v-model= "labName" class="ipttxt"/></div>
             <span slot="footer" class="dialog-footer">
-                <el-button @click="dialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="addTag" :plain="true">确 定</el-button>
+                <el-button @click= "dialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click= "addTag" :plain= "true">确 定</el-button>
             </span>
         </el-dialog>
    </div>
@@ -56,18 +56,18 @@ export default{
     },
     components:{cLab},
     created(){
-        console.log(JSON.parse(window.localStorage.getItem("appInfo")).appId)
+        console.log(JSON.parse(window.localStorage.getItem('appInfo')).appId)
         this.loadList()
     },
     methods:{
         loadList(){
             this.userapi.getList(this.search).then(rs => {
-                if(rs.returnCode == "F") {
+                if(rs.returnCode === 'F') {
                     this.$message({
                         type: 'error',
                         message: `${rs.returnMsg}`
                     })
-                    if(rs.errorCode=="000005"){
+                    if(rs.errorCode === '000005'){
                         this.$router.push({path:'/'})
                     }
                 }else{
@@ -95,13 +95,13 @@ export default{
                 cancelButtonText: '取消',
                 type: 'warning'
             }).then(() => {
-                this.userapi.deleteTag({"id" : id}).then(rs => {
-                    if(rs.returnCode == "F") {
+                this.userapi.deleteTag({'id' : id}).then(rs => {
+                    if(rs.returnCode === 'F') {
                         this.$message({
                             type: 'error',
                             message: `${rs.returnMsg}`
                         })
-                        if(rs.errorCode=="000005"){
+                        if(rs.errorCode === '000005'){
                             this.$router.push({path:'/'})
                         }
                     }else{
@@ -114,18 +114,18 @@ export default{
                 })
             })
         },
-        addTag(){
-                if(this.type == 0){
-                    this.userapi.addTag({"name":this.labName}).then(rs => {
-                    if(rs.returnCode == "F") {
+        addTag () {
+                if(this.type == 0) {
+                    this.userapi.addTag({'name':this.labName}).then(rs => {
+                    if(rs.returnCode === 'F') {
                         this.$message({
                             type: 'error',
                             message: `${rs.returnMsg}`
                         })
-                        if(rs.errorCode=="000005"){
+                        if(rs.errorCode === '000005'){
                             this.$router.push({path:'/'})
                         }
-                    }else{
+                    } else {
                         this.$message({
                             type: 'success',
                             message: `${rs.returnMsg}`
@@ -134,18 +134,18 @@ export default{
                         this.loadList()
                     }
                 })
-                }else{
+                } else {
                 let params ={
                     "name": this.labName,
                     "id": this.tagId 
                 }
                 this.userapi.updateLab(params).then(rs => {
-                    if(rs.returnCode == "F") {
+                    if(rs.returnCode === 'F') {
                         this.$message({
                             type: 'error',
                             message: `${rs.returnMsg}`
                         })
-                        if(rs.errorCode=="000005"){
+                        if(rs.errorCode === '000005'){
                             this.$router.push({path:'/'})
                         }
                     }else{

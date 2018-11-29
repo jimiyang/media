@@ -1,8 +1,7 @@
 <template>
   <router-view class="view" ></router-view>
 </template>
-
-<script type="text/javascript">
+<script>
 export default {
   data() {
     return{}
