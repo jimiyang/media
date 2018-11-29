@@ -37,25 +37,24 @@
 <script>
     import cLab from '../../components/createLab.vue'
     import userapi from '../../api/userapi'
-    export default{
-        // inject:['reload'], //注入依赖 刷新当前页面
-        data(){
-            return{
+    export default {
+        data() {  // inject:['reload'], //注入依赖 刷新当前页面
+          return {
                 userapi : userapi,
                 dialogVisible: false,
-                labName:'',
-                tagId:'',
-                type:0,
-                tagData:[],
-                totalCount:0,
-                search:{
+                labName: '',
+                tagId: '',
+                type: 0,
+                tagData: [],
+                totalCount: 0,
+                search: {
                     currentPage  : 1,
                     pageSize : 5
                 },
                 params:''
-            }
+          }
         },
-        components:{cLab},
+        components: {cLab},
         created(){
            console.log(JSON.parse(window.localStorage.getItem("appInfo")).appId)
            this.loadList()

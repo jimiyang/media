@@ -29,7 +29,7 @@
         </el-table>
     </div>
 </template>
-<<script>
+<script>
 import  pubnumapi from '../../api/pubnumapi.js'
 import bus from '../../until/eventbus.js'
 export default{
