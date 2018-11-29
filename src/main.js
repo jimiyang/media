@@ -12,9 +12,10 @@ Vue.use(common)
 require ('!style-loader!css-loader!less-loader!../static/less/style.less') 
 Vue.config.productionTip = false
 Vue.prototype.$ajax = axios
+Vue.prototype.$common = common
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requireAuth)){ // 判断该路由是否需要登录权限
-    if (window.localStorage.getItem('changeLogin')==100) { // 
+    if (window.localStorage.getItem('changeLogin') === 100) { // 
       next()
     }
     else {
