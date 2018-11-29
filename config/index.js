@@ -33,31 +33,10 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/Home': {
-        target: 'http://localhost:8085',
+        target: 'http://testnmweb.liantuobank.cn',
         changeOrigin: true,
         pathRewrite: {
-          '^/Home': '/Home'
-        }
-      },
-      '/ueditor': {
-        target: 'http://localhost:8085',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/ueditor': '/ueditor'
-        }
-      },
-      '/Upload': {
-        target: 'http://localhost:8085',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/Upload': '/Upload'
-        }
-      },
-      '/findimg': {
-        target: 'http://localhost:8085',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/findimg': '/findimg'
+          '^/api/': '/'
         }
       }
     },
