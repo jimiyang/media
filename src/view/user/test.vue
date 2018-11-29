@@ -1,7 +1,7 @@
 <template></tempalte>
 <script>
   export default {
-    data () { 
+    data () {
       return {
         myname: '123'
       }
