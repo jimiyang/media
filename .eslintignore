@@ -1,0 +1,7 @@
+build/*.js
+config/*.js
+src/assets/ufile/*.js
+src/assets/ytx/*.js
+src/assets/**/*.js
+
+src/form/page/testdoc.vue
