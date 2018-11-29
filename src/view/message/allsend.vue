@@ -7,12 +7,12 @@
                     <p>请注意这种情况，如果某个粉丝身上有3个标签，群发3个标签他就会收到3次推送。</p>
                 </div>
                 <h1 class="title">设置群发内容</h1>
-                <a href="javascript:" class="white-btn select" @click="selectContent">选择群发内容</a>
+                <a href="javascript:" class="white-btn select" @click= "selectContent">选择群发内容</a>
                 <h1 class="title">选择群发对象
                     <span>需要发给同时拥有A和B标签的粉丝？</span>
                 </h1>
                 <ul class="lab-blocks" >
-                    <li v-for="(item,i) in labList"  :key="i" :class="{checked:i==index}"   @click="selLab(i,item.wxTagId)">{{item.name}}</li>
+                    <li v-for= "(item,i) in labList"  :key="i" :class= "{checked:i === index}"   @click= "selLab(i,item.wxTagId)">{{item.name}}</li>
                 </ul>
                 <h1 class="title">定时发送及原创校验</h1>
                 <div class="ant-items">
@@ -25,7 +25,7 @@
                             <el-button>如何操作？</el-button>
                         </el-tooltip>
                     </div>
-                    <div class="block" :class="{show:timingChecked==true}">
+                    <div class="block" :class= "{show:timingChecked === true}">
                         <label>请选择具体时间</label><el-date-picker  v-model="groupMessage.sendDate"  type="datetime"  placeholder="选择日期时间"></el-date-picker>
                     </div>
                     <div>
@@ -38,10 +38,10 @@
             <div class="preview-blocks">
                 <h1 class="title">微信预览器</h1>
                 <div class="news-list">
-                    <div class="txt-temp blocks" :class="{show:cur==0}">{{groupMessage.content}}</div>
-                    <div class="items blocks" :class="{show:cur==1}">
+                    <div class="txt-temp blocks" :class= "{show:cur === 0}">{{groupMessage.content}}</div>
+                    <div class="items blocks" :class= "{show:cur === 1}">
                         <dl>
-                            <dd v-for= "(item,i) in wechatArticleList" :key="i"  :class="{first:i==0}" >
+                            <dd v-for= "(item,i) in wechatArticleList" :key= "i"  :class= "{first:i === 0}" >
                                <a :href="item.url" target="_blank">
                                   <span>{{item.title}}</span>
                                   <img :src="item.thumbMediaUrl" />
@@ -64,7 +64,7 @@
                 <el-button type="primary"  @click="sendContent">确 定</el-button>
             </span>
         </el-dialog>
-        <el-dialog title="选择发送对象" :visible.sync="dialog"  @close='closeDialog'  width="600">
+        <el-dialog title="选择发送对象" :visible.sync= "dialog"  @close= "closeDialog"  width="600">
              <userlist :checkedUserData.sync="checkedUserData"></userlist>
              <span slot="footer" class="dialog-footer">
                 <el-button @click="dialog = false">取 消</el-button>
@@ -80,47 +80,47 @@
     import msgapi from  '../../api/msgapi'
     import materialapi from  '../../api/materialapi'
     import bus from '../../until/eventbus.js'
-    export default{
-        data(){
-            return{
+    export default {
+        data () {
+            return {
                 msgapi: msgapi,
-                timingChecked:false,
-                reprintChecked:true,
+                timingChecked: false,
+                reprintChecked: true,
                 dialogVisible: false,
-                dialog:false,
-                ishide:true,
-                index:0,
-                wechatArticleList:[],
-                current:0,//当前要发送的消息类型[图文，消息，语音，视频]
-                cur:-1,
-                labList:[],
-                groupMessage:{
+                dialog: false,
+                ishide: true,
+                index: 0,
+                wechatArticleList: [],
+                current: 0,//当前要发送的消息类型[图文，消息，语音，视频]
+                cur: -1,
+                labList: [],
+                groupMessage: {
                     mediaId: '',
-                    isToAll:true,
-                    tagId:'',
-                    content:'',
+                    isToAll: true,
+                    tagId: '',
+                    content: '',
                     sendDate: new Date().getTime()
                 },
-                tagSearch:{
-                    currentPage:1,
-                    pageSize:5
+                tagSearch: {
+                    currentPage: 1,
+                    pageSize: 5
                 },
-                checkedUserData:[],
-                sendNum:0 // 发送人数
+                checkedUserData: [],
+                sendNum: 0 // 发送人数
             }
         },
-        components:{selmaterial,userlist},
-        created(){
+        components: {selmaterial, userlist},
+        created() {
             userapi.getList().then(rs => {
-                if(rs.returnCode == "F"){
+                if(rs.returnCode === 'F') {
                     this.$message({
                       type: 'error',
                       message: `${rs.returnMsg}`
                     })
-                    if(rs.errorCode=="00005"){
+                    if(rs.errorCode === '000005') {
                         this.$router.push({path:'/'})
                     }
-                }else{
+                } else {
                     this.labList = rs.data.items
                     this.groupMessage.tagId = this.labList[0].wxTagId
                     console.log(this.labList)
@@ -128,33 +128,33 @@
             })
         },
         methods:{
-            selectContent(){
+            selectContent() {
                 this.dialogVisible = true 
             },
-            closeDialog(){
+            closeDialog() {
                  this.dialogVisible = false
                  this.dialog = false 
             },
-            selLab(id,tagid){
+            selLab(id, tagid) {
                 this.index=id
                 this.groupMessage.tagId = tagid
             },
-            sendContent(){
+            sendContent() {
                 this.dialogVisible =false
                 this.cur = this.current
                 if(this.current!=0){
-                    this.groupMessage.content=""
+                    this.groupMessage.content=''
                 }
                 console.log(this.current)
                 console.log(this.groupMessage.mediaId)
-                if(this.groupMessage.mediaId!=""){
+                if(this.groupMessage.mediaId!=''){
                     materialapi.getMediaByWxMediaId({wxMediaId:this.groupMessage.mediaId}).then(rs => {
-                        if(rs.returnCode == "F"){
+                        if(rs.returnCode === 'F'){
                             this.$message({
                             type: 'error',
                             message: `${rs.returnMsg}`
                             })
-                            if(rs.errorCode=="00005"){
+                            if(rs.errorCode === '00005'){
                                 this.$router.push({path:'/'})
                             }
                         }else{
@@ -164,7 +164,7 @@
                     })
                 }
             },
-            sendUser(){//手机预览并发送
+            sendUser() {//手机预览并发送
                 this.dialog = false
                 let arrOpenid=[]
                 for(let i=0;i < this.checkedUserData.length;i++){
@@ -180,15 +180,15 @@
 
                 console.log(params)
                 this.msgapi.preview(params).then(rs => {
-                    if(rs.returnCode == "F"){
+                    if(rs.returnCode === 'F'){
                         this.$message({
                             type: 'error',
                             message: `${rs.returnMsg}`
                         })
-                        if(rs.errorCode=="000005"){
+                        if(rs.errorCode === '000005') {
                             this.$router.push({path:'/'})
                         }
-                    }else{
+                    } else {
                         this.$message({
                             type: 'success',
                             message: `手机发送成功！`
@@ -196,19 +196,19 @@
                     }
                })
             },
-            phonePreview(){ //手机预览选择发送对象
+            phonePreview() { //手机预览选择发送对象
                 this.dialog = true
                 let params = {
                     tagId : this.groupMessage.tagId
                 }
                 console.log(params)
                 userapi.getTagfanslistByid(params).then(rs => {
-                   if(rs.returnCode == "F"){
+                   if(rs.returnCode === 'F'){
                         this.$message({
                             type: 'error',
                             message: `${rs.returnMsg}`
                         })
-                        if(rs.errorCode=="000005"){
+                        if(rs.errorCode === '000005'){
                             this.$router.push({path:'/'})
                         }
                     }else{
@@ -218,7 +218,7 @@
                 })
                 
             },
-            sendSubmit(){ //高级群发
+            sendSubmit() { //高级群发
                if(this.timingChecked==false){
                    this.groupMessage.sendDate = null
                }
@@ -230,15 +230,15 @@
                
                console.log(params)
                this.msgapi.batchMessage(params).then(rs => {
-                    if(rs.returnCode == "F"){
+                    if(rs.returnCode === 'F'){
                         this.$message({
                             type: 'error',
                             message: `${rs.returnMsg}`
                         })
-                        if(rs.errorCode=="000005"){
+                        if(rs.errorCode === '000005'){
                             this.$router.push({path:'/'})
                         }
-                    }else{
+                    } else {
                         this.$message({
                             type: 'success',
                             message: `群发成功！`

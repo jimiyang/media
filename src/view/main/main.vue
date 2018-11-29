@@ -1,12 +1,12 @@
 <template>
      <el-container class="sec">
         <el-aside width="200px">
-            <div class="img-blocks"> <img :src="imgurl" />
+            <div class="img-blocks"> <img :src= "imgurl" />
             </div>
             <div class="wx-name">
-                {{name}} <span>{{isAuth == 0 ? "未认证" : "已认证"}}</span>
+                {{name}} <span>{{isAuth === 0 ? "未认证" : "已认证"}}</span>
             </div>
-            <div class="fun-num">{{serviceTypeInfo==1 ? "订阅号" : "服务号"}}</div>
+            <div class="fun-num">{{serviceTypeInfo === 1 ? "订阅号" : "服务号"}}</div>
             <el-menu class="menu-blocks" :default-openeds="['1','2','3','4']" :default-active="currentMenu">
                 <el-submenu index="1">
                     <template slot="title"><i class="el-icon-message"></i>消息管理</template>
@@ -44,9 +44,8 @@
                         <a href="javascript:" class="cur" @click="change">切换帐号</a>
                     </el-tooltip>
                     <div class="user-name">
-                        <img :src="imgurl" />{{this.userName}}
+                        <img :src= "imgurl" />{{this.userName}}
                     </div>
-                   <router-link to="/" class="exit" >退出帐号</router-link>
                  </div>
             </el-header>
             <div class="view-content"><router-view></router-view></div>
@@ -55,24 +54,24 @@
     </el-container>
 </template>
 <script>
-    import accountArea from  './account'
-    import bus from '../../until/eventbus.js'
-    export default{
-        data(){
-            return{
-                userName:JSON.parse(window.localStorage.getItem("appInfo")).userName,
+import accountArea from  './account'
+import bus from '../../until/eventbus.js'
+    export default {
+        data () {
+            return {
+                userName: JSON.parse(window.localStorage.getItem('appInfo')).userName,
                 currentMenu: 'allsend',
-                imgurl:JSON.parse(window.localStorage.getItem("appInfo")).headImg,
-                name:JSON.parse(window.localStorage.getItem("appInfo")).nickName,
-                isAuth :JSON.parse(window.localStorage.getItem("appInfo")).isAuth, //是否认证
-                serviceTypeInfo :JSON.parse(window.localStorage.getItem("appInfo")).serviceTypeInfo, //1:订阅号2:服务号
-                funcount:1000,
-                isopen:true,
-                visible2:''
+                imgurl: JSON.parse(window.localStorage.getItem('appInfo')).headImg,
+                name: JSON.parse(window.localStorage.getItem('appInfo')).nickName,
+                isAuth: JSON.parse(window.localStorage.getItem('appInfo')).isAuth, //是否认证
+                serviceTypeInfo: JSON.parse(window.localStorage.getItem('appInfo')).serviceTypeInfo, //1:订阅号2:服务号
+                funcount: 1000,
+                isopen: true,
+                visible2: ''
             }
         },
         created(){
-           bus.$on("ischange",obj => {
+           bus.$on('ischange',obj => {
                this.name = obj.nickName
                this.userName = obj.userName
                this.imgurl = obj.headImg
