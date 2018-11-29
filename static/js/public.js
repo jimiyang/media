@@ -1,3 +1,4 @@
+import Vue from 'vue'
 let obj = {
   getDate (time, flag) {
     let date = new Date(time)
@@ -39,8 +40,9 @@ let obj = {
     return tname
   }
 }
+console.log(Vue)
 // prototype封装
-export default{
+export default {
   install (Vue) {
     Vue.prototype.$common = obj
   }
