@@ -44,8 +44,18 @@
                         <a href="javascript:" class="cur" @click="change">切换帐号</a>
                     </el-tooltip>
                     <div class="user-name">
-                        <img :src= "imgurl" />{{this.userName}}
+                        <img :src= "imgurl" />
                     </div>
+                    <el-popover
+                        placement="bottom"
+                        width="160"
+                        v-model="visible2">
+                        <ul class="setting-center">
+                            <li><i class="el-icon-edit-outline"></i><router-link to="/">退出</router-link></li>
+                            <li><i class="el-icon-setting"></i><router-link to="/account/publist">切换公众号</router-link></li>
+                        </ul>
+                        <el-button slot="reference">{{this.userName}}</el-button>
+                    </el-popover>
                  </div>
             </el-header>
             <div class="view-content"><router-view></router-view></div>
@@ -67,7 +77,7 @@ export default {
       serviceTypeInfo: JSON.parse(window.localStorage.getItem('appInfo')).serviceTypeInfo, // 1:订阅号2:服务号
       funcount: 1000,
       isopen: true,
-      visible2: ''
+      visible2: false
     }
   },
   created () {

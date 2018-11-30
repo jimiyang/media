@@ -8,7 +8,7 @@
                     <span @click="change(0,'公众号')"  :class="{checked: ischecked==0}">公众号</span>
                     <span  @click="change(1,'小程序')" :class="{checked: ischecked==1}">小程序</span>
                 </div>
-                <a href="javascript:" class="add">+{{name}}</a>
+                <a href="javascript:" class="add" @click="goAuthor">+{{name}}</a>
             </div>
             <ul class="list">
                 <li  v-for ="(item,index) in Data" :key="index" @click="tagEvent(item)">
@@ -55,6 +55,16 @@
         })
       },
       methods: {
+        goAuthor () {
+          let params = {
+            agencyId: JSON.parse(window.localStorage.getItem('appInfo')).agencyId
+            // sucessAuthRedirectUri: encodeURIComponent('http://testnmweb.liantuobank.cn/#/account/publist')
+          }
+          console.log(params)
+          this.publicapi.goAuthor(params).then(rs => {
+            console.log(rs)
+          })
+        },
         change (index, item) {
           this.ischecked = index
           this.name = item

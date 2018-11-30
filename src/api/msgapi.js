@@ -21,7 +21,6 @@ function preview (params) {
 function deleteNewsRecord (params) {
   return axios.post('/wechat/batchMessage/deleteNewsRecord', params)
     .then((repsonse) => {
-      console.log(params)
       return repsonse.data
     })
 }

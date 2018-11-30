@@ -1,7 +1,7 @@
 <template>
     <div class="msg-list">
-        <el-table class="tab-list" :data="messageData"  style="width:100%;">
-            <el-table-column   prop="sendContent"  label="发送内容" ></el-table-column>
+        <el-table class="tab-list" :data="messageData"  style="width:100%;" v-loading="loading">
+            <el-table-column   prop="sendContent"  label="发送内容"></el-table-column>
             <el-table-column   prop="msgtype"  label="发送方式"   >
                 <template slot="header" slot-scope="slot">
                    发送方式<img src="/static/images/filter-ico.png" />
@@ -24,7 +24,7 @@
             </el-table-column>
             <el-table-column  label="操作"  width="180">
                 <template slot-scope="scope">
-                    <a href="javascript:" class="blue-color" @click="detailEvent(scope.row.id)">详情</a>
+                    <a href="javascript:" class="blue-color" @click="detailEvent(scope)">详情</a>
                 </template>
             </el-table-column>
         </el-table>
@@ -54,15 +54,15 @@
                     <li>成功人数：{{detail.sentCount}}人</li>
                     <li>失败人数：{{detail.errorCount}}人</li>
                     <li>发送时间：{{$common.getDate(detail.sendDate,true)}}</li>
-                    <li>
+                    <li :class="{hide:msgtype !== detail.msgtype}">
                         <label>当前图文消息：</label>
                         <el-select  v-model="selectVal"  placeholder="请选择">
                              <el-option
-                                v-for="item in detail.wechatMediaResponse"
-                                :key="item.id"
+                                v-for="(item, i) in detail.wechatMediaResponse"
+                                :key="i"
                                 :label="item.title"
-                                :value="item.id">
-                                </el-option>
+                                :value="i">
+                              </el-option>
                         </el-select>
                         <a href="javascript:" class="blue-btn" @click = "delMsg">删除图文</a>
                     </li>
@@ -77,7 +77,6 @@
 </template>
 <script>
 import messageapi from '../../api/msgapi'
-// import fanlistVue from '../user/fanlist.vue'
 export default {
   data () {
     return {
@@ -93,7 +92,9 @@ export default {
       detail: {
                 // wechatArticleList : []
       },
-      selectVal: ''
+      selectVal: '',
+      loading: false,
+      msgtype: 'mpnews'
     }
   },
   created () {
@@ -113,12 +114,13 @@ export default {
         } else {
           this.messageData = rs.data.items
           this.totalCount = rs.data.totalNum
+          this.loading = false
         }
       })
     },
-    detailEvent (id) {
+    detailEvent (item) {
       this.dialogVisible = true
-      this.messageapi.getMsgSendRecordByid({id: id}).then(rs => {
+      this.messageapi.getMsgSendRecordByid({id: item.row.id}).then(rs => {
         if (rs.returnCode === 'F') {
           this.$message({
             type: 'error',
@@ -130,13 +132,16 @@ export default {
         } else {
           this.detail = rs.data
           this.detail.wechatMediaResponse = rs.data.wechatMediaResponse.wechatArticleList
-          console.log(this.detail)
         }
       })
     },
     delMsg () {
       if (this.selectVal !== '' && (this.detail.sendStatus + 1) > 2) {
-        this.messageapi.deleteNewsRecord({msg_id: this.detail.msgId}).then(rs => {
+        let params = {
+          msg_id: this.detail.msgId,
+          article_idx: parseInt(this.selectVal) + 1
+        }
+        this.messageapi.deleteNewsRecord(params).then(rs => {
           if (rs.returnCode === 'F') {
             this.$message({
               type: 'error',
@@ -165,10 +170,12 @@ export default {
       this.dialogVisible = false
     },
     handleSizeChange (val) {
+      this.loading = true
       this.search.pageSize = val
       this.loadList()
     },
     handleCurrentChange (val) {
+      this.loading = true
       this.search.currentPage = val
       this.loadList()
     }

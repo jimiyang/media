@@ -36,7 +36,7 @@
             <a href="javascript:" class="blue-btn" @click="updateUser">同步数据</a>
             <a href="javascript:" class="white-btn" @click="operation">批量操作</a>
         </div>
-        <el-table class="tab-list" ref="multipleTable" :data="fansData"   @selection-change="checkEvent"  style="width:100%;">
+        <el-table class="tab-list" ref="multipleTable" :data="fansData"   @selection-change="checkEvent"  style="width:100%;" v-loading="loading">
             <el-table-column   type="selection" width="55"></el-table-column>
             <el-table-column   prop="nickName"  label="用户昵称" ></el-table-column>
             <el-table-column   prop="city"  label="地域" >
@@ -67,7 +67,7 @@
                  <div>
                    <template>
                      <el-radio v-model="radio" label="0">已勾选的粉丝{{checkedCount}}位</el-radio>
-                     <el-radio v-model="radio" label="1">未勾选的粉丝{{nocheckCount}}位</el-radio>
+                     <el-radio v-model="radio" label="1">搜索到的粉丝{{totalCount}}位</el-radio>
                    </template>
                  </div>
               </li>
@@ -103,6 +103,7 @@ export default {
     return {
       userapi: userapi,
       dialogVisible: false,
+      loading: false,
       fansData: [],
       search: {
         openId: '',
@@ -148,12 +149,14 @@ export default {
             this.$router.push({path: '/'})
           }
         } else {
+          this.loading = false
           this.totalCount = rs.data.totalNum
           this.fansData = rs.data.items
         }
       })
     },
     searchUser () {
+      this.loading = true
       this.loadList()
     },
     reset () {
@@ -203,6 +206,7 @@ export default {
       this.dialogVisible = false
     },
     updateUser () { // 同步粉丝数据
+      this.loading = true
       this.userapi.refreshUserlist().then(rs => {
         if (rs.returnCode === 'F') {
           this.$message({
@@ -212,12 +216,14 @@ export default {
           if (rs.errorCode === '000005') {
             this.$router.push({path: '/'})
           }
+          this.loading = false
         } else {
           this.$message({
             type: 'success',
             message: `数据同步成功！`
           })
           this.loadList()
+          this.loading = false
         }
       })
     },
@@ -226,10 +232,12 @@ export default {
     },
     handleSizeChange (val) {
       this.search.pageSize = val
+      this.loading = true
       this.loadList()
     },
     handleCurrentChange (val) {
       this.search.currentPage = val
+      this.loading = true
       this.loadList()
     },
     handleChange (value) {}

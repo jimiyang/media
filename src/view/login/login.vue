@@ -56,9 +56,9 @@
 	            this.$router.push({path: '/'})
 	          }
 	        } else {
-	          window.localStorage.setItem('changeLogin', 100)
-	          window.localStorage.setItem('userName', this.userName)
-	          this.$router.push({path: '/main'})
+	          window.localStorage.setItem('changeLogin', '100')
+          window.localStorage.setItem('userName', this.userName)
+	          this.$router.push({path: '/Main'})
 	        }
 	      })
 	    }

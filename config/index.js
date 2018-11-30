@@ -36,7 +36,7 @@ module.exports = {
         target: 'http://testnmweb.liantuobank.cn',
         changeOrigin: true,
         pathRewrite: {
-          '^/api/': '/'
+          '^/api/': ''
         }
       }
     },

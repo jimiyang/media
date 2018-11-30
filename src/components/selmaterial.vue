@@ -25,14 +25,19 @@
                 <div class="masonry">
                     <div class="item" v-for="(node,index) in materialData" :key = "index">
                        <div class="layer" :class="{show:currentindex === index}"><img src="/static/images/right-ico.png" /></div>
-                       <h1 class="date">
+                       <div class="date">
                           <span><img src="/static/images/wx-ico.jpg" />{{$common.getDate(node.updateTime,false)}}更新</span>
-                          <a href="javascript:">查看连接</a>
-                       </h1>
+                          <el-tooltip placement="bottom">
+                            <div slot="content" v-for="(item, i) in node.wechatArticleList" :key = "i" >
+                              <a :href="item.url" class="link" target="_blank">{{item.title}}</a>
+                            </div>
+                            <a href="javascript:">查看链接</a>
+                          </el-tooltip>
+                       </div>
                        <dl class="ant-col" @click="selSendcon(index,node.wxMediaId)">
                          <dd :class="{first: i === 0}"  v-for="(item, i) in node.wechatArticleList" :key = "i" >
                             <div><a :href="item.url" target="_blank">{{item.title}}</a></div>
-                            <img class="lazy" :src="node.thumbMediaUrl" alt="" />
+                            <img class="lazy" :src="item.thumbMediaUrl" alt="" />
                          </dd>
                        </dl>
                     </div>
@@ -58,7 +63,7 @@ export default {
       totalNum: 0,
       totalPage: 1,
       search: {
-        'typetype': 'news',
+        'type': 'news',
         'currentPage': 1,
         'pageSize': 5
       }

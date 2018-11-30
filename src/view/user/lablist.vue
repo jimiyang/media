@@ -2,7 +2,7 @@
     <div class="lab-mange">
          <a href="javascript:" class="blue-btn" @click= "createLab">创建新标签</a>
          <div class="warning">你在本平台的操作将自动同步至公众平台，但是在公众平台或其他微信第三方的操作不会自动同步，需进入粉丝列表手动点击同步才能保证数据与公众平台一致。</div>
-         <el-table class="tab-list" :data= "tagData"   style="width:100%;">
+         <el-table class="tab-list" :data= "tagData"   style="width:100%;" v-loading="loading">
             <el-table-column   prop="name"  label="标签名称" ></el-table-column>
             <el-table-column   prop="id"  label="标签ID"   ></el-table-column>
             <el-table-column   prop="fansCount"  label="粉丝人数" sortable ></el-table-column>
@@ -51,7 +51,8 @@ export default{
         currentPage: 1,
         pageSize: 5
       },
-      params: ''
+      params: '',
+      loading: false
     }
   },
   components: {cLab},
@@ -70,7 +71,9 @@ export default{
           if (rs.errorCode === '000005') {
             this.$router.push({path: '/'})
           }
+          this.loading = false
         } else {
+          this.loading = false
           this.totalCount = rs.data.totalNum
           this.tagData = rs.data.items
         }
@@ -78,10 +81,13 @@ export default{
     },
     handleSizeChange (val) {
       this.search.pageSize = val
+      this.loading = true
       this.loadList(this.search)
     },
     handleCurrentChange (val) {
       this.search.currentPage = val
+      console.log(this.search.currentPage)
+      this.loading = true
       this.loadList(this.search)
     },
     createLab () {

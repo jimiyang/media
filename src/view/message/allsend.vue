@@ -165,43 +165,50 @@
           }
         },
         sendUser () { // 手机预览并发送
-          this.dialog = false
           let arrOpenid = []
           for (let i = 0; i < this.checkedUserData.length; i++) {
             arrOpenid.push(this.checkedUserData[i].openId)
           }
-          let params = {
-            touserList: arrOpenid,
-            sendIgnoreReprint: this.reprintChecked === false ? 0 : 1,
-            content: this.groupMessage.content,
-            media_id: this.groupMessage.mediaId,
-            msgtype: this.$common.msgTypelist(this.current, 1)
-          }
-
-          console.log(params)
-          this.msgapi.preview(params).then(rs => {
-            if (rs.returnCode === 'F') {
-              this.$message({
-                type: 'error',
-                message: `${rs.returnMsg}`
-              })
-              if (rs.errorCode === '000005') {
-                this.$router.push({path: '/'})
-              }
-            } else {
-              this.$message({
-                type: 'success',
-                message: `手机发送成功！`
-              })
+          if (arrOpenid.length === 0) {
+            this.$message({
+              type: 'error',
+              message: `请选择`
+            })
+          } else {
+            this.dialog = false
+            let params = {
+              touserList: arrOpenid,
+              sendIgnoreReprint: this.reprintChecked === false ? 0 : 1,
+              content: this.groupMessage.content,
+              media_id: this.groupMessage.mediaId,
+              msgtype: this.$common.msgTypelist(this.current, 1)
             }
-          })
+            this.msgapi.preview(params).then(rs => {
+              if (rs.returnCode === 'F') {
+                this.$message({
+                  type: 'error',
+                  message: `${rs.returnMsg}`
+                })
+                if (rs.errorCode === '000005') {
+                  this.$router.push({path: '/'})
+                }
+              } else {
+                this.$message({
+                  type: 'success',
+                  message: `手机发送成功！`
+                })
+              }
+            })
+          }
         },
         phonePreview () { // 手机预览选择发送对象
+          bus.$emit('ischeckall', false)
           this.dialog = true
           let params = {
-            tagId: this.groupMessage.tagId
+            tagId: this.groupMessage.tagId,
+            currentPage: 1,
+            pageSize: 10
           }
-          console.log(params)
           userapi.getTagfanslistByid(params).then(rs => {
             if (rs.returnCode === 'F') {
               this.$message({
@@ -213,35 +220,42 @@
               }
             } else {
               this.sendNum = rs.data.totalNum
-              bus.$emit('node', rs.data.items)
+              bus.$emit('node', rs)
+              bus.$emit('tagID', this.groupMessage.tagId)
             }
           })
         },
         sendSubmit () { // 高级群发
-          if (this.timingChecked === false) {
-            this.groupMessage.sendDate = null
-          }
-          let params = {
-            ...this.groupMessage,
-            msgtype: this.$common.msgTypelist(this.current, 1),
-            sendIgnoreReprint: this.reprintChecked === false ? 0 : 1
-          }
-          console.log(params)
-          this.msgapi.batchMessage(params).then(rs => {
-            if (rs.returnCode === 'F') {
-              this.$message({
-                type: 'error',
-                message: `${rs.returnMsg}`
-              })
-              if (rs.errorCode === '000005') {
-                this.$router.push({path: '/'})
-              }
-            } else {
-              this.$message({
-                type: 'success',
-                message: `群发成功！`
-              })
+          this.$confirm('是否立即发送?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            if (this.timingChecked === false) {
+              this.groupMessage.sendDate = null
             }
+            let params = {
+              ...this.groupMessage,
+              msgtype: this.$common.msgTypelist(this.current, 1),
+              sendIgnoreReprint: this.reprintChecked === false ? 0 : 1
+            }
+            console.log(params)
+            this.msgapi.batchMessage(params).then(rs => {
+              if (rs.returnCode === 'F') {
+                this.$message({
+                  type: 'error',
+                  message: `${rs.returnMsg}`
+                })
+                if (rs.errorCode === '000005') {
+                  this.$router.push({path: '/'})
+                }
+              } else {
+                this.$message({
+                  type: 'success',
+                  message: `群发成功！`
+                })
+              }
+            })
           })
         }
       },
