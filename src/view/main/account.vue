@@ -56,14 +56,9 @@
       },
       methods: {
         goAuthor () {
-          let params = {
-            agencyId: JSON.parse(window.localStorage.getItem('appInfo')).agencyId
-            // sucessAuthRedirectUri: encodeURIComponent('http://testnmweb.liantuobank.cn/#/account/publist')
-          }
-          console.log(params)
-          this.publicapi.goAuthor(params).then(rs => {
-            console.log(rs)
-          })
+          let agencyId = JSON.parse(window.localStorage.getItem('appInfo')).agencyId
+          let sucessAuthRedirectUri = encodeURIComponent('http://testnmweb.liantuobank.cn/#/account/publist')
+          location.href = `/wechat/*/goAuthor?agencyId=${agencyId}&sucessAuthRedirectUri=${sucessAuthRedirectUri}`
         },
         change (index, item) {
           this.ischecked = index

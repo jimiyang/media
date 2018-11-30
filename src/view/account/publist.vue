@@ -16,7 +16,7 @@
                          </a>
                     </span>
                     <span v-else>
-                         --<a href="javascript:" class="blue-color">重新授权</a>
+                         --<a href="javascript:" class="blue-color" @click="goAuthor">重新授权</a>
                     </span>
                 </template>
             </el-table-column>
@@ -63,9 +63,14 @@ export default{
         }
       })
     },
-        // 解除授权
+    goAuthor () {
+      let agencyId = JSON.parse(window.localStorage.getItem('appInfo')).agencyId
+      let sucessAuthRedirectUri = encodeURIComponent('http://testnmweb.liantuobank.cn/#/account/publist')
+      location.href = `/wechat/*/goAuthor?agencyId=${agencyId}&sucessAuthRedirectUri=${sucessAuthRedirectUri}`
+    },
+    // 解除授权
     authorizationEvent (item) {
-      console.log(item.appid)
+      console.log(item.authorizationDate)
       this.publicapi.quitAuth({'appId': item.appid}).then((rs) => {
         if (rs.returnCode === 'F') {
           this.$message({
