@@ -95,7 +95,7 @@ textarea{outline: none;}
     bottom:0; left: 0;background: #2A3F54;color:#fff;
     .img-blocks{
         text-align: center;padding-top:20px;
-        img{width:60px;height:60px;}
+        img{width:60px;height:60px;border-radius: 50%;}
     }
     .wx-name{
         font-size: 14px;margin-top: 17px;margin-bottom: 13px;
@@ -118,6 +118,12 @@ textarea{outline: none;}
         }
         .el-menu-item-group__title{display:none;}
     }
+    .el-menu-item,.el-submenu__title{
+        &:hover{background: rgba(255,255,255,.05);}
+    }
+    .rborder{border-right:5px solid #1ABB9C}
+    #menu-blocks .el-menu-item.isActive{background: rgba(255,255,255,.05);}
+    .el-menu-item.is-active{background: none;}
   }
   .el-main {
     background-color: #E9EEF3;

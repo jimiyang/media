@@ -58,7 +58,7 @@
         goAuthor () {
           let agencyId = JSON.parse(window.localStorage.getItem('appInfo')).agencyId
           let sucessAuthRedirectUri = encodeURIComponent('http://testnmweb.liantuobank.cn/#/account/publist')
-          location.href = `/wechat/*/goAuthor?agencyId=${agencyId}&sucessAuthRedirectUri=${sucessAuthRedirectUri}`
+          location.href = `/wechat/*/authPage?agencyId=${agencyId}&sucessAuthRedirectUri=${sucessAuthRedirectUri}`
         },
         change (index, item) {
           this.ischecked = index

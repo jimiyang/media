@@ -7,31 +7,13 @@
                 {{name}} <span>{{isAuth === 0 ? "未认证" : "已认证"}}</span>
             </div>
             <div class="fun-num">{{serviceTypeInfo === 1 ? "订阅号" : "服务号"}}</div>
-            <el-menu class="menu-blocks" :default-openeds="['1','2','3','4']" :default-active="currentMenu">
-                <el-submenu index="1">
-                    <template slot="title"><i class="el-icon-message"></i>消息管理</template>
+            <el-menu class="menu-blocks" id="menu-blocks" :default-openeds="['1']" :default-active="currentMenu">
+                <el-submenu index="1" v-for="(item, i) in menuData" :key="i" :class="{rborder:curr === i}">
+                    <template slot="title" ><i :class="item.ico"></i>{{item.name}}</template>
                     <el-menu-item-group>
-                        <router-link to="/message/allsend"><el-menu-item index="1-1">群发消息</el-menu-item></router-link>
-                        <router-link to="/message/list"><el-menu-item index="1-2">消息记录</el-menu-item></router-link>
-                    </el-menu-item-group>
-                </el-submenu>
-                <el-submenu index="2">
-                    <template slot="title"><i class="el-icon-menu"></i>用户管理</template>
-                    <el-menu-item-group>
-                       <router-link to="/user/fanlist"> <el-menu-item index="2-1">粉丝列表</el-menu-item></router-link>
-                       <router-link to="/user/lablist"><el-menu-item index="2-2">标签管理</el-menu-item></router-link>
-                    </el-menu-item-group>
-                </el-submenu>
-                <el-submenu index="3">
-                    <template slot="title"><i class="el-icon-picture"></i>素材管理</template>
-                    <el-menu-item-group>
-                     <router-link to="/material/list"><el-menu-item index="3-1">图文素材库</el-menu-item></router-link>
-                    </el-menu-item-group>
-                </el-submenu>
-                <el-submenu index="4">
-                    <template slot="title"><i class="el-icon-setting"></i>帐号设置</template>
-                    <el-menu-item-group>
-                        <router-link to="/account/publist"><el-menu-item index="4-1">公众号列表</el-menu-item></router-link>
+                        <router-link :to="childData.url" v-for="(childData,index) in item.children" :key="index">
+                            <el-menu-item :index="childData.id" :class="{isActive:current === childData.id}" @click="menuEvent(childData.id,i)">{{childData.name}}</el-menu-item>
+                        </router-link>
                     </el-menu-item-group>
                 </el-submenu>
             </el-menu>
@@ -60,7 +42,7 @@
             </el-header>
             <div class="view-content"><router-view></router-view></div>
         </el-container>
-        <accountArea :open.sync="isopen"></accountArea>
+       <!-- <accountArea :open.sync="isopen"></accountArea>-->
     </el-container>
 </template>
 <script>
@@ -70,14 +52,17 @@ export default {
   data () {
     return {
       userName: JSON.parse(window.localStorage.getItem('appInfo')).userName,
-      currentMenu: 'allsend',
+      currentMenu: '1',
       imgurl: JSON.parse(window.localStorage.getItem('appInfo')).headImg,
       name: JSON.parse(window.localStorage.getItem('appInfo')).nickName,
       isAuth: JSON.parse(window.localStorage.getItem('appInfo')).isAuth, // 是否认证
       serviceTypeInfo: JSON.parse(window.localStorage.getItem('appInfo')).serviceTypeInfo, // 1:订阅号2:服务号
       funcount: 1000,
       isopen: true,
-      visible2: false
+      visible2: false,
+      menuData: this.$common.menuList(),
+      current: '',
+      curr: 0
     }
   },
   created () {
@@ -88,11 +73,17 @@ export default {
       this.isAuth = obj.isAuth
       this.serviceTypeInfo = obj.serviceTypeInfo
     })
+    console.log(this.$common.menuList())
   },
   components: {accountArea},
   methods: {
     change () {
       this.isopen = true
+    },
+    menuEvent (id, index) {
+      this.current = id
+      this.curr = index
+      console.log(this.current)
     }
   }
 }

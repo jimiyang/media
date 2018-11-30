@@ -66,7 +66,7 @@ export default{
     goAuthor () {
       let agencyId = JSON.parse(window.localStorage.getItem('appInfo')).agencyId
       let sucessAuthRedirectUri = encodeURIComponent('http://testnmweb.liantuobank.cn/#/account/publist')
-      location.href = `/wechat/*/goAuthor?agencyId=${agencyId}&sucessAuthRedirectUri=${sucessAuthRedirectUri}`
+      location.href = `http://testnmweb.liantuobank.cn/wechat/*/authPage?agencyId=${agencyId}&sucessAuthRedirectUri=${sucessAuthRedirectUri}`
     },
     // 解除授权
     authorizationEvent (item) {
