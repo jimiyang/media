@@ -42,7 +42,7 @@
             </el-header>
             <div class="view-content"><router-view></router-view></div>
         </el-container>
-       <!-- <accountArea :open.sync="isopen"></accountArea>-->
+       <accountArea :open.sync="isopen"></accountArea>
     </el-container>
 </template>
 <script>
@@ -51,12 +51,12 @@ import bus from '../../until/eventbus.js'
 export default {
   data () {
     return {
-      userName: JSON.parse(window.localStorage.getItem('appInfo')).userName,
+      userName: '',
       currentMenu: '1',
-      imgurl: JSON.parse(window.localStorage.getItem('appInfo')).headImg,
-      name: JSON.parse(window.localStorage.getItem('appInfo')).nickName,
-      isAuth: JSON.parse(window.localStorage.getItem('appInfo')).isAuth, // 是否认证
-      serviceTypeInfo: JSON.parse(window.localStorage.getItem('appInfo')).serviceTypeInfo, // 1:订阅号2:服务号
+      imgurl: '',
+      name: '',
+      isAuth: '', // 是否认证
+      serviceTypeInfo: '', // 1:订阅号2:服务号
       funcount: 1000,
       isopen: true,
       visible2: false,
@@ -73,7 +73,15 @@ export default {
       this.isAuth = obj.isAuth
       this.serviceTypeInfo = obj.serviceTypeInfo
     })
-    console.log(this.$common.menuList())
+    console.log(window.sessionStorage.getItem('appInfo'))
+    if (window.sessionStorage.getItem('appInfo') != null) {
+      let appInfo = JSON.parse(window.sessionStorage.getItem('appInfo'))
+      this.userName = appInfo.userName
+      this.imgurl = appInfo.headImg
+      this.name = appInfo.nickName
+      this.isAuth = appInfo.isAuth
+      this.serviceTypeInfo = appInfo.serviceTypeInfo
+    }
   },
   components: {accountArea},
   methods: {

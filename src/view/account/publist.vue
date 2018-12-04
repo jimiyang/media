@@ -43,7 +43,6 @@ export default{
     }
   },
   created () {
-        // console.log(window.localStorage.getItem('changeLogin'))
     this.loadList()
   },
   methods: {
@@ -64,9 +63,8 @@ export default{
       })
     },
     goAuthor () {
-      let agencyId = JSON.parse(window.localStorage.getItem('appInfo')).agencyId
-      let sucessAuthRedirectUri = encodeURIComponent('http://testnmweb.liantuobank.cn/#/account/publist')
-      location.href = `http://testnmweb.liantuobank.cn/wechat/*/authPage?agencyId=${agencyId}&sucessAuthRedirectUri=${sucessAuthRedirectUri}`
+      let sucessAuthRedirectUri = encodeURIComponent('/account/publist')
+      location.href = `/wechat/*/authPage?sucessAuthRedirectUri=${sucessAuthRedirectUri}`
     },
     // 解除授权
     authorizationEvent (item) {
@@ -108,8 +106,8 @@ export default{
             center: true,
             type: 'success'
           })
-          window.localStorage.setItem('appInfo', JSON.stringify(rs.data))
-          bus.$emit('ischange', JSON.parse(window.localStorage.getItem('appInfo'))) // 中间件
+          window.sessionStorage.setItem('appInfo', JSON.stringify(rs.data))
+          bus.$emit('ischange', JSON.parse(window.sessionStorage.getItem('appInfo')))
         }
       })
     }

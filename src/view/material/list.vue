@@ -75,7 +75,9 @@ export default {
           if (this.search.currentPage !== 1) {
             this.materialData = rs.data.items.concat(this.materialData)
           } else {
-            this.materialData = rs.data.items
+            if (rs.data !== null) {
+              this.materialData = rs.data.items
+            }
           }
           this.totalNum = rs.data.totalNum
           this.totalPage = rs.data.totalPage

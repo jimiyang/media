@@ -57,7 +57,7 @@ export default{
   },
   components: {cLab},
   created () {
-    console.log(JSON.parse(window.localStorage.getItem('appInfo')).appId)
+    console.log(JSON.parse(window.sessionStorage.getItem('appInfo')).appId)
     this.loadList()
   },
   methods: {

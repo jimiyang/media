@@ -56,9 +56,8 @@
       },
       methods: {
         goAuthor () {
-          let agencyId = JSON.parse(window.localStorage.getItem('appInfo')).agencyId
-          let sucessAuthRedirectUri = encodeURIComponent('http://testnmweb.liantuobank.cn/#/account/publist')
-          location.href = `/wechat/*/authPage?agencyId=${agencyId}&sucessAuthRedirectUri=${sucessAuthRedirectUri}`
+          let sucessAuthRedirectUri = encodeURIComponent('/account/publist')
+          location.href = `/wechat/*/authPage?sucessAuthRedirectUri=${sucessAuthRedirectUri}`
         },
         change (index, item) {
           this.ischecked = index
@@ -90,9 +89,9 @@
             } else {
               this.isopen = false
               this.$emit('update:open', false)
-              window.localStorage.setItem('appInfo', JSON.stringify(rs.data))
-              console.log(JSON.parse(window.localStorage.getItem('appInfo')))
-              bus.$emit('ischange', JSON.parse(window.localStorage.getItem('appInfo'))) // 中间件
+              window.sessionStorage.setItem('appInfo', JSON.stringify(rs.data))
+              console.log(window.sessionStorage.getItem('appInfo'))
+              bus.$emit('ischange', JSON.parse(window.sessionStorage.getItem('appInfo'))) // 中间件
             }
           })
         }
