@@ -43,10 +43,10 @@
                 <img :src="scope.row.headImgUrl" class="headimg-ico"/>
                 {{scope.row.nickName}}
                 <span v-if="scope.row.sex === 1" class="sex-ico">
-                    <img src="../../../static/images/girl.png" />
+                    <img src="../../../static/images/boy.png" />
                 </span>
                  <span v-if="scope.row.sex === 2" class="sex-ico">
-                    <img src="../../../static/images/boy.png"/>
+                    <img src="../../../static/images/girl.png"/>
                 </span>
               </template>
             </el-table-column>
