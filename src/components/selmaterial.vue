@@ -87,7 +87,7 @@ export default {
           }
         } else {
           if (this.flag === false) {
-            this.materialData = rs.data.items.concat(this.materialData)
+            this.materialData = this.materialData.concat(rs.data.items)
           } else {
             this.materialData = rs.data.items
           }

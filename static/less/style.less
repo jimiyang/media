@@ -76,7 +76,7 @@ textarea{outline: none;}
          }
          
          .el-button{
-             background:none;border:none;position: relative;padding-left:0;padding-right:0;
+             background:none;border:none;position: relative;padding-left:0;padding-right:0;min-width:100px;
              &:after{
                 position: absolute;right:-15px;top:13px;content:'';width:6px;height:6px;
                 border-right:1px solid #666;border-bottom:1px solid #666;transform: rotate(45deg)
@@ -376,18 +376,16 @@ textarea{outline: none;}
  .link{display:block;color:#fff;margin:10px 0;text-align: left;width:200px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
 .material-list{
     display: flex;align-items: flex-start;
-    width: 600px;
     &>ul{
         border-right: 1px solid #e9e9e9;margin-right: -1px;margin-bottom: 0;padding-top:34px;
-        height: 350px;transform: translate3d(0px, 0px, 0px);
-        li{height: 34px;padding: 8px 30px;margin-bottom: 7px;cursor: pointer;}
+        height: 350px;transform: translate3d(0px, 0px, 0px);width:90px;
+        li{height: 34px;padding: 8px 0;margin-bottom: 7px;cursor: pointer;}
         &>.active{
            border-right:2px solid #4993ff;
         }
     }
-    
     .image-text{
-        padding: 34px 20px 30px 15px;width:80%;height:350px;overflow-y:auto;display:none;
+        padding: 34px 10px 30px 15px;width:100%;height:350px;overflow-y:auto;display:none;
         .txt-content{
             display: flex;justify-content: space-between;align-items: flex-start;height:250px;
             border:1px solid #e9e9e9;
@@ -421,9 +419,8 @@ textarea{outline: none;}
             -webkit-column-count: 2;-moz-column-count: 2;column-count:2;-moz-column-gap:20px;-webkit-column-gap:20px;column-gap:20px;padding-top:10px;
             
         }
-        
         .item { 
-            width:210px;border:1px solid #e6e6e6;margin-bottom: 10px; break-inside: avoid;position: relative;
+           border:1px solid #e6e6e6;margin-bottom: 10px; break-inside: avoid;position: relative;
             .layer{
                 position: absolute;left:0;right:0;top:34px;background:#000;height:80%;z-index:9999;opacity: 0.4;
                 text-align:center;display:none;
@@ -524,6 +521,10 @@ textarea{outline: none;}
             display: flex;justify-content:left;align-items: center;padding:10px 0;
             label.name{display: block;padding-right:5%;}
        }
+    }
+    .headimg-ico{width:20px;height:20px;vertical-align: middle;}
+    .sex-ico{
+        img{vertical-align: middle;}
     }
 }
 /*标签管理*/

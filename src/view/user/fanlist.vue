@@ -38,7 +38,18 @@
         </div>
         <el-table class="tab-list" ref="multipleTable" :data="fansData"   @selection-change="checkEvent"  style="width:100%;" v-loading="loading">
             <el-table-column   type="selection" width="55"></el-table-column>
-            <el-table-column   prop="nickName"  label="用户昵称" ></el-table-column>
+            <el-table-column   prop="nickName"  label="用户昵称" >
+              <template slot-scope="scope">
+                <img :src="scope.row.headImgUrl" class="headimg-ico"/>
+                {{scope.row.nickName}}
+                <span v-if="scope.row.sex === 1" class="sex-ico">
+                    <img src="../../../static/images/girl.png" />
+                </span>
+                 <span v-if="scope.row.sex === 2" class="sex-ico">
+                    <img src="../../../static/images/boy.png"/>
+                </span>
+              </template>
+            </el-table-column>
             <el-table-column   prop="city"  label="地域" >
               <template slot-scope="scope">
                 {{scope.row.country}}{{scope.row.province}}{{scope.row.city}}
@@ -121,6 +132,7 @@ export default {
       checkedCount: 0,
       nocheckCount: 0,
       appidList: [], // 批量打标签传入的appid
+      userData: [],
       options: [
         {value: -1, label: '全部'},
         {value: 0, label: '未知'},
@@ -152,6 +164,7 @@ export default {
           this.loading = false
           this.totalCount = rs.data.totalNum
           this.fansData = rs.data.items
+          console.log(rs.data.items)
         }
       })
     },
@@ -169,19 +182,20 @@ export default {
     },
     checkEvent (node) {
       this.checkedCount = node.length
-      this.nocheckCount = (this.totalCount - node.length)
-      for (let i = 0; i < node.length; i++) {
-        this.appidList.push(node[i].openId)
-      }
+      this.userData = node
     },
     addTag () {
+      this.appidList = []
+      for (let i = 0; i < this.userData.length; i++) {
+        this.appidList.push(this.userData[i].openId)
+      }
+      console.log(this.appidList)
       let params = {
         tagId: this.selectTag,
         openIdList: this.appidList,
         tagrgetFansFlag: this.radio
       }
       Object.assign(params, this.search)
-      console.log(this.selectTag)
       console.log(params)
       this.userapi.batchAddtag(params).then(rs => {
         if (rs.returnCode === 'F') {

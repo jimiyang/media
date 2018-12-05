@@ -3,7 +3,7 @@
         <div class="layers" :class="{show:isopen}"></div>
         <div class="account-list" :class="{open:isopen}">
             <div class="title">
-                <a href="javascript:" class="back" @click="back">返回</a>
+                <a href="javascript:" class="back" @click="back">{{msgBack}}</a>
                 <div>
                     <span @click="change(0,'公众号')"  :class="{checked: ischecked==0}">公众号</span>
                     <span  @click="change(1,'小程序')" :class="{checked: ischecked==1}">小程序</span>
@@ -34,7 +34,8 @@
           isShow: false,
           Data: [],
           imgurl: '',
-          publicapi: publicapi
+          publicapi: publicapi,
+          msgBack: ''
         }
       },
       props: ['open'],
@@ -50,9 +51,16 @@
             }
           } else {
             this.Data = rs.data
-            console.log(rs.data)
           }
         })
+        bus.$on('ischange', obj => {
+          if (obj !== null) {
+            this.msgBack = '返回'
+          }
+        })
+        if (sessionStorage.getItem('appInfo') !== null) {
+          this.msgBack = '返回'
+        }
       },
       methods: {
         goAuthor () {
@@ -92,6 +100,7 @@
               window.sessionStorage.setItem('appInfo', JSON.stringify(rs.data))
               console.log(window.sessionStorage.getItem('appInfo'))
               bus.$emit('ischange', JSON.parse(window.sessionStorage.getItem('appInfo'))) // 中间件
+              this.$router.push({'path': '/account/publist'})
             }
           })
         }

@@ -7,8 +7,8 @@
                 {{name}} <span>{{isAuth === 0 ? "未认证" : "已认证"}}</span>
             </div>
             <div class="fun-num">{{serviceTypeInfo === 1 ? "订阅号" : "服务号"}}</div>
-            <el-menu class="menu-blocks" id="menu-blocks" :default-openeds="['1']" :default-active="currentMenu">
-                <el-submenu index="1" v-for="(item, i) in menuData" :key="i" :class="{rborder:curr === i}">
+            <el-menu class="menu-blocks" id="menu-blocks" :default-openeds="defaultData" :default-active="currentMenu" @open="openEvent">
+                <el-submenu :index="''+(i + 1)" v-for="(item, i) in menuData" :key="i" :class="{rborder:curr === i}">
                     <template slot="title" ><i :class="item.ico"></i>{{item.name}}</template>
                     <el-menu-item-group>
                         <router-link :to="childData.url" v-for="(childData,index) in item.children" :key="index">
@@ -42,7 +42,7 @@
             </el-header>
             <div class="view-content"><router-view></router-view></div>
         </el-container>
-       <accountArea :open.sync="isopen"></accountArea>
+       <!--<accountArea :open.sync="isopen"></accountArea>-->
     </el-container>
 </template>
 <script>
@@ -62,11 +62,13 @@ export default {
       visible2: false,
       menuData: this.$common.menuList(),
       current: '',
-      curr: 0
+      curr: 0,
+      defaultData: ['1']
     }
   },
   created () {
     bus.$on('ischange', obj => {
+      console.log(obj)
       this.name = obj.nickName
       this.userName = obj.userName
       this.imgurl = obj.headImg
@@ -85,13 +87,15 @@ export default {
   },
   components: {accountArea},
   methods: {
+    openEvent (index) {
+      this.defaultData = ['' + index + '']
+    },
     change () {
       this.isopen = true
     },
     menuEvent (id, index) {
       this.current = id
       this.curr = index
-      console.log(this.current)
     }
   }
 }

@@ -73,7 +73,7 @@ export default {
         } else {
           this.loading = false
           if (this.search.currentPage !== 1) {
-            this.materialData = rs.data.items.concat(this.materialData)
+            this.materialData = this.materialData.concat(rs.data.items)
           } else {
             if (rs.data !== null) {
               this.materialData = rs.data.items

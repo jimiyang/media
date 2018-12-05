@@ -46,6 +46,7 @@
                     <el-step title="微信发送中"></el-step>
                     <el-step title="群发完毕"></el-step>
                 </el-steps> 
+                <el-progress type="circle" :percentage="sendSuccessnum"></el-progress>
                 <ul class="list">
                     <li class="wrap">
                         <div>群发对象：{{detail.target}}</div>
@@ -94,7 +95,8 @@ export default {
       },
       selectVal: '',
       loading: false,
-      msgtype: 'mpnews'
+      msgtype: 'mpnews',
+      sendSuccessnum: 0
     }
   },
   created () {
@@ -134,6 +136,7 @@ export default {
           this.detail.wechatMediaResponse = rs.data.wechatMediaResponse.wechatArticleList
         }
       })
+      // setInterval(() => {}, 100)
     },
     delMsg () {
       if (this.selectVal !== '' && (this.detail.sendStatus + 1) > 2) {

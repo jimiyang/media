@@ -44,7 +44,6 @@ export default {
       this.allUserList = obj.data.items
       this.restaurants = obj.data.items
       this.totalNum = obj.data.totalNum
-      console.log(obj)
     })
     bus.$on('ischeckall', obj => {
       this.checkAll = obj
@@ -56,7 +55,6 @@ export default {
   methods: {
     moreEvent () {
       this.search.currentPage = this.search.currentPage + 1
-      console.log(this.search.currentPage)
       let params = {
         currentPage: this.search.currentPage,
         pageSize: this.search.pageSize,
