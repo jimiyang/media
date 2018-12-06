@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/view/login/login'
-import NotFound from '../view/404.vue'
+import Reg from '@/view/login/reg'
+import NotFound from '@/view/404.vue'
 import Center from '@/center'
 import Main from '@/view/main/main'
 import Allsend from '@/view/message/allsend' // 消息群发
@@ -18,6 +19,12 @@ export default new Router({
       path: '/',
       name: '',
       component: Login,
+      hidden: true
+    },
+    {
+      path: '/reg',
+      name: '',
+      component: Reg,
       hidden: true
     },
     {

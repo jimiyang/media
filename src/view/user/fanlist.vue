@@ -107,6 +107,7 @@
       </el-dialog>
     </div>
 </template>
+<style lang="less" src="../../../static/less/user.less"></style>
 <script>
 import userapi from '../../api/userapi'
 export default {

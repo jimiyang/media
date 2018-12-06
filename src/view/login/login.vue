@@ -20,11 +20,13 @@
 				<a href="">忘记密码?</a>
 			</li>
 			<li class="btn-reg">
-				<input type="button" value="注册" class="white-btn"/>
+				<!--<input type="button" value="注册" class="white-btn"/>-->
+				<router-link to="reg" class="white-btn">注册</router-link>
 			</li>
 		</ul>
 	</div>
 </template>
+<style lang="less" src="../../../static/less/login.less"></style>
 <script>
 	import loginapi from '../../api/loginapi.js'
 	export default{

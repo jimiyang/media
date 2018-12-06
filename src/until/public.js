@@ -46,6 +46,17 @@ let obj = {
       {'name': '帐号设置', 'ico': 'el-icon-setting', children: [{'id': '301', 'name': '公众号列表', 'url': '/account/publist'}]}
     ]
     return node
+  },
+  regeXp (value) {
+    let regList = {
+      phone: /^[1][3,4,5,7,8][0-9]{9}$/,
+      password: /^(?!([a-zA-Z]+|\d+)$)[a-zA-Z\d]{6,20}$/
+    }
+    let check = {}
+    for (let i in regList) {
+      check[i] = regList[i].test(value)
+    }
+    return check
   }
 }
 // prototype封装

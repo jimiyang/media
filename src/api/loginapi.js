@@ -6,5 +6,11 @@ function userLogin (params) {
       return response
     })
 }
-export default{ userLogin }
+function userRegister (params) {
+  return axios.post('/wechat/register', params)
+    .then((response) => {
+      return response.data
+    })
+}
+export default{ userLogin, userRegister }
 

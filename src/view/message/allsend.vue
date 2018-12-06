@@ -73,6 +73,7 @@
         </el-dialog>
     </div>
 </template>
+<style lang="less" src="../../../static/less/message.less"></style>
 <script>
     import selmaterial from '../../components/selmaterial.vue'
     import userlist from '../../components/userlist.vue'

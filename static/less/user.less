@@ -1,0 +1,44 @@
+/*粉丝列表*/
+.fun-items{
+  .search-box{
+      display: flex;flex-wrap: wrap;
+      .items{
+          margin:10px;
+      }
+  }
+  .ant-btn{
+      padding:20px;
+      &>a{
+          margin:0 30px;
+      }
+  }
+  .count{padding:10px 0; border-bottom: 1px solid rgb(233, 233, 233); overflow: hidden;}
+  .opeart-btn{padding:10px 0;
+      &>a{margin-right:30px;padding-top:5px;padding-bottom:5px;}
+  }
+  .opeartiontag-box{
+      height: 300px;
+      li{
+          display: flex;justify-content:left;align-items: center;padding:10px 0;
+          label.name{display: block;padding-right:5%;}
+     }
+  }
+  .headimg-ico{width:20px;height:20px;vertical-align: middle;}
+  .sex-ico{
+      img{vertical-align: middle;}
+  }
+}
+/*标签管理*/
+.lab-mange{padding:10px;
+  .warning{
+      border: 1px solid #fff3cf;background-color: #fffaeb;position: relative;
+      padding: 8px 48px 8px 38px;
+      border-radius: 4px;color: rgba(0, 0, 0, 0.65);
+      font-size: 12px;line-height: 1.5;margin:20px 0;
+   }
+   .el-dialog{
+      .content{padding:20px 0;text-align:center;
+          &>input{height:40px;line-height:40px;width: 80%;border-radius: 5px; border: 1px solid #e2e2eb;color:#606266;}
+      }
+   }
+}

@@ -34,6 +34,7 @@
         </el-dialog>
    </div>
 </template>
+<style lang="less" src="../../../static/less/user.less"></style>
 <script>
 import cLab from '../../components/createLab.vue'
 import userapi from '../../api/userapi'

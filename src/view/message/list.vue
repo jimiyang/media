@@ -25,6 +25,7 @@
             <el-table-column  label="操作"  width="180">
                 <template slot-scope="scope">
                     <a href="javascript:" class="blue-color" @click="detailEvent(scope)">详情</a>
+                    <a href="javascript:" class="blue-color" v-if="scope.row.sendStatus==0">取消发送</a>
                 </template>
             </el-table-column>
         </el-table>
@@ -76,6 +77,7 @@
         </el-dialog>
     </div>
 </template>
+<style lang="less" src="../../../static/less/message.less"></style>
 <script>
 import messageapi from '../../api/msgapi'
 export default {
