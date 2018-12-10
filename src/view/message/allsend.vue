@@ -136,9 +136,10 @@
           this.dialogVisible = false
           this.dialog = false
         },
-        selLab (id, tagid) {
+        selLab (id, wxtagid) {
           this.index = id
-          this.groupMessage.tagId = tagid
+          this.groupMessage.tagId = wxtagid
+          console.log(wxtagid)
         },
         sendContent () {
           this.dialogVisible = false
@@ -206,7 +207,7 @@
           bus.$emit('ischeckall', false)
           this.dialog = true
           let params = {
-            tagId: this.groupMessage.tagId,
+            wxTagId: this.groupMessage.tagId,
             currentPage: 1,
             pageSize: 10
           }

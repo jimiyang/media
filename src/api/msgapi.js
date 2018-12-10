@@ -30,6 +30,12 @@ function batchMessage (params) {
       return repsonse.data
     })
 }
+function cancle (params) {
+  return axios.post('/wechat/batchMessage/cancle', params)
+    .then((response) => {
+      return response.data
+    })
+}
 export default{
-  getMsgSendRecordList, getMsgSendRecordByid, preview, deleteNewsRecord, batchMessage
+  getMsgSendRecordList, getMsgSendRecordByid, preview, deleteNewsRecord, batchMessage, cancle
 }

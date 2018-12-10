@@ -243,3 +243,11 @@ textarea{outline: none;}
         &:hover{background:#EDEDED;}
     }
 }
+/*进度条*/
+.percent-box{
+    display:none;
+    .layer{position: absolute;left:0;top:0;right:0;width:100%;height: 100%;background:#000;opacity:0.4;}
+    .circle-blocks{position: fixed;left:50%;top:50%;margin-left:-63px;margin-top:-63px;}
+    .el-progress--circle .el-progress__text{color:#fff;}
+}
+.percent-box.show{display: block;}

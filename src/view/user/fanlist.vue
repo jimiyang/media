@@ -105,11 +105,13 @@
              <el-button type="primary"  @click="addTag">确 定</el-button>
           </span>
       </el-dialog>
+      <getPercent :show.sync = "isshow" :percentageNum.sync="percentage"></getPercent><!--进度条-->
     </div>
 </template>
 <style lang="less" src="../../../static/less/user.less"></style>
 <script>
 import userapi from '../../api/userapi'
+import getPercent from '../../components/getPercent'
 export default {
   data () {
     return {
@@ -139,9 +141,12 @@ export default {
         {value: 0, label: '未知'},
         {value: 1, label: '男'},
         {value: 2, label: '女'}
-      ]
+      ],
+      percentage: 0,
+      isshow: false
     }
   },
+  components: { getPercent },
   created () {
     this.loadList()
     this.userapi.getList().then(rs => {
@@ -152,7 +157,6 @@ export default {
   methods: {
     loadList () {
       this.userapi.getFanslist(this.search).then(rs => {
-        console.log(rs)
         if (rs.returnCode === 'F') {
           this.$message({
             type: 'error',
@@ -165,7 +169,6 @@ export default {
           this.loading = false
           this.totalCount = rs.data.totalNum
           this.fansData = rs.data.items
-          console.log(rs.data.items)
         }
       })
     },
@@ -185,12 +188,32 @@ export default {
       this.checkedCount = node.length
       this.userData = node
     },
+    getPercent (type) { // 得出百分比
+      this.userapi.getPercent(type).then(rs => {
+        console.log(rs.data)
+        if (rs.returnCode === 'S') {
+          if (this.percentage <= 99) {
+            this.getPercent(type)
+            this.percentage = rs.data.sysUserPercent
+            console.log(rs.data.sysUserPercent)
+          } else {
+            setTimeout(() => {
+              this.isshow = false
+            }, 500)
+            this.$message({
+              type: 'success',
+              message: '操作成功！'
+            })
+            this.loadList()
+          }
+        }
+      })
+    },
     addTag () {
       this.appidList = []
       for (let i = 0; i < this.userData.length; i++) {
         this.appidList.push(this.userData[i].openId)
       }
-      console.log(this.appidList)
       let params = {
         tagId: this.selectTag,
         openIdList: this.appidList,
@@ -208,20 +231,19 @@ export default {
             this.$router.push({path: '/'})
           }
         } else {
-          this.$message({
-            type: 'success',
-            message: `批量操作成功`
-          })
           this.dialogVisible = false
-          this.loadList()
+          this.isshow = true
+          this.percentage = 0
+          this.getPercent('tags')
         }
       })
     },
     handleClose () {
       this.dialogVisible = false
     },
-    updateUser () { // 同步粉丝数据
-      this.loading = true
+    updateUser () {
+      this.isshow = true
+      this.percentage = 0
       this.userapi.refreshUserlist().then(rs => {
         if (rs.returnCode === 'F') {
           this.$message({
@@ -233,12 +255,7 @@ export default {
           }
           this.loading = false
         } else {
-          this.$message({
-            type: 'success',
-            message: `数据同步成功！`
-          })
-          this.loadList()
-          this.loading = false
+          this.getPercent('fans')
         }
       })
     },

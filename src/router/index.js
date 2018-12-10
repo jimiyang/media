@@ -11,6 +11,9 @@ import Fanlist from '@/view/user/fanlist' // 粉丝列表
 import Lablist from '@/view/user/lablist' // 用户标签管理
 import Mlist from '@/view/material/list' // 图文素材库
 import Publist from '@/view/account/publist' // 公众号列表
+import Create from '@/view/advertising/create' // 广告创建
+import Putting from '@/view/advertising/putting' // 广告投放
+import AdvertList from '@/view/advertising/list' // 广告资源管理
 Vue.use(Router)
 export default new Router({
   // mode: 'history',
@@ -93,6 +96,26 @@ export default new Router({
           {
             path: 'publist',
             component: Publist
+          }
+        ]
+      },
+      {
+        name: '/advertising',
+        path: '/advertising',
+        redirect: 'advertising/list',
+        component: Center,
+        children: [
+          {
+            path: 'create',
+            component: Create
+          },
+          {
+            path: 'putting',
+            component: Putting
+          },
+          {
+            path: 'list',
+            component: AdvertList
           }
         ]
       }

@@ -11,9 +11,9 @@
             <el-table-column   prop="totalCount"  label="目标人数"  ></el-table-column>
             <el-table-column   prop="sendStatus"  label="发送状态" >
                 <template slot-scope="scope">
-                    <span class="dot-ico " v-if="scope.row.sendStatus==0">未发送</span>
-                    <span class="dot-ico loading" v-if="scope.row.sendStatus==1">发送中</span>
-                    <span class="dot-ico success" v-if="scope.row.sendStatus==2">发送完毕</span>
+                    <span class="dot-ico " v-if="scope.row.sendStatus === 0">未发送</span>
+                    <span class="dot-ico loading" v-if="scope.row.sendStatus === 1">发送中</span>
+                    <span class="dot-ico success" v-if="scope.row.sendStatus === 2">发送完毕</span>
                 </template>
             </el-table-column>
             <el-table-column   prop="sendDate"  label="发送时间" >
@@ -25,7 +25,8 @@
             <el-table-column  label="操作"  width="180">
                 <template slot-scope="scope">
                     <a href="javascript:" class="blue-color" @click="detailEvent(scope)">详情</a>
-                    <a href="javascript:" class="blue-color" v-if="scope.row.sendStatus==0">取消发送</a>
+                    <a href="javascript:" class="blue-color" v-if="scope.row.sendStatus === 0 && scope.row.enable === 1" @click="cancelEvent(scope.row.id)">取消发送</a>
+                    <a href="javascript:" class="blue-color" v-if="scope.row.sendStatus === 0 && scope.row.enable === 0">已取消</a>
                 </template>
             </el-table-column>
         </el-table>
@@ -34,7 +35,7 @@
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
                 :current-page.sync="search.currentPage"
-                :page-sizes="[5, 10, 20, 30, 40,100,200,300,400]"
+                :page-sizes="[10, 20, 30, 40,100,200,300,400]"
                 :page-size.sync="search.pageSize"
                 layout="total, sizes, prev, pager, next, jumper"
                 :total="totalCount">
@@ -47,7 +48,6 @@
                     <el-step title="微信发送中"></el-step>
                     <el-step title="群发完毕"></el-step>
                 </el-steps> 
-                <el-progress type="circle" :percentage="sendSuccessnum"></el-progress>
                 <ul class="list">
                     <li class="wrap">
                         <div>群发对象：{{detail.target}}</div>
@@ -89,7 +89,7 @@ export default {
       totalCount: 0,
       search: {
         currentPage: 1,
-        pageSize: 5
+        pageSize: 10
       },
       marteralId: '', // 图文id
       detail: {
@@ -97,8 +97,7 @@ export default {
       },
       selectVal: '',
       loading: false,
-      msgtype: 'mpnews',
-      sendSuccessnum: 0
+      msgtype: 'mpnews'
     }
   },
   created () {
@@ -139,6 +138,25 @@ export default {
         }
       })
       // setInterval(() => {}, 100)
+    },
+    cancelEvent (id) {
+      this.messageapi.cancle({id: id}).then(rs => {
+        if (rs.returnCode === 'F') {
+          this.$message({
+            type: 'error',
+            message: `${rs.returnMsg}`
+          })
+          if (rs.errorCode === '000005') {
+            this.$router.push({path: '/'})
+          }
+        } else {
+          this.$message({
+            type: 'success',
+            message: '定时发送已取消！'
+          })
+          this.loadList()
+        }
+      })
     },
     delMsg () {
       if (this.selectVal !== '' && (this.detail.sendStatus + 1) > 2) {

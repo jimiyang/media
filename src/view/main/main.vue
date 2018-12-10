@@ -42,7 +42,7 @@
             </el-header>
             <div class="view-content"><router-view></router-view></div>
         </el-container>
-       <accountArea :open.sync="isopen"></accountArea>
+       <!--<accountArea :open.sync="isopen"></accountArea>-->
     </el-container>
 </template>
 <script>
@@ -62,20 +62,18 @@ export default {
       visible2: false,
       menuData: this.$common.menuList(),
       current: '',
-      curr: 0,
-      defaultData: ['1']
+      curr: 4,
+      defaultData: ['5']
     }
   },
   created () {
     bus.$on('ischange', obj => {
-      console.log(obj)
       this.name = obj.nickName
       this.userName = obj.userName
       this.imgurl = obj.headImg
       this.isAuth = obj.isAuth
       this.serviceTypeInfo = obj.serviceTypeInfo
     })
-    console.log(window.sessionStorage.getItem('appInfo'))
     if (window.sessionStorage.getItem('appInfo') != null) {
       let appInfo = JSON.parse(window.sessionStorage.getItem('appInfo'))
       this.userName = appInfo.userName

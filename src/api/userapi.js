@@ -56,6 +56,14 @@ function refreshUserlist (params) {
       return response.data
     })
 }
+function getPercent (type) {
+  let url = type === 'fans' ? '/wechat/fans/getRefreshWechatUserPercent' : '/wechat/fans/getBatchAddTagsPercent'
+  console.log(url)
+  return axios.get(url)
+    .then((response) => {
+      return response.data
+    })
+}
 /* 粉丝管理 end */
 export default{
   getList,
@@ -66,5 +74,6 @@ export default{
   getTagfanslistByid,
   batchAddtag,
   batchDeltag,
-  refreshUserlist
+  refreshUserlist,
+  getPercent
 }
