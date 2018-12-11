@@ -35,14 +35,14 @@ function update (params) {
       return response.data
     })
 }
-function adverToChannel (params) {
-  return axios.post('/advertChannel/adverToChannel', params)
+function channelSetAdvert (params) {
+  return axios.post('/advertChannel/channelSetAdvert', params)
     .then((response) => {
       return response.data
     })
 }
-function getAdvertListByChannel (params) {
-  return axios.get('/advertChannel/getAdvertListByChannel', {params: params})
+function getAdvertListByChannelId (params) {
+  return axios.post('/advertChannel/getAdvertListByChannelId', params)
     .then((response) => {
       return response.data
     })
@@ -53,5 +53,5 @@ function channelList () {
   })
 }
 // 广告新增、所有广告列表、删除广告、广告详情、广告列表、广告更新、广告投放、根据渠道Id获取已经选择广告列表、渠道列表（不分页）
-export default{add, allList, deleteAdvert, get, list, update, adverToChannel, getAdvertListByChannel, channelList}
+export default{add, allList, deleteAdvert, get, list, update, channelSetAdvert, getAdvertListByChannelId, channelList}
 

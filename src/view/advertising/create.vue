@@ -3,7 +3,7 @@
   <el-form ref="form" :model="form" :rules="rules">
     <ul>
       <li>
-        <el-form-item label="广告类型：" prop="type">
+        <el-form-item label="广告展示平台：" prop="type">
           <el-radio v-model="form.type" label="0">微信</el-radio>
           <el-radio v-model="form.type" label="1">支付宝</el-radio>
         </el-form-item>
@@ -14,13 +14,18 @@
         </el-form-item>
       </li>
       <li>
-        <el-form-item label="广告活动名称：" prop="advertName">
-           <input type="text" class="ipttxt" v-model="form.advertName" placeholder="请输入广告活动名称"/>
+        <el-form-item label="广告标题：" prop="advertName">
+           <input type="text" class="ipttxt" v-model="form.advertName" placeholder="请输入广告标题"/>
         </el-form-item>
       </li>
       <li>
         <el-form-item label="广告链接地址：" prop="url">
-           <input type="text" class="ipttxt" v-model="form.url" placeholder="www.abc.com/http://www.abc.com/http://sub.abc.com/abc.com/a/b.html"/>
+           <input type="text" class="ipttxt" v-model="form.url" placeholder="请输入广告链接地址"/>
+        </el-form-item>
+      </li>
+      <li>
+        <el-form-item label="广告内容：" prop="content">
+           <textarea v-model="form.content" placeholder="请输入广告内容"></textarea>
         </el-form-item>
       </li>
       <li>
@@ -47,7 +52,7 @@
       </li>
       <li>
         <el-form-item label="合作价格（单价）：" prop="price">
-          <input type="text" class="ipt" v-model="form.price"/>元
+          <input type="text" class="ipt" v-model="form.price" @keyup="matcthEvent"/>元
         </el-form-item>
       </li>
     </ul>
@@ -70,18 +75,20 @@ export default {
         advertiserName: '',
         advertName: '',
         url: '',
+        content: '',
         subUrl: '',
         jsContent: '',
         jsSubUrl: '',
         copType: '0',
-        price: ''
+        price: '',
+        createTime: new Date().getTime()
       },
       rules: {
         advertiserName: [
           { required: true, message: '请输入广告活动主题', trigger: 'blur' }
         ],
         advertName: [
-          { required: true, message: '请输入广告活动名称', trigger: 'blur' }
+          { required: true, message: '请输入广告标题', trigger: 'blur' }
         ],
         url: [
           { required: true, message: '请输入广告链接地址', trigger: 'blur' },
@@ -89,33 +96,76 @@ export default {
         ],
         price: [
           { required: true, message: '请输入合作价格', trigger: 'blur' },
-          { pattern: /^[0-9]+([.]{1,2}[0-9]+){0,1}$/, message: '只能输入整数或小数' }
+          { pattern: /^[0-9]+([.]{1}[0-9]{1,2})?$/, message: '只能输入整数或小数（保留后两位）' }// /^[0-9]+([.]{1,2}[0-9]+){0,1}$/
         ]
       }
     }
   },
+  created () {
+    this.initForm()
+  },
   methods: {
+    initForm () {
+      if (!this.$route.query.id) {
+        return false
+      }
+      this.advertapi.get({id: this.$route.query.id}).then(rs => {
+        this.form = rs.data
+        this.form.type = rs.data.type.toString()
+        this.form.copType = rs.data.copType.toString()
+      })
+    },
+    prevBack () {
+      window.history.go(-1)
+    },
+    matcthEvent () {
+      this.form.price = (this.form.price.match(/\d+(\.\d{0,2})?/))[0]
+    },
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          // Object.assign(this.form, {appId: JSON.parse(window.sessionStorage.getItem('appInfo')).appId})
-          // console.log(this.form)
-          this.advertapi.add(this.form).then(rs => {
-            if (rs.returnCode === 'F') {
-              this.$message({
-                type: 'error',
-                message: `${rs.returnMsg}`
-              })
-              if (rs.errorCode === '000005') {
-                this.$router.push({path: '/'})
+          if (this.$route.query.id) {
+            Object.assign(this.form, {id: this.$route.query.id})
+            this.advertapi.update(this.form).then(rs => {
+              if (rs.returnCode === 'F') {
+                this.$message({
+                  type: 'error',
+                  message: `${rs.returnMsg}`
+                })
+                if (rs.errorCode === '000005') {
+                  this.$router.push({path: '/'})
+                }
+              } else {
+                this.$message({
+                  type: 'success',
+                  message: '修改成功'
+                })
+                this.$router.push({path: '/advertising/list'})
               }
-            } else {
-              this.$message({
-                type: 'success',
-                message: '创建成功'
-              })
-            }
-          })
+            })
+          } else {
+            this.advertapi.add(this.form).then(rs => {
+              if (rs.returnCode === 'F') {
+                this.$message({
+                  type: 'error',
+                  message: `${rs.returnMsg}`
+                })
+                if (rs.errorCode === '000005') {
+                  this.$router.push({path: '/'})
+                }
+              } else {
+                this.$confirm('继续添加还是返回列表?', '保存成功', {
+                  confirmButtonText: '继续',
+                  cancelButtonText: '返回',
+                  type: 'success'
+                }).then(() => {
+                  this.$refs[formName].resetFields()
+                }).catch(() => {
+                  this.prevBack()
+                })
+              }
+            })
+          }
         } else {
           this.$message({
             type: 'error',

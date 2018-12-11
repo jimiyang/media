@@ -89,6 +89,7 @@ export default {
     handleCheckAllChange (val) {
       this.checkedPersonal = val ? this.restaurants : []
       this.isIndeterminate = false
+      console.log(val)
       this.$emit('update:checkedUserData', this.checkedPersonal)
     },
     handleCheckedCitiesChange (value) {

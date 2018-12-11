@@ -42,7 +42,7 @@
             </el-header>
             <div class="view-content"><router-view></router-view></div>
         </el-container>
-       <!--<accountArea :open.sync="isopen"></accountArea>-->
+       <accountArea :open.sync="isopen"></accountArea>
     </el-container>
 </template>
 <script>
@@ -63,7 +63,7 @@ export default {
       menuData: this.$common.menuList(),
       current: '',
       curr: 4,
-      defaultData: ['5']
+      defaultData: ['1']
     }
   },
   created () {

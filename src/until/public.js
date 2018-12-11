@@ -42,15 +42,14 @@ let obj = {
     let node = [
       {'name': '消息管理', 'ico': 'el-icon-message', 'children': [{'id': '001', 'name': '群发消息', 'url': '/message/allsend'}, {'id': '002', 'name': '消息记录', 'url': '/message/list'}]},
       {'name': '用户管理', 'ico': 'el-icon-menu', 'children': [{'id': '101', 'name': '粉丝列表', 'url': '/user/fanlist'}, {'id': '102', 'name': '标签管理', 'url': '/user/lablist'}]},
-      {'name': '素材管理', 'ico': 'el-icon-picture', 'children': [{'id': '201', 'name': '图文素材库', 'url': '/material/list'}]},
+      {'name': '素材管理', 'ico': 'el-icon-picture', 'children': [{'id': '201', 'name': '图文素材', 'url': '/material/list'}]},
       {'name': '帐号设置', 'ico': 'el-icon-setting', 'children': [{'id': '301', 'name': '公众号列表', 'url': '/account/publist'}]},
       {
         'name': '广告管理',
         'ico': 'el-icon-goods',
         'children': [
-          {'id': '401', 'name': '广告创建', 'url': '/advertising/create'},
-          {'id': '402', 'name': '广告投放', 'url': '/advertising/putting'},
-          {'id': '403', 'name': '广告资源管理', 'url': '/advertising/list'}
+          {'id': '401', 'name': '广告管理', 'url': '/advertising/list'},
+          {'id': '402', 'name': '广告投放', 'url': '/advertising/putting'}
         ]
       }
     ]

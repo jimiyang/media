@@ -1,15 +1,15 @@
 <template>
   <div class="create-blocks flex-type">
     <ul>
-        <li>
+        <!--<li>
           <label>流量投放方式</label>
           <div>
-            <el-radio v-model="puttingType" label="1">轮播（随机方式）</el-radio>
-            <el-radio v-model="puttingType" label="2">按点击效果</el-radio>
-            <el-radio v-model="puttingType" label="3">收益最大化</el-radio>
-            <el-radio v-model="puttingType" label="4">平滑投放</el-radio>
+            <el-radio v-model="puttingType" label="0">轮播（随机方式）</el-radio>
+            <el-radio v-model="puttingType" label="1">按点击效果</el-radio>
+            <el-radio v-model="puttingType" label="2">收益最大化</el-radio>
+            <el-radio v-model="puttingType" label="3">平滑投放</el-radio>
           </div>
-        </li>
+        </li>-->
         <li>
            <label>请选择一个渠道：</label> 
            <el-select v-model="channelValue" placeholder="请选择" @change="getChangeVal">
@@ -24,23 +24,29 @@
         <li>
            <div class="advertActivity">
              <label>可选择的广告活动(可多选)</label>
-             <div>
-                <el-checkbox v-for="(item, i) in advertList" :key="i">{{item.advertName}}</el-checkbox>
-             </div>
+             <el-checkbox-group v-model="allCheckedList">
+               <el-checkbox v-for="(item, i) in advertList" :key="i" :label="item.id">{{item.advertName}}</el-checkbox>
+             </el-checkbox-group>
            </div>
         </li>
-        <li>
+        <li class="flex-con">
            <label>排除代理商：</label> 
-            <textarea></textarea>
+           <div>
+             <textarea placeholder="多个代理商请以，分隔" v-model="excludeMerchantCode"></textarea>
+             <p class="msg-txt">提示：多个代理商请以，分隔</p>
+           </div>
         </li>
-        <li>
+        <li class="flex-con">
            <label>排除公众号：</label> 
-            <textarea></textarea>
+           <div>
+            <textarea placeholder="多个公众号请以，分隔" v-model="excludeAgencyCode"></textarea>
+            <p class="msg-txt">提示：多个公众号请以，分隔</p>
+           </div>
         </li>
     </ul>
     <div class="btn-blocks">
-      <a href="javascript:" class="blue-btn" @click="submitForm('form')">保存</a>
-      <a href="javascript:" class="white-btn" @click="resetForm('form')">重置</a>
+      <a href="javascript:" class="blue-btn" @click="putinEvent">投放</a>
+      <a href="javascript:" class="white-btn" @click="resetForm">重置</a>
     </div>
   </div>
 </template>
@@ -51,10 +57,13 @@ export default {
   data () {
     return {
       advertapi: advertapi,
-      puttingType: '1',
+      puttingType: '0',
       channelValue: '',
+      excludeMerchantCode: '',
+      excludeAgencyCode: '',
       channelList: [],
-      advertList: []
+      advertList: [],
+      allCheckedList: []
     }
   },
   created () {
@@ -64,19 +73,94 @@ export default {
   methods: {
     getChannellist () {
       this.advertapi.channelList().then(rs => {
-        this.channelList = rs.data
+        if (rs.returnCode === 'F') {
+          this.$message({
+            type: 'error',
+            message: `${rs.returnMsg}`
+          })
+          if (rs.errorCode === '000005') {
+            this.$router.push({path: '/'})
+          }
+        } else {
+          this.channelList = rs.data
+        }
       })
     },
     getAdvertList () {
       this.advertapi.allList().then(rs => {
-        this.advertList = rs.data
-        console.log(rs.data)
+        if (rs.returnCode === 'F') {
+          this.$message({
+            type: 'error',
+            message: `${rs.returnMsg}`
+          })
+          if (rs.errorCode === '000005') {
+            this.$router.push({path: '/'})
+          }
+        } else {
+          this.advertList = rs.data
+          console.log(this.advertList)
+        }
       })
     },
     getChangeVal () {
-      this.advertapi.getAdvertListByChannel(this.channelValue).then(rs => {
-        console.log(rs.data)
+      this.advertapi.getAdvertListByChannelId({channelId: this.channelValue}).then(rs => {
+        if (rs.returnCode === 'F') {
+          this.$message({
+            type: 'error',
+            message: `${rs.returnMsg}`
+          })
+          if (rs.errorCode === '000005') {
+            this.$router.push({path: '/'})
+          }
+        } else {
+          let arr = []
+          if (rs.data.length > 0) {
+            rs.data.map((data) => {
+              arr.push(data.id)
+            })
+            console.log(rs.data)
+            this.excludeAgencyCode = rs.data[0].excludeAgencyCode
+            this.excludeMerchantCode = rs.data[0].excludeMerchantCode
+          }
+          this.allCheckedList = arr
+        }
       })
+    },
+    putinEvent () {
+      let arr = []
+      this.allCheckedList.map((data) => {
+        arr.push(data)
+      })
+      let params = {
+        flowType: this.puttingType,
+        channelId: this.channelValue,
+        advertIdList: arr,
+        excludeMerchantCode: this.excludeMerchantCode,
+        excludeAgencyCode: this.excludeAgencyCode
+      }
+      this.advertapi.channelSetAdvert(params).then(rs => {
+        if (rs.returnCode === 'F') {
+          this.$message({
+            type: 'error',
+            message: `${rs.returnMsg}`
+          })
+          if (rs.errorCode === '000005') {
+            this.$router.push({path: '/'})
+          }
+        } else {
+          this.$message({
+            type: 'success',
+            message: '广告投放成功'
+          })
+        }
+      })
+    },
+    resetForm () {
+      this.puttingType = '0'
+      this.channelValue = ''
+      this.excludeMerchantCode = ''
+      this.excludeAgencyCode = ''
+      this.allCheckedList = []
     }
   }
 }
