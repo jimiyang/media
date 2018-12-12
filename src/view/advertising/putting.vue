@@ -75,13 +75,7 @@ export default {
       this.advertapi.channelList().then(rs => {
         console.log(rs)
         if (rs.returnCode === 'F') {
-          this.$message({
-            type: 'error',
-            message: `${rs.returnMsg}`
-          })
-          if (rs.errorCode === '000005') {
-            this.$router.push({path: '/'})
-          }
+          this.$common.errorMsg(rs, this)
         } else {
           this.channelList = rs.data
           console.log(this.channelList)
@@ -91,13 +85,7 @@ export default {
     getAdvertList () {
       this.advertapi.allList().then(rs => {
         if (rs.returnCode === 'F') {
-          this.$message({
-            type: 'error',
-            message: `${rs.returnMsg}`
-          })
-          if (rs.errorCode === '000005') {
-            this.$router.push({path: '/'})
-          }
+          this.$common.errorMsg(rs, this)
         } else {
           this.advertList = rs.data
           console.log(this.advertList)
@@ -107,13 +95,7 @@ export default {
     getChangeVal () {
       this.advertapi.getAdvertListByChannelId({channelId: this.channelId}).then(rs => {
         if (rs.returnCode === 'F') {
-          this.$message({
-            type: 'error',
-            message: `${rs.returnMsg}`
-          })
-          if (rs.errorCode === '000005') {
-            this.$router.push({path: '/'})
-          }
+          this.$common.errorMsg(rs, this)
         } else {
           let arr = []
           if (rs.data.length > 0) {
@@ -145,13 +127,7 @@ export default {
       console.log(params)
       this.advertapi.channelSetAdvert(params).then(rs => {
         if (rs.returnCode === 'F') {
-          this.$message({
-            type: 'error',
-            message: `${rs.returnMsg}`
-          })
-          if (rs.errorCode === '000005') {
-            this.$router.push({path: '/'})
-          }
+          this.$common.errorMsg(rs, this)
         } else {
           this.$message({
             type: 'success',

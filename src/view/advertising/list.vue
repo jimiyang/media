@@ -10,10 +10,10 @@
           <el-date-picker  type="date"  placeholder="结束时间" v-model="form.endDate"></el-date-picker>
         </el-form-item>
       </el-form>
-      <div class="btn-blocks">
-        <input type="button" class="blue-btn" value="搜索" @click="searchEvent('form')"/>
-        <input type="button" class="white-btn" value="重置" @click="resetForm('form')"/>
-      </div>
+    </div>
+    <div class="btn-blocks">
+      <input type="button" class="blue-btn" value="搜索" @click="searchEvent('form')"/>
+      <input type="button" class="white-btn" value="重置" @click="resetForm('form')"/>
     </div>
     <div class="g-tr mb">
       <input type="button" class="blue-btn cursor" value="创建广告" @click="creatEvent"/>
@@ -22,7 +22,7 @@
         <el-table-column  prop="advertiserName"  label="广告主"></el-table-column>
         <el-table-column  prop="advertName"  label="广告标题"></el-table-column>
         <el-table-column  prop="url"  label="广告url"></el-table-column>
-        <el-table-column  prop="type"  label="广告类型">
+        <el-table-column  prop="payType"  label="广告支付类型">
           <template slot-scope="scope">
             <span v-if="scope.row.payType === 0">微信</span>
             <span v-if="scope.row.payType === 1">支付宝</span>
@@ -68,19 +68,17 @@ export default {
     }
   },
   created () {
+    this.$on('current', obj => {
+      this.form = obj
+    })
     this.loadList()
   },
   methods: {
     loadList () {
+      console.log(this.form)
       this.advertapi.list(this.form).then(rs => {
         if (rs.returnCode === 'F') {
-          this.$message({
-            type: 'error',
-            message: `${rs.returnMsg}`
-          })
-          if (rs.errorCode === '000005') {
-            this.$router.push({path: '/'})
-          }
+          this.$common.errorMsg(rs, this)
         } else {
           this.advertData = rs.data.items
           this.totalCount = rs.data.totalNum
@@ -88,22 +86,22 @@ export default {
       })
     },
     deleteAdvert (item) {
-      this.advertapi.deleteAdvert({id: item.id}).then(rs => {
-        if (rs.returnCode === 'F') {
-          this.$message({
-            type: 'error',
-            message: `${rs.returnMsg}`
-          })
-          if (rs.errorCode === '000005') {
-            this.$router.push({path: '/'})
+      this.$confirm('是否要删除此广告?', {
+        confirmButtonText: '删除',
+        cancelButtonText: '返回',
+        type: 'success'
+      }).then(() => {
+        this.advertapi.deleteAdvert({id: item.id}).then(rs => {
+          if (rs.returnCode === 'F') {
+            this.$common.errorMsg(rs, this)
+          } else {
+            this.$message({
+              type: 'success',
+              message: '删除成功'
+            })
+            this.loadList()
           }
-        } else {
-          this.$message({
-            type: 'success',
-            message: '删除成功'
-          })
-          this.loadList()
-        }
+        })
       })
     },
     modifyAdvert (item) {
@@ -113,12 +111,14 @@ export default {
       this.loadList()
     },
     resetForm (formName) {
+      this.form.advertiserName = ''
       this.$nextTick(function () {
         this.$refs[formName].resetFields()
       })
     },
     creatEvent () {
       this.$router.push({path: '/advertising/create'})
+      this.form.pageSize = 3
       this.$emit('current', this.form)
     },
     handleSizeChange (val) {

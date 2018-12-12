@@ -42,13 +42,7 @@
       created () {
         this.publicapi.switchList().then(rs => {
           if (rs.returnCode === 'F') {
-            this.$message({
-              type: 'error',
-              message: `${rs.returnMsg}`
-            })
-            if (rs.errorCode === '000005') {
-              this.$router.push({path: '/'})
-            }
+            this.$common.errorMsg(rs, this)
           } else {
             this.Data = rs.data
           }
@@ -86,14 +80,7 @@
           console.log(item)
           this.publicapi.switchApp({'appId': item.appId}).then((rs) => {
             if (rs.returnCode === 'F') {
-              this.$message({
-                message: `${rs.returnMsg}`,
-                center: true,
-                type: 'error'
-              })
-              if (rs.errorCode === '000005') {
-                this.$router.push({path: '/'})
-              }
+              this.$common.errorMsg(rs, this)
             } else {
               this.isopen = false
               this.$emit('update:open', false)

@@ -49,14 +49,7 @@
 	      }
 	      this.loginapi.userLogin(params).then((rs) => {
 	        if (rs.data.returnCode === 'F') {
-	          this.$message({
-	            message: `${rs.data.returnMsg}`,
-	            center: true,
-	            type: 'warning'
-	          })
-	          if (rs.errorCode === '000005') {
-	            this.$router.push({path: '/'})
-	          }
+	          this.$common.errorMsg(rs, this)
 	        } else {
           sessionStorage.setItem('changeLogin', '100')
           sessionStorage.setItem('userName', this.userName)

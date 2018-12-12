@@ -65,13 +65,7 @@ export default{
     loadList () {
       this.userapi.getList(this.search).then(rs => {
         if (rs.returnCode === 'F') {
-          this.$message({
-            type: 'error',
-            message: `${rs.returnMsg}`
-          })
-          if (rs.errorCode === '000005') {
-            this.$router.push({path: '/'})
-          }
+          this.$common.errorMsg(rs, this)
           this.loading = false
         } else {
           this.loading = false
@@ -104,13 +98,7 @@ export default{
       }).then(() => {
         this.userapi.deleteTag({'id': id}).then(rs => {
           if (rs.returnCode === 'F') {
-            this.$message({
-              type: 'error',
-              message: `${rs.returnMsg}`
-            })
-            if (rs.errorCode === '000005') {
-              this.$router.push({path: '/'})
-            }
+            this.$common.errorMsg(rs, this)
           } else {
             this.$message({
               type: 'success',
@@ -125,13 +113,7 @@ export default{
       if (this.type === 0) {
         this.userapi.addTag({'name': this.labName}).then(rs => {
           if (rs.returnCode === 'F') {
-            this.$message({
-              type: 'error',
-              message: `${rs.returnMsg}`
-            })
-            if (rs.errorCode === '000005') {
-              this.$router.push({path: '/'})
-            }
+            this.$common.errorMsg(rs, this)
           } else {
             this.$message({
               type: 'success',
@@ -148,13 +130,7 @@ export default{
         }
         this.userapi.updateLab(params).then(rs => {
           if (rs.returnCode === 'F') {
-            this.$message({
-              type: 'error',
-              message: `${rs.returnMsg}`
-            })
-            if (rs.errorCode === '000005') {
-              this.$router.push({path: '/'})
-            }
+            this.$common.errorMsg(rs, this)
           } else {
             this.$message({
               type: 'success',

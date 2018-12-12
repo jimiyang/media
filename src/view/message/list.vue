@@ -107,17 +107,13 @@ export default {
     loadList () {
       this.messageapi.getMsgSendRecordList(this.search).then(rs => {
         if (rs.returnCode === 'F') {
-          this.$message({
-            type: 'error',
-            message: `${rs.returnMsg}`
-          })
-          if (rs.errorCode === '000005') {
-            this.$router.push({path: '/'})
-          }
+          this.$common.errorMsg(rs, this)
         } else {
-          this.messageData = rs.data.items
-          this.totalCount = rs.data.totalNum
-          this.loading = false
+          if (rs.data !== null) {
+            this.messageData = rs.data.items
+            this.totalCount = rs.data.totalNum
+            this.loading = false
+          }
         }
       })
     },
@@ -125,13 +121,7 @@ export default {
       this.dialogVisible = true
       this.messageapi.getMsgSendRecordByid({id: item.row.id}).then(rs => {
         if (rs.returnCode === 'F') {
-          this.$message({
-            type: 'error',
-            message: `${rs.returnMsg}`
-          })
-          if (rs.errorCode === '000005') {
-            this.$router.push({path: '/'})
-          }
+          this.$common.errorMsg(rs, this)
         } else {
           this.detail = rs.data
           this.detail.wechatMediaResponse = rs.data.wechatMediaResponse.wechatArticleList
@@ -142,13 +132,7 @@ export default {
     cancelEvent (id) {
       this.messageapi.cancle({id: id}).then(rs => {
         if (rs.returnCode === 'F') {
-          this.$message({
-            type: 'error',
-            message: `${rs.returnMsg}`
-          })
-          if (rs.errorCode === '000005') {
-            this.$router.push({path: '/'})
-          }
+          this.$common.errorMsg(rs, this)
         } else {
           this.$message({
             type: 'success',
@@ -166,13 +150,7 @@ export default {
         }
         this.messageapi.deleteNewsRecord(params).then(rs => {
           if (rs.returnCode === 'F') {
-            this.$message({
-              type: 'error',
-              message: `${rs.returnMsg}`
-            })
-            if (rs.errorCode === '000005') {
-              this.$router.push({path: '/'})
-            }
+            this.$common.errorMsg(rs, this)
           } else {
             this.$message({
               type: 'success',

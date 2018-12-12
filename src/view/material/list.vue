@@ -61,14 +61,7 @@ export default {
     getMeadiaList () {
       this.materialapi.getMediaListByType(this.search).then(rs => {
         if (rs.returnCode === 'F') {
-          this.$message({
-            message: `${rs.returnMsg}`,
-            center: true,
-            type: 'error'
-          })
-          if (rs.errorCode === '000005') {
-            this.$router.push({path: '/'})
-          }
+          this.$common.errorMsg(rs, this)
           this.loading = false
         } else {
           this.loading = false
@@ -90,14 +83,7 @@ export default {
       this.search.currentPage = 1
       this.materialapi.getList().then(rs => {
         if (rs.returnCode === 'F') {
-          this.$message({
-            message: `${rs.returnMsg}`,
-            center: true,
-            type: 'error'
-          })
-          if (rs.errorCode === '000005') {
-            this.$router.push({path: '/'})
-          }
+          this.$common.errorMsg(rs, this)
         } else {
           this.getMeadiaList()
         }

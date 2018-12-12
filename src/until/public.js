@@ -65,6 +65,15 @@ let obj = {
       check[i] = regList[i].test(value)
     }
     return check
+  },
+  errorMsg (rs, th) {
+    th.$message({
+      type: 'error',
+      message: `${rs.returnMsg}`
+    })
+    if (rs.errorCode === '000005') {
+      th.$router.push({path: '/'})
+    }
   }
 }
 // prototype封装

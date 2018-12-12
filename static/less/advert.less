@@ -40,13 +40,19 @@
 .list-blocks{
   .search-box{
     display:flex;
-    .ipttxt{height:40px;line-height:40px;border:1px solid #f3f3f3;}
+    .ipttxt{height:40px;line-height:40px;border:1px solid #f3f3f3;border-radius: 5px;padding-left:10px;color:#606266;font-size:14px;}
+    .ipttxt::-webkit-input-placeholder {
+      color:#ddd; font-size:14px;
+    } 
     .el-form-item__content{float:left;}
     .btn-blocks{
       &>input{margin-right:10px;}
     }
   }
-  .el-form-item{display:inline-block;}
-  .btn-blocks{margin-left:10px;margin-top:3px;}
+  .el-form{display: flex;flex-wrap: wrap;width:100%;}
+  .el-form-item{display:inline-block;margin-right:5%;}
+  .btn-blocks{margin-left:10px;margin-top:3px;
+    &>input{margin-right:20px;}
+  }
   a {color: #3092ff}
 }

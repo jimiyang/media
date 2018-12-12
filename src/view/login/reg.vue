@@ -62,11 +62,7 @@ export default{
       }
       this.loginapi.userRegister(params).then(rs => {
         if (rs.returnCode === 'F') {
-          this.$message({
-            message: `${rs.returnMsg}`,
-            center: true,
-            type: 'error'
-          })
+          this.$common.errorMsg(rs, this)
         } else {
           this.active = 2
           let sucessAuthRedirectUri = encodeURIComponent('/main')

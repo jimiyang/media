@@ -129,13 +129,7 @@ export default {
             Object.assign(this.form, {id: this.$route.query.id})
             this.advertapi.update(this.form).then(rs => {
               if (rs.returnCode === 'F') {
-                this.$message({
-                  type: 'error',
-                  message: `${rs.returnMsg}`
-                })
-                if (rs.errorCode === '000005') {
-                  this.$router.push({path: '/'})
-                }
+                this.$common.errorMsg(rs, this)
               } else {
                 this.$message({
                   type: 'success',
@@ -147,13 +141,7 @@ export default {
           } else {
             this.advertapi.add(this.form).then(rs => {
               if (rs.returnCode === 'F') {
-                this.$message({
-                  type: 'error',
-                  message: `${rs.returnMsg}`
-                })
-                if (rs.errorCode === '000005') {
-                  this.$router.push({path: '/'})
-                }
+                this.$common.errorMsg(rs, this)
               } else {
                 this.$confirm('继续添加还是返回列表?', '广告创建成功', {
                   confirmButtonText: '继续',

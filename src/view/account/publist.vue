@@ -49,14 +49,7 @@ export default{
     loadList () {
       this.publicapi.getList().then((rs) => {
         if (rs.returnCode === 'F') {
-          this.$message({
-            message: `${rs.returnMsg}`,
-            center: true,
-            type: 'error'
-          })
-          if (rs.errorCode === '000005') {
-            this.$router.push({path: '/'})
-          }
+          this.$common.errorMsg(rs, this)
         } else {
           this.pnumberList = rs.data
         }
@@ -71,14 +64,7 @@ export default{
       console.log(item.authorizationDate)
       this.publicapi.quitAuth({'appId': item.appid}).then((rs) => {
         if (rs.returnCode === 'F') {
-          this.$message({
-            message: `${rs.returnMsg}`,
-            center: true,
-            type: 'error'
-          })
-          if (rs.errorCode === '000005') {
-            this.$router.push({path: '/'})
-          }
+          this.$common.errorMsg(rs, this)
         } else {
           this.$message({
             message: `${rs.returnMsg}`,
@@ -92,14 +78,7 @@ export default{
     switchApp (id) { // 切换
       this.publicapi.switchApp({'appId': id}).then((rs) => {
         if (rs.returnCode === 'F') {
-          this.$message({
-            message: `${rs.returnMsg}`,
-            center: true,
-            type: 'error'
-          })
-          if (rs.errorCode === '000005') {
-            this.$router.push({path: '/'})
-          }
+          this.$common.errorMsg(rs, this)
         } else {
           this.$message({
             message: `${rs.returnMsg}`,

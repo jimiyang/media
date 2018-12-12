@@ -158,13 +158,7 @@ export default {
     loadList () {
       this.userapi.getFanslist(this.search).then(rs => {
         if (rs.returnCode === 'F') {
-          this.$message({
-            type: 'error',
-            message: `${rs.returnMsg}`
-          })
-          if (rs.errorCode === '000005') {
-            this.$router.push({path: '/'})
-          }
+          this.$common.errorMsg(rs, this)
         } else {
           this.loading = false
           this.totalCount = rs.data.totalNum
@@ -223,13 +217,7 @@ export default {
       console.log(params)
       this.userapi.batchAddtag(params).then(rs => {
         if (rs.returnCode === 'F') {
-          this.$message({
-            type: 'error',
-            message: `${rs.returnMsg}`
-          })
-          if (rs.errorCode === '000005') {
-            this.$router.push({path: '/'})
-          }
+          this.$common.errorMsg(rs, this)
         } else {
           this.dialogVisible = false
           this.isshow = true
@@ -246,13 +234,7 @@ export default {
       this.percentage = 0
       this.userapi.refreshUserlist().then(rs => {
         if (rs.returnCode === 'F') {
-          this.$message({
-            type: 'error',
-            message: `${rs.returnMsg}`
-          })
-          if (rs.errorCode === '000005') {
-            this.$router.push({path: '/'})
-          }
+          this.$common.errorMsg(rs, this)
           this.loading = false
         } else {
           this.getPercent('fans')

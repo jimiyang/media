@@ -114,17 +114,13 @@
       created () {
         userapi.getList().then(rs => {
           if (rs.returnCode === 'F') {
-            this.$message({
-              type: 'error',
-              message: `${rs.returnMsg}`
-            })
-            if (rs.errorCode === '000005') {
-              this.$router.push({path: '/'})
-            }
+            this.$common.errorMsg(rs, this)
           } else {
-            this.labList = rs.data.items
-            this.groupMessage.tagId = this.labList[0].wxTagId
-            console.log(this.labList)
+            if (rs.data.items.length > 0) {
+              this.labList = rs.data.items
+              this.groupMessage.tagId = this.labList[0].wxTagId
+              console.log(this.labList)
+            }
           }
         })
       },
@@ -152,13 +148,7 @@
           if (this.groupMessage.mediaId !== '') {
             materialapi.getMediaByWxMediaId({wxMediaId: this.groupMessage.mediaId}).then(rs => {
               if (rs.returnCode === 'F') {
-                this.$message({
-                  type: 'error',
-                  message: `${rs.returnMsg}`
-                })
-                if (rs.errorCode === '00005') {
-                  this.$router.push({path: '/'})
-                }
+                this.$common.errorMsg(rs, this)
               } else {
                 this.wechatArticleList = rs.data.wechatArticleList
                 console.log(this.wechatArticleList)
@@ -187,13 +177,7 @@
             }
             this.msgapi.preview(params).then(rs => {
               if (rs.returnCode === 'F') {
-                this.$message({
-                  type: 'error',
-                  message: `${rs.returnMsg}`
-                })
-                if (rs.errorCode === '000005') {
-                  this.$router.push({path: '/'})
-                }
+                this.$common.errorMsg(rs, this)
               } else {
                 this.$message({
                   type: 'success',
@@ -213,13 +197,7 @@
           }
           userapi.getTagfanslistByid(params).then(rs => {
             if (rs.returnCode === 'F') {
-              this.$message({
-                type: 'error',
-                message: `${rs.returnMsg}`
-              })
-              if (rs.errorCode === '000005') {
-                this.$router.push({path: '/'})
-              }
+              this.$common.errorMsg(rs, this)
             } else {
               this.sendNum = rs.data.totalNum
               bus.$emit('node', rs)
@@ -244,13 +222,7 @@
             console.log(params)
             this.msgapi.batchMessage(params).then(rs => {
               if (rs.returnCode === 'F') {
-                this.$message({
-                  type: 'error',
-                  message: `${rs.returnMsg}`
-                })
-                if (rs.errorCode === '000005') {
-                  this.$router.push({path: '/'})
-                }
+                this.$common.errorMsg(rs, this)
               } else {
                 this.$message({
                   type: 'success',
