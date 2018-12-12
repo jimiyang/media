@@ -12,11 +12,11 @@
         </li>-->
         <li>
            <label>请选择一个渠道：</label> 
-           <el-select v-model="channelValue" placeholder="请选择" @change="getChangeVal">
+           <el-select v-model="channelId" placeholder="请选择" @change="getChangeVal">
             <el-option
               v-for="item in channelList"
               :key="item.id"
-              :label="item.name"
+              :label="item.channelName"
               :value="item.id">
             </el-option>
           </el-select>
@@ -58,7 +58,7 @@ export default {
     return {
       advertapi: advertapi,
       puttingType: '0',
-      channelValue: '',
+      channelId: '',
       excludeMerchantCode: '',
       excludeAgencyCode: '',
       channelList: [],
@@ -73,6 +73,7 @@ export default {
   methods: {
     getChannellist () {
       this.advertapi.channelList().then(rs => {
+        console.log(rs)
         if (rs.returnCode === 'F') {
           this.$message({
             type: 'error',
@@ -83,6 +84,7 @@ export default {
           }
         } else {
           this.channelList = rs.data
+          console.log(this.channelList)
         }
       })
     },
@@ -103,7 +105,7 @@ export default {
       })
     },
     getChangeVal () {
-      this.advertapi.getAdvertListByChannelId({channelId: this.channelValue}).then(rs => {
+      this.advertapi.getAdvertListByChannelId({channelId: this.channelId}).then(rs => {
         if (rs.returnCode === 'F') {
           this.$message({
             type: 'error',
@@ -118,9 +120,11 @@ export default {
             rs.data.map((data) => {
               arr.push(data.id)
             })
-            console.log(rs.data)
             this.excludeAgencyCode = rs.data[0].excludeAgencyCode
             this.excludeMerchantCode = rs.data[0].excludeMerchantCode
+          } else {
+            this.excludeAgencyCode = ''
+            this.excludeMerchantCode = ''
           }
           this.allCheckedList = arr
         }
@@ -133,11 +137,12 @@ export default {
       })
       let params = {
         flowType: this.puttingType,
-        channelId: this.channelValue,
+        channelId: this.channelId,
         advertIdList: arr,
         excludeMerchantCode: this.excludeMerchantCode,
         excludeAgencyCode: this.excludeAgencyCode
       }
+      console.log(params)
       this.advertapi.channelSetAdvert(params).then(rs => {
         if (rs.returnCode === 'F') {
           this.$message({
@@ -157,7 +162,7 @@ export default {
     },
     resetForm () {
       this.puttingType = '0'
-      this.channelValue = ''
+      this.channelId = ''
       this.excludeMerchantCode = ''
       this.excludeAgencyCode = ''
       this.allCheckedList = []

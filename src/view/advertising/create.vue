@@ -1,11 +1,12 @@
 <template>
 <div class="create-blocks">
+  <div class="page-nav">广告管理&nbsp;>&nbsp;<router-link to='/advertising/list'>返回列表</router-link></div>
   <el-form ref="form" :model="form" :rules="rules">
     <ul>
       <li>
-        <el-form-item label="广告展示平台：" prop="type">
-          <el-radio v-model="form.type" label="0">微信</el-radio>
-          <el-radio v-model="form.type" label="1">支付宝</el-radio>
+        <el-form-item label="广告支付类型：" prop="payType">
+          <el-radio v-model="form.payType" label="0">微信</el-radio>
+          <el-radio v-model="form.payType" label="1">支付宝</el-radio>
         </el-form-item>
       </li>
       <li>
@@ -71,7 +72,7 @@ export default {
     return {
       advertapi: advertapi,
       form: {
-        type: '0',
+        payType: '0',
         advertiserName: '',
         advertName: '',
         url: '',
@@ -111,8 +112,8 @@ export default {
       }
       this.advertapi.get({id: this.$route.query.id}).then(rs => {
         this.form = rs.data
-        this.form.type = rs.data.type.toString()
-        this.form.copType = rs.data.copType.toString()
+        this.form.payType = rs.data.payType === null ? '0' : rs.data.payType.toString()
+        this.form.copType = rs.data.copType === null ? '0' : rs.data.copType.toString()
       })
     },
     prevBack () {
@@ -154,7 +155,7 @@ export default {
                   this.$router.push({path: '/'})
                 }
               } else {
-                this.$confirm('继续添加还是返回列表?', '保存成功', {
+                this.$confirm('继续添加还是返回列表?', '广告创建成功', {
                   confirmButtonText: '继续',
                   cancelButtonText: '返回',
                   type: 'success'

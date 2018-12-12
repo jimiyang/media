@@ -24,7 +24,8 @@
         <el-table-column  prop="url"  label="广告url"></el-table-column>
         <el-table-column  prop="type"  label="广告类型">
           <template slot-scope="scope">
-            {{scope.row.type === 0 ? ' 微信' : '支付宝'}}
+            <span v-if="scope.row.payType === 0">微信</span>
+            <span v-if="scope.row.payType === 1">支付宝</span>
           </template>
         </el-table-column>
         <el-table-column  prop="createTime"  label="创建时间"></el-table-column>
@@ -72,7 +73,6 @@ export default {
   methods: {
     loadList () {
       this.advertapi.list(this.form).then(rs => {
-        console.log(this.form)
         if (rs.returnCode === 'F') {
           this.$message({
             type: 'error',
@@ -119,6 +119,7 @@ export default {
     },
     creatEvent () {
       this.$router.push({path: '/advertising/create'})
+      this.$emit('current', this.form)
     },
     handleSizeChange (val) {
       this.form.pageSize = val
