@@ -12,6 +12,7 @@ import Lablist from '@/view/user/lablist' // 用户标签管理
 import Mlist from '@/view/material/list' // 图文素材库
 import Publist from '@/view/account/publist' // 公众号列表
 import Create from '@/view/advertising/create' // 广告创建
+import CreateBanner from '@/view/advertising/createBanner' // 创建banner广告
 import Putting from '@/view/advertising/putting' // 广告投放
 import AdvertList from '@/view/advertising/list' // 广告资源管理
 Vue.use(Router)
@@ -108,6 +109,10 @@ export default new Router({
           {
             path: 'create',
             component: Create
+          },
+          {
+            path: 'createBanner',
+            component: CreateBanner
           },
           {
             path: 'putting',

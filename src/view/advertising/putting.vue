@@ -32,14 +32,14 @@
         <li class="flex-con">
            <label>排除代理商：</label> 
            <div>
-             <textarea placeholder="多个代理商请以，分隔" v-model="excludeMerchantCode"></textarea>
+             <textarea placeholder="多个代理商请以，分隔" v-model="excludeAgencyCode"></textarea>
              <p class="msg-txt">提示：多个代理商请以，分隔</p>
            </div>
         </li>
         <li class="flex-con">
-           <label>排除公众号：</label> 
+           <label>排除商户：</label> 
            <div>
-            <textarea placeholder="多个公众号请以，分隔" v-model="excludeAgencyCode"></textarea>
+            <textarea placeholder="多个公众号请以，分隔" v-model="excludeMerchantCode"></textarea>
             <p class="msg-txt">提示：多个公众号请以，分隔</p>
            </div>
         </li>

@@ -4,7 +4,8 @@ if (window.location.hostname === 'localhost') {
   base = '/api'
 }
 const ajax = axios.create({
-  baseURL: base
+  baseURL: base,
+  withCredentials: true
 })
 ajax.interceptors.request.use(function (config) {
   return config

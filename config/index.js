@@ -33,7 +33,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api/': {
-        target: 'http://testnmweb.liantuobank.cn',
+        target: '192.168.4.179:8080', // 'http://testnmweb.liantuobank.cn',
         changeOrigin: true,
         pathRewrite: {
           '^/api/': ''
@@ -45,6 +45,7 @@ module.exports = {
     // (https://github.com/webpack/css-loader#sourcemaps)
     // In our experience, they generally work as expected,
     // just be aware of this issue when enabling this option.
-    cssSourceMap: false
+    cssSourceMap: false,
+    productionSourceMap: false
   }
 }
