@@ -1,6 +1,6 @@
 <template>
 <div class="create-blocks">
-  <div class="page-nav">广告管理&nbsp;>&nbsp;<router-link to='/advertising/list'>返回列表</router-link></div>
+  <div class="page-nav">广告管理&nbsp;>&nbsp;创建H5广告&nbsp;>&nbsp;<router-link to='/advertising/list'>返回列表</router-link></div>
   <el-form ref="form" :model="form" :rules="rules">
     <ul>
       <li>
@@ -59,7 +59,8 @@
     </ul>
   </el-form>
   <div class="btn-blocks">
-    <a href="javascript:" class="blue-btn" @click="submitForm('form')">保存</a>
+    <a href="javascript:" class="blue-btn" v-if="disabled === false"  @click="submitForm('form')">保存</a>
+    <a href="javascript:" class="blue-btn" v-else><img src="../../../static/images/loading.gif"/></a>
     <a href="javascript:" class="white-btn" @click="resetForm('form')">重置</a>
   </div>
 </div>
@@ -71,6 +72,7 @@ export default {
   data () {
     return {
       advertapi: advertapi,
+      disabled: false,
       form: {
         payType: '0',
         advertiserName: '',
@@ -82,6 +84,7 @@ export default {
         jsSubUrl: '',
         copType: '0',
         price: '',
+        type: this.$route.query.type,
         createTime: new Date().getTime()
       },
       rules: {
@@ -125,9 +128,11 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
+          this.disabled = true
           if (this.$route.query.id) {
             Object.assign(this.form, {id: this.$route.query.id})
             this.advertapi.update(this.form).then(rs => {
+              this.disabled = false
               if (rs.returnCode === 'F') {
                 this.$common.errorMsg(rs, this)
               } else {
@@ -140,6 +145,7 @@ export default {
             })
           } else {
             this.advertapi.add(this.form).then(rs => {
+              this.disabled = false
               if (rs.returnCode === 'F') {
                 this.$common.errorMsg(rs, this)
               } else {
@@ -150,7 +156,8 @@ export default {
                 }).then(() => {
                   this.$refs[formName].resetFields()
                 }).catch(() => {
-                  this.prevBack()
+                  // this.prevBack()
+                  this.$router.push({path: '/advertising/list'})
                 })
               }
             })

@@ -49,8 +49,7 @@ let obj = {
         'ico': 'el-icon-goods',
         'children': [
           {'id': '401', 'name': '广告管理', 'url': '/advertising/list'},
-          {'id': '402', 'name': '广告投放', 'url': '/advertising/putting'},
-          {'id': '403', 'name': 'banner广告', 'url': '/advertising/CreateBanner'}
+          {'id': '402', 'name': '广告投放', 'url': '/advertising/putting'}
         ]
       }
     ]

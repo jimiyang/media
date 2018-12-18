@@ -33,7 +33,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api/': {
-        target: '192.168.4.179:8080', // 'http://testnmweb.liantuobank.cn',
+        target: 'http://testnmweb.liantuobank.cn',
         changeOrigin: true,
         pathRewrite: {
           '^/api/': ''

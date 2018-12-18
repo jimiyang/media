@@ -69,6 +69,22 @@ function bannerUpdate (params) {
     return response.data
   })
 }
-// 广告新增、所有广告列表、删除广告、广告详情、广告列表、广告更新、广告投放、根据渠道Id获取已经选择广告列表、渠道列表（不分页）、图片上传、新增banner、更新广告
-export default{add, allList, deleteAdvert, get, list, update, channelSetAdvert, getAdvertListByChannelId, channelList, imageAdd, bannerAdd, bannerUpdate}
+function templateMsgAdd (params) {
+  return axios.post('/advert/templateMsgAdd', params).then(response => {
+    return response.data
+  })
+}
+function templateMsgUpdate (params) {
+  return axios.post('/advert/templateMsgUpdate', params).then(response => {
+    return response.data
+  })
+}
+function tempAlllist () {
+  return axios.get('/wechat/template/allList').then(response => {
+    return response.data
+  })
+}
+// 广告新增、所有广告列表、删除广告、广告详情、广告列表、广告更新、广告投放、根据渠道Id获取已经选择广告列表、渠道列表（不分页）、图片上传、新增banner、更新广告、模版新增
+// 模版修改、模版消息模版接口
+export default{add, allList, deleteAdvert, get, list, update, channelSetAdvert, getAdvertListByChannelId, channelList, imageAdd, bannerAdd, bannerUpdate, templateMsgAdd, templateMsgUpdate, tempAlllist}
 

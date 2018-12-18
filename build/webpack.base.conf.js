@@ -13,7 +13,9 @@ module.exports = {
     app: './src/main.js'
   },
   externals: {
-    'AMap': 'AMap'
+    AMap: 'AMap',
+    vue: 'Vue',
+    element: 'ElementUI'
   },
   output: {
     path: config.build.assetsRoot,

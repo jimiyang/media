@@ -2,6 +2,13 @@
   <div class="list-blocks">
     <div class="search-box">
       <el-form ref="form" :model="form">
+        <el-form-item label="广告类型：">
+          <el-select v-model="form.type" placeholder="请选择">
+            <el-option value="0" label="H5广告">H5广告</el-option>
+            <el-option value="1" label="banner广告">banner广告</el-option>
+            <el-option value="2" label="模板消息广告">模板消息广告</el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item label="广告主：" prop="theme"><input type="text" class="ipttxt" v-model="form.advertiserName" placeholder="搜索关键字"/></el-form-item>
         <el-form-item label="开始时间：" prop="startDate">
           <el-date-picker   type="date"  placeholder="开始时间" v-model="form.startDate"></el-date-picker>
@@ -22,6 +29,13 @@
         <el-table-column  prop="advertiserName"  label="广告主"></el-table-column>
         <el-table-column  prop="advertName"  label="广告标题"></el-table-column>
         <el-table-column  prop="url"  label="广告url"></el-table-column>
+        <el-table-column  prop="type"  label="广告类型">
+          <template slot-scope="scope">
+            <span v-if="scope.row.type === 0">H5</span>
+            <span v-if="scope.row.type === 1">banner</span>
+            <span v-if="scope.row.type === 2">模板消息</span>
+          </template>
+        </el-table-column>
         <el-table-column  prop="payType"  label="广告支付类型">
           <template slot-scope="scope">
             <span v-if="scope.row.payType === 0">微信</span>
@@ -57,6 +71,7 @@ export default {
     return {
       advertapi: advertapi,
       form: {
+        type: '',
         advertiserName: '',
         startDate: '',
         endDate: '',
@@ -75,7 +90,6 @@ export default {
   },
   methods: {
     loadList () {
-      console.log(this.form)
       this.advertapi.list(this.form).then(rs => {
         if (rs.returnCode === 'F') {
           this.$common.errorMsg(rs, this)
@@ -105,9 +119,23 @@ export default {
       })
     },
     modifyAdvert (item) {
-      this.$router.push({path: '/advertising/create', query: {id: item.id}})
+      let url
+      switch (item.type) {
+        case 0:
+          url = '/advertising/create'
+          break
+        case 1:
+          url = '/advertising/createBanner'
+          break
+        case 2:
+          url = '/advertising/createMessagetemp'
+          break
+      }
+      console.log(item.id)
+      this.$router.push({path: url, query: {id: item.id}})
     },
     searchEvent () {
+      console.log(this.form)
       this.loadList()
     },
     resetForm (formName) {
@@ -117,7 +145,7 @@ export default {
       })
     },
     creatEvent () {
-      this.$router.push({path: '/advertising/create'})
+      this.$router.push({path: '/advertising/type'})
       this.form.pageSize = 3
       this.$emit('current', this.form)
     },

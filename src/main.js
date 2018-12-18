@@ -1,12 +1,10 @@
 import Vue from 'vue'
-import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import App from './App'
 import router from './router/index'
 import store from './router/store'
 import axios from 'axios'
 import common from './until/public.js'
-Vue.use(ElementUI)
 Vue.use(common)
 /* eslint-disable  */
 require ('!style-loader!css-loader!less-loader!../static/less/style.less') 

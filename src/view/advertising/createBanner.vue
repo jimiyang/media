@@ -1,5 +1,6 @@
 <template>
   <div class="banner-blocks create-blocks">
+    <div class="page-nav">广告管理&nbsp;>&nbsp;创建banner广告&nbsp;>&nbsp;<router-link to='/advertising/list'>返回列表</router-link></div>
     <el-form ref="form" :model="form" :rules="rules">
       <ul>
         <li>
@@ -14,27 +15,25 @@
         </li>
         <li>
           <el-form-item label="广告图片：" prop="imageUrl">
-            <div class="col-md-6">
+            <div class="col-md-6" :class="{hide:isblock}">
               <input type="file" accept="image/jpg,image/jpeg,image/png"  ref="avatarInput" class="valid coverfile" @change="changeImage($event)"> 
               <div class="ant-upload ant-upload-select ant-upload-select-picture-card upload-v-img adImgUrl">
                 <span class="rc-upload coverbutton" tabindex="0" role="button">
-                    <i class="anticon anticon-plus" style="line-height: 2;">+</i>
-                    <div class="ant-upload-text" style="line-height: 25px;">上传广告图</div>
+                    <i class="anticon anticon-plus">+</i>
+                    <div class="ant-upload-text">上传广告图</div>
                 </span>
               </div>
               <div class="ant-upload-list-item-info v-img-box ad_p_img" style="display: none;" src="">
-                <img src="" class="v-img ">
+                <img src="" class="v-img">
                 <i class="icon-close anticon-delete voucherImgIcon" data-ref="v-img-file" style=" left: 44%; "></i>
               </div>
-              <p class="tipsInfo">图片尺寸为700*260px,建议保持Banner广告风格一致,支持JPG、JEPG、PNG格式且文件小于1M</p>
             </div>
+            <div class="show-img" :class="{hide:ishide}">
+              <div class="layer" :class="{hide:isshow}"><em class="el-icon-close" @click="deleteImg"></em></div>
+              <img :src="avatar" alt="" name="avatar" @mousemove.stop="deleteEvent">
+            </div>
+            <p class="tipsInfo">图片尺寸为700*260px,建议保持Banner广告风格一致,支持JPG、JEPG、PNG格式且文件小于1M</p>
           </el-form-item>
-        </li>
-        <li>
-            <div class="show-img" style="width:700px;height:260px;">
-              <img :src="avatar?avatar:require('../../../static/images/404.png')" alt="" style="width:700px;height:260px;" name="avatar"  @mouseenter="enter">
-              <div class="layer" :class="{show:isshow === false}"><em class="el-icon-close" @click="deleteImg"></em></div>
-            </div>
         </li>
         <li>
           <el-form-item label="广告链接：" prop="url">
@@ -43,8 +42,10 @@
         </li>
       </ul>
     </el-form>
-    <div class="g-tc btn-blocks">
-      <input type="button" class="blue-btn" value="保存banner图片" @click="submitEvent"/>
+    <div class="btn-blocks">
+      <a href="javascript:" class="blue-btn" v-if="disabled === false"  @click="submitEvent('form')">保存</a>
+      <a href="javascript:" class="blue-btn" v-else><img src="../../../static/images/loading.gif"/></a>
+      <input type="button" class="white-btn" value="重置" @click="resetForm('form')"/>
     </div>
   </div>
 </template>
@@ -56,12 +57,17 @@
       return {
         advertapi: advertapi,
         isshow: true,
+        ishide: true,
+        isblock: false,
         avatar: '',
         file: '',
+        disabled: false,
         form: {
+          type: this.$route.query.type,
           advertiserName: '',
           advertName: '',
-          url: ''
+          url: '',
+          imageUrl: ''
         },
         rules: {
           advertiserName: [
@@ -77,7 +83,22 @@
         }
       }
     },
+    created () {
+      this.initForm()
+    },
     methods: {
+      initForm () {
+        if (!this.$route.query.id) {
+          return false
+        }
+        this.advertapi.get({id: this.$route.query.id}).then(rs => {
+          // console.log(rs)
+          this.form = rs.data
+          this.avatar = rs.data.imageUrl
+          this.ishide = false
+          this.isblock = true
+        })
+      },
       changeImage (ev) {
         let file = ev.target.files[0]
         if (file) {
@@ -85,56 +106,81 @@
           let reader = new FileReader()
           let _this = this
           reader.readAsDataURL(file)
-          console.log(file)
           reader.onload = function (e) {
-            // 这里的this 指向reader
             _this.avatar = this.result
-            console.log(e)
+            _this.ishide = false
+            _this.isblock = true
+            _this.height = ''
             let params = {
               imgData: _this.avatar,
               fileName: file.name
             }
             _this.advertapi.imageAdd(params).then(rs => {
-              console.log(rs)
-            }).catch(error => {
-              console.log(error)
+              if (rs.returnCode === 'F') {
+                _this.$common.errorMsg(rs, _this)
+              } else {
+                _this.form.imageUrl = rs.data
+                console.log(_this.form.imageUrl)
+              }
             })
           }
         }
       },
-      submitEvent () {
-        let files = this.$refs.avatarInput.files
-        let fileData = {}
-        if (files instanceof Array) {
-          fileData = files[0]
-        } else {
-          fileData = this.file
-        }
-        let data = new FormData()
-        data.append('multfile', fileData)
-        data.append('operaType', this.uploadType)
-        // console.log(fileData)
-        // console.log(JSON.stringify(this.avatar))
-        let params = {
-          advertiserName: '新banner',
-          advertName: '新banner',
-          url: 'http://www.baidu.com',
-          imgUrl: this.avatar
-        }
-        console.log(params)
-        this.advertapi.bannerAdd(params).then(rs => {
-          console.log(rs)
+      submitEvent (formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            this.disabled = true
+            if (this.$route.query.id) {
+              Object.assign(this.form, {id: this.$route.query.id})
+              this.advertapi.bannerUpdate(this.form).then(rs => {
+                this.disabled = false
+                if (rs.returnCode === 'F') {
+                  this.$common.errorMsg(rs, this)
+                } else {
+                  this.$message({
+                    type: 'success',
+                    message: '修改成功'
+                  })
+                }
+              })
+            } else {
+              this.advertapi.bannerAdd(this.form).then(rs => {
+                this.disabled = false
+                if (rs.returnCode === 'F') {
+                  this.$common.errorMsg(rs, this)
+                } else {
+                  this.$confirm('继续添加还是返回列表?', '广告创建成功', {
+                    confirmButtonText: '继续',
+                    cancelButtonText: '返回',
+                    type: 'success'
+                  }).then(() => {
+                    this.$refs[formName].resetFields()
+                  }).catch(() => {
+                    this.$router.push({path: '/advertising/list'})
+                  })
+                }
+              })
+            }
+          }
         })
       },
-      enter () {
-        if (this.avatar !== '') {
-          this.isshow = false
-        }
+      resetForm (formName) {
+        this.$nextTick(function () {
+          this.$refs[formName].resetFields()
+        })
+        this.avatar = ''
+        this.ishide = true
+        this.isblock = false
+        this.isshow = true
+      },
+      deleteEvent () {
+        this.isshow = false
       },
       deleteImg () {
         this.avatar = ''
         this.isshow = true
-        console.log(this.isshow)
+        this.ishide = true
+        this.isblock = false
       }
     }
   }

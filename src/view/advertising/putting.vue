@@ -45,7 +45,8 @@
         </li>
     </ul>
     <div class="btn-blocks">
-      <a href="javascript:" class="blue-btn" @click="putinEvent">投放</a>
+      <a href="javascript:" class="blue-btn" v-if="disabled === false" @click="putinEvent">投放</a>
+      <a href="javascript:" class="blue-btn" v-else><img src="../../../static/images/loading.gif"/></a>
       <a href="javascript:" class="white-btn" @click="resetForm">重置</a>
     </div>
   </div>
@@ -63,7 +64,8 @@ export default {
       excludeAgencyCode: '',
       channelList: [],
       advertList: [],
-      allCheckedList: []
+      allCheckedList: [],
+      disabled: false
     }
   },
   created () {
@@ -125,7 +127,9 @@ export default {
         excludeAgencyCode: this.excludeAgencyCode
       }
       console.log(params)
+      this.disabled = true
       this.advertapi.channelSetAdvert(params).then(rs => {
+        this.disabled = false
         if (rs.returnCode === 'F') {
           this.$common.errorMsg(rs, this)
         } else {
