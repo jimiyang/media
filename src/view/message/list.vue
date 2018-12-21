@@ -93,7 +93,7 @@ export default {
       },
       marteralId: '', // 图文id
       detail: {
-                // wechatArticleList : []
+        wechatArticleList: []
       },
       selectVal: '',
       loading: false,

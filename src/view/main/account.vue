@@ -5,8 +5,8 @@
             <div class="title">
                 <a href="javascript:" class="back" @click="back">{{msgBack}}</a>
                 <div>
-                    <span @click="change(0,'公众号')"  :class="{checked: ischecked==0}">公众号</span>
-                    <span  @click="change(1,'小程序')" :class="{checked: ischecked==1}">小程序</span>
+                    <span @click="change(0,'公众号')"  :class="{checked: ischecked === 0}">公众号</span>
+                    <span  @click="change(1,'小程序')" :class="{checked: ischecked === 1}">小程序</span>
                 </div>
                 <a href="javascript:" class="add" @click="goAuthor">+{{name}}</a>
             </div>
@@ -15,7 +15,7 @@
                     <img :src="item.headImg" />
                     <div>
                         <h1>{{item.nickName}}</h1>
-                        <p>{{item.isAuth == 0 ? "未授权" : "已授权"}}</p>
+                        <p>{{item.isAuth === 0 ? "未授权" : "已授权"}}</p>
                     </div>
                 </li>
             </ul>
@@ -77,7 +77,6 @@
             })
             return false
           }
-          console.log(item)
           this.publicapi.switchApp({'appId': item.appId}).then((rs) => {
             if (rs.returnCode === 'F') {
               this.$common.errorMsg(rs, this)
@@ -85,7 +84,6 @@
               this.isopen = false
               this.$emit('update:open', false)
               window.sessionStorage.setItem('appInfo', JSON.stringify(rs.data))
-              console.log(window.sessionStorage.getItem('appInfo'))
               bus.$emit('ischange', JSON.parse(window.sessionStorage.getItem('appInfo'))) // 中间件
               this.$router.push({'path': '/account/publist'})
             }

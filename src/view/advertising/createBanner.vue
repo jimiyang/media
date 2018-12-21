@@ -92,7 +92,6 @@
           return false
         }
         this.advertapi.get({id: this.$route.query.id}).then(rs => {
-          // console.log(rs)
           this.form = rs.data
           this.avatar = rs.data.imageUrl
           this.ishide = false
@@ -120,7 +119,6 @@
                 _this.$common.errorMsg(rs, _this)
               } else {
                 _this.form.imageUrl = rs.data
-                console.log(_this.form.imageUrl)
               }
             })
           }

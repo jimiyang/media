@@ -34,7 +34,7 @@
            <input type="text" class="ipttxt" v-model="form.subUrl" placeholder="请输入广告子链接"/>
         </el-form-item>
       </li>
-      <li>
+      <!--<li>
         <el-form-item label="js广告内容：" prop="jsContent">
            <textarea v-model="form.jsContent"></textarea>
         </el-form-item>
@@ -43,7 +43,7 @@
         <el-form-item label="js广告子链接：" prop="jsSubUrl">
            <input type="text" class="ipttxt" v-model="form.jsSubUrl" placeholder="请输入js广告子链接"/>
         </el-form-item>
-      </li>
+      </li>-->
       <li>
         <el-form-item label="合作方式：" prop="copType">
           <el-radio v-model="form.copType" label="0">CPM</el-radio>
@@ -156,7 +156,6 @@ export default {
                 }).then(() => {
                   this.$refs[formName].resetFields()
                 }).catch(() => {
-                  // this.prevBack()
                   this.$router.push({path: '/advertising/list'})
                 })
               }

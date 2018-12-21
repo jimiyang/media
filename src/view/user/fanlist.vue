@@ -18,14 +18,14 @@
                     </el-option>
                 </el-select>
             </div>
-            <!--<div class="items">
+            <div class="items">
                 粉丝地域：
                 <el-cascader
-                    :options="options"
+                    :options="areaData"
                     v-model="search.selectedOptions"
                     @change="handleChange">
                 </el-cascader>
-            </div>-->
+            </div>
         </div>
         <div class="ant-btn">
             <a href="javascript:" class="blue-btn" @click="searchUser">搜索</a>
@@ -112,6 +112,7 @@
 <script>
 import userapi from '../../api/userapi'
 import getPercent from '../../components/getPercent'
+import areaData from '../../until/area.js'
 export default {
   data () {
     return {
@@ -143,7 +144,8 @@ export default {
         {value: 2, label: '女'}
       ],
       percentage: 0,
-      isshow: false
+      isshow: false,
+      areaData: areaData.node
     }
   },
   components: { getPercent },
@@ -151,7 +153,6 @@ export default {
     this.loadList()
     this.userapi.getList().then(rs => {
       this.tagData = rs.data.items
-      console.log(this.tagData)
     })
   },
   methods: {
@@ -167,6 +168,7 @@ export default {
       })
     },
     searchUser () {
+      console.log(this.search.selectedOptions)
       this.loading = true
       this.loadList()
     },
@@ -184,12 +186,10 @@ export default {
     },
     getPercent (type) { // 得出百分比
       this.userapi.getPercent(type).then(rs => {
-        console.log(rs.data)
         if (rs.returnCode === 'S') {
           if (this.percentage <= 99) {
             this.getPercent(type)
             this.percentage = rs.data.sysUserPercent
-            console.log(rs.data.sysUserPercent)
           } else {
             setTimeout(() => {
               this.isshow = false
@@ -214,7 +214,6 @@ export default {
         tagrgetFansFlag: this.radio
       }
       Object.assign(params, this.search)
-      console.log(params)
       this.userapi.batchAddtag(params).then(rs => {
         if (rs.returnCode === 'F') {
           this.$common.errorMsg(rs, this)

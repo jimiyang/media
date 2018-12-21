@@ -9,7 +9,6 @@ export default new Vuex.Store({
     changeLogin (state, data) {
       state.isLogin = data
     }
-
   }, // update  data
   getters: {}, // get data
   actions: {},

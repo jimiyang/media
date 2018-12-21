@@ -2,18 +2,18 @@
     <div class="material-items">
         <el-button type="primary" @click = "syncData">同步图文素材</el-button>
         <div class="news-list" v-loading="loading">
-            <div class="items"  v-for= "(item,index) in materialData" :key= "index">
+            <div class="items"  v-for="(item,index) in materialData" :key= "index">
                 <dl>
-                    <dd :class= "{first : i === 0}" v-for= "(data,i) in item.wechatArticleList" :key = "i"  @mouseenter="enter(data.id)">
-                        <span><a :href= "data.url" target="_blank">{{data.title}}</a></span>
-                        <img :src= "data.thumbMediaUrl " />
-                        <div class="layer" :class= "{show: current=== data.id}"><a :href= "data.url" target="_blank">预览文章</a></div>
+                    <dd :class="{first : i === 0}" v-for="(data,i) in item.wechatArticleList" :key ="i"  @mouseenter="enter(data.id)">
+                        <span><a :href="data.url" target="_blank">{{data.title}}</a></span>
+                        <img :src="data.thumbMediaUrl " />
+                        <div class="layer" :class="{show: current === data.id}"><a :href="data.url" target="_blank">预览文章</a></div>
                     </dd>
                 </dl>
                 <div class="time">{{$common.getDate(item.updateTime,false)}}</div>
             </div>
         </div>
-        <div class="g-tc blue-color more" @click= "moreEvent" v-if= "totalNum > search.pageSize">{{message}}</div>
+        <div class="g-tc blue-color more" @click="moreEvent" v-if="totalNum > search.pageSize">{{message}}</div>
     </div>
 </template>
 <script>
@@ -74,7 +74,6 @@ export default {
           }
           this.totalNum = rs.data.totalNum
           this.totalPage = rs.data.totalPage
-          console.log(rs.data.items.concat(this.materialData))
         }
       })
     },

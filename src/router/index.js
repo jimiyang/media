@@ -16,6 +16,11 @@ export default new Router({
       hidden: true
     },
     {
+      path: '/404',
+      component: resolve => require(['@/view/404'], resolve),
+      hidden: true
+    },
+    {
       path: '/main',
       component: resolve => require(['@/view/main/main'], resolve),
       meta: {
@@ -97,6 +102,18 @@ export default new Router({
             {
               path: 'type',
               component: resolve => require(['@/view/advertising/type'], resolve)
+            },
+            {
+              path: 'advertspacelist',
+              component: resolve => require(['@/view/advertising/advertspacelist'], resolve)
+            },
+            {
+              path: 'advertspaceputting',
+              component: resolve => require(['@/view/advertising/advertspaceputting'], resolve)
+            },
+            {
+              path: 'createadvertspace',
+              component: resolve => require(['@/view/advertising/createadvertspace'], resolve)
             }
           ]
         }

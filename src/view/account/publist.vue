@@ -9,8 +9,8 @@
             </el-table-column>
             <el-table-column   prop="authorizationDate"  label="授权时间">
                 <template slot-scope="scope">
-                    <span  v-if="scope.row.authorizationDate!=null"> 
-                         {{scope.row.authorizationDate!=null ? scope.row.authorizationDate: '--' }}
+                    <span  v-if="scope.row.authorizationDate !== null"> 
+                         {{scope.row.authorizationDate !== null ? scope.row.authorizationDate: '--' }}
                          <a href="javascript:" class="blue-color"  @click="authorizationEvent(scope.row)">
                              {{text}}
                          </a>
@@ -61,7 +61,6 @@ export default{
     },
     // 解除授权
     authorizationEvent (item) {
-      console.log(item.authorizationDate)
       this.publicapi.quitAuth({'appId': item.appid}).then((rs) => {
         if (rs.returnCode === 'F') {
           this.$common.errorMsg(rs, this)

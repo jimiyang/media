@@ -58,7 +58,6 @@ export default{
   },
   components: {cLab},
   created () {
-    console.log(JSON.parse(window.sessionStorage.getItem('appInfo')).appId)
     this.loadList()
   },
   methods: {
@@ -81,7 +80,6 @@ export default{
     },
     handleCurrentChange (val) {
       this.search.currentPage = val
-      console.log(this.search.currentPage)
       this.loading = true
       this.loadList(this.search)
     },

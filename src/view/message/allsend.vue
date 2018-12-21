@@ -119,7 +119,6 @@
             if (rs.data.items.length > 0) {
               this.labList = rs.data.items
               this.groupMessage.tagId = this.labList[0].wxTagId
-              console.log(this.labList)
             }
           }
         })
@@ -135,7 +134,6 @@
         selLab (id, wxtagid) {
           this.index = id
           this.groupMessage.tagId = wxtagid
-          console.log(wxtagid)
         },
         sendContent () {
           this.dialogVisible = false
@@ -143,15 +141,12 @@
           if (this.current !== 0) {
             this.groupMessage.content = ''
           }
-          console.log(this.current)
-          console.log(this.groupMessage.mediaId)
           if (this.groupMessage.mediaId !== '') {
             materialapi.getMediaByWxMediaId({wxMediaId: this.groupMessage.mediaId}).then(rs => {
               if (rs.returnCode === 'F') {
                 this.$common.errorMsg(rs, this)
               } else {
                 this.wechatArticleList = rs.data.wechatArticleList
-                console.log(this.wechatArticleList)
               }
             })
           }
@@ -219,7 +214,6 @@
               msgtype: this.$common.msgTypelist(this.current, 1),
               sendIgnoreReprint: this.reprintChecked === false ? 0 : 1
             }
-            console.log(params)
             this.msgapi.batchMessage(params).then(rs => {
               if (rs.returnCode === 'F') {
                 this.$common.errorMsg(rs, this)

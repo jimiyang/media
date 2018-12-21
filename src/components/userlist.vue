@@ -1,7 +1,7 @@
 <template>
     <div class="userlist-box">
         <div class="search-box">
-              搜索用户：<el-input  v-model="name"    placeholder="请输入用户昵称" style="width:200px"></el-input>
+              搜索用户：<el-input  v-model="name" placeholder="请输入用户昵称" class="w200"></el-input>
               <el-button type="primary" @click = "searchUser">搜索</el-button>
         </div>
           <template>

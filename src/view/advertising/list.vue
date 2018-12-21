@@ -131,11 +131,9 @@ export default {
           url = '/advertising/createMessagetemp'
           break
       }
-      console.log(item.id)
       this.$router.push({path: url, query: {id: item.id}})
     },
     searchEvent () {
-      console.log(this.form)
       this.loadList()
     },
     resetForm (formName) {

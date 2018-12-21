@@ -114,7 +114,6 @@
           if (valid) {
             if (this.$route.query.id) {
               Object.assign(this.form, {id: this.$route.query.id})
-              console.log(this.form)
               this.advertapi.templateMsgUpdate(this.form).then(rs => {
                 if (rs.returnCode === 'F') {
                   this.$common.errorMsg(rs, this)

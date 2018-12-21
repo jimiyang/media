@@ -53,15 +53,10 @@
 	        } else {
           sessionStorage.setItem('changeLogin', '100')
           sessionStorage.setItem('userName', this.userName)
-          this.$router.push({path: '/Main'})
+          this.$router.push({path: '/main'})
           sessionStorage.removeItem('appInfo')
 	        }
 	      })
-	    }
-	  },
-	  watch: {
-	    username (val) {
-	      console.log(val)
 	    }
 	  }
 	}

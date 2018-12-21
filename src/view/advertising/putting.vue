@@ -75,12 +75,10 @@ export default {
   methods: {
     getChannellist () {
       this.advertapi.channelList().then(rs => {
-        console.log(rs)
         if (rs.returnCode === 'F') {
           this.$common.errorMsg(rs, this)
         } else {
           this.channelList = rs.data
-          console.log(this.channelList)
         }
       })
     },
@@ -90,7 +88,6 @@ export default {
           this.$common.errorMsg(rs, this)
         } else {
           this.advertList = rs.data
-          console.log(this.advertList)
         }
       })
     },
@@ -126,7 +123,6 @@ export default {
         excludeMerchantCode: this.excludeMerchantCode,
         excludeAgencyCode: this.excludeAgencyCode
       }
-      console.log(params)
       this.disabled = true
       this.advertapi.channelSetAdvert(params).then(rs => {
         this.disabled = false

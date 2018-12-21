@@ -11,7 +11,7 @@
                      </div>
                      <div class="items ant-col">
                         <h1>预览区</h1>
-                        <div class= "">{{text}}</div>
+                        <div>{{text}}</div>
                      </div>
                </div>
               <el-tooltip placement="top">
@@ -19,7 +19,7 @@
                   <el-button>如何发送文字链接?</el-button>
               </el-tooltip>
             </div>
-            <div class="image-text"  :class= "{show:cur == 1}">
+            <div class="image-text"  :class= "{show:cur === 1}">
                 <div class="notice">仅显示微图文消息</div>
                 <a href="javascript:" class="white-btn" @click = "syncData()">同步</a>
                 <div class="masonry">
@@ -37,7 +37,7 @@
                        <dl class="ant-col" @click="selSendcon(index,node.wxMediaId)">
                          <dd :class="{first: i === 0}"  v-for="(item, i) in node.wechatArticleList" :key = "i" >
                             <div><a :href="item.url" target="_blank">{{item.title}}</a></div>
-                            <img class="lazy" :src="item.thumbMediaUrl" alt="" />
+                            <img class="lazy" :src="item.thumbMediaUrl" />
                          </dd>
                        </dl>
                     </div>
