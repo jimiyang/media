@@ -1,5 +1,6 @@
 <template>
   <div class="list-blocks">
+    <div class="page-nav">广告位管理&nbsp;>&nbsp;广告列表</div>
     <div class="search-box">
       <el-form ref="form" :model="form">
         <el-form-item label="广告类型：">
@@ -45,8 +46,8 @@
         <el-table-column  prop="createTime"  label="创建时间"></el-table-column>
         <el-table-column  label="操作">
           <template slot-scope="scope">
-            <a href="javascript:" @click="deleteAdvert(scope.row)">删除</a>
-            <a href="javascript:" @click="modifyAdvert(scope.row)">修改</a>
+            <a href="javascript:" class="mr20" @click="deleteAdvert(scope.row)">删除</a>
+            <a href="javascript:" class="mr20" @click="modifyAdvert(scope.row)">修改</a>
           </template>
         </el-table-column>
     </el-table>

@@ -49,15 +49,8 @@ let obj = {
         'ico': 'el-icon-goods',
         'children': [
           {'id': '401', 'name': '广告管理', 'url': '/advertising/list'},
-          {'id': '402', 'name': '广告投放', 'url': '/advertising/putting'}
-        ]
-      },
-      {
-        'name': '广告位管理',
-        'ico': 'el-icon-goods',
-        'children': [
-          {'id': '501', 'name': '广告位管理', 'url': '/advertising/advertspacelist'},
-          {'id': '502', 'name': '广告位投放', 'url': '/advertising/advertspaceputting'}
+          {'id': '402', 'name': '广告位管理', 'url': '/advertising/advertspacelist'},
+          {'id': '403', 'name': '广告投放', 'url': '/advertising/putting'}
         ]
       }
     ]

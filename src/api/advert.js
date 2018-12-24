@@ -92,18 +92,18 @@ function advertspaceList () {
     return response.data
   })
 }
-function advertspaceGetlist () {
-  return axios.get('/channel/list').then(response => {
+function advertspaceGetlist (params) {
+  return axios.post('/channel/list', params).then(response => {
     return response.data
   })
 }
 function advertspaceGetDetail (params) {
-  return axios.get('/channel/get', params).then(response => {
+  return axios.get('/channel/get', {params: params}).then(response => {
     return response.data
   })
 }
 function advertspaceputInDetail (params) {
-  return axios.get('channel/puInDetail', params).then(response => {
+  return axios.get('/channel/puInDetail', {params: params}).then(response => {
     return response.data
   })
 }

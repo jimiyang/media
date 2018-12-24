@@ -1,5 +1,6 @@
 <template>
   <div class="create-blocks flex-type">
+    <div class="page-nav">广告管理&nbsp;>&nbsp;广告投放</div>
     <ul>
         <!--<li>
           <label>流量投放方式</label>
