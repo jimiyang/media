@@ -56,6 +56,30 @@
           <input type="text" class="ipt" v-model="form.price" @keyup="matcthEvent"/>元
         </el-form-item>
       </li>
+			<li>
+				<el-form-item label="广告发送时间类型：" prop="adSendTimeType">
+					<el-radio v-model="form.adSendTimeType" label="0">无限制</el-radio>
+					<el-radio v-model="form.adSendTimeType" label="1">限制</el-radio>
+				</el-form-item>
+			</li>
+			<li :class="{hide:form.adSendTimeType === '0'}">
+				<el-form-item>
+          <label class="el-form-item__label"><em class="red">*</em>发送时间：</label>
+					<el-date-picker   type="datetime"  placeholder="开始时间" v-model="form.adSendStartTime"></el-date-picker>
+					<el-date-picker   type="datetime"  placeholder="结束时间" v-model="form.adSendEndTime"></el-date-picker>
+          <div class="el-form-item__error" :class="{hide:ishide === true}">请输入开始时间和结束时间</div>
+				</el-form-item>
+			</li>
+			<li>
+				<el-form-item label="每日发送次数：" prop="adSendNum">
+					<input type="text" class="ipt" v-model="form.adSendNum"/>次
+				</el-form-item>
+			</li>
+			<li>
+				<el-form-item label="发送权重：" prop="adWeight">
+					<input type="text" class="ipt" v-model="form.adWeight"/>
+				</el-form-item>
+			</li>
     </ul>
   </el-form>
   <div class="btn-blocks">
@@ -73,6 +97,7 @@ export default {
     return {
       advertapi: advertapi,
       disabled: false,
+      ishide: true,
       form: {
         payType: '0',
         advertiserName: '',
@@ -84,6 +109,11 @@ export default {
         jsSubUrl: '',
         copType: '0',
         price: '',
+        adSendTimeType: '0',
+        adSendStartTime: '',
+        adSendEndTime: '',
+        adSendNum: 0,
+        adWeight: 1,
         type: this.$route.query.type,
         createTime: new Date().getTime()
       },
@@ -101,6 +131,14 @@ export default {
         price: [
           { required: true, message: '请输入合作价格', trigger: 'blur' },
           { pattern: /^[0-9]+([.]{1}[0-9]{1,2})?$/, message: '只能输入整数或小数（保留后两位）' }// /^[0-9]+([.]{1,2}[0-9]+){0,1}$/
+        ],
+        adSendNum: [
+          { required: true, message: '请输入每日发送次数', trigger: 'blur' },
+          { pattern: /^[0-9]\d*$/, message: '请输入整数' }
+        ],
+        adWeight: [
+          { required: true, message: '请输入发送权重', trigger: 'blur' },
+          { pattern: /^[1-9]\d*$/, message: '只能输入整数且大于0' }
         ]
       }
     }
@@ -117,6 +155,8 @@ export default {
         this.form = rs.data
         this.form.payType = rs.data.payType === null ? '0' : rs.data.payType.toString()
         this.form.copType = rs.data.copType === null ? '0' : rs.data.copType.toString()
+        this.form.adSendTimeType = rs.data.adSendTimeType === null ? '0' : rs.data.adSendTimeType.toString()
+        this.form.adSendNum = rs.data.adSendNum === null ? '0' : rs.data.adSendNum
       })
     },
     prevBack () {
@@ -127,8 +167,26 @@ export default {
     },
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
+        let start = new Date(Date.parse(this.form.adSendStartTime))
+        let end = new Date(Date.parse(this.form.adSendEndTime))
+        if (this.form.adSendTimeType === '1') {
+          if (this.form.adSendStartTime === '' || this.form.adSendEndTime === '') {
+            this.ishide = false
+            return false
+          } else {
+            this.ishide = true
+          }
+        }
         if (valid) {
+          if (start > end) {
+            this.$message({
+              type: 'error',
+              message: '结束时间不能小于开始时间！'
+            })
+            return false
+          }
           this.disabled = true
+          this.ishide = true
           if (this.$route.query.id) {
             Object.assign(this.form, {id: this.$route.query.id})
             this.advertapi.update(this.form).then(rs => {

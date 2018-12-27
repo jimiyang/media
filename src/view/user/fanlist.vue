@@ -22,7 +22,7 @@
                 粉丝地域：
                 <el-cascader
                     :options="areaData"
-                    v-model="search.selectedOptions"
+                    v-model="selectedOptions"
                     @change="handleChange">
                 </el-cascader>
             </div>
@@ -120,12 +120,15 @@ export default {
       dialogVisible: false,
       loading: false,
       fansData: [],
+      selectedOptions: [],
       search: {
         openId: '',
         nickName: '',
         tagIdList: [],
         sex: -1,
-        selectedOptions: [],
+        country: null,
+        province: null,
+        city: null,
         currentPage: 1,
         pageSize: 10
       },
@@ -168,7 +171,11 @@ export default {
       })
     },
     searchUser () {
-      console.log(this.search.selectedOptions)
+      if (this.selectedOptions.length > 0) {
+        this.search.country = this.selectedOptions[0] === undefined ? null : this.selectedOptions[0]
+        this.search.province = this.selectedOptions[1] === undefined ? null : this.selectedOptions[1]
+        this.search.city = this.selectedOptions[2] === undefined ? null : this.selectedOptions[2]
+      }
       this.loading = true
       this.loadList()
     },
@@ -179,6 +186,7 @@ export default {
         tagIdList: [],
         sex: -1
       }
+      this.selectedOptions = []
     },
     checkEvent (node) {
       this.checkedCount = node.length

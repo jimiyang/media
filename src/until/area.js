@@ -3,55 +3,107 @@ const node = [
     value: '中国',
     label: '中国',
     children: [
-      {value: '北京', label: '北京', children: [{value: '北京', label: '北京'}]},
-      {value: '天津', label: '天津', children: [{value: '天津', label: '天津'}]},
+      {label: '全部', value: null},
+      {
+        value: '北京',
+        label: '北京',
+        children: [
+          {label: '全部', value: null},
+          {label: '东城区', value: '东城区'},
+          {label: '西城区', value: '西城区'},
+          {label: '崇文区', value: '崇文区'},
+          {label: '宣武区', value: '宣武区'},
+          {label: '朝阳区', value: '朝阳区'},
+          {label: '丰台区', value: '丰台区'},
+          {label: '石景山区', value: '石景山区'},
+          {label: '海淀区', value: '海淀区'},
+          {label: '门头沟区', value: '门头沟区'},
+          {label: '房山区', value: '房山区'},
+          {label: '通州区', value: '通州区'},
+          {label: '顺义区', value: '顺义区'},
+          {label: '昌平区', value: '昌平区'},
+          {label: '大兴区', value: '大兴区'},
+          {label: '怀柔区', value: '怀柔区'},
+          {label: '平谷区', value: '平谷区'},
+          {label: '密云县', value: '密云县'},
+          {label: '延庆县', value: '延庆县'}
+        ]
+      },
+      {
+        value: '天津',
+        label: '天津',
+        children: [
+          {label: '全部', value: null},
+          {label: '和平区', value: '和平区'},
+          {label: '河东区', value: '河东区'},
+          {label: '河西区', value: '河西区'},
+          {label: '南开区', value: '南开区'},
+          {label: '河北区', value: '河北区'},
+          {label: '红桥区', value: '红桥区'},
+          {label: '塘沽区', value: '塘沽区'},
+          {label: '汉沽区', value: '汉沽区'},
+          {label: '大港区', value: '大港区'},
+          {label: '东丽区', value: '东丽区'},
+          {label: '西青区', value: '西青区'},
+          {label: '津南区', value: '津南区'},
+          {label: '北辰区', value: '北辰区'},
+          {label: '武清区', value: '武清区'},
+          {label: '宝坻区', value: '宝坻区'},
+          {label: '宁河县', value: '宁河县'},
+          {label: '静海县', value: '静海县'},
+          {label: '蓟县', value: '蓟县'}
+        ]
+      },
       {
         value: '河北',
         label: '河北',
         children: [
-          {value: '石家庄市', label: '石家庄市'},
-          {value: '唐山市', label: '唐山市'},
-          {value: '秦皇岛市', label: '秦皇岛市'},
-          {value: '邯郸市', label: '邯郸市'},
-          {value: '邢台市', label: '邢台市'},
-          {value: '保定市', label: '保定市'},
-          {value: '张家口市', label: '张家口市'},
-          {value: '承德市', label: '承德市'},
-          {value: '沧州市', label: '沧州市'},
-          {value: '廊坊市', label: '廊坊市'},
-          {value: '衡水市', label: '衡水市'}
+          {label: '全部', value: null},
+          {value: '石家庄', label: '石家庄'},
+          {value: '唐山', label: '唐山'},
+          {value: '秦皇岛', label: '秦皇岛'},
+          {value: '邯郸', label: '邯郸'},
+          {value: '邢台', label: '邢台'},
+          {value: '保定', label: '保定'},
+          {value: '张家口', label: '张家口'},
+          {value: '承德', label: '承德'},
+          {value: '沧州', label: '沧州'},
+          {value: '廊坊', label: '廊坊'},
+          {value: '衡水', label: '衡水'}
         ]
       },
       {
         value: '山西',
         label: '山西',
         children: [
-          {value: '太原市', label: '太原市'},
-          {value: '大同市', label: '大同市'},
-          {value: '阳泉市', label: '阳泉市'},
-          {value: '长治市', label: '长治市'},
-          {value: '晋城市', label: '晋城市'},
-          {value: '朔州市', label: '朔州市'},
-          {value: '晋中市', label: '晋中市'},
-          {value: '运城市', label: '运城市'},
-          {value: '忻州市', label: '忻州市'},
-          {value: '临汾市', label: '临汾市'},
-          {value: '吕梁市', label: '吕梁市'}
+          {label: '全部', value: null},
+          {value: '太原', label: '太原'},
+          {value: '大同', label: '大同'},
+          {value: '阳泉', label: '阳泉'},
+          {value: '长治', label: '长治'},
+          {value: '晋城', label: '晋城'},
+          {value: '朔州', label: '朔州'},
+          {value: '晋中', label: '晋中'},
+          {value: '运城', label: '运城'},
+          {value: '忻州', label: '忻州'},
+          {value: '临汾', label: '临汾'},
+          {value: '吕梁', label: '吕梁'}
         ]
       },
       {
         value: '内蒙古',
         label: '内蒙古',
         children: [
-          {value: '呼和浩特市', label: '呼和浩特市'},
-          {value: '包头市', label: '包头市'},
-          {value: '乌海市', label: '乌海市'},
-          {value: '赤峰市', label: '赤峰市'},
-          {value: '通辽市', label: '通辽市'},
-          {value: '鄂尔多斯市', label: '鄂尔多斯市'},
-          {value: '呼伦贝尔市', label: '呼伦贝尔市'},
-          {value: '巴彦淖尔市', label: '巴彦淖尔市'},
-          {value: '乌兰察布市', label: '乌兰察布市'},
+          {label: '全部', value: null},
+          {value: '呼和浩特', label: '呼和浩特'},
+          {value: '包头', label: '包头'},
+          {value: '乌海', label: '乌海'},
+          {value: '赤峰', label: '赤峰'},
+          {value: '通辽', label: '通辽'},
+          {value: '鄂尔多斯', label: '鄂尔多斯'},
+          {value: '呼伦贝尔', label: '呼伦贝尔'},
+          {value: '巴彦淖尔', label: '巴彦淖尔'},
+          {value: '乌兰察布', label: '乌兰察布'},
           {value: '兴安盟', label: '兴安盟'},
           {value: '锡林郭勒盟', label: '锡林郭勒盟'},
           {value: '阿拉善盟', label: '阿拉善盟'}
@@ -61,34 +113,36 @@ const node = [
         value: '辽宁',
         label: '辽宁',
         children: [
-          {value: '沈阳市', label: '沈阳市'},
-          {value: '大连市', label: '大连市'},
-          {value: '鞍山市', label: '鞍山市'},
-          {value: '抚顺市', label: '抚顺市'},
-          {value: '本溪市', label: '本溪市'},
-          {value: '丹东市', label: '丹东市'},
-          {value: '锦州市', label: '锦州市'},
-          {value: '营口市', label: '营口市'},
-          {value: '阜新市', label: '阜新市'},
-          {value: '辽阳市', label: '辽阳市'},
-          {value: '盘锦市', label: '盘锦市'},
-          {value: '铁岭市', label: '铁岭市'},
-          {value: '朝阳市', label: '朝阳市'},
-          {value: '葫芦岛市', label: '葫芦岛市'}
+          {label: '全部', value: null},
+          {value: '沈阳', label: '沈阳'},
+          {value: '大连', label: '大连'},
+          {value: '鞍山', label: '鞍山'},
+          {value: '抚顺', label: '抚顺'},
+          {value: '本溪', label: '本溪'},
+          {value: '丹东', label: '丹东'},
+          {value: '锦州', label: '锦州'},
+          {value: '营口', label: '营口'},
+          {value: '阜新', label: '阜新'},
+          {value: '辽阳', label: '辽阳'},
+          {value: '盘锦', label: '盘锦'},
+          {value: '铁岭', label: '铁岭'},
+          {value: '朝阳', label: '朝阳'},
+          {value: '葫芦岛', label: '葫芦岛'}
         ]
       },
       {
         value: '吉林',
         label: '吉林',
         children: [
-          {value: '长春市', label: '长春市'},
-          {value: '吉林市', label: '长春市'},
-          {value: '四平市', label: '四平市'},
-          {value: '辽源市', label: '辽源市'},
-          {value: '通化市', label: '通化市'},
-          {value: '白山市', label: '白山市'},
-          {value: '松原市', label: '松原市'},
-          {value: '白城市', label: '白城市'},
+          {label: '全部', value: null},
+          {value: '长春', label: '长春'},
+          {value: '吉林', label: '长春'},
+          {value: '四平', label: '四平'},
+          {value: '辽源', label: '辽源'},
+          {value: '通化', label: '通化'},
+          {value: '白山', label: '白山'},
+          {value: '松原', label: '松原'},
+          {value: '白城', label: '白城'},
           {value: '延边朝鲜族自治州', label: '延边朝鲜族自治州'}
         ]
       },
@@ -96,175 +150,209 @@ const node = [
         value: '黑龙江',
         label: '黑龙江',
         children: [
-          {label: '哈尔滨市', value: '哈尔滨市'},
-          {label: '齐齐哈尔市', value: '齐齐哈尔市'},
-          {label: '鸡西市', value: '鸡西市'},
-          {label: '鹤岗市', value: '鹤岗市'},
-          {label: '双鸭山市', value: '双鸭山市'},
-          {label: '大庆市', value: '大庆市'},
-          {label: '伊春市', value: '伊春市'},
-          {label: '佳木斯市', value: '佳木斯市'},
-          {label: '七台河市', value: '七台河市'},
-          {label: '牡丹江市', value: '牡丹江市'},
-          {label: '黑河市', value: '黑河市'},
-          {label: '绥化市', value: '绥化市'},
+          {label: '全部', value: null},
+          {label: '哈尔滨', value: '哈尔滨'},
+          {label: '齐齐哈尔', value: '齐齐哈尔'},
+          {label: '鸡西', value: '鸡西'},
+          {label: '鹤岗', value: '鹤岗'},
+          {label: '双鸭山', value: '双鸭山'},
+          {label: '大庆', value: '大庆'},
+          {label: '伊春', value: '伊春'},
+          {label: '佳木斯', value: '佳木斯'},
+          {label: '七台河', value: '七台河'},
+          {label: '牡丹江', value: '牡丹江'},
+          {label: '黑河', value: '黑河'},
+          {label: '绥化', value: '绥化'},
           {label: '大兴安岭地区', value: '大兴安岭地区'}
         ]
       },
-      {label: '上海', value: '上海', children: [{label: '上海', value: '上海'}]},
+      {
+        label: '上海',
+        value: '上海',
+        children: [
+          {label: '全部', value: null},
+          {label: '黄浦区', value: '黄浦区'},
+          {label: '卢湾区', value: '卢湾区'},
+          {label: '徐汇区', value: '徐汇区'},
+          {label: '长宁区', value: '长宁区'},
+          {label: '静安区', value: '静安区'},
+          {label: '普陀区', value: '普陀区'},
+          {label: '闸北区', value: '闸北区'},
+          {label: '虹口区', value: '虹口区'},
+          {label: '杨浦区', value: '杨浦区'},
+          {label: '闵行区', value: '闵行区'},
+          {label: '宝山区', value: '宝山区'},
+          {label: '嘉定区', value: '嘉定区'},
+          {label: '浦东新区', value: '浦东新区'},
+          {label: '金山区', value: '金山区'},
+          {label: '松江区', value: '松江区'},
+          {label: '青浦区', value: '青浦区'},
+          {label: '南汇区', value: '南汇区'},
+          {label: '奉贤区', value: '奉贤区'},
+          {label: '崇明县', value: '崇明县'}
+        ]
+      },
       {
         label: '江苏',
         value: '江苏',
         children: [
-          {label: '南京市', value: '南京市'},
-          {label: '无锡市', value: '无锡市'},
-          {label: '徐州市', value: '徐州市'},
-          {label: '常州市', value: '常州市'},
-          {label: '苏州市', value: '苏州市'},
-          {label: '南通市', value: '南通市'},
-          {label: '连云港市', value: '连云港市'},
-          {label: '淮安市', value: '淮安市'},
-          {label: '盐城市', value: '盐城市'},
-          {label: '扬州市', value: '扬州市'},
-          {label: '镇江市', value: '镇江市'},
-          {label: '泰州市', value: '泰州市'},
-          {label: '宿迁市', value: '宿迁市'}
+          {label: '全部', value: null},
+          {label: '南京', value: '南京'},
+          {label: '无锡', value: '无锡'},
+          {label: '徐州', value: '徐州'},
+          {label: '常州', value: '常州'},
+          {label: '苏州', value: '苏州'},
+          {label: '南通', value: '南通'},
+          {label: '连云港', value: '连云港'},
+          {label: '淮安', value: '淮安'},
+          {label: '盐城', value: '盐城'},
+          {label: '扬州', value: '扬州'},
+          {label: '镇江', value: '镇江'},
+          {label: '泰州', value: '泰州'},
+          {label: '宿迁', value: '宿迁'}
         ]
       },
       {
         label: '浙江',
         value: '浙江',
         children: [
-          {label: '杭州市', value: '杭州市'},
-          {label: '宁波市', value: '宁波市'},
-          {label: '温州市', value: '温州市'},
-          {label: '嘉兴市', value: '嘉兴市'},
-          {label: '湖州市', value: '湖州市'},
-          {label: '绍兴市', value: '绍兴市'},
-          {label: '金华市', value: '金华市'},
-          {label: '衢州市', value: '衢州市'},
-          {label: '舟山市', value: '舟山市'},
-          {label: '台州市', value: '台州市'},
-          {label: '丽水市', value: '丽水市'}
+          {label: '全部', value: null},
+          {label: '杭州', value: '杭州'},
+          {label: '宁波', value: '宁波'},
+          {label: '温州', value: '温州'},
+          {label: '嘉兴', value: '嘉兴'},
+          {label: '湖州', value: '湖州'},
+          {label: '绍兴', value: '绍兴'},
+          {label: '金华', value: '金华'},
+          {label: '衢州', value: '衢州'},
+          {label: '舟山', value: '舟山'},
+          {label: '台州', value: '台州'},
+          {label: '丽水', value: '丽水'}
         ]
       },
       {
         label: '安徽',
         value: '安徽',
         children: [
-          {label: '合肥市', value: '合肥市'},
-          {label: '芜湖市', value: '芜湖市'},
-          {label: '蚌埠市', value: '蚌埠市'},
-          {label: '淮南市', value: '淮南市'},
-          {label: '马鞍山市', value: '马鞍山市'},
-          {label: '淮北市', value: '淮北市'},
-          {label: '铜陵市', value: '铜陵市'},
-          {label: '安庆市', value: '安庆市'},
-          {label: '黄山市', value: '黄山市'},
-          {label: '滁州市', value: '滁州市'},
-          {label: '阜阳市', value: '阜阳市'},
-          {label: '宿州市', value: '宿州市'},
-          {label: '巢湖市', value: '巢湖市'},
-          {label: '六安市', value: '六安市'},
-          {label: '亳州市', value: '亳州市'},
-          {label: '池州市', value: '池州市'},
-          {label: '宣城市', value: '宣城市'}
+          {label: '全部', value: null},
+          {label: '合肥', value: '合肥'},
+          {label: '芜湖', value: '芜湖'},
+          {label: '蚌埠', value: '蚌埠'},
+          {label: '淮南', value: '淮南'},
+          {label: '马鞍山', value: '马鞍山'},
+          {label: '淮北', value: '淮北'},
+          {label: '铜陵', value: '铜陵'},
+          {label: '安庆', value: '安庆'},
+          {label: '黄山', value: '黄山'},
+          {label: '滁州', value: '滁州'},
+          {label: '阜阳', value: '阜阳'},
+          {label: '宿州', value: '宿州'},
+          {label: '巢湖', value: '巢湖'},
+          {label: '六安', value: '六安'},
+          {label: '亳州', value: '亳州'},
+          {label: '池州', value: '池州'},
+          {label: '宣城', value: '宣城'}
         ]
       },
       {
         label: '福建',
         value: '福建',
         children: [
-          {label: '福州市', value: '福州市'},
-          {label: '厦门市', value: '厦门市'},
-          {label: '莆田市', value: '莆田市'},
-          {label: '三明市', value: '三明市'},
-          {label: '泉州市', value: '泉州市'},
-          {label: '漳州市', value: '漳州市'},
-          {label: '南平市', value: '南平市'},
-          {label: '龙岩市', value: '龙岩市'},
-          {label: '宁德市', value: '宁德市'}
+          {label: '全部', value: null},
+          {label: '福州', value: '福州'},
+          {label: '厦门', value: '厦门'},
+          {label: '莆田', value: '莆田'},
+          {label: '三明', value: '三明'},
+          {label: '泉州', value: '泉州'},
+          {label: '漳州', value: '漳州'},
+          {label: '南平', value: '南平'},
+          {label: '龙岩', value: '龙岩'},
+          {label: '宁德', value: '宁德'}
         ]
       },
       {
         label: '江西',
         value: '江西',
         children: [
-          {label: '南昌市', value: '南昌市'},
-          {label: '景德镇市', value: '景德镇市'},
-          {label: '萍乡市', value: '萍乡市'},
-          {label: '九江市', value: '九江市'},
-          {label: '新余市', value: '新余市'},
-          {label: '鹰潭市', value: '鹰潭市'},
-          {label: '赣州市', value: '赣州市'},
-          {label: '吉安市', value: '吉安市'},
-          {label: '宜春市', value: '宜春市'},
-          {label: '抚州市', value: '抚州市'},
-          {label: '上饶市', value: '上饶市'}
+          {label: '全部', value: null},
+          {label: '南昌', value: '南昌'},
+          {label: '景德镇', value: '景德镇'},
+          {label: '萍乡', value: '萍乡'},
+          {label: '九江', value: '九江'},
+          {label: '新余', value: '新余'},
+          {label: '鹰潭', value: '鹰潭'},
+          {label: '赣州', value: '赣州'},
+          {label: '吉安', value: '吉安'},
+          {label: '宜春', value: '宜春'},
+          {label: '抚州', value: '抚州'},
+          {label: '上饶', value: '上饶'}
         ]
       },
       {
         label: '山东',
         value: '山东',
         children: [
-          {label: '济南市', value: '济南市'},
-          {label: '青岛市', value: '青岛市'},
-          {label: '淄博市', value: '淄博市'},
-          {label: '枣庄市', value: '枣庄市'},
-          {label: '东营市', value: '东营市'},
-          {label: '烟台市', value: '烟台市'},
-          {label: '潍坊市', value: '潍坊市'},
-          {label: '济宁市', value: '济宁市'},
-          {label: '泰安市', value: '泰安市'},
-          {label: '威海市', value: '威海市'},
-          {label: '日照市', value: '日照市'},
-          {label: '莱芜市', value: '莱芜市'},
-          {label: '临沂市', value: '临沂市'},
-          {label: '德州市', value: '德州市'},
-          {label: '聊城市', value: '聊城市'},
-          {label: '滨州市', value: '滨州市'},
-          {label: '菏泽市', value: '菏泽市'}
+          {label: '全部', value: null},
+          {label: '济南', value: '济南'},
+          {label: '青岛', value: '青岛'},
+          {label: '淄博', value: '淄博'},
+          {label: '枣庄', value: '枣庄'},
+          {label: '东营', value: '东营'},
+          {label: '烟台', value: '烟台'},
+          {label: '潍坊', value: '潍坊'},
+          {label: '济宁', value: '济宁'},
+          {label: '泰安', value: '泰安'},
+          {label: '威海', value: '威海'},
+          {label: '日照', value: '日照'},
+          {label: '莱芜', value: '莱芜'},
+          {label: '临沂', value: '临沂'},
+          {label: '德州', value: '德州'},
+          {label: '聊城', value: '聊城'},
+          {label: '滨州', value: '滨州'},
+          {label: '菏泽', value: '菏泽'}
         ]
       },
       {
         label: '河南',
         value: '河南',
         children: [
-          {label: '郑州市', value: '郑州市'},
-          {label: '开封市', value: '开封市'},
-          {label: '洛阳市', value: '洛阳市'},
-          {label: '平顶山市', value: '平顶山市'},
-          {label: '安阳市', value: '安阳市'},
-          {label: '鹤壁市', value: '鹤壁市'},
-          {label: '新乡市', value: '新乡市'},
-          {label: '焦作市', value: '焦作市'},
-          {label: '濮阳市', value: '濮阳市'},
-          {label: '许昌市', value: '许昌市'},
-          {label: '漯河市', value: '漯河市'},
-          {label: '三门峡市', value: '三门峡市'},
-          {label: '南阳市', value: '南阳市'},
-          {label: '商丘市', value: '商丘市'},
-          {label: '信阳市', value: '信阳市'},
-          {label: '周口市', value: '周口市'},
-          {label: '驻马店市', value: '驻马店市'}
+          {label: '全部', value: null},
+          {label: '郑州', value: '郑州'},
+          {label: '开封', value: '开封'},
+          {label: '洛阳', value: '洛阳'},
+          {label: '平顶山', value: '平顶山'},
+          {label: '安阳', value: '安阳'},
+          {label: '鹤壁', value: '鹤壁'},
+          {label: '新乡', value: '新乡'},
+          {label: '焦作', value: '焦作'},
+          {label: '濮阳', value: '濮阳'},
+          {label: '许昌', value: '许昌'},
+          {label: '漯河', value: '漯河'},
+          {label: '三门峡', value: '三门峡'},
+          {label: '南阳', value: '南阳'},
+          {label: '商丘', value: '商丘'},
+          {label: '信阳', value: '信阳'},
+          {label: '周口', value: '周口'},
+          {label: '驻马店', value: '驻马店'}
         ]
       },
       {
         label: '湖北',
         value: '湖北',
         children: [
-          {label: '武汉市', value: '武汉市'},
-          {label: '黄石市', value: '黄石市'},
-          {label: '十堰市', value: '十堰市'},
-          {label: '宜昌市', value: '宜昌市'},
-          {label: '襄樊市', value: '襄樊市'},
-          {label: '鄂州市', value: '鄂州市'},
-          {label: '荆门市', value: '荆门市'},
-          {label: '孝感市', value: '孝感市'},
-          {label: '荆州市', value: '荆州市'},
-          {label: '黄冈市', value: '黄冈市'},
-          {label: '咸宁市', value: '咸宁市'},
-          {label: '随州市', value: '随州市'},
+          {label: '全部', value: null},
+          {label: '武汉', value: '武汉'},
+          {label: '黄石', value: '黄石'},
+          {label: '十堰', value: '十堰'},
+          {label: '宜昌', value: '宜昌'},
+          {label: '襄樊', value: '襄樊'},
+          {label: '鄂州', value: '鄂州'},
+          {label: '荆门', value: '荆门'},
+          {label: '孝感', value: '孝感'},
+          {label: '荆州', value: '荆州'},
+          {label: '黄冈', value: '黄冈'},
+          {label: '咸宁', value: '咸宁'},
+          {label: '随州', value: '随州'},
           {label: '恩施土家族苗族自治州', value: '恩施土家族苗族自治州'},
           {label: '省直辖行政单位', value: '省直辖行政单位'}
         ]
@@ -273,19 +361,20 @@ const node = [
         label: '湖南',
         value: '湖南',
         children: [
-          {label: '长沙市', value: '长沙市'},
-          {label: '株洲市', value: '株洲市'},
-          {label: '湘潭市', value: '湘潭市'},
-          {label: '衡阳市', value: '衡阳市'},
-          {label: '邵阳市', value: '邵阳市'},
-          {label: '岳阳市', value: '岳阳市'},
-          {label: '常德市', value: '常德市'},
-          {label: '张家界市', value: '张家界市'},
-          {label: '益阳市', value: '益阳市'},
-          {label: '郴州市', value: '郴州市'},
-          {label: '永州市', value: '永州市'},
-          {label: '怀化市', value: '怀化市'},
-          {label: '娄底市', value: '娄底市'},
+          {label: '全部', value: null},
+          {label: '长沙', value: '长沙'},
+          {label: '株洲', value: '株洲'},
+          {label: '湘潭', value: '湘潭'},
+          {label: '衡阳', value: '衡阳'},
+          {label: '邵阳', value: '邵阳'},
+          {label: '岳阳', value: '岳阳'},
+          {label: '常德', value: '常德'},
+          {label: '张家界', value: '张家界'},
+          {label: '益阳', value: '益阳'},
+          {label: '郴州', value: '郴州'},
+          {label: '永州', value: '永州'},
+          {label: '怀化', value: '怀化'},
+          {label: '娄底', value: '娄底'},
           {label: '湘西土家族苗族自治州', value: '湘西土家族苗族自治州'}
         ]
       },
@@ -293,81 +382,131 @@ const node = [
         label: '广东',
         value: '广东',
         children: [
-          {label: '广州市', value: '广州市'},
-          {label: '韶关市', value: '韶关市'},
-          {label: '深圳市', value: '深圳市'},
-          {label: '珠海市', value: '珠海市'},
-          {label: '汕头市', value: '汕头市'},
-          {label: '佛山市', value: '佛山市'},
-          {label: '江门市', value: '江门市'},
-          {label: '湛江市', value: '湛江市'},
-          {label: '茂名市', value: '茂名市'},
-          {label: '肇庆市', value: '肇庆市'},
-          {label: '惠州市', value: '惠州市'},
-          {label: '梅州市', value: '梅州市'},
-          {label: '汕尾市', value: '汕尾市'},
-          {label: '河源市', value: '河源市'},
-          {label: '阳江市', value: '阳江市'},
-          {label: '清远市', value: '清远市'},
-          {label: '东莞市', value: '东莞市'},
-          {label: '中山市', value: '中山市'},
-          {label: '潮州市', value: '潮州市'},
-          {label: '揭阳市', value: '揭阳市'},
-          {label: '云浮市', value: '云浮市'}
+          {label: '全部', value: null},
+          {label: '广州', value: '广州'},
+          {label: '韶关', value: '韶关'},
+          {label: '深圳', value: '深圳'},
+          {label: '珠海', value: '珠海'},
+          {label: '汕头', value: '汕头'},
+          {label: '佛山', value: '佛山'},
+          {label: '江门', value: '江门'},
+          {label: '湛江', value: '湛江'},
+          {label: '茂名', value: '茂名'},
+          {label: '肇庆', value: '肇庆'},
+          {label: '惠州', value: '惠州'},
+          {label: '梅州', value: '梅州'},
+          {label: '汕尾', value: '汕尾'},
+          {label: '河源', value: '河源'},
+          {label: '阳江', value: '阳江'},
+          {label: '清远', value: '清远'},
+          {label: '东莞', value: '东莞'},
+          {label: '中山', value: '中山'},
+          {label: '潮州', value: '潮州'},
+          {label: '揭阳', value: '揭阳'},
+          {label: '云浮', value: '云浮'}
         ]
       },
       {
         label: '广西',
         value: '广西',
         children: [
-          {label: '南宁市', value: '南宁市'},
-          {label: '柳州市', value: '柳州市'},
-          {label: '桂林市', value: '桂林市'},
-          {label: '梧州市', value: '梧州市'},
-          {label: '北海市', value: '北海市'},
-          {label: '防城港市', value: '防城港市'},
-          {label: '钦州市', value: '钦州市'},
-          {label: '贵港市', value: '贵港市'},
-          {label: '玉林市', value: '玉林市'},
-          {label: '百色市', value: '百色市'},
-          {label: '贺州市', value: '贺州市'},
-          {label: '河池市', value: '河池市'},
-          {label: '来宾市', value: '来宾市'},
-          {label: '崇左市', value: '崇左市'}
+          {label: '全部', value: null},
+          {label: '南宁', value: '南宁'},
+          {label: '柳州', value: '柳州'},
+          {label: '桂林', value: '桂林'},
+          {label: '梧州', value: '梧州'},
+          {label: '北海', value: '北海'},
+          {label: '防城港', value: '防城港'},
+          {label: '钦州', value: '钦州'},
+          {label: '贵港', value: '贵港'},
+          {label: '玉林', value: '玉林'},
+          {label: '百色', value: '百色'},
+          {label: '贺州', value: '贺州'},
+          {label: '河池', value: '河池'},
+          {label: '来宾', value: '来宾'},
+          {label: '崇左', value: '崇左'}
         ]
       },
       {
         label: '海南',
         value: '海南',
         children: [
-          {label: '海口市', value: '海口市'},
-          {label: '三亚市', value: '三亚市'},
+          {label: '全部', value: null},
+          {label: '海口', value: '海口'},
+          {label: '三亚', value: '三亚'},
           {label: '省直辖县级行政单位', value: '省直辖县级行政单位'}
         ]
       },
-      {label: '重庆', value: '重庆', children: [{label: '重庆', value: '重庆'}]},
+      {
+        label: '重庆',
+        value: '重庆',
+        children: [
+          {label: '全部', value: null},
+          {label: '万州区', value: '万州区'},
+          {label: '涪陵区', value: '涪陵区'},
+          {label: '渝中区', value: '渝中区'},
+          {label: '大渡口区', value: '大渡口区'},
+          {label: '江北区', value: '江北区'},
+          {label: '沙坪坝区', value: '沙坪坝区'},
+          {label: '九龙坡区', value: '九龙坡区'},
+          {label: '南岸区', value: '南岸区'},
+          {label: '北碚区', value: '北碚区'},
+          {label: '万盛区', value: '万盛区'},
+          {label: '双桥区', value: '双桥区'},
+          {label: '渝北区', value: '渝北区'},
+          {ilabel: '巴南区', value: '巴南区'},
+          {label: '黔江区', value: '黔江区'},
+          {label: '长寿区', value: '长寿区'},
+          {label: '江津区', value: '江津区'},
+          {label: '合川区', value: '合川区'},
+          {label: '永川区', value: '永川区'},
+          {label: '南川区', value: '南川区'},
+          {label: '綦江县', value: '綦江县'},
+          {label: '潼南县', value: '潼南县'},
+          {label: '铜梁县', value: '铜梁县'},
+          {label: '大足县', value: '大足县'},
+          {label: '荣昌县', value: '荣昌县'},
+          {label: '璧山县', value: '璧山县'},
+          {label: '梁平县', value: '梁平县'},
+          {label: '城口县', value: '城口县'},
+          {label: '丰都县', value: '丰都县'},
+          {label: '垫江县', value: '垫江县'},
+          {label: '武隆县', value: '武隆县'},
+          {label: '忠县', value: '忠县'},
+          {label: '开县', value: '开县'},
+          {label: '云阳县', value: '云阳县'},
+          {label: '奉节县', value: '奉节县'},
+          {label: '巫山县', value: '巫山县'},
+          {label: '巫溪县', value: '巫溪县'},
+          {label: '石柱土家族自治县', value: '石柱土家族自治县'},
+          {label: '秀山土家族苗族自治县', value: '秀山土家族苗族自治县'},
+          {label: '酉阳土家族苗族自治县', value: '酉阳土家族苗族自治县'},
+          {label: '彭水苗族土家族自治县', value: '彭水苗族土家族自治县'}
+        ]
+      },
       {
         label: '四川',
         value: '四川',
         children: [
-          {label: '成都市', value: '成都市'},
-          {label: '自贡市', value: '自贡市'},
-          {label: '攀枝花市', value: '攀枝花市'},
-          {label: '泸州市', value: '泸州市'},
-          {label: '德阳市', value: '德阳市'},
-          {label: '绵阳市', value: '绵阳市'},
-          {label: '广元市', value: '广元市'},
-          {label: '遂宁市', value: '遂宁市'},
-          {label: '内江市', value: '内江市'},
-          {label: '乐山市', value: '乐山市'},
-          {label: '南充市', value: '南充市'},
-          {label: '眉山市', value: '眉山市'},
-          {label: '宜宾市', value: '宜宾市'},
-          {label: '广安市', value: '广安市'},
-          {label: '达州市', value: '达州市'},
-          {label: '雅安市', value: '雅安市'},
-          {label: '巴中市', value: '巴中市'},
-          {label: '资阳市', value: '资阳市'},
+          {label: '全部', value: null},
+          {label: '成都', value: '成都'},
+          {label: '自贡', value: '自贡'},
+          {label: '攀枝花', value: '攀枝花'},
+          {label: '泸州', value: '泸州'},
+          {label: '德阳', value: '德阳'},
+          {label: '绵阳', value: '绵阳'},
+          {label: '广元', value: '广元'},
+          {label: '遂宁', value: '遂宁'},
+          {label: '内江', value: '内江'},
+          {label: '乐山', value: '乐山'},
+          {label: '南充', value: '南充'},
+          {label: '眉山', value: '眉山'},
+          {label: '宜宾', value: '宜宾'},
+          {label: '广安', value: '广安'},
+          {label: '达州', value: '达州'},
+          {label: '雅安', value: '雅安'},
+          {label: '巴中', value: '巴中'},
+          {label: '资阳', value: '资阳'},
           {label: '阿坝藏族羌族自治州', value: '阿坝藏族羌族自治州'},
           {label: '甘孜藏族自治州', value: '甘孜藏族自治州'},
           {label: '凉山彝族自治州', value: '凉山彝族自治州'}
@@ -377,10 +516,11 @@ const node = [
         label: '贵州',
         value: '贵州',
         children: [
-          {label: '贵阳市', value: '贵阳市'},
-          {label: '六盘水市', value: '六盘水市'},
-          {label: '遵义市', value: '遵义市'},
-          {label: '安顺市', value: '安顺市'},
+          {label: '全部', value: null},
+          {label: '贵阳', value: '贵阳'},
+          {label: '六盘水', value: '六盘水'},
+          {label: '遵义', value: '遵义'},
+          {label: '安顺', value: '安顺'},
           {label: '铜仁地区', value: '铜仁地区'},
           {label: '黔西南布依族苗族自治州', value: '黔西南布依族苗族自治州'},
           {label: '毕节地区', value: '毕节地区'},
@@ -392,14 +532,15 @@ const node = [
         label: '云南',
         value: '云南',
         children: [
-          {label: '昆明市', value: '昆明市'},
-          {label: '曲靖市', value: '曲靖市'},
-          {label: '玉溪市', value: '玉溪市'},
-          {label: '保山市', value: '保山市'},
-          {label: '昭通市', value: '昭通市'},
-          {label: '丽江市', value: '丽江市'},
-          {label: '思茅市', value: '思茅市'},
-          {label: '临沧市', value: '临沧市'},
+          {label: '全部', value: null},
+          {label: '昆明', value: '昆明'},
+          {label: '曲靖', value: '曲靖'},
+          {label: '玉溪', value: '玉溪'},
+          {label: '保山', value: '保山'},
+          {label: '昭通', value: '昭通'},
+          {label: '丽江', value: '丽江'},
+          {label: '思茅', value: '思茅'},
+          {label: '临沧', value: '临沧'},
           {label: '楚雄彝族自治州', value: '楚雄彝族自治州'},
           {label: '红河哈尼族彝族自治州', value: '红河哈尼族彝族自治州'},
           {label: '文山壮族苗族自治州', value: '文山壮族苗族自治州'},
@@ -414,7 +555,8 @@ const node = [
         label: '西藏',
         value: '西藏',
         children: [
-          {label: '拉萨市', value: '拉萨市'},
+          {label: '全部', value: null},
+          {label: '拉萨', value: '拉萨'},
           {label: '昌都地区', value: '昌都地区'},
           {label: '山南地区', value: '山南地区'},
           {label: '日喀则地区', value: '日喀则地区'},
@@ -427,34 +569,36 @@ const node = [
         label: '陕西',
         value: '陕西',
         children: [
-          {label: '西安市', value: '西安市'},
-          {label: '铜川市', value: '铜川市'},
-          {label: '宝鸡市', value: '宝鸡市'},
-          {label: '咸阳市', value: '咸阳市'},
-          {label: '渭南市', value: '渭南市'},
-          {label: '延安市', value: '延安市'},
-          {label: '汉中市', value: '汉中市'},
-          {label: '榆林市', value: '榆林市'},
-          {label: '安康市', value: '安康市'},
-          {label: '商洛市', value: '商洛市'}
+          {label: '全部', value: null},
+          {label: '西安', value: '西安'},
+          {label: '铜川', value: '铜川'},
+          {label: '宝鸡', value: '宝鸡'},
+          {label: '咸阳', value: '咸阳'},
+          {label: '渭南', value: '渭南'},
+          {label: '延安', value: '延安'},
+          {label: '汉中', value: '汉中'},
+          {label: '榆林', value: '榆林'},
+          {label: '安康', value: '安康'},
+          {label: '商洛', value: '商洛'}
         ]
       },
       {
         label: '甘肃',
         value: '甘肃',
         children: [
-          {label: '兰州市', value: '兰州市'},
-          {label: '嘉峪关市', value: '嘉峪关市'},
-          {label: '金昌市', value: '金昌市'},
-          {label: '白银市', value: '白银市'},
-          {label: '天水市', value: '天水市'},
-          {label: '武威市', value: '武威市'},
-          {label: '张掖市', value: '张掖市'},
-          {label: '平凉市', value: '平凉市'},
-          {label: '酒泉市', value: '酒泉市'},
-          {label: '庆阳市', value: '庆阳市'},
-          {label: '定西市', value: '定西市'},
-          {label: '陇南市', value: '陇南市'},
+          {label: '全部', value: null},
+          {label: '兰州', value: '兰州'},
+          {label: '嘉峪关', value: '嘉峪关'},
+          {label: '金昌', value: '金昌'},
+          {label: '白银', value: '白银'},
+          {label: '天水', value: '天水'},
+          {label: '武威', value: '武威'},
+          {label: '张掖', value: '张掖'},
+          {label: '平凉', value: '平凉'},
+          {label: '酒泉', value: '酒泉'},
+          {label: '庆阳', value: '庆阳'},
+          {label: '定西', value: '定西'},
+          {label: '陇南', value: '陇南'},
           {label: '临夏回族自治州', value: '临夏回族自治州'},
           {label: '甘南藏族自治州', value: '甘南藏族自治州'}
         ]
@@ -463,7 +607,8 @@ const node = [
         label: '青海',
         value: '青海',
         children: [
-          {label: '西宁市', value: '西宁市'},
+          {label: '全部', value: null},
+          {label: '西宁', value: '西宁'},
           {label: '海东地区', value: '海东地区'},
           {label: '海北藏族自治州', value: '海北藏族自治州'},
           {label: '黄南藏族自治州', value: '黄南藏族自治州'},
@@ -477,19 +622,21 @@ const node = [
         label: '宁夏',
         value: '宁夏',
         children: [
-          {label: '银川市', value: '银川市'},
-          {label: '石嘴山市', value: '石嘴山市'},
-          {label: '吴忠市', value: '吴忠市'},
-          {label: '固原市', value: '固原市'},
-          {label: '中卫市', value: '中卫市'}
+          {label: '全部', value: null},
+          {label: '银川', value: '银川'},
+          {label: '石嘴山', value: '石嘴山'},
+          {label: '吴忠', value: '吴忠'},
+          {label: '固原', value: '固原'},
+          {label: '中卫', value: '中卫'}
         ]
       },
       {
         label: '新疆',
         value: '新疆',
         children: [
-          {label: '乌鲁木齐市', value: '乌鲁木齐市'},
-          {label: '克拉玛依市', value: '克拉玛依市'},
+          {label: '全部', value: null},
+          {label: '乌鲁木齐', value: '乌鲁木齐'},
+          {label: '克拉玛依', value: '克拉玛依'},
           {label: '吐鲁番地区', value: '吐鲁番地区'},
           {label: '哈密地区', value: '哈密地区'},
           {label: '昌吉回族自治州', value: '昌吉回族自治州'},
@@ -505,15 +652,81 @@ const node = [
           {label: '省直辖行政单位', value: '省直辖行政单位'}
         ]
       },
-      {label: '台湾', value: '台湾', children: [{label: '台湾', value: '台湾'}]},
-      {label: '香港', value: '香港', children: [{label: '香港', value: '香港'}]},
-      {label: '澳门', value: '澳门', children: [{label: '澳门', value: '澳门'}]}
+      {
+        label: '台湾',
+        value: '台湾',
+        children: [
+          {label: '全部', value: null},
+          {label: '高雄市', value: '高雄市'},
+          {label: '花莲县', value: '花莲县'},
+          {label: '基隆市', value: '基隆市'},
+          {label: '嘉义市', value: '嘉义市'},
+          {label: '嘉义县', value: '嘉义县'},
+          {label: '金门县', value: '金门县'},
+          {label: '连江县', value: '连江县'},
+          {label: '苗栗县', value: '苗栗县'},
+          {label: '南投县', value: '南投县'},
+          {label: '澎湖县', value: '澎湖县'},
+          {label: '屏东县', value: '屏东县'},
+          {label: '台北市', value: '台北市'},
+          {label: '台东县', value: '台东县'},
+          {label: '台南市', value: '台南市'},
+          {label: '台中市', value: '台中市'},
+          {label: '桃园县', value: '桃园县'},
+          {label: '新北市', value: '新北市'},
+          {label: '新竹市', value: '新竹市'},
+          {label: '新竹县', value: '新竹县'},
+          {label: '宜兰县', value: '宜兰县'},
+          {label: '云林县', value: '云林县'},
+          {label: '彰化县', value: '彰化县'}
+        ]
+      },
+      {
+        label: '香港',
+        value: '香港',
+        children: [
+          {label: '全部', value: null},
+          {label: '北区', value: '北区'},
+          {label: '大埔区', value: '大埔区'},
+          {label: '东区', value: '东区'},
+          {label: '观塘区', value: '观塘区'},
+          {label: '黄大仙区', value: '黄大仙区'},
+          {label: '九龙城区', value: '九龙城区'},
+          {label: '葵青区', value: '葵青区'},
+          {label: '离岛区', value: '离岛区'},
+          {label: '南区', value: '南区'},
+          {label: '荃湾区', value: '荃湾区'},
+          {label: '沙田区', value: '沙田区'},
+          {label: '深水埗區', value: '深水埗區'},
+          {label: '屯门区', value: '屯门区'},
+          {label: '湾仔区', value: '湾仔区'},
+          {label: '西贡区', value: '西贡区'},
+          {label: '油尖旺区', value: '油尖旺区'},
+          {label: '元朗区', value: '元朗区'},
+          {label: '中西区', value: '中西区'}
+        ]
+      },
+      {
+        label: '澳门',
+        value: '澳门',
+        children: [
+          {label: '全部', value: null},
+          {label: '大堂区', value: '大堂区'},
+          {label: '氹仔', value: '氹仔'},
+          {label: '风顺堂区', value: '风顺堂区'},
+          {label: '花地玛堂区', value: '花地玛堂区'},
+          {label: '路环岛', value: '路环岛'},
+          {label: '圣安多尼堂区', value: '圣安多尼堂区'},
+          {label: '望德堂区', value: '望德堂区'}
+        ]
+      }
     ]
   },
   {
     label: '阿尔巴尼亚',
     value: '阿尔巴尼亚',
     children: [
+      {label: '全部', value: null},
       {value: '爱尔巴桑', label: '爱尔巴桑'},
       {value: '迪勃拉', label: '迪勃拉'},
       {value: '地拉那', label: '地拉那'},
@@ -532,6 +745,7 @@ const node = [
     label: '阿尔及利亚',
     value: '阿尔及利亚',
     children: [
+      {label: '全部', value: null},
       {value: '阿德拉尔', label: '阿德拉尔'},
       {value: '阿尔及尔', label: '阿尔及尔'},
       {value: '艾因·德夫拉', label: '艾因·德夫拉'},
@@ -582,6 +796,7 @@ const node = [
     label: '阿富汗',
     value: '阿富汗',
     children: [
+      {label: '全部', value: null},
       {value: '赫拉特', label: '赫拉特'},
       {value: '喀布尔', label: '喀布尔'},
       {value: '坎大哈', label: '坎大哈'},
@@ -592,6 +807,7 @@ const node = [
     label: '阿根廷',
     value: '阿根廷',
     children: [
+      {label: '全部', value: null},
       {value: '巴拉那', label: '巴拉那'},
       {value: '别德马', label: '别德马'},
       {value: '波萨达斯', label: '波萨达斯'},
@@ -632,6 +848,7 @@ const node = [
     label: '阿拉伯联合酋长国',
     value: '阿拉伯联合酋长国',
     children: [
+      {label: '全部', value: null},
       {value: '阿布扎比', label: '阿布扎比'},
       {value: '艾因', label: '艾因'},
       {value: '迪拜', label: '迪拜'},
@@ -646,6 +863,7 @@ const node = [
     label: '阿曼',
     value: '阿曼',
     children: [
+      {label: '全部', value: null},
       {value: '巴提奈地区', label: '巴提奈地区'},
       {value: '达希莱地区', label: '达希莱地区'},
       {value: '东部地区', label: '东部地区'},
@@ -660,6 +878,7 @@ const node = [
     label: '阿塞拜疆',
     value: '阿塞拜疆',
     children: [
+      {label: '全部', value: null},
       {value: '阿布歇隆', label: '阿布歇隆'},
       {value: '哈奇马斯', label: '哈奇马斯'},
       {value: '卡尔巴卡尔', label: '卡尔巴卡尔'},
@@ -681,6 +900,7 @@ const node = [
     label: '埃及',
     value: '埃及',
     children: [
+      {label: '全部', value: null},
       {value: '阿斯旺', label: '阿斯旺'},
       {value: '古尔代盖', label: '古尔代盖'},
       {value: '开罗', label: '开罗'},
@@ -692,6 +912,7 @@ const node = [
     label: '埃塞俄比亚',
     value: '埃塞俄比亚',
     children: [
+      {label: '全部', value: null},
       {value: '阿法尔', label: '阿法尔'},
       {value: '阿姆哈拉', label: '阿姆哈拉'},
       {value: '奥罗米亚', label: '奥罗米亚'},
@@ -709,6 +930,7 @@ const node = [
     label: '爱尔兰',
     value: '爱尔兰',
     children: [
+      {label: '全部', value: null},
       {value: '奥法利', label: '奥法利'},
       {value: '蒂珀雷里', label: '蒂珀雷里'},
       {value: '都柏林', label: '都柏林'},
@@ -741,6 +963,7 @@ const node = [
     label: '爱沙尼亚',
     value: '爱沙尼亚',
     children: [
+      {label: '全部', value: null},
       {value: '贝尔瓦', label: '贝尔瓦'},
       {value: '哈留', label: '哈留'},
       {value: '拉普拉', label: '拉普拉'},
@@ -762,6 +985,7 @@ const node = [
     label: '安道尔',
     value: '安道尔',
     children: [
+      {label: '全部', value: null},
       {value: '安道尔城', label: '安道尔城'},
       {value: '奥尔迪诺', label: '奥尔迪诺'},
       {value: '恩坎普', label: '恩坎普'},
@@ -775,6 +999,7 @@ const node = [
     label: '安哥拉',
     value: '安哥拉',
     children: [
+        {label: '全部', value: null},
         {value: '北宽扎', label: '北宽扎'},
         {value: '北隆达', label: '北隆达'},
         {value: '本戈', label: '本戈'},
@@ -796,10 +1021,7 @@ const node = [
     ]
   },
   {label: '安圭拉', value: '安圭拉'},
-  {
-    label: '安提瓜岛和巴布达',
-    value: '安提瓜岛和巴布达'
-  },
+  {label: '安提瓜岛和巴布达', value: '安提瓜岛和巴布达'},
   {
     label: '澳大利亚',
     value: '澳大利亚',
@@ -808,6 +1030,7 @@ const node = [
         value: '北部地区',
         label: '北部地区',
         children: [
+        {label: '全部', value: null},
         {value: '北帕默斯顿', label: '北帕默斯顿'},
         {value: '达尔文', label: '达尔文'}
         ]
@@ -816,73 +1039,80 @@ const node = [
         value: '堪培拉',
         label: '堪培拉',
         children: [
-        {value: '堪培拉', label: '堪培拉'}
+          {label: '全部', value: null},
+          {value: '堪培拉', label: '堪培拉'}
         ]
       },
       {
         value: '昆士兰',
         label: '昆士兰',
         children: [
-        {value: '布里斯班', label: '布里斯班'},
-        {value: '黄金海岸', label: '黄金海岸'},
-        {value: '凯恩斯', label: '凯恩斯'},
-        {value: '日光海岸', label: '日光海岸'},
-        {value: '汤斯维尔', label: '汤斯维尔'},
-        {value: '图文巴', label: '图文巴'}
+          {label: '全部', value: null},
+          {value: '布里斯班', label: '布里斯班'},
+          {value: '黄金海岸', label: '黄金海岸'},
+          {value: '凯恩斯', label: '凯恩斯'},
+          {value: '日光海岸', label: '日光海岸'},
+          {value: '汤斯维尔', label: '汤斯维尔'},
+          {value: '图文巴', label: '图文巴'}
         ]
       },
       {
         value: '南澳大利亚',
         label: '南澳大利亚',
         children: [
-        {value: '阿德莱德', label: '阿德莱德'},
-        {value: '奥古斯塔港', label: '奥古斯塔港'},
-        {value: '甘比亚山', label: '甘比亚山'},
-        {value: '怀阿拉', label: '怀阿拉'},
-        {value: '林肯港', label: '林肯港'},
-        {value: '默里布里奇', label: '默里布里奇'},
-        {value: '皮里港', label: '皮里港'},
-        {value: '维克托港', label: '维克托港'}
+          {label: '全部', value: null},
+          {value: '阿德莱德', label: '阿德莱德'},
+          {value: '奥古斯塔港', label: '奥古斯塔港'},
+          {value: '甘比亚山', label: '甘比亚山'},
+          {value: '怀阿拉', label: '怀阿拉'},
+          {value: '林肯港', label: '林肯港'},
+          {value: '默里布里奇', label: '默里布里奇'},
+          {value: '皮里港', label: '皮里港'},
+          {value: '维克托港', label: '维克托港'}
         ]
       },
       {
         value: '塔斯马尼亚',
         label: '塔斯马尼亚',
         children: [
-        {value: '伯尼港', label: '伯尼港'},
-        {value: '德文波特', label: '德文波特'},
-        {value: '霍巴特', label: '霍巴特'},
-        {value: '朗塞斯顿', label: '朗塞斯顿'}
+          {label: '全部', value: null},
+          {value: '伯尼港', label: '伯尼港'},
+          {value: '德文波特', label: '德文波特'},
+          {value: '霍巴特', label: '霍巴特'},
+          {value: '朗塞斯顿', label: '朗塞斯顿'}
         ]
       },
       {
         value: '维多利亚',
         label: '维多利亚',
         children: [
-        {value: '吉朗', label: '吉朗'},
-        {value: '墨尔本', label: '墨尔本'}
+          {label: '全部', value: null},
+          {value: '吉朗', label: '吉朗'},
+          {value: '墨尔本', label: '墨尔本'}
         ]
       },
       {
         value: '西澳大利亚',
         label: '西澳大利亚',
         children: [
-        {value: '奥尔巴尼', label: '奥尔巴尼'},
-        {value: '班伯里', label: '班伯里'},
-        {value: '弗里曼特尔港', label: '弗里曼特尔港'},
-        {value: '杰拉尔顿', label: '杰拉尔顿'},
-        {value: '卡尔古利', label: '卡尔古利'},
-        {value: '曼哲拉', label: '曼哲拉'},
-        {value: '珀斯', label: '珀斯'}
+          {label: '全部', value: null},
+          {value: '奥尔巴尼', label: '奥尔巴尼'},
+          {value: '班伯里', label: '班伯里'},
+          {value: '弗里曼特尔港', label: '弗里曼特尔港'},
+          {value: '杰拉尔顿', label: '杰拉尔顿'},
+          {value: '卡尔古利', label: '卡尔古利'},
+          {value: '曼哲拉', label: '曼哲拉'},
+          {value: '珀斯', label: '珀斯'}
         ]
       },
       {
         value: '新南威尔士',
         label: '新南威尔士',
         children: [
-        {value: '纽卡斯尔', label: '纽卡斯尔'},
-        {value: '伍伦贡', label: '伍伦贡'},
-        {value: '悉尼', label: '悉尼'}
+          {label: '全部', value: null},
+          {value: '纽卡斯尔', label: '纽卡斯尔'},
+          {value: '伍伦贡', label: '伍伦贡'},
+          {value: '悉尼', label: '悉尼'}
         ]
       }
     ]
@@ -892,6 +1122,7 @@ const node = [
     label: '奥地利',
     value: '奥地利',
     children: [
+      {label: '全部', value: null},
       {value: '布尔根兰', label: '布尔根兰'},
       {value: '蒂罗尔', label: '蒂罗尔'},
       {value: '福拉尔贝格', label: '福拉尔贝格'},
@@ -912,6 +1143,7 @@ const node = [
     label: '巴布亚新几内亚',
     value: '巴布亚新几内亚',
     children: [
+      {label: '全部', value: null},
       {value: '北部', label: '北部'},
       {value: '布干维尔', label: '布干维尔'},
       {value: '东部高地', label: '东部高地'},
@@ -937,6 +1169,7 @@ const node = [
     label: '巴布亚新几内亚',
     value: '巴布亚新几内亚',
     children: [
+      {label: '全部', value: null},
       {value: '白沙瓦', label: '白沙瓦'},
       {value: '费萨拉巴德', label: '费萨拉巴德'},
       {value: '故吉软瓦拉', label: '故吉软瓦拉'},
@@ -952,6 +1185,7 @@ const node = [
     label: '巴拉圭',
     value: '巴拉圭',
     children: [
+      {label: '全部', value: null},
       {value: '阿曼拜', label: '阿曼拜'},
       {value: '阿耶斯总统省', label: '阿耶斯总统省'},
       {value: '巴拉瓜里', label: '巴拉瓜里'},
@@ -976,6 +1210,7 @@ const node = [
     label: '巴勒斯坦',
     value: '巴勒斯坦',
     children: [
+      {label: '全部', value: null},
       {value: '加沙地带', label: '加沙地带'},
       {value: '西岸', label: '西岸'}
     ]
@@ -984,6 +1219,7 @@ const node = [
     label: '巴林',
     value: '巴林',
     children: [
+      {label: '全部', value: null},
       {value: '北部', label: '北部'},
       {value: '哈德', label: '哈德'},
       {value: '哈马德', label: '哈马德'},
@@ -999,6 +1235,7 @@ const node = [
     label: '巴西',
     value: '巴西',
     children: [
+      {label: '全部', value: null},
       {value: '阿克里', label: '阿克里'},
       {value: '阿拉戈斯', label: '阿拉戈斯'},
       {value: '阿马帕', label: '阿马帕'},
@@ -1032,10 +1269,11 @@ const node = [
     label: '白俄罗斯',
     value: '白俄罗斯',
     children: [
+      {label: '全部', value: null},
       {value: '布列斯特', label: '布列斯特'},
       {value: '戈梅利', label: '戈梅利'},
       {value: '格罗德诺', label: '格罗德诺'},
-      {value: '明斯克市', label: '明斯克市'},
+      {value: '明斯克', label: '明斯克'},
       {value: '莫吉廖夫', label: '莫吉廖夫'},
       {value: '维捷布斯克', label: '维捷布斯克'}
     ]
@@ -1044,6 +1282,7 @@ const node = [
     label: '保加利亚',
     value: '保加利亚',
     children: [
+      {label: '全部', value: null},
       {value: '布尔加斯', label: '布尔加斯'},
       {value: '卡斯科伏', label: '卡斯科伏'},
       {value: '鲁塞', label: '鲁塞'},
@@ -1051,7 +1290,7 @@ const node = [
       {value: '蒙塔纳', label: '蒙塔纳'},
       {value: '普罗夫迪夫', label: '普罗夫迪夫'},
       {value: '索非亚', label: '索非亚'},
-      {value: '索非亚市', label: '索非亚市'},
+      {value: '索非亚', label: '索非亚'},
       {value: '瓦尔纳', label: '瓦尔纳'}
     ]
   },
@@ -1059,10 +1298,11 @@ const node = [
     label: '贝宁',
     value: '贝宁',
     children: [
+      {label: '全部', value: null},
       {value: '阿黎博里', label: '阿黎博里'},
       {value: '阿塔科拉', label: '阿塔科拉'},
       {value: '滨海', label: '滨海'},
-      {value: '波希康市', label: '波希康市'},
+      {value: '波希康', label: '波希康'},
       {value: '博尔古', label: '博尔古'},
       {value: '大西洋', label: '大西洋'},
       {value: '高原', label: '高原'},
@@ -1078,6 +1318,7 @@ const node = [
     label: '比利时',
     value: '比利时',
     children: [
+      {label: '全部', value: null},
       {value: '埃诺', label: '埃诺'},
       {value: '安特卫普', label: '安特卫普'},
       {value: '布拉班特-瓦隆', label: '布拉班特-瓦隆'},
@@ -1097,6 +1338,7 @@ const node = [
     label: '波兰',
     value: '波兰',
     children: [
+      {label: '全部', value: null},
       {value: '埃尔布隆格', label: '埃尔布隆格'},
       {value: '奥尔什丁', label: '奥尔什丁'},
       {value: '奥斯特罗文卡', label: '奥斯特罗文卡'},
@@ -1166,6 +1408,7 @@ const node = [
     label: '玻利维亚',
     value: '玻利维亚',
     children: [
+      {label: '全部', value: null},
       {value: '奥尔托', label: '奥尔托'},
       {value: '奥鲁罗', label: '奥鲁罗'},
       {value: '贝尼', label: '贝尼'},
@@ -1184,6 +1427,7 @@ const node = [
     label: '波斯尼亚和黑塞哥维那',
     value: '波斯尼亚和黑塞哥维那',
     children: [
+      {label: '全部', value: null},
       {value: '波萨维纳', label: '波萨维纳'},
       {value: '波斯尼亚－波德里涅', label: '波斯尼亚－波德里涅'},
       {value: '多米斯拉夫格勒', label: '多米斯拉夫格勒'},
@@ -1203,6 +1447,7 @@ const node = [
     label: '伯利兹',
     value: '伯利兹',
     children: [
+      {label: '全部', value: null},
       {value: '伯利兹', label: '伯利兹'},
       {value: '橘园', label: '橘园'},
       {value: '卡约', label: '卡约'},
@@ -1215,6 +1460,7 @@ const node = [
     label: '伯利兹',
     value: '伯利兹',
     children: [
+      {label: '全部', value: null},
       {value: '巴雷', label: '巴雷'},
       {value: '巴姆', label: '巴姆'},
       {value: '巴瓦', label: '巴瓦'},
@@ -1266,9 +1512,10 @@ const node = [
     label: '布隆迪',
     value: '布隆迪',
     children: [
+      {label: '全部', value: null},
       {value: '布班扎', label: '布班扎'},
       {value: '布鲁里', label: '布鲁里'},
-      {value: '布琼布拉城市', label: '布琼布拉城市'},
+      {value: '布琼布拉城', label: '布琼布拉城'},
       {value: '布琼布拉乡村', label: '布琼布拉乡村'},
       {value: '恩戈齐', label: '恩戈齐'},
       {value: '基龙多', label: '基龙多'},
@@ -1290,6 +1537,7 @@ const node = [
     label: '朝鲜',
     value: '朝鲜',
     children: [
+      {label: '全部', value: null},
       {value: '海州', label: '海州'},
       {value: '惠山', label: '惠山'},
       {value: '江界', label: '江界'},
@@ -1308,6 +1556,7 @@ const node = [
     label: '丹麦',
     value: '丹麦',
     children: [
+      {label: '全部', value: null},
       {value: '奥胡斯', label: '奥胡斯'},
       {value: '北日德兰', label: '北日德兰'},
       {value: '博恩霍尔姆', label: '博恩霍尔姆'},
@@ -1328,6 +1577,7 @@ const node = [
     label: '德国',
     value: '德国',
     children: [
+      {label: '全部', value: null},
       {value: '阿恩斯贝格', label: '阿恩斯贝格'},
       {value: '爱尔福特', label: '爱尔福特'},
       {value: '安斯巴格', label: '安斯巴格'},
@@ -1376,25 +1626,27 @@ const node = [
     label: '东帝汶',
     value: '东帝汶',
     children: [
-      {'value': '阿伊莱乌', 'label': '阿伊莱乌'},
-      {'value': '阿伊纳罗', 'label': '阿伊纳罗'},
-      {'value': '埃尔梅拉', 'label': '埃尔梅拉'},
-      {'value': '安贝诺', 'label': '安贝诺'},
-      {'value': '包考', 'label': '包考'},
-      {'value': '博博纳罗', 'label': '博博纳罗'},
-      {'value': '帝力', 'label': '帝力'},
-      {'value': '科瓦利马', 'label': '科瓦利马'},
-      {'value': '劳滕', 'label': '劳滕'},
-      {'value': '利基卡', 'label': '利基卡'},
-      {'value': '马纳图托', 'label': '马纳图托'},
-      {'value': '马努法伊', 'label': '马努法伊'},
-      {'value': '维克克', 'label': '维克克'}
+      {label: '全部', value: null},
+      {value: '阿伊莱乌', label: '阿伊莱乌'},
+      {value: '阿伊纳罗', label: '阿伊纳罗'},
+      {value: '埃尔梅拉', label: '埃尔梅拉'},
+      {value: '安贝诺', label: '安贝诺'},
+      {value: '包考', label: '包考'},
+      {value: '博博纳罗', label: '博博纳罗'},
+      {value: '帝力', label: '帝力'},
+      {value: '科瓦利马', label: '科瓦利马'},
+      {value: '劳滕', label: '劳滕'},
+      {value: '利基卡', label: '利基卡'},
+      {value: '马纳图托', label: '马纳图托'},
+      {value: '马努法伊', label: '马努法伊'},
+      {value: '维克克', label: '维克克'}
     ]
   },
   {
     label: '多哥',
     value: '多哥',
     children: [
+      {label: '全部', value: null},
       {value: '滨海区', label: '滨海区'},
       {value: '草原区', label: '草原区'},
       {value: '高原区', label: '高原区'},
@@ -1408,8 +1660,9 @@ const node = [
     label: '中非共和国',
     value: '中非共和国',
     children: [
+      {label: '全部', value: null},
       {value: '巴明吉-班戈兰', label: '巴明吉-班戈兰'},
-      {value: '班吉直辖市', label: '班吉直辖市'},
+      {value: '班吉直辖', label: '班吉直辖'},
       {value: '宾博', label: '宾博'},
       {value: '凯莫', label: '凯莫'},
       {value: '洛巴伊', label: '洛巴伊'},
@@ -1432,6 +1685,7 @@ const node = [
     label: '俄罗斯',
     value: '俄罗斯',
     children: [
+      {label: '全部', value: null},
       {value: '阿巴坎', label: '阿巴坎'},
       {value: '阿尔汉格尔斯克', label: '阿尔汉格尔斯克'},
       {value: '阿金斯科耶', label: '阿金斯科耶'},
@@ -1523,6 +1777,7 @@ const node = [
     label: '厄瓜多尔',
     value: '厄瓜多尔',
     children: [
+      {label: '全部', value: null},
       {value: '阿苏艾', label: '阿苏艾'},
       {value: '埃尔奥罗', label: '埃尔奥罗'},
       {value: '埃斯梅拉尔达斯', label: '埃斯梅拉尔达斯'},
@@ -1550,6 +1805,7 @@ const node = [
     label: '厄立特里亚',
     value: '厄立特里亚',
     children: [
+      {label: '全部', value: null},
       {value: '安塞巴', label: '安塞巴'},
       {value: '北红海', label: '北红海'},
       {value: '加什·巴尔卡', label: '加什·巴尔卡'},
@@ -1562,6 +1818,7 @@ const node = [
     label: '厄立特里亚',
     value: '厄立特里亚',
     children: [
+      {label: '全部', value: null},
       {value: '阿尔勒', label: '阿尔勒'},
       {value: '阿雅克修', label: '阿雅克修'},
       {value: '艾克斯', label: '艾克斯'},
@@ -1597,6 +1854,7 @@ const node = [
     label: '菲律宾',
     value: '菲律宾',
     children: [
+      {label: '全部', value: null},
       {value: '达沃', label: '达沃'},
       {value: '卡卢坎', label: '卡卢坎'},
       {value: '马尼拉', label: '马尼拉'},
@@ -1607,6 +1865,7 @@ const node = [
     label: '芬兰',
     value: '芬兰',
     children: [
+      {label: '全部', value: null},
       {value: '埃斯波', label: '埃斯波'},
       {value: '奥卢', label: '奥卢'},
       {value: '波里', label: '波里'},
@@ -1633,6 +1892,7 @@ const node = [
     label: '佛得角',
     value: '佛得角',
     children: [
+      {label: '全部', value: null},
       {value: '保尔', label: '保尔'},
       {value: '波多诺伏', label: '波多诺伏'},
       {value: '博阿维斯塔岛', label: '博阿维斯塔岛'},
@@ -1663,6 +1923,7 @@ const node = [
     label: '哥伦比亚',
     value: '哥伦比亚',
     children: [
+      {label: '全部', value: null},
       {value: '阿劳卡', label: '阿劳卡'},
       {value: '安提奥基亚', label: '安提奥基亚'},
       {value: '北桑坦德', label: '北桑坦德'},
@@ -1702,6 +1963,7 @@ const node = [
     label: '哥斯达黎加',
     value: '哥斯达黎加',
     children: [
+      {label: '全部', value: null},
       {value: '阿拉胡埃拉', label: '阿拉胡埃拉'},
       {value: '埃雷迪亚', label: '埃雷迪亚'},
       {value: '瓜纳卡斯特', label: '瓜纳卡斯特'},
@@ -1718,6 +1980,7 @@ const node = [
     label: '古巴',
     value: '古巴',
     children: [
+      {label: '全部', value: null},
       {value: '奥尔金', label: '奥尔金'},
       {value: '比那尔德里奥', label: '比那尔德里奥'},
       {value: '比亚克拉拉', label: '比亚克拉拉'},
@@ -1743,6 +2006,7 @@ const node = [
     label: '圭亚那',
     value: '圭亚那',
     children: [
+      {label: '全部', value: null},
       {value: '埃塞奎博群岛-西德梅拉拉', label: '埃塞奎博群岛-西德梅拉拉'},
       {value: '巴里马-瓦伊尼', label: '巴里马-瓦伊尼'},
       {value: '波默伦-苏佩纳姆', label: '波默伦-苏佩纳姆'},
@@ -1759,13 +2023,14 @@ const node = [
     label: '哈萨克斯坦',
     value: '哈萨克斯坦',
     children: [
+      {label: '全部', value: null},
       {value: '阿尔卡累克', label: '阿尔卡累克'},
       {value: '阿克莫拉', label: '阿克莫拉'},
       {value: '阿克苏', label: '阿克苏'},
       {value: '阿克托别', label: '阿克托别'},
       {value: '阿拉木图', label: '阿拉木图'},
       {value: '阿雷斯', label: '阿雷斯'},
-      {value: '阿斯塔纳市', label: '阿斯塔纳市'},
+      {value: '阿斯塔纳', label: '阿斯塔纳'},
       {value: '阿特劳', label: '阿特劳'},
       {value: '埃基巴斯图兹', label: '埃基巴斯图兹'},
       {value: '巴尔喀什', label: '巴尔喀什'},
@@ -1807,9 +2072,10 @@ const node = [
         value: '大邱',
         label: '大邱',
         children: [
-        {value: '达城郡', label: '达城郡'},
-        {value: '大邱', label: '大邱'},
-        {value: '寿城区', label: '寿城区'}
+          {label: '全部', value: null},
+          {value: '达城郡', label: '达城郡'},
+          {value: '大邱', label: '大邱'},
+          {value: '寿城区', label: '寿城区'}
         ]
       },
       {
@@ -1832,164 +2098,170 @@ const node = [
         value: '江原道',
         label: '江原道',
         children: [
-        {value: '春川市', label: '春川市'},
-        {value: '东海市', label: '东海市'},
-        {value: '高城郡', label: '高城郡'},
-        {value: '横城郡', label: '横城郡'},
-        {value: '洪川郡', label: '洪川郡'},
-        {value: '华川郡', label: '华川郡'},
-        {value: '江陵市', label: '江陵市'},
-        {value: '旌善郡', label: '旌善郡'},
-        {value: '麟蹄郡', label: '麟蹄郡'},
-        {value: '宁越郡', label: '宁越郡'},
-        {value: '平昌郡', label: '平昌郡'},
-        {value: '三陟市', label: '三陟市'},
-        {value: '束草市', label: '束草市'},
-        {value: '太白市', label: '太白市'},
-        {value: '铁原郡', label: '铁原郡'},
-        {value: '襄阳郡', label: '襄阳郡'},
-        {value: '杨口郡', label: '杨口郡'},
-        {value: '原州市', label: '原州市'}
+          {label: '全部', value: null},
+          {value: '春川', label: '春川'},
+          {value: '东海', label: '东海'},
+          {value: '高城郡', label: '高城郡'},
+          {value: '横城郡', label: '横城郡'},
+          {value: '洪川郡', label: '洪川郡'},
+          {value: '华川郡', label: '华川郡'},
+          {value: '江陵', label: '江陵'},
+          {value: '旌善郡', label: '旌善郡'},
+          {value: '麟蹄郡', label: '麟蹄郡'},
+          {value: '宁越郡', label: '宁越郡'},
+          {value: '平昌郡', label: '平昌郡'},
+          {value: '三陟', label: '三陟'},
+          {value: '束草', label: '束草'},
+          {value: '太白', label: '太白'},
+          {value: '铁原郡', label: '铁原郡'},
+          {value: '襄阳郡', label: '襄阳郡'},
+          {value: '杨口郡', label: '杨口郡'},
+          {value: '原州', label: '原州'}
         ]
       },
       {
         value: '京畿道',
         label: '京畿道',
         children: [
-        {value: '安城市', label: '安城市'},
-        {value: '安山市', label: '安山市'},
-        {value: '安养市', label: '安养市'},
-        {value: '抱川市', label: '抱川市'},
-        {value: '城南市', label: '城南市'},
-        {value: '东豆川市', label: '东豆川市'},
-        {value: '富川市', label: '富川市'},
-        {value: '高阳市', label: '高阳市'},
-        {value: '光明市', label: '光明市'},
-        {value: '广州市', label: '广州市'},
-        {value: '果川市', label: '果川市'},
-        {value: '河南市', label: '河南市'},
-        {value: '华城市', label: '华城市'},
-        {value: '加平郡', label: '加平郡'},
-        {value: '金浦市', label: '金浦市'},
-        {value: '九里市', label: '九里市'},
-        {value: '军浦市', label: '军浦市'},
-        {value: '骊州郡', label: '骊州郡'},
-        {value: '利川市', label: '利川市'},
-        {value: '涟川郡', label: '涟川郡'},
-        {value: '龙仁市', label: '龙仁市'},
-        {value: '南杨州市', label: '南杨州市'},
-        {value: '平泽市', label: '平泽市'},
-        {value: '坡州市', label: '坡州市'},
-        {value: '始兴市', label: '始兴市'},
-        {value: '水原市', label: '水原市'},
-        {value: '乌山市', label: '乌山市'},
-        {value: '扬平郡', label: '扬平郡'},
-        {value: '杨州市', label: '杨州市'},
-        {value: '仪旺市', label: '仪旺市'},
-        {value: '议政府市', label: '议政府市'}
+          {label: '全部', value: null},
+          {value: '安城', label: '安城'},
+          {value: '安山', label: '安山'},
+          {value: '安养', label: '安养'},
+          {value: '抱川', label: '抱川'},
+          {value: '城南', label: '城南'},
+          {value: '东豆川', label: '东豆川'},
+          {value: '富川', label: '富川'},
+          {value: '高阳', label: '高阳'},
+          {value: '光明', label: '光明'},
+          {value: '广州', label: '广州'},
+          {value: '果川', label: '果川'},
+          {value: '河南', label: '河南'},
+          {value: '华城', label: '华城'},
+          {value: '加平郡', label: '加平郡'},
+          {value: '金浦', label: '金浦'},
+          {value: '九里', label: '九里'},
+          {value: '军浦', label: '军浦'},
+          {value: '骊州郡', label: '骊州郡'},
+          {value: '利川', label: '利川'},
+          {value: '涟川郡', label: '涟川郡'},
+          {value: '龙仁', label: '龙仁'},
+          {value: '南杨州', label: '南杨州'},
+          {value: '平泽', label: '平泽'},
+          {value: '坡州', label: '坡州'},
+          {value: '始兴', label: '始兴'},
+          {value: '水原', label: '水原'},
+          {value: '乌山', label: '乌山'},
+          {value: '扬平郡', label: '扬平郡'},
+          {value: '杨州', label: '杨州'},
+          {value: '仪旺', label: '仪旺'},
+          {value: '议政府', label: '议政府'}
         ]
       },
       {
         value: '庆尚北道',
         label: '庆尚北道',
         children: [
-        {value: '安东市', label: '安东市'},
-        {value: '奉化郡', label: '奉化郡'},
-        {value: '高灵郡', label: '高灵郡'},
-        {value: '龟尾市', label: '龟尾市'},
-        {value: '金泉市', label: '金泉市'},
-        {value: '军威郡', label: '军威郡'},
-        {value: '醴泉郡', label: '醴泉郡'},
-        {value: '浦项市', label: '浦项市'},
-        {value: '漆谷郡', label: '漆谷郡'},
-        {value: '淸道郡', label: '淸道郡'},
-        {value: '靑松郡', label: '靑松郡'},
-        {value: '庆山市', label: '庆山市'},
-        {value: '庆州市', label: '庆州市'},
-        {value: '荣州市', label: '荣州市'},
-        {value: '尙州市', label: '尙州市'},
-        {value: '蔚珍郡', label: '蔚珍郡'},
-        {value: '闻庆市', label: '闻庆市'},
-        {value: '星州郡', label: '星州郡'},
-        {value: '义城郡', label: '义城郡'},
-        {value: '英阳郡', label: '英阳郡'},
-        {value: '盈德郡', label: '盈德郡'},
-        {value: '永川市', label: '永川市'},
-        {value: '郁陵郡', label: '郁陵郡'}
+          {label: '全部', value: null},
+          {value: '安东', label: '安东'},
+          {value: '奉化郡', label: '奉化郡'},
+          {value: '高灵郡', label: '高灵郡'},
+          {value: '龟尾', label: '龟尾'},
+          {value: '金泉', label: '金泉'},
+          {value: '军威郡', label: '军威郡'},
+          {value: '醴泉郡', label: '醴泉郡'},
+          {value: '浦项', label: '浦项'},
+          {value: '漆谷郡', label: '漆谷郡'},
+          {value: '淸道郡', label: '淸道郡'},
+          {value: '靑松郡', label: '靑松郡'},
+          {value: '庆山', label: '庆山'},
+          {value: '庆州', label: '庆州'},
+          {value: '荣州', label: '荣州'},
+          {value: '尙州', label: '尙州'},
+          {value: '蔚珍郡', label: '蔚珍郡'},
+          {value: '闻庆', label: '闻庆'},
+          {value: '星州郡', label: '星州郡'},
+          {value: '义城郡', label: '义城郡'},
+          {value: '英阳郡', label: '英阳郡'},
+          {value: '盈德郡', label: '盈德郡'},
+          {value: '永川', label: '永川'},
+          {value: '郁陵郡', label: '郁陵郡'}
         ]
       },
       {
         value: '庆尚南道',
         label: '庆尚南道',
         children: [
-        {value: '昌宁郡', label: '昌宁郡'},
-        {value: '昌原市', label: '昌原市'},
-        {value: '固城郡', label: '固城郡'},
-        {value: '河东郡', label: '河东郡'},
-        {value: '金海市', label: '金海市'},
-        {value: '晋州市', label: '晋州市'},
-        {value: '居昌郡', label: '居昌郡'},
-        {value: '巨济市', label: '巨济市'},
-        {value: '梁山市', label: '梁山市'},
-        {value: '马山市', label: '马山市'},
-        {value: '密阳市', label: '密阳市'},
-        {value: '南海郡', label: '南海郡'},
-        {value: '山淸郡', label: '山淸郡'},
-        {value: '泗川市', label: '泗川市'},
-        {value: '统营市', label: '统营市'},
-        {value: '陜川郡', label: '陜川郡'},
-        {value: '咸安郡', label: '咸安郡'},
-        {value: '咸阳郡', label: '咸阳郡'},
-        {value: '宜宁郡', label: '宜宁郡'},
-        {value: '鎭海市', label: '鎭海市'}
+          {label: '全部', value: null},
+          {value: '昌宁郡', label: '昌宁郡'},
+          {value: '昌原', label: '昌原'},
+          {value: '固城郡', label: '固城郡'},
+          {value: '河东郡', label: '河东郡'},
+          {value: '金海', label: '金海'},
+          {value: '晋州', label: '晋州'},
+          {value: '居昌郡', label: '居昌郡'},
+          {value: '巨济', label: '巨济'},
+          {value: '梁山', label: '梁山'},
+          {value: '马山', label: '马山'},
+          {value: '密阳', label: '密阳'},
+          {value: '南海郡', label: '南海郡'},
+          {value: '山淸郡', label: '山淸郡'},
+          {value: '泗川', label: '泗川'},
+          {value: '统营', label: '统营'},
+          {value: '陜川郡', label: '陜川郡'},
+          {value: '咸安郡', label: '咸安郡'},
+          {value: '咸阳郡', label: '咸阳郡'},
+          {value: '宜宁郡', label: '宜宁郡'},
+          {value: '鎭海', label: '鎭海'}
         ]
       },
       {
         value: '全罗北道',
         label: '全罗北道',
         children: [
-        {value: '淳昌郡', label: '淳昌郡'},
-        {value: '扶安郡', label: '扶安郡'},
-        {value: '高敞郡', label: '高敞郡'},
-        {value: '金堤市', label: '金堤市'},
-        {value: '井邑市', label: '井邑市'},
-        {value: '茂朱郡', label: '茂朱郡'},
-        {value: '南原市', label: '南原市'},
-        {value: '全州市', label: '全州市'},
-        {value: '群山市', label: '群山市'},
-        {value: '任实郡', label: '任实郡'},
-        {value: '完州郡', label: '完州郡'},
-        {value: '益山市', label: '益山市'},
-        {value: '长水郡', label: '长水郡'},
-        {value: '鎭安郡', label: '鎭安郡'}
+          {label: '全部', value: null},
+          {value: '淳昌郡', label: '淳昌郡'},
+          {value: '扶安郡', label: '扶安郡'},
+          {value: '高敞郡', label: '高敞郡'},
+          {value: '金堤', label: '金堤'},
+          {value: '井邑', label: '井邑'},
+          {value: '茂朱郡', label: '茂朱郡'},
+          {value: '南原', label: '南原'},
+          {value: '全州', label: '全州'},
+          {value: '群山', label: '群山'},
+          {value: '任实郡', label: '任实郡'},
+          {value: '完州郡', label: '完州郡'},
+          {value: '益山', label: '益山'},
+          {value: '长水郡', label: '长水郡'},
+          {value: '鎭安郡', label: '鎭安郡'}
         ]
       },
       {
         value: '全罗南道',
         label: '全罗南道',
         children: [
-        {value: '宝城郡', label: '宝城郡'},
-        {value: '高兴郡', label: '高兴郡'},
-        {value: '谷城郡', label: '谷城郡'},
-        {value: '莞岛郡', label: '莞岛郡'},
-        {value: '光阳市', label: '光阳市'},
-        {value: '海南郡', label: '海南郡'},
-        {value: '和顺郡', label: '和顺郡'},
-        {value: '康津郡', label: '康津郡'},
-        {value: '丽水市', label: '丽水市'},
-        {value: '灵光郡', label: '灵光郡'},
-        {value: '灵岩郡', label: '灵岩郡'},
-        {value: '罗州市', label: '罗州市'},
-        {value: '木浦市', label: '木浦市'},
-        {value: '求礼郡', label: '求礼郡'},
-        {value: '顺天市', label: '顺天市'},
-        {value: '潭阳郡', label: '潭阳郡'},
-        {value: '务安郡', label: '务安郡'},
-        {value: '咸平郡', label: '咸平郡'},
-        {value: '新安郡', label: '新安郡'},
-        {value: '长兴郡', label: '长兴郡'},
-        {value: '长兴郡', label: '长兴郡'},
-        {value: '珍岛郡', label: '珍岛郡'}
+          {label: '全部', value: null},
+          {value: '宝城郡', label: '宝城郡'},
+          {value: '高兴郡', label: '高兴郡'},
+          {value: '谷城郡', label: '谷城郡'},
+          {value: '莞岛郡', label: '莞岛郡'},
+          {value: '光阳', label: '光阳'},
+          {value: '海南郡', label: '海南郡'},
+          {value: '和顺郡', label: '和顺郡'},
+          {value: '康津郡', label: '康津郡'},
+          {value: '丽水', label: '丽水'},
+          {value: '灵光郡', label: '灵光郡'},
+          {value: '灵岩郡', label: '灵岩郡'},
+          {value: '罗州', label: '罗州'},
+          {value: '木浦', label: '木浦'},
+          {value: '求礼郡', label: '求礼郡'},
+          {value: '顺天', label: '顺天'},
+          {value: '潭阳郡', label: '潭阳郡'},
+          {value: '务安郡', label: '务安郡'},
+          {value: '咸平郡', label: '咸平郡'},
+          {value: '新安郡', label: '新安郡'},
+          {value: '长兴郡', label: '长兴郡'},
+          {value: '长兴郡', label: '长兴郡'},
+          {value: '珍岛郡', label: '珍岛郡'}
         ]
       },
       {
@@ -2012,40 +2284,42 @@ const node = [
         value: '忠清北道',
         label: '忠清北道',
         children: [
-        {value: '报恩郡', label: '报恩郡'},
-        {value: '曾坪郡', label: '曾坪郡'},
-        {value: '丹阳郡', label: '丹阳郡'},
-        {value: '堤川市', label: '堤川市'},
-        {value: '槐山郡', label: '槐山郡'},
-        {value: '淸原郡', label: '淸原郡'},
-        {value: '淸州市', label: '淸州市'},
-        {value: '沃川郡', label: '沃川郡'},
-        {value: '阴城郡', label: '阴城郡'},
-        {value: '永同郡', label: '永同郡'},
-        {value: '鎭川郡', label: '鎭川郡'},
-        {value: '忠州市', label: '忠州市'}
+          {label: '全部', value: null},
+          {value: '报恩郡', label: '报恩郡'},
+          {value: '曾坪郡', label: '曾坪郡'},
+          {value: '丹阳郡', label: '丹阳郡'},
+          {value: '堤川', label: '堤川'},
+          {value: '槐山郡', label: '槐山郡'},
+          {value: '淸原郡', label: '淸原郡'},
+          {value: '淸州', label: '淸州'},
+          {value: '沃川郡', label: '沃川郡'},
+          {value: '阴城郡', label: '阴城郡'},
+          {value: '永同郡', label: '永同郡'},
+          {value: '鎭川郡', label: '鎭川郡'},
+          {value: '忠州', label: '忠州'}
         ]
       },
       {
         value: '忠清南道',
         label: '忠清南道',
         children: [
-        {value: '保宁市', label: '保宁市'},
-        {value: '扶余郡', label: '扶余郡'},
-        {value: '公州市', label: '公州市'},
-        {value: '洪城郡', label: '洪城郡'},
-        {value: '鸡龙市', label: '鸡龙市'},
-        {value: '锦山郡', label: '锦山郡'},
-        {value: '礼山郡', label: '礼山郡'},
-        {value: '论山市', label: '论山市'},
-        {value: '青阳郡', label: '青阳郡'},
-        {value: '瑞山市', label: '瑞山市'},
-        {value: '舒川郡', label: '舒川郡'},
-        {value: '泰安郡', label: '泰安郡'},
-        {value: '唐津郡', label: '唐津郡'},
-        {value: '天安市', label: '天安市'},
-        {value: '牙山市', label: '牙山市'},
-        {value: '燕岐郡', label: '燕岐郡'}
+          {label: '全部', value: null},
+          {value: '保宁', label: '保宁'},
+          {value: '扶余郡', label: '扶余郡'},
+          {value: '公州', label: '公州'},
+          {value: '洪城郡', label: '洪城郡'},
+          {value: '鸡龙', label: '鸡龙'},
+          {value: '锦山郡', label: '锦山郡'},
+          {value: '礼山郡', label: '礼山郡'},
+          {value: '论山', label: '论山'},
+          {value: '青阳郡', label: '青阳郡'},
+          {value: '瑞山', label: '瑞山'},
+          {value: '舒川郡', label: '舒川郡'},
+          {value: '泰安郡', label: '泰安郡'},
+          {value: '唐津郡', label: '唐津郡'},
+          {value: '天安', label: '天安'},
+          {value: '牙山', label: '牙山'},
+          {value: '燕岐郡', label: '燕岐郡'}
         ]
       }
     ]
@@ -2054,6 +2328,7 @@ const node = [
     label: '荷兰',
     value: '荷兰',
     children: [
+      {label: '全部', value: null},
       {value: '阿尔梅勒', label: '阿尔梅勒'},
       {value: '阿默斯福特', label: '阿默斯福特'},
       {value: '阿姆斯特丹', label: '阿姆斯特丹'},
@@ -2090,6 +2365,7 @@ const node = [
     label: '洪都拉斯',
     value: '洪都拉斯',
     children: [
+      {label: '全部', value: null},
       {value: '阿特兰蒂达', label: '阿特兰蒂达'},
       {value: '埃尔帕拉伊索', label: '埃尔帕拉伊索'},
       {value: '奥科特佩克', label: '奥科特佩克'},
@@ -2115,6 +2391,7 @@ const node = [
     label: '基里巴斯',
     value: '基里巴斯',
     children: [
+      {label: '全部', value: null},
       {value: '菲尼克斯群岛', label: '菲尼克斯群岛'},
       {value: '吉尔伯特群岛', label: '吉尔伯特群岛'},
       {value: '莱恩群岛', label: '莱恩群岛'}
@@ -2124,6 +2401,7 @@ const node = [
     label: '吉布提',
     value: '吉布提',
     children: [
+      {label: '全部', value: null},
       {value: '阿里萨比赫区', label: '阿里萨比赫区'},
       {value: '奥博克区', label: '奥博克区'},
       {value: '迪基勒区', label: '迪基勒区'},
@@ -2134,9 +2412,10 @@ const node = [
     label: '吉尔吉斯斯坦',
     value: '吉尔吉斯斯坦',
     children: [
+      {label: '全部', value: null},
       {value: '奥什', label: '奥什'},
       {value: '巴特肯', label: '巴特肯'},
-      {value: '比什凯克市', label: '比什凯克市'},
+      {value: '比什凯克', label: '比什凯克'},
       {value: '楚河', label: '楚河'},
       {value: '贾拉拉巴德', label: '贾拉拉巴德'},
       {value: '卡拉巴尔塔', label: '卡拉巴尔塔'},
@@ -2156,6 +2435,7 @@ const node = [
     label: '几内亚',
     value: '几内亚',
     children: [
+      {label: '全部', value: null},
       {value: '博凯', label: '博凯'},
       {value: '恩泽雷科雷', label: '恩泽雷科雷'},
       {value: '法拉纳', label: '法拉纳'},
@@ -2171,6 +2451,7 @@ const node = [
     label: '加拿大',
     value: '加拿大',
     children: [
+      {label: '全部', value: null},
       {value: '阿伯茨福', label: '阿伯茨福'},
       {value: '埃德蒙顿', label: '埃德蒙顿'},
       {value: '奥沙瓦', label: '奥沙瓦'},
@@ -2211,6 +2492,7 @@ const node = [
     label: '加纳',
     value: '加纳',
     children: [
+      {label: '全部', value: null},
       {value: '阿散蒂', label: '阿散蒂'},
       {value: '奥布阿西', label: '奥布阿西'},
       {value: '北部', label: '北部'},
@@ -2228,6 +2510,7 @@ const node = [
     label: '加蓬',
     value: '加蓬',
     children: [
+      {label: '全部', value: null},
       {value: '奥果韦-洛洛', label: '奥果韦-洛洛'},
       {value: '奥果韦-伊温多', label: '奥果韦-伊温多'},
       {value: '滨海奥果韦', label: '滨海奥果韦'},
@@ -2243,10 +2526,11 @@ const node = [
     label: '柬埔寨',
     value: '柬埔寨',
     children: [
+      {label: '全部', value: null},
       {value: '奥多棉吉', label: '奥多棉吉'},
-      {value: '白马市', label: '白马市'},
+      {value: '白马', label: '白马'},
       {value: '柏威夏', label: '柏威夏'},
-      {value: '拜林市', label: '拜林市'},
+      {value: '拜林', label: '拜林'},
       {value: '班迭棉吉', label: '班迭棉吉'},
       {value: '磅清扬', label: '磅清扬'},
       {value: '磅士卑', label: '磅士卑'},
@@ -2258,14 +2542,14 @@ const node = [
       {value: '干丹', label: '干丹'},
       {value: '戈公', label: '戈公'},
       {value: '贡布', label: '贡布'},
-      {value: '金边市', label: '金边市'},
+      {value: '金边', label: '金边'},
       {value: '桔井', label: '桔井'},
       {value: '腊塔纳基里', label: '腊塔纳基里'},
       {value: '马德望', label: '马德望'},
       {value: '蒙多基里', label: '蒙多基里'},
       {value: '菩萨', label: '菩萨'},
       {value: '上丁', label: '上丁'},
-      {value: '西哈努克市', label: '西哈努克市'},
+      {value: '西哈努克', label: '西哈努克'},
       {value: '暹粒', label: '暹粒'}
     ]
   },
@@ -2273,9 +2557,10 @@ const node = [
     label: '捷克共和国',
     value: '捷克共和国',
     children: [
+      {label: '全部', value: null},
       {value: '奥洛穆茨', label: '奥洛穆茨'},
       {value: '比尔森', label: '比尔森'},
-      {value: '布拉格直辖市', label: '布拉格直辖市'},
+      {value: '布拉格直辖', label: '布拉格直辖'},
       {value: '赫拉德茨-克拉洛韦', label: '赫拉德茨-克拉洛韦'},
       {value: '卡罗维发利', label: '卡罗维发利'},
       {value: '利贝雷克', label: '利贝雷克'},
@@ -2292,6 +2577,7 @@ const node = [
     label: '津巴布韦',
     value: '津巴布韦',
     children: [
+      {label: '全部', value: null},
       {value: '北马塔贝莱兰', label: '北马塔贝莱兰'},
       {value: '布拉瓦约', label: '布拉瓦约'},
       {value: '东马绍纳兰', label: '东马绍纳兰'},
@@ -2308,6 +2594,7 @@ const node = [
     label: '喀麦隆',
     value: '喀麦隆',
     children: [
+      {label: '全部', value: null},
       {value: '阿达马瓦', label: '阿达马瓦'},
       {value: '北部', label: '北部'},
       {value: '北端', label: '北端'},
@@ -2324,6 +2611,7 @@ const node = [
     label: '卡塔尔',
     value: '卡塔尔',
     children: [
+      {label: '全部', value: null},
       {value: '北部', label: '北部'},
       {value: '多哈', label: '多哈'},
       {value: '古韦里耶', label: '古韦里耶'},
@@ -2342,6 +2630,7 @@ const node = [
     label: '科特迪瓦',
     value: '科特迪瓦',
     children: [
+      {label: '全部', value: null},
       {value: '阿涅比', label: '阿涅比'},
       {value: '巴芬', label: '巴芬'},
       {value: '邦达马河谷', label: '邦达马河谷'},
@@ -2368,6 +2657,7 @@ const node = [
     label: '克罗地亚',
     value: '克罗地亚',
     children: [
+      {label: '全部', value: null},
       {value: '奥西耶克-巴拉尼亚', label: '奥西耶克-巴拉尼亚'},
       {value: '别洛瓦尔-比洛戈拉', label: '别洛瓦尔-比洛戈拉'},
       {value: '滨海和山区', label: '滨海和山区'},
@@ -2380,7 +2670,7 @@ const node = [
       {value: '利卡-塞尼', label: '利卡-塞尼'},
       {value: '梅吉穆列', label: '梅吉穆列'},
       {value: '萨格勒布', label: '萨格勒布'},
-      {value: '萨格勒布市', label: '萨格勒布市'},
+      {value: '萨格勒布', label: '萨格勒布'},
       {value: '斯普利特-达尔马提亚', label: '斯普利特-达尔马提亚'},
       {value: '瓦拉日丁', label: '瓦拉日丁'},
       {value: '维罗维蒂察-波德拉维纳', label: '维罗维蒂察-波德拉维纳'},
@@ -2395,6 +2685,7 @@ const node = [
     label: '肯尼亚',
     value: '肯尼亚',
     children: [
+      {label: '全部', value: null},
       {value: '埃尔格约-马拉奎特', label: '埃尔格约-马拉奎特'},
       {value: '巴林戈', label: '巴林戈'},
       {value: '邦戈马', label: '邦戈马'},
@@ -2450,6 +2741,7 @@ const node = [
     label: '拉脱维亚',
     value: '拉脱维亚',
     children: [
+      {label: '全部', value: null},
       {value: '阿卢克斯内', label: '阿卢克斯内'},
       {value: '爱兹克劳克雷', label: '爱兹克劳克雷'},
       {value: '奥格雷', label: '奥格雷'},
@@ -2482,6 +2774,7 @@ const node = [
     label: '莱索托',
     value: '莱索托',
     children: [
+      {label: '全部', value: null},
       {value: '伯里亚', label: '伯里亚'},
       {value: '布塔布泰', label: '布塔布泰'},
       {value: '古廷', label: '古廷'},
@@ -2498,6 +2791,7 @@ const node = [
     label: '老挝',
     value: '老挝',
     children: [
+      {label: '全部', value: null},
       {value: '阿速坡', label: '阿速坡'},
       {value: '波里坎赛', label: '波里坎赛'},
       {value: '博乔', label: '博乔'},
@@ -2521,18 +2815,20 @@ const node = [
     label: '黎巴嫩',
     value: '黎巴嫩',
     children: [
+      {label: '全部', value: null},
       {value: '北部', label: '北部'},
       {value: '贝卡', label: '贝卡'},
       {value: '贝鲁特', label: '贝鲁特'},
       {value: '黎巴嫩山', label: '黎巴嫩山'},
-      {value: '奈拜提耶市', label: '奈拜提耶市'},
-      {value: '南部', label: '奈拜提耶市'}
+      {value: '奈拜提耶', label: '奈拜提耶'},
+      {value: '南部', label: '奈拜提耶'}
     ]
   },
   {
     label: '利比里亚',
     value: '利比里亚',
     children: [
+      {label: '全部', value: null},
       {value: '巴波卢', label: '巴波卢'},
       {value: '邦', label: '邦'},
       {value: '博波卢', label: '博波卢'},
@@ -2557,6 +2853,7 @@ const node = [
     label: '立陶宛',
     value: '立陶宛',
     children: [
+      {label: '全部', value: null},
       {value: '阿利图斯', label: '阿利图斯'},
       {value: '考纳斯', label: '考纳斯'},
       {value: '克莱佩达', label: '克莱佩达'},
@@ -2576,6 +2873,7 @@ const node = [
     label: '卢森堡',
     value: '卢森堡',
     children: [
+      {label: '全部', value: null},
       {value: '迪基希', label: '迪基希'},
       {value: '格雷文马赫', label: '格雷文马赫'},
       {value: '卢森堡', label: '卢森堡'}
@@ -2585,13 +2883,14 @@ const node = [
     label: '卢旺达',
     value: '卢旺达',
     children: [
+      {label: '全部', value: null},
       {value: '比温巴', label: '比温巴'},
       {value: '布塔雷', label: '布塔雷'},
       {value: '恩延扎', label: '恩延扎'},
       {value: '基本古', label: '基本古'},
       {value: '基布耶', label: '基布耶'},
       {value: '基加利-恩加利', label: '基加利-恩加利'},
-      {value: '基加利市', label: '基加利市'},
+      {value: '基加利', label: '基加利'},
       {value: '吉孔戈罗', label: '吉孔戈罗'},
       {value: '吉塞尼', label: '吉塞尼'},
       {value: '吉塔拉马', label: '吉塔拉马'},
@@ -2607,6 +2906,7 @@ const node = [
     label: '罗马尼亚',
     value: '罗马尼亚',
     children: [
+      {label: '全部', value: null},
       {value: '阿尔巴尤利亚', label: '阿尔巴尤利亚'},
       {value: '阿拉德', label: '阿拉德'},
       {value: '奥拉迪亚', label: '奥拉迪亚'},
@@ -2654,6 +2954,7 @@ const node = [
     label: '马达加斯加',
     value: '马达加斯加',
     children: [
+      {label: '全部', value: null},
       {value: '安齐拉纳纳', label: '安齐拉纳纳'},
       {value: '菲亚纳兰楚阿', label: '菲亚纳兰楚阿'},
       {value: '马哈赞加', label: '马哈赞加'},
@@ -2666,6 +2967,7 @@ const node = [
     label: '马尔代夫',
     value: '马尔代夫',
     children: [
+      {label: '全部', value: null},
       {value: '阿杜', label: '阿杜'},
       {value: '北阿里', label: '北阿里'},
       {value: '北蒂拉杜马蒂', label: '北蒂拉杜马蒂'},
@@ -2694,6 +2996,7 @@ const node = [
     label: '马拉维',
     value: '马拉维',
     children: [
+      {label: '全部', value: null},
       {value: '北部区', label: '北部区'},
       {value: '南部区', label: '南部区'},
       {value: '中央区', label: '中央区'}
@@ -2707,6 +3010,7 @@ const node = [
         value: '槟榔屿',
         label: '槟榔屿',
         children: [
+          {label: '全部', value: null},
           {value: '北海', label: '北海'},
           {value: '槟城', label: '槟城'},
           {value: '大山脚', label: '大山脚'},
@@ -2714,9 +3018,10 @@ const node = [
         ]
       },
       {
-        value: '玻璃市',
-        label: '玻璃市',
+        value: '玻璃',
+        label: '玻璃',
         children: [
+          {label: '全部', value: null},
           {value: '加央', label: '加央'}
         ]
       },
@@ -2724,6 +3029,7 @@ const node = [
         value: '丁加奴',
         label: '丁加奴',
         children: [
+          {label: '全部', value: null},
           {value: '甘马挽', label: '甘马挽'},
           {value: '瓜拉丁加奴', label: '瓜拉丁加奴'},
           {value: '龙运', label: '龙运'},
@@ -2737,6 +3043,7 @@ const node = [
         value: '吉打',
         label: '吉打',
         children: [
+          {label: '全部', value: null},
           {value: '巴东得腊', label: '巴东得腊'},
           {value: '笨筒', label: '笨筒'},
           {value: '浮罗交怡', label: '浮罗交怡'},
@@ -2752,6 +3059,7 @@ const node = [
         value: '吉兰丹',
         label: '吉兰丹',
         children: [
+          {label: '全部', value: null},
           {value: '巴西富地', label: '巴西富地'},
           {value: '巴西马', label: '巴西马'},
           {value: '丹那美拉', label: '丹那美拉'},
@@ -2768,6 +3076,7 @@ const node = [
         value: '吉隆坡',
         label: '吉隆坡',
         children: [
+          {label: '全部', value: null},
           {value: '吉隆坡', label: '吉隆坡'}
         ]
       },
@@ -2775,7 +3084,8 @@ const node = [
         value: '马六甲',
         label: '马六甲',
         children: [
-          {value: '马六甲市', label: '马六甲市'},
+          {label: '全部', value: null},
+          {value: '马六甲', label: '马六甲'},
           {value: '亚罗牙也', label: '亚罗牙也'},
           {value: '野新', label: '野新'}
         ]
@@ -2784,6 +3094,7 @@ const node = [
         value: '纳闽',
         label: '纳闽',
         children: [
+          {label: '全部', value: null},
           {value: '纳闽', label: '纳闽'},
           {value: '维多利亚', label: '维多利亚'}
         ]
@@ -2792,6 +3103,7 @@ const node = [
         value: '彭亨',
         label: '彭亨',
         children: [
+          {label: '全部', value: null},
           {value: '百乐', label: '百乐'},
           {value: '北根', label: '北根'},
           {value: '淡马鲁', label: '淡马鲁'},
@@ -2809,6 +3121,7 @@ const node = [
         value: '霹雳',
         label: '霹雳',
         children: [
+          {label: '全部', value: null},
           {value: '安顺', label: '安顺'},
           {value: '丹绒马', label: '丹绒马'},
           {value: '和丰', label: '和丰'},
@@ -2823,6 +3136,7 @@ const node = [
         value: '柔佛',
         label: '柔佛',
         children: [
+          {label: '全部', value: null},
           {value: '笨珍', label: '笨珍'},
           {value: '丰盛港', label: '丰盛港'},
           {value: '哥打丁宜', label: '哥打丁宜'},
@@ -2837,6 +3151,7 @@ const node = [
         value: '森美兰',
         label: '森美兰',
         children: [
+          {label: '全部', value: null},
           {value: '波德申', label: '波德申'},
           {value: '淡边', label: '淡边'},
           {value: '芙蓉', label: '芙蓉'},
@@ -2850,6 +3165,7 @@ const node = [
         value: '沙巴',
         label: '沙巴',
         children: [
+          {label: '全部', value: null},
           {value: '吧巴', label: '吧巴'},
           {value: '保佛', label: '保佛'},
           {value: '比鲁兰', label: '比鲁兰'},
@@ -2879,6 +3195,7 @@ const node = [
         value: '沙捞越',
         label: '沙捞越',
         children: [
+          {label: '全部', value: null},
           {value: '加帛', label: '加帛'},
           {value: '林梦', label: '林梦'},
           {value: '美里', label: '美里'},
@@ -2895,6 +3212,7 @@ const node = [
         value: '雪兰莪',
         label: '雪兰莪',
         children: [
+          {label: '全部', value: null},
           {value: '八打灵', label: '八打灵'},
           {value: '鹅麦', label: '鹅麦'},
           {value: '瓜拉冷岳', label: '瓜拉冷岳'},
@@ -2911,6 +3229,7 @@ const node = [
     label: '马里',
     value: '马里',
     children: [
+      {label: '全部', value: null},
       {value: '巴马科首都区', label: '巴马科首都区'},
       {value: '基达尔', label: '基达尔'},
       {value: '加奥', label: '加奥'},
@@ -2932,6 +3251,7 @@ const node = [
     label: '毛里塔尼亚',
     value: '毛里塔尼亚',
     children: [
+      {label: '全部', value: null},
       {value: '阿德拉尔', label: '阿德拉尔'},
       {value: '阿萨巴', label: '阿萨巴'},
       {value: '卜拉克纳', label: '卜拉克纳'},
@@ -2955,6 +3275,7 @@ const node = [
         value: '阿肯色',
         label: '阿肯色',
         children: [
+          {label: '全部', value: null},
           {value: '费耶特维尔', label: '费耶特维尔'},
           {value: '史密斯堡', label: '史密斯堡'},
           {value: '小石城', label: '小石城'}
@@ -2964,6 +3285,7 @@ const node = [
         value: '阿拉巴马',
         label: '阿拉巴马',
         children: [
+          {label: '全部', value: null},
           {value: '伯明罕', label: '伯明罕'},
           {value: '蒙哥马利', label: '蒙哥马利'},
           {value: '莫比尔', label: '莫比尔'}
@@ -2973,6 +3295,7 @@ const node = [
         value: '阿拉斯加',
         label: '阿拉斯加',
         children: [
+          {label: '全部', value: null},
           {value: '安克雷奇', label: '安克雷奇'},
           {value: '费尔班克斯', label: '费尔班克斯'},
           {value: '朱诺', label: '朱诺'}
@@ -2982,6 +3305,7 @@ const node = [
         value: '爱达荷',
         label: '爱达荷',
         children: [
+          {label: '全部', value: null},
           {value: '爱达荷福尔斯', label: '爱达荷福尔斯'},
           {value: '波卡特洛', label: '波卡特洛'},
           {value: '博伊西', label: '博伊西'},
@@ -3000,6 +3324,7 @@ const node = [
         value: '爱荷华',
         label: '爱荷华',
         children: [
+          {label: '全部', value: null},
           {value: '达文波特', label: '达文波特'},
           {value: '得梅因', label: '得梅因'},
           {value: '锡达拉皮兹', label: '锡达拉皮兹'}
@@ -3009,6 +3334,7 @@ const node = [
         value: '北达科他',
         label: '北达科他',
         children: [
+          {label: '全部', value: null},
           {value: '俾斯麦', label: '俾斯麦'},
           {value: '大福克斯', label: '大福克斯'},
           {value: '法戈', label: '法戈'},
@@ -3019,6 +3345,7 @@ const node = [
         value: '北卡罗来纳',
         label: '北卡罗来纳',
         children: [
+          {label: '全部', value: null},
           {value: '艾许维尔', label: '艾许维尔'},
           {value: '杜罕', label: '杜罕'},
           {value: '格林斯伯勒', label: '格林斯伯勒'},
@@ -3032,6 +3359,7 @@ const node = [
         value: '宾夕法尼亚',
         label: '宾夕法尼亚',
         children: [
+          {label: '全部', value: null},
           {value: '阿伦敦', label: '阿伦敦'},
           {value: '费城', label: '费城'},
           {value: '匹兹堡', label: '匹兹堡'}
@@ -3041,6 +3369,7 @@ const node = [
         value: '德克萨斯',
         label: '德克萨斯',
         children: [
+          {label: '全部', value: null},
           {value: '埃尔帕索', label: '埃尔帕索'},
           {value: '奥斯汀', label: '奥斯汀'},
           {value: '达拉斯', label: '达拉斯'},
@@ -3056,6 +3385,7 @@ const node = [
         value: '俄亥俄',
         label: '俄亥俄',
         children: [
+          {label: '全部', value: null},
           {value: '代顿', label: '代顿'},
           {value: '哥伦布', label: '哥伦布'},
           {value: '克利夫兰', label: '克利夫兰'},
@@ -3067,6 +3397,7 @@ const node = [
         value: '俄克拉荷马',
         label: '俄克拉荷马',
         children: [
+          {label: '全部', value: null},
           {value: '俄克拉荷马城', label: '俄克拉荷马城'},
           {value: '诺曼', label: '诺曼'},
           {value: '塔尔萨', label: '塔尔萨'}
@@ -3076,6 +3407,7 @@ const node = [
         value: '俄勒冈',
         label: '俄勒冈',
         children: [
+          {label: '全部', value: null},
           {value: '本德', label: '本德'},
           {value: '波特兰', label: '波特兰'},
           {value: '达尔斯', label: '达尔斯'},
@@ -3097,13 +3429,14 @@ const node = [
         value: '佛罗里达',
         label: '佛罗里达',
         children: [
+          {label: '全部', value: null},
           {value: '奥兰多', label: '奥兰多'},
           {value: '基韦斯特', label: '基韦斯特'},
           {value: '杰克逊维尔', label: '杰克逊维尔'},
           {value: '卡纳维尔角', label: '卡纳维尔角'},
           {value: '罗德岱堡', label: '罗德岱堡'},
           {value: '迈阿密', label: '迈阿密'},
-          {value: '圣彼德斯堡市', label: '圣彼德斯堡市'},
+          {value: '圣彼德斯堡', label: '圣彼德斯堡'},
           {value: '塔拉哈西', label: '塔拉哈西'},
           {value: '坦帕', label: '坦帕'}
         ]
@@ -3112,6 +3445,7 @@ const node = [
         value: '佛蒙特',
         label: '佛蒙特',
         children: [
+          {label: '全部', value: null},
           {value: '伯灵顿', label: '伯灵顿'},
           {value: '拉特兰', label: '拉特兰'},
           {value: '南伯灵顿', label: '南伯灵顿'}
@@ -3121,6 +3455,7 @@ const node = [
         value: '哥伦比亚特区',
         label: '哥伦比亚特区',
         children: [
+          {label: '全部', value: null},
           {value: '华盛顿哥伦比亚特区', label: '华盛顿哥伦比亚特区'}
         ]
       },
@@ -3128,6 +3463,7 @@ const node = [
         value: '华盛顿',
         label: '华盛顿',
         children: [
+          {label: '全部', value: null},
           {value: '斯波坎', label: '斯波坎'},
           {value: '塔科马', label: '塔科马'},
           {value: '西雅图', label: '西雅图'}
@@ -3137,6 +3473,7 @@ const node = [
         value: '怀俄明',
         label: '怀俄明',
         children: [
+          {label: '全部', value: null},
           {value: '埃文斯顿', label: '埃文斯顿'},
           {value: '卡斯珀', label: '卡斯珀'},
           {value: '拉勒米', label: '拉勒米'},
@@ -3149,6 +3486,7 @@ const node = [
         value: '加利福尼亚',
         label: '加利福尼亚',
         children: [
+          {label: '全部', value: null},
           {value: '旧金山', label: '旧金山'},
           {value: '洛杉矶', label: '洛杉矶'},
           {value: '圣迭戈', label: '圣迭戈'},
@@ -3159,6 +3497,7 @@ const node = [
         value: '堪萨斯',
         label: '堪萨斯',
         children: [
+          {label: '全部', value: null},
           {value: '阿比林', label: '阿比林'},
           {value: '奥弗兰公园', label: '奥弗兰公园'},
           {value: '哈钦森', label: '哈钦森'},
@@ -3174,6 +3513,7 @@ const node = [
         value: '康涅狄格',
         label: '康涅狄格',
         children: [
+          {label: '全部', value: null},
           {value: '布里奇波特', label: '布里奇波特'},
           {value: '达里恩', label: '达里恩'},
           {value: '格林尼治', label: '格林尼治'},
@@ -3189,6 +3529,7 @@ const node = [
         value: '科罗拉多',
         label: '科罗拉多',
         children: [
+          {label: '全部', value: null},
           {value: '阿斯彭', label: '阿斯彭'},
           {value: '奥罗拉', label: '奥罗拉'},
           {value: '博尔德', label: '博尔德'},
@@ -3203,6 +3544,7 @@ const node = [
         value: '肯塔基',
         label: '肯塔基',
         children: [
+          {label: '全部', value: null},
           {value: '列克星敦', label: '列克星敦'},
           {value: '路易斯维尔', label: '路易斯维尔'},
           {value: '欧文斯伯勒', label: '欧文斯伯勒'}
@@ -3212,6 +3554,7 @@ const node = [
         value: '路易斯安那',
         label: '路易斯安那',
         children: [
+          {label: '全部', value: null},
           {value: '巴吞鲁日', label: '巴吞鲁日'},
           {value: '什里夫波特', label: '什里夫波特'},
           {value: '新奥尔良', label: '新奥尔良'}
@@ -3221,6 +3564,7 @@ const node = [
         value: '罗德岛',
         label: '罗德岛',
         children: [
+          {label: '全部', value: null},
           {value: '波塔基特', label: '波塔基特'},
           {value: '克兰斯顿', label: '克兰斯顿'},
           {value: '纽波特', label: '纽波特'},
@@ -3234,6 +3578,7 @@ const node = [
         value: '马里兰',
         label: '马里兰',
         children: [
+          {label: '全部', value: null},
           {value: '巴尔的摩', label: '巴尔的摩'},
           {value: '盖瑟斯堡', label: '盖瑟斯堡'},
           {value: '罗克维尔', label: '罗克维尔'}
@@ -3243,6 +3588,7 @@ const node = [
         value: '马萨诸塞',
         label: '马萨诸塞',
         children: [
+          {label: '全部', value: null},
           {value: '波士顿', label: '波士顿'},
           {value: '斯普林菲尔德', label: '斯普林菲尔德'},
           {value: '伍斯特', label: '伍斯特'}
@@ -3252,6 +3598,7 @@ const node = [
         value: '蒙大拿',
         label: '蒙大拿',
         children: [
+          {label: '全部', value: null},
           {value: '比灵斯', label: '比灵斯'},
           {value: '大瀑布村', label: '大瀑布村'},
           {value: '米苏拉', label: '米苏拉'}
@@ -3261,8 +3608,9 @@ const node = [
         value: '密苏里',
         label: '密苏里',
         children: [
+          {label: '全部', value: null},
           {value: '哥伦比亚', label: '哥伦比亚'},
-          {value: '杰佛逊市', label: '杰佛逊市'},
+          {value: '杰佛逊', label: '杰佛逊'},
           {value: '堪萨斯城', label: '堪萨斯城'},
           {value: '圣路易斯', label: '圣路易斯'},
           {value: '斯普林菲尔德', label: '斯普林菲尔德'}
@@ -3272,6 +3620,7 @@ const node = [
         value: '密西西比',
         label: '密西西比',
         children: [
+          {label: '全部', value: null},
           {value: '比洛克西', label: '比洛克西'},
           {value: '格尔夫波特', label: '格尔夫波特'},
           {value: '格林维尔', label: '格林维尔'},
@@ -3285,6 +3634,7 @@ const node = [
         value: '密歇根',
         label: '密歇根',
         children: [
+          {label: '全部', value: null},
           {value: '安娜堡', label: '安娜堡'},
           {value: '巴特尔克里克', label: '巴特尔克里克'},
           {value: '贝城', label: '贝城'},
@@ -3307,6 +3657,7 @@ const node = [
         value: '缅因',
         label: '缅因',
         children: [
+          {label: '全部', value: null},
           {value: '班戈', label: '班戈'},
           {value: '波特兰', label: '波特兰'},
           {value: '刘易斯顿', label: '刘易斯顿'}
@@ -3316,6 +3667,7 @@ const node = [
         value: '明尼苏达',
         label: '明尼苏达',
         children: [
+          {label: '全部', value: null},
           {value: '罗切斯特', label: '罗切斯特'},
           {value: '明尼阿波利斯', label: '明尼阿波利斯'},
           {value: '圣保罗', label: '圣保罗'}
@@ -3325,6 +3677,7 @@ const node = [
         value: '南达科他',
         label: '南达科他',
         children: [
+          {label: '全部', value: null},
           {value: '阿伯丁', label: '阿伯丁'},
           {value: '拉皮德城', label: '拉皮德城'},
           {value: '苏福尔斯', label: '苏福尔斯'}
@@ -3334,6 +3687,7 @@ const node = [
         value: '南卡罗来纳',
         label: '南卡罗来纳',
         children: [
+          {label: '全部', value: null},
           {value: '北查尔斯顿', label: '北查尔斯顿'},
           {value: '查尔斯顿', label: '查尔斯顿'},
           {value: '哥伦比亚', label: '哥伦比亚'}
@@ -3343,6 +3697,7 @@ const node = [
         value: '内布拉斯加',
         label: '内布拉斯加',
         children: [
+          {label: '全部', value: null},
           {value: '奥马哈', label: '奥马哈'},
           {value: '贝尔维尤', label: '贝尔维尤'},
           {value: '林肯', label: '林肯'}
@@ -3352,6 +3707,7 @@ const node = [
         value: '内华达',
         label: '内华达',
         children: [
+          {label: '全部', value: null},
           {value: '埃尔科', label: '埃尔科'},
           {value: '北拉斯维加斯', label: '北拉斯维加斯'},
           {value: '弗吉尼亚城', label: '弗吉尼亚城'},
@@ -3366,15 +3722,17 @@ const node = [
         value: '纽约',
         label: '纽约',
         children: [
+          {label: '全部', value: null},
           {value: '布法罗', label: '布法罗'},
           {value: '罗切斯特', label: '罗切斯特'},
-          {value: '纽约市', label: '纽约市'}
+          {value: '纽约', label: '纽约'}
         ]
       },
       {
         value: '特拉华',
         label: '特拉华',
         children: [
+          {label: '全部', value: null},
           {value: '多佛', label: '多佛'},
           {value: '纽瓦克', label: '纽瓦克'},
           {value: '威明顿', label: '威明顿'}
@@ -3384,6 +3742,7 @@ const node = [
         value: '田纳西',
         label: '田纳西',
         children: [
+          {label: '全部', value: null},
           {value: '布利斯托', label: '布利斯托'},
           {value: '查塔努加', label: '查塔努加'},
           {value: '金斯波特', label: '金斯波特'},
@@ -3400,6 +3759,7 @@ const node = [
         value: '威斯康星',
         label: '威斯康星',
         children: [
+          {label: '全部', value: null},
           {value: '阿普尓顿', label: '阿普尓顿'},
           {value: '奥什科什', label: '奥什科什'},
           {value: '格林贝', label: '格林贝'},
@@ -3418,6 +3778,7 @@ const node = [
         value: '维吉尼亚',
         label: '维吉尼亚',
         children: [
+          {label: '全部', value: null},
           {value: '弗吉尼亚比奇', label: '弗吉尼亚比奇'},
           {value: '诺福克', label: '诺福克'},
           {value: '切萨皮克', label: '切萨皮克'}
@@ -3427,6 +3788,7 @@ const node = [
         value: '西佛吉尼亚',
         label: '西佛吉尼亚',
         children: [
+          {label: '全部', value: null},
           {value: '查尔斯顿', label: '查尔斯顿'},
           {value: '亨廷顿', label: '亨廷顿'},
           {value: '帕克斯堡', label: '帕克斯堡'}
@@ -3436,6 +3798,7 @@ const node = [
         value: '夏威夷',
         label: '夏威夷',
         children: [
+          {label: '全部', value: null},
           {value: '凯卢阿', label: '凯卢阿'},
           {value: '檀香山', label: '檀香山'},
           {value: '希洛', label: '希洛'}
@@ -3445,6 +3808,7 @@ const node = [
         value: '新罕布什尔',
         label: '新罕布什尔',
         children: [
+          {label: '全部', value: null},
           {value: '康科德', label: '康科德'},
           {value: '曼彻斯特', label: '曼彻斯特'},
           {value: '纳舒厄', label: '纳舒厄'}
@@ -3454,6 +3818,7 @@ const node = [
         value: '新墨西哥',
         label: '新墨西哥',
         children: [
+          {label: '全部', value: null},
           {value: '阿尔伯克基', label: '阿尔伯克基'},
           {value: '拉斯克鲁塞斯', label: '拉斯克鲁塞斯'},
           {value: '罗斯韦尔', label: '罗斯韦尔'},
@@ -3464,6 +3829,7 @@ const node = [
         value: '新泽西',
         label: '新泽西',
         children: [
+          {label: '全部', value: null},
           {value: '纽瓦克', label: '纽瓦克'},
           {value: '帕特森', label: '帕特森'},
           {value: '泽西城', label: '泽西城'}
@@ -3473,6 +3839,7 @@ const node = [
         value: '亚利桑那',
         label: '亚利桑那',
         children: [
+          {label: '全部', value: null},
           {value: '凤凰城', label: '凤凰城'},
           {value: '格兰代尔', label: '格兰代尔'},
           {value: '梅萨', label: '梅萨'},
@@ -3486,6 +3853,7 @@ const node = [
         value: '伊利诺斯',
         label: '伊利诺斯',
         children: [
+          {label: '全部', value: null},
           {value: '奥尔顿', label: '奥尔顿'},
           {value: '奥罗拉', label: '奥罗拉'},
           {value: '布卢明顿', label: '布卢明顿'},
@@ -3510,6 +3878,7 @@ const node = [
         value: '印第安那',
         label: '印第安那',
         children: [
+          {label: '全部', value: null},
           {value: '埃文斯维尔', label: '埃文斯维尔'},
           {value: '韦恩堡', label: '韦恩堡'},
           {value: '印第安纳波利斯', label: '印第安纳波利斯'}
@@ -3519,6 +3888,7 @@ const node = [
         value: '犹他',
         label: '犹他',
         children: [
+          {label: '全部', value: null},
           {value: '奥格登', label: '奥格登'},
           {value: '雷登', label: '雷登'},
           {value: '欧仁', label: '欧仁'},
@@ -3533,6 +3903,7 @@ const node = [
         value: '佐治亚',
         label: '佐治亚',
         children: [
+          {label: '全部', value: null},
           {value: '奥古斯塔', label: '奥古斯塔'},
           {value: '哥伦布', label: '哥伦布'},
           {value: '梅肯', label: '梅肯'},
@@ -3546,6 +3917,7 @@ const node = [
     label: '美属萨摩亚',
     value: '美属萨摩亚',
     children: [
+      {label: '全部', value: null},
       {value: '阿纳', label: '阿纳'},
       {value: '阿图阿', label: '阿图阿'},
       {value: '艾加伊勒泰', label: '艾加伊勒泰'},
@@ -3566,6 +3938,7 @@ const node = [
     label: '蒙古',
     value: '蒙古',
     children: [
+      {label: '全部', value: null},
       {value: '巴彦洪格尔', label: '巴彦洪格尔'},
       {value: '巴彦乌勒盖', label: '巴彦乌勒盖'},
       {value: '布尔干', label: '布尔干'},
@@ -3584,7 +3957,7 @@ const node = [
       {value: '色楞格', label: '色楞格'},
       {value: '苏赫巴托尔', label: '苏赫巴托尔'},
       {value: '乌布苏', label: '乌布苏'},
-      {value: '乌兰巴托市', label: '乌兰巴托市'},
+      {value: '乌兰巴托', label: '乌兰巴托'},
       {value: '扎布汗', label: '扎布汗'},
       {value: '中戈壁', label: '中戈壁'},
       {value: '中央', label: '中央'}
@@ -3595,6 +3968,7 @@ const node = [
     label: '孟加拉',
     value: '孟加拉',
     children: [
+      {label: '全部', value: null},
       {value: '达卡', label: '达卡'},
       {value: '吉大港', label: '吉大港'},
       {value: '库尔纳', label: '库尔纳'}
@@ -3605,6 +3979,7 @@ const node = [
     label: '秘鲁',
     value: '秘鲁',
     children: [
+      {label: '全部', value: null},
       {value: '阿雷基帕', label: '阿雷基帕'},
       {value: '阿普里马克', label: '阿普里马克'},
       {value: '阿亚库乔', label: '阿亚库乔'},
@@ -3640,6 +4015,7 @@ const node = [
     label: '缅甸',
     value: '缅甸',
     children: [
+      {label: '全部', value: null},
       {value: '勃固省', label: '勃固省'},
       {value: '掸邦', label: '掸邦'},
       {value: '德林达依省', label: '德林达依省'},
@@ -3663,6 +4039,7 @@ const node = [
     label: '摩洛哥',
     value: '摩洛哥',
     children: [
+      {label: '全部', value: null},
       {value: '丹吉尔', label: '丹吉尔'},
       {value: '得土安', label: '得土安'},
       {value: '非斯', label: '非斯'},
@@ -3678,6 +4055,7 @@ const node = [
     label: '墨西哥',
     value: '墨西哥',
     children: [
+      {label: '全部', value: null},
       {value: '阿瓜斯卡连斯特', label: '阿瓜斯卡连斯特'},
       {value: '阿卡普尔科', label: '阿卡普尔科'},
       {value: '埃莫西约', label: '埃莫西约'},
@@ -3744,6 +4122,7 @@ const node = [
     label: '纳米比亚',
     value: '纳米比亚',
     children: [
+      {label: '全部', value: null},
       {value: '埃龙戈', label: '埃龙戈'},
       {value: '奥汉圭纳', label: '奥汉圭纳'},
       {value: '奥卡万戈', label: '奥卡万戈'},
@@ -3763,6 +4142,7 @@ const node = [
     label: '南非',
     value: '南非',
     children: [
+      {label: '全部', value: null},
       {value: '阿平顿', label: '阿平顿'},
       {value: '艾利弗山', label: '艾利弗山'},
       {value: '彼德马里茨堡', label: '彼德马里茨堡'},
@@ -3822,6 +4202,7 @@ const node = [
     label: '尼泊尔',
     value: '尼泊尔',
     children: [
+      {label: '全部', value: null},
       {value: '巴格马蒂', label: '巴格马蒂'},
       {value: '道拉吉里', label: '道拉吉里'},
       {value: '甘达基', label: '甘达基'},
@@ -3842,6 +4223,7 @@ const node = [
     label: '尼加拉瓜',
     value: '尼加拉瓜',
     children: [
+      {label: '全部', value: null},
       {value: '埃斯特利', label: '埃斯特利'},
       {value: '北大西洋', label: '北大西洋'},
       {value: '博阿科', label: '博阿科'},
@@ -3865,13 +4247,14 @@ const node = [
     label: '尼日尔',
     value: '尼日尔',
     children: [
+      {label: '全部', value: null},
       {value: '阿加德兹', label: '阿加德兹'},
       {value: '迪法', label: '迪法'},
       {value: '蒂拉贝里', label: '蒂拉贝里'},
       {value: '多索', label: '多索'},
       {value: '津德尔', label: '津德尔'},
       {value: '马拉迪', label: '马拉迪'},
-      {value: '尼亚美市', label: '尼亚美市'},
+      {value: '尼亚美', label: '尼亚美'},
       {value: '塔瓦', label: '塔瓦'}
     ]
   },
@@ -3879,6 +4262,7 @@ const node = [
     label: '尼日利亚',
     value: '尼日利亚',
     children: [
+      {label: '全部', value: null},
       {value: '阿比亚', label: '阿比亚'},
       {value: '奥博莫绍', label: '奥博莫绍'},
       {value: '卡诺', label: '卡诺'},
@@ -3891,9 +4275,10 @@ const node = [
     label: '挪威',
     value: '挪威',
     children: [
+      {label: '全部', value: null},
       {value: '阿克什胡斯', label: '阿克什胡斯'},
       {value: '奥普兰', label: '奥普兰'},
-      {value: '奥斯陆市', label: '奥斯陆市'},
+      {value: '奥斯陆', label: '奥斯陆'},
       {value: '北特伦德拉格', label: '北特伦德拉格'},
       {value: '布斯克吕', label: '布斯克吕'},
       {value: '东阿格德尔', label: '东阿格德尔'},
@@ -3920,6 +4305,7 @@ const node = [
     label: '葡萄牙',
     value: '葡萄牙',
     children: [
+      {label: '全部', value: null},
       {value: '滨海阿连特茹', label: '滨海阿连特茹'},
       {value: '滨海皮尼亚尔', label: '滨海皮尼亚尔'},
       {value: '波尔图', label: '波尔图'},
@@ -3955,6 +4341,7 @@ const node = [
     label: '日本',
     value: '日本',
     children: [
+      {label: '全部', value: null},
       {value: '爱媛', label: '爱媛'},
       {value: '爱知', label: '爱知'},
       {value: '北海道', label: '北海道'},
@@ -4008,6 +4395,7 @@ const node = [
     label: '瑞典',
     value: '瑞典',
     children: [
+      {label: '全部', value: null},
       {value: '北博滕', label: '北博滕'},
       {value: '布莱金厄', label: '布莱金厄'},
       {value: '达拉纳', label: '达拉纳'},
@@ -4035,8 +4423,9 @@ const node = [
     label: '瑞士',
     value: '瑞士',
     children: [
+      {label: '全部', value: null},
       {value: '阿尔高', label: '阿尔高'},
-      {value: '巴塞尔城市', label: '巴塞尔城市'},
+      {value: '巴塞尔城', label: '巴塞尔城'},
       {value: '巴塞尔乡村', label: '巴塞尔乡村'},
       {value: '伯尔尼', label: '伯尔尼'},
       {value: '楚格', label: '楚格'},
@@ -4068,6 +4457,7 @@ const node = [
     label: '萨尔瓦多',
     value: '萨尔瓦多',
     children: [
+      {label: '全部', value: null},
       {value: '阿波帕', label: '阿波帕'},
       {value: '阿瓦查潘', label: '阿瓦查潘'},
       {value: '滨海', label: '滨海'},
@@ -4098,6 +4488,7 @@ const node = [
     label: '塞尔维亚,黑山',
     value: '塞尔维亚,黑山',
     children: [
+      {label: '全部', value: null},
       {value: '贝尔格莱德', label: '贝尔格莱德'},
       {value: '波德戈里察', label: '波德戈里察'},
       {value: '克拉古涅瓦茨', label: '克拉古涅瓦茨'},
@@ -4112,6 +4503,7 @@ const node = [
     label: '塞拉利昂',
     value: '塞拉利昂',
     children: [
+      {label: '全部', value: null},
       {value: '北部', label: '北部'},
       {value: '东部', label: '东部'},
       {value: '南部', label: '南部'},
@@ -4122,6 +4514,7 @@ const node = [
     label: '塞内加尔',
     value: '塞内加尔',
     children: [
+      {label: '全部', value: null},
       {value: '达喀尔', label: '达喀尔'},
       {value: '法蒂克', label: '法蒂克'},
       {value: '济金绍尔', label: '济金绍尔'},
@@ -4139,6 +4532,7 @@ const node = [
     label: '塞浦路斯',
     value: '塞浦路斯',
     children: [
+      {label: '全部', value: null},
       {value: '法马古斯塔', label: '法马古斯塔'},
       {value: '凯里尼亚', label: '凯里尼亚'},
       {value: '拉纳卡', label: '拉纳卡'},
@@ -4152,6 +4546,7 @@ const node = [
     label: '沙特阿拉伯',
     value: '沙特阿拉伯',
     children: [
+      {label: '全部', value: null},
       {value: '阿尔阿尔', label: '阿尔阿尔'},
       {value: '艾卜哈', label: '艾卜哈'},
       {value: '巴哈', label: '巴哈'},
@@ -4188,6 +4583,7 @@ const node = [
     label: '斯里兰卡',
     value: '斯里兰卡',
     children: [
+      {label: '全部', value: null},
       {value: '阿努拉德普勒', label: '阿努拉德普勒'},
       {value: '安帕赖', label: '安帕赖'},
       {value: '巴杜勒', label: '巴杜勒'},
@@ -4219,6 +4615,7 @@ const node = [
     label: '斯洛伐克',
     value: '斯洛伐克',
     children: [
+      {label: '全部', value: null},
       {value: '班斯卡-比斯特里察', label: '班斯卡-比斯特里察'},
       {value: '布拉迪斯拉发', label: '布拉迪斯拉发'},
       {value: '科希策', label: '科希策'},
@@ -4233,6 +4630,7 @@ const node = [
     label: '斯洛文尼亚',
     value: '斯洛文尼亚',
     children: [
+      {label: '全部', value: null},
       {value: '奥巴尔诺-克拉', label: '奥巴尔诺-克拉'},
       {value: '奥斯雷德涅斯洛文', label: '奥斯雷德涅斯洛文'},
       {value: '波德拉夫', label: '波德拉夫'},
@@ -4253,6 +4651,7 @@ const node = [
     label: '苏丹',
     value: '苏丹',
     children: [
+      {label: '全部', value: null},
       {value: '北部', label: '北部'},
       {value: '赤道', label: '赤道'},
       {value: '达尔富尔', label: '达尔富尔'},
@@ -4268,6 +4667,7 @@ const node = [
     label: '苏里南',
     value: '苏里南',
     children: [
+      {label: '全部', value: null},
       {value: '布罗科蓬多', label: '布罗科蓬多'},
       {value: '科罗尼', label: '科罗尼'},
       {value: '科默韦讷', label: '科默韦讷'},
@@ -4284,6 +4684,7 @@ const node = [
     label: '所罗门群岛',
     value: '所罗门群岛',
     children: [
+      {label: '全部', value: null},
       {value: '瓜达尔卡纳尔', label: '瓜达尔卡纳尔'},
       {value: '霍尼亚拉', label: '霍尼亚拉'},
       {value: '拉纳尔和贝罗纳', label: '拉纳尔和贝罗纳'},
@@ -4301,6 +4702,7 @@ const node = [
     label: '塔吉克斯坦',
     value: '塔吉克斯坦',
     children: [
+      {label: '全部', value: null},
       {value: '杜尚别', label: '杜尚别'},
       {value: '霍罗格', label: '霍罗格'},
       {value: '卡尼巴达姆', label: '卡尼巴达姆'},
@@ -4322,6 +4724,7 @@ const node = [
     label: '泰国',
     value: '泰国',
     children: [
+      {label: '全部', value: null},
       {value: '安纳乍能', label: '安纳乍能'},
       {value: '巴蜀', label: '巴蜀'},
       {value: '巴吞他尼', label: '巴吞他尼'},
@@ -4402,6 +4805,7 @@ const node = [
     label: '坦桑尼亚',
     value: '坦桑尼亚',
     children: [
+      {label: '全部', value: null},
       {value: '阿鲁沙', label: '阿鲁沙'},
       {value: '奔巴北', label: '奔巴北'},
       {value: '奔巴南', label: '奔巴南'},
@@ -4423,7 +4827,7 @@ const node = [
       {value: '桑给巴尔', label: '桑给巴尔'},
       {value: '桑给巴尔北', label: '桑给巴尔北'},
       {value: '桑给巴尔南', label: '桑给巴尔南'},
-      {value: '桑给巴尔市和西', label: '桑给巴尔市和西'},
+      {value: '桑给巴尔和西', label: '桑给巴尔和西'},
       {value: '塔波拉', label: '塔波拉'},
       {value: '坦噶', label: '坦噶'},
       {value: '辛吉达', label: '辛吉达'},
@@ -4435,6 +4839,7 @@ const node = [
     label: '汤加',
     value: '汤加',
     children: [
+      {label: '全部', value: null},
       {value: '埃瓦', label: '埃瓦'},
       {value: '哈派', label: '哈派'},
       {value: '纽阿斯', label: '纽阿斯'},
@@ -4449,6 +4854,7 @@ const node = [
     label: '突尼斯',
     value: '突尼斯',
     children: [
+      {label: '全部', value: null},
       {value: '艾尔亚奈', label: '艾尔亚奈'},
       {value: '巴杰', label: '巴杰'},
       {value: '本阿鲁斯', label: '本阿鲁斯'},
@@ -4492,15 +4898,17 @@ const node = [
     label: '越南',
     value: '越南',
     children: [
+      {label: '全部', value: null},
       {value: '海防', label: '海防'},
       {value: '河内', label: '河内'},
-      {value: '胡志明市', label: '胡志明市'}
+      {value: '胡志明', label: '胡志明'}
     ]
   },
   {
     label: '土耳其',
     value: '土耳其',
     children: [
+      {label: '全部', value: null},
       {value: '阿达纳', label: '阿达纳'},
       {value: '阿德亚曼', label: '阿德亚曼'},
       {value: '阿尔达罕', label: '阿尔达罕'},
@@ -4585,8 +4993,9 @@ const node = [
     label: '土库曼斯坦',
     value: '土库曼斯坦',
     children: [
+      {label: '全部', value: null},
       {value: '阿哈尔', label: '阿哈尔'},
-      {value: '阿什哈巴德市', label: '阿什哈巴德市'},
+      {value: '阿什哈巴德', label: '阿什哈巴德'},
       {value: '巴尔坎', label: '巴尔坎'},
       {value: '达沙古兹', label: '达沙古兹'},
       {value: '列巴普', label: '列巴普'},
@@ -4598,6 +5007,7 @@ const node = [
     label: '瓦努阿图',
     value: '瓦努阿图',
     children: [
+      {label: '全部', value: null},
       {value: '马朗帕', label: '马朗帕'},
       {value: '彭纳马', label: '彭纳马'},
       {value: '桑马', label: '桑马'},
@@ -4610,6 +5020,7 @@ const node = [
     label: '危地马拉',
     value: '危地马拉',
     children: [
+      {label: '全部', value: null},
       {value: '埃尔普罗格雷索', label: '埃尔普罗格雷索'},
       {value: '埃斯昆特拉', label: '埃斯昆特拉'},
       {value: '哈拉帕', label: '哈拉帕'},
@@ -4640,6 +5051,7 @@ const node = [
     label: '委内瑞拉',
     value: '委内瑞拉',
     children: [
+      {label: '全部', value: null},
       {value: '阿拉瓜', label: '阿拉瓜'},
       {value: '阿马库罗三角洲', label: '阿马库罗三角洲'},
       {value: '阿普雷', label: '阿普雷'},
@@ -4670,6 +5082,7 @@ const node = [
     label: '乌干达',
     value: '乌干达',
     children: [
+      {label: '全部', value: null},
       {value: '阿鲁阿', label: '阿鲁阿'},
       {value: '阿帕克', label: '阿帕克'},
       {value: '阿朱马尼', label: '阿朱马尼'},
@@ -4732,6 +5145,7 @@ const node = [
     label: '乌兹别克斯坦',
     value: '乌兹别克斯坦',
     children: [
+      {label: '全部', value: null},
       {value: '安集延', label: '安集延'},
       {value: '布哈拉', label: '布哈拉'},
       {value: '费尔干纳', label: '费尔干纳'},
@@ -4744,7 +5158,7 @@ const node = [
       {value: '撒马尔罕', label: '撒马尔罕'},
       {value: '苏尔汉河', label: '苏尔汉河'},
       {value: '塔什干', label: '塔什干'},
-      {value: '塔什干市', label: '塔什干市'},
+      {value: '塔什干', label: '塔什干'},
       {value: '锡尔河', label: '锡尔河'}
     ]
   },
@@ -4752,6 +5166,7 @@ const node = [
     label: '乌克兰',
     value: '乌克兰',
     children: [
+      {label: '全部', value: null},
       {value: '敖德萨', label: '敖德萨'},
       {value: '波尔塔瓦', label: '波尔塔瓦'},
       {value: '第聂伯罗波得罗夫斯克', label: '第聂伯罗波得罗夫斯克'},
@@ -4783,6 +5198,7 @@ const node = [
     label: '乌拉圭',
     value: '乌拉圭',
     children: [
+      {label: '全部', value: null},
       {value: '阿蒂加斯', label: '阿蒂加斯'},
       {value: '杜拉斯诺', label: '杜拉斯诺'},
       {value: '佛罗里达', label: '佛罗里达'},
@@ -4808,6 +5224,7 @@ const node = [
     label: '西班牙',
     value: '西班牙',
     children: [
+      {label: '全部', value: null},
       {value: '阿尔梅里亚', label: '阿尔梅里亚'},
       {value: '阿尔瓦塞特', label: '阿尔瓦塞特'},
       {value: '阿拉瓦', label: '阿拉瓦'},
@@ -4864,6 +5281,7 @@ const node = [
     label: '希腊',
     value: '希腊',
     children: [
+      {label: '全部', value: null},
       {value: '比雷埃夫斯', label: '比雷埃夫斯'},
       {value: '多德卡尼斯', label: '多德卡尼斯'},
       {value: '干尼亚', label: '干尼亚'},
@@ -4880,6 +5298,7 @@ const node = [
     label: '新西兰',
     value: '新西兰',
     children: [
+      {label: '全部', value: null},
       {value: '奥克兰', label: '奥克兰'},
       {value: '北岸', label: '北岸'},
       {value: '北帕默斯顿', label: '北帕默斯顿'},
@@ -4910,6 +5329,7 @@ const node = [
     label: '匈牙利',
     value: '匈牙利',
     children: [
+      {label: '全部', value: null},
       {value: '巴兰尼亚', label: '巴兰尼亚'},
       {value: '巴奇-基什孔', label: '巴奇-基什孔'},
       {value: '包尔绍德-奥包乌伊-曾普伦', label: '包尔绍德-奥包乌伊-曾普伦'},
@@ -4936,9 +5356,10 @@ const node = [
     label: '叙利亚',
     value: '叙利亚',
     children: [
+      {label: '全部', value: null},
       {value: '阿勒颇', label: '阿勒颇'},
       {value: '大马士革', label: '大马士革'},
-      {value: '大马士革市', label: '大马士革市'},
+      {value: '大马士革', label: '大马士革'},
       {value: '代尔祖尔', label: '代尔祖尔'},
       {value: '德拉', label: '德拉'},
       {value: '哈马', label: '哈马'},
@@ -4958,6 +5379,7 @@ const node = [
     label: '叙利亚',
     value: '叙利亚',
     children: [
+      {label: '全部', value: null},
       {value: '波特兰', label: '波特兰'},
       {value: '汉诺威', label: '汉诺威'},
       {value: '金斯敦', label: '金斯敦'},
@@ -4978,10 +5400,11 @@ const node = [
     label: '亚美尼亚',
     value: '亚美尼亚',
     children: [
+      {label: '全部', value: null},
       {value: '阿尔马维尔', label: '阿尔马维尔'},
       {value: '阿拉加措特恩', label: '阿拉加措特恩'},
       {value: '阿拉拉特', label: '阿拉拉特'},
-      {value: '埃里温市', label: '埃里温市'},
+      {value: '埃里温', label: '埃里温'},
       {value: '格加尔库尼克', label: '格加尔库尼克'},
       {value: '科泰克', label: '科泰克'},
       {value: '洛里', label: '洛里'},
@@ -4995,6 +5418,7 @@ const node = [
     label: '也门',
     value: '也门',
     children: [
+      {label: '全部', value: null},
       {value: '阿比扬', label: '阿比扬'},
       {value: '阿姆兰', label: '阿姆兰'},
       {value: '贝达', label: '贝达'},
@@ -5022,6 +5446,7 @@ const node = [
     label: '以色列',
     value: '以色列',
     children: [
+      {label: '全部', value: null},
       {value: '阿什杜德', label: '阿什杜德'},
       {value: '贝尔谢巴', label: '贝尔谢巴'},
       {value: '贝特雁', label: '贝特雁'},
@@ -5036,6 +5461,7 @@ const node = [
     label: '意大利',
     value: '意大利',
     children: [
+      {label: '全部', value: null},
       {value: '阿斯蒂', label: '阿斯蒂'},
       {value: '阿斯科利皮切诺', label: '阿斯科利皮切诺'},
       {value: '安科纳', label: '安科纳'},
@@ -5108,6 +5534,7 @@ const node = [
     label: '印度',
     value: '印度',
     children: [
+      {label: '全部', value: null},
       {value: '艾藻尔', label: '艾藻尔'},
       {value: '班加罗尔', label: '班加罗尔'},
       {value: '本地治里', label: '本地治里'},
@@ -5144,6 +5571,7 @@ const node = [
     label: '印度尼西亚',
     value: '印度尼西亚',
     children: [
+      {label: '全部', value: null},
       {value: '巴厘', label: '巴厘'},
       {value: '邦加－勿里洞群岛', label: '邦加－勿里洞群岛'},
       {value: '北苏拉威西', label: '北苏拉威西'},
@@ -5182,6 +5610,7 @@ const node = [
         value: '北爱尔兰',
         label: '北爱尔兰',
         children: [
+          {label: '全部', value: null},
           {value: '贝尔法斯特', label: '贝尔法斯特'},
           {value: '德里', label: '德里'},
           {value: '利斯本', label: '利斯本'},
@@ -5192,6 +5621,7 @@ const node = [
         value: '苏格兰',
         label: '苏格兰',
         children: [
+          {label: '全部', value: null},
           {value: '阿伯丁', label: '阿伯丁'},
           {value: '爱丁堡', label: '爱丁堡'},
           {value: '格拉斯哥', label: '格拉斯哥'},
@@ -5203,6 +5633,7 @@ const node = [
         value: '威尔士',
         label: '威尔士',
         children: [
+          {label: '全部', value: null},
           {value: '班戈', label: '班戈'},
           {value: '卡迪夫', label: '卡迪夫'},
           {value: '纽波特', label: '纽波特'},
@@ -5213,6 +5644,7 @@ const node = [
         value: '英格兰',
         label: '英格兰',
         children: [
+          {label: '全部', value: null},
           {value: '埃克塞特', label: '埃克塞特'},
           {value: '巴斯', label: '巴斯'},
           {value: '彼得伯勒', label: '彼得伯勒'},
@@ -5270,6 +5702,7 @@ const node = [
     label: '约旦',
     value: '约旦',
     children: [
+      {label: '全部', value: null},
       {value: '阿吉隆', label: '阿吉隆'},
       {value: '安曼', label: '安曼'},
       {value: '拜勒加', label: '拜勒加'},
@@ -5289,6 +5722,7 @@ const node = [
     label: '赞比亚',
     value: '赞比亚',
     children: [
+      {label: '全部', value: null},
       {value: '北方', label: '北方'},
       {value: '东方', label: '东方'},
       {value: '卢阿普拉', label: '卢阿普拉'},
@@ -5304,6 +5738,7 @@ const node = [
     label: '智利',
     value: '智利',
     children: [
+      {label: '全部', value: null},
       {value: '阿劳卡尼亚大区', label: '阿劳卡尼亚大区'},
       {value: '阿塔卡马大区', label: '阿塔卡马大区'},
       {value: '安托法加斯塔大区', label: '安托法加斯塔大区'},

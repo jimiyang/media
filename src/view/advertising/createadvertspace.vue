@@ -59,7 +59,8 @@ export default {
           this.$common.errorMsg(rs, this)
         } else {
           this.form = rs.data
-          this.form.adType = rs.data.adType.toString()
+          let type = rs.data.adType !== null ? rs.data.adType.toString() : ''
+          this.form.adType = type
         }
       })
     },
@@ -78,7 +79,6 @@ export default {
           }
         })
       } else {
-        console.log(this.form)
         this.advertapi.advertspaceEdit(this.form).then(rs => {
           this.disabled = false
           if (rs.returnCode === 'F') {

@@ -79,31 +79,42 @@ export default {
   },
   methods: {
     loadList () {
+      if (window.localStorage.getItem('searchObj') !== null) {
+        this.form = JSON.parse(window.localStorage.getItem('searchObj'))
+        console.log(window.localStorage.getItem('searchObj'))
+      }
       this.advertapi.advertspaceGetlist(this.form).then(rs => {
         if (rs.returnCode === 'F') {
           this.$common.errorMsg(rs, this)
         } else {
           this.advertspaceData = rs.data.items
           this.totalCount = rs.data.totalNum
-          console.log(rs)
         }
       })
     },
     searchEvent (formName) {
+      window.localStorage.setItem('searchObj', JSON.stringify(this.form))
       this.loadList()
     },
     resetForm (formName) {
-      this.$nextTick(function () {
-        this.$refs[formName].resetFields()
-      })
-      this.form.adType = ''
+      this.form = {
+        adType: '',
+        startDate: '',
+        endDate: ''
+      }
+      localStorage.removeItem('searchObj')
+      window.localStorage.setItem('searchObj', JSON.stringify(this.form))
+      this.loadList()
     },
     handleSizeChange (pagesize) {
       this.form.pageSize = pagesize
+      window.localStorage.setItem('searchObj', JSON.stringify(this.form))
       this.loadList()
     },
     handleCurrentChange (currentpage) {
       this.form.currentPage = currentpage
+      console.log(this.form)
+      window.localStorage.setItem('searchObj', JSON.stringify(this.form))
       this.loadList()
     },
     modifyAdvert (item) {

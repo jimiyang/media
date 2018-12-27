@@ -91,6 +91,10 @@ export default {
   },
   methods: {
     loadList () {
+      if (window.localStorage.getItem('searchObj') !== null) {
+        this.form = JSON.parse(window.localStorage.getItem('searchObj'))
+      }
+      console.log(this.form)
       this.advertapi.list(this.form).then(rs => {
         if (rs.returnCode === 'F') {
           this.$common.errorMsg(rs, this)
@@ -135,13 +139,19 @@ export default {
       this.$router.push({path: url, query: {id: item.id}})
     },
     searchEvent () {
+      window.localStorage.setItem('searchObj', JSON.stringify(this.form))
       this.loadList()
     },
     resetForm (formName) {
-      this.form.advertiserName = ''
-      this.$nextTick(function () {
-        this.$refs[formName].resetFields()
-      })
+      this.form = {
+        advertiserName: '',
+        type: '',
+        startDate: '',
+        endDate: ''
+      }
+      localStorage.removeItem('searchObj')
+      window.localStorage.setItem('searchObj', JSON.stringify(this.form))
+      this.loadList()
     },
     creatEvent () {
       this.$router.push({path: '/advertising/type'})
@@ -150,10 +160,12 @@ export default {
     },
     handleSizeChange (val) {
       this.form.pageSize = val
+      window.localStorage.setItem('searchObj', JSON.stringify(this.form))
       this.loadList()
     },
     handleCurrentChange (val) {
       this.form.currentPage = val
+      window.localStorage.setItem('searchObj', JSON.stringify(this.form))
       this.loadList()
     }
   }
