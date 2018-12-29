@@ -34,6 +34,12 @@
                         当群发内容被微信判定为转载时，将自动替换为原文章内容发送且注明转载来源。
                     </div>
                 </div>
+                <h1 class="title">推送公众号</h1>
+                <div class="mt20">
+                  <el-checkbox-group >
+                    <el-checkbox disabled>金旅通</el-checkbox>
+                  </el-checkbox-group>
+                </div>
             </div>
             <div class="preview-blocks">
                 <h1 class="title">微信预览器</h1>
