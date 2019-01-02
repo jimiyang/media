@@ -25,6 +25,7 @@
             <el-table-column  label="操作"  width="180">
                 <template slot-scope="scope">
                     <a href="javascript:" class="blue-color" @click="detailEvent(scope)">详情</a>
+                    <a href="javascript:" class="blue-color" @click="detailEvent(scope)">附加推送详情</a>
                     <a href="javascript:" class="blue-color" v-if="scope.row.sendStatus === 0 && scope.row.enable === 1" @click="cancelEvent(scope.row.id)">取消发送</a>
                     <a href="javascript:" class="blue-color" v-if="scope.row.sendStatus === 0 && scope.row.enable === 0">已取消</a>
                 </template>

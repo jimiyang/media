@@ -11,9 +11,25 @@
                 <h1 class="title">选择群发对象
                     <span>需要发给同时拥有A和B标签的粉丝？</span>
                 </h1>
-                <ul class="lab-blocks" >
+                <!--<ul class="lab-blocks" >
                     <li v-for= "(item,i) in labList"  :key="i" :class= "{checked:i === index}"   @click= "selLab(i,item.wxTagId)">{{item.name}}</li>
-                </ul>
+                </ul>-->
+                
+                <div class="mt20">
+                  <div class="current-nickName">当前公众号：{{nickName}}</div>
+                  <el-radio-group  v-model="groupMessage.tagId">
+                    <el-radio v-for="(item,i) in labList" :key="i" :label="item.wxTagId">{{item.name}}</el-radio>
+                  </el-radio-group>
+                </div>
+                <h1 class="title mt20">附加推送公众号</h1>
+                <div class="mt20 extra-box">
+                    <div  v-for="(item, i) in pnumberList" :key="i" :label="item">
+                      <el-checkbox  :disabled="item.nickName === '生活小精灵'">{{item.nickName}}</el-checkbox>
+                      <el-radio-group  v-model="radio">
+                        <el-radio v-for="(data,i) in item.tagList" :key="i" :label="data.wxTagId">{{data.name}}</el-radio>
+                      </el-radio-group>
+                    </div>
+                </div>
                 <h1 class="title">定时发送及原创校验</h1>
                 <div class="ant-items">
                     <div>
@@ -33,12 +49,6 @@
                         <el-switch  v-model="groupMessage.sendIgnoreReprint"  active-color="#4993ff"  inactive-color="#E0E0E0"></el-switch>
                         当群发内容被微信判定为转载时，将自动替换为原文章内容发送且注明转载来源。
                     </div>
-                </div>
-                <h1 class="title">推送公众号</h1>
-                <div class="mt20">
-                  <el-checkbox-group >
-                    <el-checkbox disabled>金旅通</el-checkbox>
-                  </el-checkbox-group>
                 </div>
             </div>
             <div class="preview-blocks">
@@ -86,7 +96,9 @@
     import userapi from '../../api/userapi'
     import msgapi from '../../api/msgapi'
     import materialapi from '../../api/materialapi'
+    import pubnumapi from '../../api/pubnumapi.js'
     import bus from '../../until/eventbus.js'
+    // import ap from '../../api/ap'
     export default {
       data () {
         return {
@@ -96,15 +108,17 @@
           dialogVisible: false,
           dialog: false,
           ishide: true,
-          index: 0,
           wechatArticleList: [],
           current: 0, // 当前要发送的消息类型[图文，消息，语音，视频]
           cur: -1,
           labList: [],
+          pnumberList: [],
+          nickName: JSON.parse(window.sessionStorage.getItem('appInfo')).nickName,
+          publicNumberChecked: ['生活小精灵'],
           groupMessage: {
             mediaId: '',
             isToAll: true,
-            tagId: '',
+            tagId: 126,
             content: '',
             sendDate: new Date().getTime()
           },
@@ -112,34 +126,56 @@
             currentPage: 1,
             pageSize: 5
           },
+          options: [
+            {'name': '万物优选'},
+            {'name': '金旅通小助手'},
+            {'name': '万物优选'},
+            {'name': '金旅通小助手'},
+            {'name': '万物优选'},
+            {'name': '金旅通小助手'},
+            {'name': '万物优选'},
+            {'name': '金旅通小助手'},
+            {'name': '万物优选'},
+            {'name': '金旅通小助手'}
+          ],
           checkedUserData: [],
           sendNum: 0 // 发送人数
         }
       },
       components: {selmaterial, userlist},
       created () {
-        userapi.getList().then(rs => {
-          if (rs.returnCode === 'F') {
-            this.$common.errorMsg(rs, this)
-          } else {
-            if (rs.data.items.length > 0) {
-              this.labList = rs.data.items
-              this.groupMessage.tagId = this.labList[0].wxTagId
-            }
-          }
-        })
+        this.loadTagList()
+        this.loadextraList()
       },
       methods: {
+        loadTagList () {
+          userapi.getList().then(rs => {
+            if (rs.returnCode === 'F') {
+              this.$common.errorMsg(rs, this)
+            } else {
+              if (rs.data.items.length > 0) {
+                this.labList = rs.data.items
+                this.groupMessage.tagId = this.labList[0].wxTagId
+              }
+            }
+          })
+        },
+        loadextraList () {
+          pubnumapi.extraList().then(rs => {
+            if (rs.returnCode === 'F') {
+              this.$common.errorMsg(rs, this)
+            } else {
+              this.pnumberList = rs.data
+              console.log(rs.data)
+            }
+          })
+        },
         selectContent () {
           this.dialogVisible = true
         },
         closeDialog () {
           this.dialogVisible = false
           this.dialog = false
-        },
-        selLab (id, wxtagid) {
-          this.index = id
-          this.groupMessage.tagId = wxtagid
         },
         sendContent () {
           this.dialogVisible = false

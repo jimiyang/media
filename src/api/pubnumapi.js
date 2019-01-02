@@ -20,4 +20,9 @@ function switchList () {
     return response.data
   })
 }
-export default {getList, quitAuth, switchApp, switchList}
+function extraList () {
+  return axios.get('/wechat/wechatAuthorizer/extraList').then((response) => {
+    return response.data
+  })
+}
+export default {getList, quitAuth, switchApp, switchList, extraList}
