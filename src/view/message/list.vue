@@ -1,5 +1,6 @@
 <template>
     <div class="msg-list">
+       <div class="page-nav">消息管理&nbsp;>&nbsp;消息记录</div>
         <el-table class="tab-list" :data="messageData"  style="width:100%;" v-loading="loading">
             <el-table-column   prop="sendContent"  label="发送内容"></el-table-column>
             <el-table-column   prop="msgtype"  label="发送方式"   >
@@ -25,7 +26,6 @@
             <el-table-column  label="操作"  width="180">
                 <template slot-scope="scope">
                     <a href="javascript:" class="blue-color" @click="detailEvent(scope)">详情</a>
-                    <a href="javascript:" class="blue-color" @click="detailEvent(scope)">附加推送详情</a>
                     <a href="javascript:" class="blue-color" v-if="scope.row.sendStatus === 0 && scope.row.enable === 1" @click="cancelEvent(scope.row.id)">取消发送</a>
                     <a href="javascript:" class="blue-color" v-if="scope.row.sendStatus === 0 && scope.row.enable === 0">已取消</a>
                 </template>
@@ -42,40 +42,6 @@
                 :total="totalCount">
             </el-pagination>
         </div>
-        <el-dialog   title="群发内容详情"  :visible.sync="dialogVisible"  width="50%"  :before-close="handleClose">
-            <div class="msg-content">
-                <el-steps :active="detail.sendStatus+1" finish-status="success">
-                    <el-step title="创建任务"></el-step>
-                    <el-step title="微信发送中"></el-step>
-                    <el-step title="群发完毕"></el-step>
-                </el-steps> 
-                <ul class="list">
-                    <li class="wrap">
-                        <div>群发对象：{{detail.target}}</div>
-                        <div>组别：{{detail.target}}</div>
-                    </li>
-                    <li>成功人数：{{detail.sentCount}}人</li>
-                    <li>失败人数：{{detail.errorCount}}人</li>
-                    <li>发送时间：{{$common.getDate(detail.sendDate,true)}}</li>
-                    <li :class="{hide:msgtype !== detail.msgtype}">
-                        <label>当前图文消息：</label>
-                        <el-select  v-model="selectVal"  placeholder="请选择">
-                             <el-option
-                                v-for="(item, i) in detail.wechatMediaResponse"
-                                :key="i"
-                                :label="item.title"
-                                :value="i">
-                              </el-option>
-                        </el-select>
-                        <a href="javascript:" class="blue-btn" @click = "delMsg">删除图文</a>
-                    </li>
-                </ul>
-            </div>
-            <span slot="footer" class="dialog-footer">
-                <el-button @click="dialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-            </span>
-        </el-dialog>
     </div>
 </template>
 <style lang="less" src="../../../static/less/message.less"></style>
@@ -85,7 +51,6 @@ export default {
   data () {
     return {
       messageapi: messageapi,
-      dialogVisible: false,
       messageData: [],
       totalCount: 0,
       search: {
@@ -119,16 +84,7 @@ export default {
       })
     },
     detailEvent (item) {
-      this.dialogVisible = true
-      this.messageapi.getMsgSendRecordByid({id: item.row.id}).then(rs => {
-        if (rs.returnCode === 'F') {
-          this.$common.errorMsg(rs, this)
-        } else {
-          this.detail = rs.data
-          this.detail.wechatMediaResponse = rs.data.wechatMediaResponse.wechatArticleList
-        }
-      })
-      // setInterval(() => {}, 100)
+      this.$router.push({path: 'detail', query: {id: item.row.id}})
     },
     cancelEvent (id) {
       this.messageapi.cancle({id: id}).then(rs => {
@@ -142,34 +98,6 @@ export default {
           this.loadList()
         }
       })
-    },
-    delMsg () {
-      if (this.selectVal !== '' && (this.detail.sendStatus + 1) > 2) {
-        let params = {
-          msg_id: this.detail.msgId,
-          article_idx: parseInt(this.selectVal) + 1
-        }
-        this.messageapi.deleteNewsRecord(params).then(rs => {
-          if (rs.returnCode === 'F') {
-            this.$common.errorMsg(rs, this)
-          } else {
-            this.$message({
-              type: 'success',
-              message: `${rs.returnMsg}`
-            })
-            this.dialogVisible = false
-            this.loadList()
-          }
-        })
-      } else {
-        this.$message({
-          type: 'warning',
-          message: `该条图文还未发送成功，请重新发送！`
-        })
-      }
-    },
-    handleClose () {
-      this.dialogVisible = false
     },
     handleSizeChange (val) {
       this.loading = true

@@ -93,7 +93,6 @@
       watch: {
         open (val) {
           this.isopen = val
-          console.log(this.isopen)
           this.$emit('update:open', val)
         }
       }

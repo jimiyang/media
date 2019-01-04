@@ -1,5 +1,6 @@
 <template>
     <div>
+      <div class="page-nav">账号设置&nbsp;>&nbsp;公众号管理</div>
         <el-table class="tab-list" ref="multipleTable" :data="pnumberList" :id="index">
             <el-table-column   prop="nickName"  label="公众号名称" ></el-table-column>
             <el-table-column   prop="serviceTypeInfo"  label="帐号类型"   >

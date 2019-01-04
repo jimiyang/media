@@ -25,4 +25,6 @@ function extraList () {
     return response.data
   })
 }
+import Vue from 'vue'
+console.log(Vue)
 export default {getList, quitAuth, switchApp, switchList, extraList}

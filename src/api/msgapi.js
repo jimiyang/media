@@ -5,8 +5,8 @@ function getMsgSendRecordList (params) {
   })
 }
 // 详情
-function getMsgSendRecordByid (params) {
-  return axios.post('/wechat/batchMessage/getMsgSendRecordById', params).then((repsonse) => {
+function getMsgRecordDetailById (params) {
+  return axios.get('/wechat/batchMessage/getMsgRecordDetailById', {params: params}).then((repsonse) => {
     return repsonse.data
   })
 }
@@ -30,4 +30,4 @@ function cancle (params) {
     return response.data
   })
 }
-export default{getMsgSendRecordList, getMsgSendRecordByid, preview, deleteNewsRecord, batchMessage, cancle}
+export default{getMsgSendRecordList, getMsgRecordDetailById, preview, deleteNewsRecord, batchMessage, cancle}

@@ -1,5 +1,6 @@
 <template>
     <div class="lab-mange">
+      <div class="page-nav">用户管理&nbsp;>&nbsp;标签管理</div>
          <a href="javascript:" class="blue-btn" @click= "createLab">创建新标签</a>
          <div class="warning">你在本平台的操作将自动同步至公众平台，但是在公众平台或其他微信第三方的操作不会自动同步，需进入粉丝列表手动点击同步才能保证数据与公众平台一致。</div>
          <el-table class="tab-list" :data= "tagData"   style="width:100%;" v-loading="loading">

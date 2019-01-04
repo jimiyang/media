@@ -1,5 +1,6 @@
 <template>
     <div class="fun-items">
+      <div class="page-nav">用户管理&nbsp;>&nbsp;粉丝列表</div>
         <div class="search-box">
             <div class="items">openId: <el-input v-model="search.openId" placeholder="请输入openid" style="width:200px;"></el-input></div>
             <div class="items">粉丝名称：<el-input v-model="search.nickName" placeholder="请输入粉丝名称" style="width:200px;"></el-input></div>

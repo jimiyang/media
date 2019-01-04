@@ -1,5 +1,6 @@
 <template>
     <div class="material-items">
+      <div class="page-nav">素材管理&nbsp;>&nbsp;图文素材</div>
         <el-button type="primary" @click = "syncData">同步图文素材</el-button>
         <div class="news-list" v-loading="loading">
             <div class="items"  v-for="(item,index) in materialData" :key= "index">

@@ -48,6 +48,10 @@ export default new Router({
             {
               path: 'list',
               component: resolve => require(['@/view/message/list'], resolve)
+            },
+            {
+              path: 'detail',
+              component: () => import('@/view/message/detail')
             }
           ]
         },

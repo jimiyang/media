@@ -1,5 +1,6 @@
 <template>
     <div class="all-send">
+      <div class="page-nav">消息管理&nbsp;>&nbsp;群发消息&nbsp;>&nbsp;<router-link to='/message/list'>返回列表</router-link></div>
         <div class="blocks">
             <div class="send-content">
                 <div class="notice">
@@ -11,10 +12,6 @@
                 <h1 class="title">选择群发对象
                     <span>需要发给同时拥有A和B标签的粉丝？</span>
                 </h1>
-                <!--<ul class="lab-blocks" >
-                    <li v-for= "(item,i) in labList"  :key="i" :class= "{checked:i === index}"   @click= "selLab(i,item.wxTagId)">{{item.name}}</li>
-                </ul>-->
-                
                 <div class="mt20">
                   <div class="current-nickName">当前公众号：{{nickName}}</div>
                   <el-radio-group  v-model="groupMessage.tagId">
@@ -23,14 +20,14 @@
                 </div>
                 <h1 class="title mt20">附加推送公众号</h1>
                 <div class="mt20 extra-box">
-                    <div  v-for="(item, i) in pnumberList" :key="i" :label="item">
-                      <el-checkbox  :disabled="item.nickName === '生活小精灵'">{{item.nickName}}</el-checkbox>
-                      <el-radio-group  v-model="radio">
-                        <el-radio v-for="(data,i) in item.tagList" :key="i" :label="data.wxTagId">{{data.name}}</el-radio>
+                    <div class="mt20" v-for="(item, i) in pnumberList" :key="i" :label="item"><!--:disabled="item.nickName === '生活小精灵'"-->
+                      <el-checkbox  v-model="publicNumberChecked[i]" @change="checkPublic(i, item.appId)">{{item.nickName}}</el-checkbox>
+                      <el-radio-group @change="radioEvent" v-model="radioCheckedList[i]">
+                        <el-radio v-for="(data,i) in item.tagList"  :key="i" :label="data.wxTagId">{{data.name}}</el-radio>
                       </el-radio-group>
                     </div>
                 </div>
-                <h1 class="title">定时发送及原创校验</h1>
+                <h1 class="title mt20">定时发送及原创校验</h1>
                 <div class="ant-items">
                     <div>
                         <label>定时开关 </label>
@@ -98,7 +95,6 @@
     import materialapi from '../../api/materialapi'
     import pubnumapi from '../../api/pubnumapi.js'
     import bus from '../../until/eventbus.js'
-    // import ap from '../../api/ap'
     export default {
       data () {
         return {
@@ -114,7 +110,9 @@
           labList: [],
           pnumberList: [],
           nickName: JSON.parse(window.sessionStorage.getItem('appInfo')).nickName,
-          publicNumberChecked: ['生活小精灵'],
+          publicNumberChecked: [],
+          radioCheckedList: [],
+          publicNumberList: [],
           groupMessage: {
             mediaId: '',
             isToAll: true,
@@ -126,18 +124,6 @@
             currentPage: 1,
             pageSize: 5
           },
-          options: [
-            {'name': '万物优选'},
-            {'name': '金旅通小助手'},
-            {'name': '万物优选'},
-            {'name': '金旅通小助手'},
-            {'name': '万物优选'},
-            {'name': '金旅通小助手'},
-            {'name': '万物优选'},
-            {'name': '金旅通小助手'},
-            {'name': '万物优选'},
-            {'name': '金旅通小助手'}
-          ],
           checkedUserData: [],
           sendNum: 0 // 发送人数
         }
@@ -146,6 +132,11 @@
       created () {
         this.loadTagList()
         this.loadextraList()
+        /* let len = 2
+        for (let key in len) {
+          this.$set(this.radioCheckedList, key, [])
+          this.$set(this.publicNumberChecked, key, [])
+        } */
       },
       methods: {
         loadTagList () {
@@ -166,12 +157,24 @@
               this.$common.errorMsg(rs, this)
             } else {
               this.pnumberList = rs.data
-              console.log(rs.data)
+              this.publicNumberList.length = rs.data.length
+              console.log(this.publicNumberList.length)
             }
           })
         },
         selectContent () {
           this.dialogVisible = true
+        },
+        checkPublic (i, item) {
+          if (this.publicNumberChecked[i] === true) {
+            this.publicNumberList[i] = item
+          } else {
+            this.publicNumberList.splice(i, 1)
+            this.radioCheckedList.splice(i, 1)
+          }
+        },
+        radioEvent (item) {
+          // console.log(item)
         },
         closeDialog () {
           this.dialogVisible = false
@@ -251,12 +254,17 @@
             if (this.timingChecked === false) {
               this.groupMessage.sendDate = null
             }
-            let params = {
-              ...this.groupMessage,
-              msgtype: this.$common.msgTypelist(this.current, 1),
-              sendIgnoreReprint: this.reprintChecked === false ? 0 : 1
+            let extraPubTagList = []
+            for (let key in this.publicNumberList) {
+              if (this.radioCheckedList[key] !== undefined) {
+                extraPubTagList.push({'pubAppId': this.publicNumberList[key], 'pubTagWxId': this.radioCheckedList[key]})
+              }
             }
-            this.msgapi.batchMessage(params).then(rs => {
+            Object.assign(
+              this.groupMessage, {msgtype: this.$common.msgTypelist(this.current, 1), sendIgnoreReprint: this.reprintChecked === false ? 0 : 1, extraPubTagList: extraPubTagList}
+            )
+            console.log(this.groupMessage)
+            this.msgapi.batchMessage(this.groupMessage).then(rs => {
               if (rs.returnCode === 'F') {
                 this.$common.errorMsg(rs, this)
               } else {

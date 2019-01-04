@@ -3,9 +3,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 import App from './App'
 import router from './router/index'
 import store from './router/store'
-// import axios from 'axios'
 import common from './until/public.js'
-// import { ajax as axios } from './api/api.js'
+// import {ajax as axios} from './api/api.js'
 Vue.use(common)
 // Vue.use(axios)
 // console.log(axios)
