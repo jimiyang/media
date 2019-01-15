@@ -97,21 +97,18 @@ export default {
             excludeMerchantCode: rs.data.advertList[0].excludeMerchantCode
           }
           this.advertList = rs.data.advertList
-          console.log(rs.data)
           let arr = []
           for (var key in this.advertList) {
             if (this.advertList[key].isSelect === 1) {
               arr.push(this.advertList[key].id)
             }
           }
-          console.log(arr)
           this.advertIdList = arr
         }
       })
     },
     putinEvent () {
       Object.assign(this.form, {channelId: this.$route.query.id}, {advertIdList: this.advertIdList})
-      console.log(this.form)
       this.advertapi.channelSetAdvert(this.form).then(rs => {
         if (rs.returnCode === 'F') {
           this.$common.errorMsg(rs, this)
@@ -125,7 +122,6 @@ export default {
       })
     },
     resetForm () {
-      console.log()
       this.form.excludeAgencyCode = ''
       this.form.excludeMerchantCode = ''
     }

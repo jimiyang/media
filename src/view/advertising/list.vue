@@ -94,7 +94,6 @@ export default {
       if (window.localStorage.getItem('searchObj') !== null) {
         this.form = JSON.parse(window.localStorage.getItem('searchObj'))
       }
-      console.log(this.form)
       this.advertapi.list(this.form).then(rs => {
         if (rs.returnCode === 'F') {
           this.$common.errorMsg(rs, this)

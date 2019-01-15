@@ -60,7 +60,6 @@ export default {
         pageSize: this.search.pageSize,
         tagId: this.tagid
       }
-      console.log(params)
       userapi.getTagfanslistByid(params).then(rs => {
         if (rs.returnCode === 'F') {
           this.$message({
@@ -71,7 +70,6 @@ export default {
             this.$router.push({path: '/'})
           }
         } else {
-          console.log(rs.data.items)
           this.restaurants = rs.data.items.concat(this.restaurants)
         }
       })
@@ -89,7 +87,6 @@ export default {
     handleCheckAllChange (val) {
       this.checkedPersonal = val ? this.restaurants : []
       this.isIndeterminate = false
-      console.log(val)
       this.$emit('update:checkedUserData', this.checkedPersonal)
     },
     handleCheckedCitiesChange (value) {

@@ -93,7 +93,7 @@ export default {
           }
           this.totalNum = rs.data.totalNum
           this.totalPage = rs.data.totalPage
-          console.log(rs.data)
+          // console.log(rs.data)
         }
       })
     },

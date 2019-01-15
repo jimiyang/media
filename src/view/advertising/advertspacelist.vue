@@ -81,7 +81,6 @@ export default {
     loadList () {
       if (window.localStorage.getItem('searchObj') !== null) {
         this.form = JSON.parse(window.localStorage.getItem('searchObj'))
-        console.log(window.localStorage.getItem('searchObj'))
       }
       this.advertapi.advertspaceGetlist(this.form).then(rs => {
         if (rs.returnCode === 'F') {
@@ -113,7 +112,6 @@ export default {
     },
     handleCurrentChange (currentpage) {
       this.form.currentPage = currentpage
-      console.log(this.form)
       window.localStorage.setItem('searchObj', JSON.stringify(this.form))
       this.loadList()
     },
@@ -121,7 +119,6 @@ export default {
       this.$router.push({path: 'createadvertspace', query: {id: item.id}})
     },
     puttingAdvert (item) {
-      console.log(item.id)
       this.$router.push({path: 'advertspaceputting', query: {id: item.id}})
     },
     creatEvent () {

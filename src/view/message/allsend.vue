@@ -95,6 +95,7 @@
     import materialapi from '../../api/materialapi'
     import pubnumapi from '../../api/pubnumapi.js'
     import bus from '../../until/eventbus.js'
+    // import com from '../../until/common.js'
     export default {
       data () {
         return {
@@ -104,6 +105,7 @@
           dialogVisible: false,
           dialog: false,
           ishide: true,
+          isLimit: false, // 判断图文素材是否超过20000字限制
           wechatArticleList: [],
           current: 0, // 当前要发送的消息类型[图文，消息，语音，视频]
           cur: -1,
@@ -118,7 +120,7 @@
             isToAll: true,
             tagId: 126,
             content: '',
-            sendDate: new Date().getTime()
+            sendDate: ''
           },
           tagSearch: {
             currentPage: 1,
@@ -158,7 +160,6 @@
             } else {
               this.pnumberList = rs.data
               this.publicNumberList.length = rs.data.length
-              console.log(this.publicNumberList.length)
             }
           })
         },
@@ -166,6 +167,14 @@
           this.dialogVisible = true
         },
         checkPublic (i, item) {
+          if (this.isLimit === true) {
+            this.publicNumberChecked[i] = false
+            this.$message({
+              type: 'warning',
+              message: `图文内容大于20000字，附加公众号就不可以勾选！`
+            })
+            return false
+          }
           if (this.publicNumberChecked[i] === true) {
             this.publicNumberList[i] = item
           } else {
@@ -182,6 +191,7 @@
         },
         sendContent () {
           this.dialogVisible = false
+          this.isLimit = false
           this.cur = this.current
           if (this.current !== 0) {
             this.groupMessage.content = ''
@@ -192,6 +202,12 @@
                 this.$common.errorMsg(rs, this)
               } else {
                 this.wechatArticleList = rs.data.wechatArticleList
+                this.wechatArticleList.forEach(item => {
+                  if (item.content.length > 20000) {
+                    this.isLimit = true
+                    return false
+                  }
+                })
               }
             })
           }
@@ -263,7 +279,6 @@
             Object.assign(
               this.groupMessage, {msgtype: this.$common.msgTypelist(this.current, 1), sendIgnoreReprint: this.reprintChecked === false ? 0 : 1, extraPubTagList: extraPubTagList}
             )
-            console.log(this.groupMessage)
             this.msgapi.batchMessage(this.groupMessage).then(rs => {
               if (rs.returnCode === 'F') {
                 this.$common.errorMsg(rs, this)

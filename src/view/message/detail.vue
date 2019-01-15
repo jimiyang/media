@@ -57,13 +57,11 @@ export default {
           this.$common.errorMsg(rs, this)
         } else {
           this.detail = rs.data
-          console.log(rs)
           // this.detail.wechatMediaResponse = rs.data.wechatMediaResponse.wechatArticleList
         }
       })
     },
     delMsg (item) {
-      console.log(item)
       if (this.selectVal !== '' && (item.sendStatus + 1) > 2) {
         let params = {
           msg_id: item.msgId,
