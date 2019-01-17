@@ -95,7 +95,6 @@
     import materialapi from '../../api/materialapi'
     import pubnumapi from '../../api/pubnumapi.js'
     import bus from '../../until/eventbus.js'
-    // import com from '../../until/common.js'
     export default {
       data () {
         return {

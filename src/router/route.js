@@ -2,52 +2,51 @@ import Vue from 'vue'
 import Router from 'vue-router'
 Vue.use(Router)
 export default new Router({
-  // mode: 'history',
   routes: [
     {
       path: '/',
       name: '',
-      component: resolve => require(['@/view/login/login'], resolve),
+      component: () => import('@/view/login/login'),
       hidden: true
     },
     {
       path: '/reg',
-      component: resolve => require(['@/view/login/reg'], resolve),
+      component: () => import('@/view/login/reg'),
       hidden: true
     },
     {
       path: '/404',
-      component: resolve => require(['@/view/404'], resolve),
+      component: () => import('@/view/404'),
       hidden: true
     },
     {
       path: '/main',
-      component: resolve => require(['@/view/main/main'], resolve),
+      component: () => import('@/view/main/main'),
       meta: {
         requireAuth: true // 判断是否需要登录
       },
       children: [
         {
           path: '/account',
-          component: resolve => require(['@/center'], resolve),
+          component: () => import('@/center'),
           children: [
             {
               path: 'publist',
-              component: resolve => require(['@/view/account/publist'], resolve)
+              component: () => import('@/view/account/publist')
             }
           ]
         },
         {
           path: '/message',
-          component: resolve => require(['@/center'], resolve),
+          component: () => import('@/center'),
           children: [
             {
               path: 'allsend',
-              component: resolve => require(['@/view/message/allsend'], resolve)
+              component: () => import('@/view/message/allsend')
             },
             {
               path: 'list',
-              component: resolve => require(['@/view/message/list'], resolve)
+              component: () => import('@/view/message/list')
             },
             {
               path: 'detail',
@@ -57,67 +56,67 @@ export default new Router({
         },
         {
           path: '/user',
-          component: resolve => require(['@/center'], resolve),
+          component: () => import('@/center'),
           children: [
             {
               path: 'fanlist',
-              component: resolve => require(['@/view/user/fanlist'], resolve)
+              component: () => import('@/view/user/fanlist')
             },
             {
               path: 'lablist',
-              component: resolve => require(['@/view/user/lablist'], resolve)
+              component: () => import('@/view/user/lablist')
             }
           ]
         },
         {
           path: '/material',
-          component: resolve => require(['@/center'], resolve),
+          component: () => import('@/center'),
           children: [
             {
               path: 'list',
-              component: resolve => require(['@/view/material/list'], resolve)
+              component: () => import('@/view/material/list')
             }
           ]
         },
         {
           path: '/advertising',
-          component: resolve => require(['@/center'], resolve),
+          component: () => import('@/center'),
           children: [
             {
               path: 'list',
-              component: resolve => require(['@/view/advertising/list'], resolve)
+              component: () => import('@/view/advertising/list')
             },
             {
               path: 'create',
-              component: resolve => require(['@/view/advertising/create'], resolve)
+              component: () => import('@/view/advertising/create')
             },
             {
               path: 'createBanner',
-              component: resolve => require(['@/view/advertising/createBanner'], resolve)
+              component: () => import('@/view/advertising/createBanner')
             },
             {
               path: 'createMessagetemp',
-              component: resolve => require(['@/view/advertising/createMessagetemp'], resolve)
+              component: () => import('@/view/advertising/createMessagetemp')
             },
             {
               path: 'putting',
-              component: resolve => require(['@/view/advertising/putting'], resolve)
+              component: () => import('@/view/advertising/putting')
             },
             {
               path: 'type',
-              component: resolve => require(['@/view/advertising/type'], resolve)
+              component: () => import('@/view/advertising/type')
             },
             {
               path: 'advertspacelist',
-              component: resolve => require(['@/view/advertising/advertspacelist'], resolve)
+              component: () => import('@/view/advertising/advertspacelist')
             },
             {
               path: 'advertspaceputting',
-              component: resolve => require(['@/view/advertising/advertspaceputting'], resolve)
+              component: () => import('@/view/advertising/advertspaceputting')
             },
             {
               path: 'createadvertspace',
-              component: resolve => require(['@/view/advertising/createadvertspace'], resolve)
+              component: () => import('@/view/advertising/createadvertspace')
             }
           ]
         }
@@ -126,3 +125,4 @@ export default new Router({
   ],
   hidden: true
 })
+

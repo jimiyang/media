@@ -33,6 +33,7 @@
 <script>
 import pubnumapi from '../../api/pubnumapi.js'
 import bus from '../../until/eventbus.js'
+// import com from '../../ts/common.js'
 export default{
   data () {
     return {
@@ -45,6 +46,7 @@ export default{
   },
   created () {
     this.loadList()
+    // console.log(com)
   },
   methods: {
     loadList () {

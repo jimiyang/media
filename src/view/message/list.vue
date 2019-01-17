@@ -4,7 +4,7 @@
         <el-table class="tab-list" :data="messageData"  style="width:100%;" v-loading="loading">
             <el-table-column   prop="sendContent"  label="发送内容"></el-table-column>
             <el-table-column   prop="msgtype"  label="发送方式"   >
-                <template slot="header" slot-scope="slot">
+                <template slot="header">
                    发送方式<img src="/static/images/filter-ico.png" />
                 </template>
                 <template slot-scope="scope">{{$common.msgTypelist(scope.row.msgtype,0)}}</template>
@@ -18,7 +18,7 @@
                 </template>
             </el-table-column>
             <el-table-column   prop="sendDate"  label="发送时间" >
-                 <template slot="header" slot-scope="slot">
+                 <template slot="header">
                    发送时间<img src="/static/images/filter-ico.png" />
                  </template>
                  <template slot-scope="scope">{{$common.getDate(scope.row.sendDate,true)}}</template>
