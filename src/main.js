@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import 'element-ui/lib/theme-chalk/index.css'
-import App from './App'
+import App from './App.vue'
 import router from './router/route'
 import store from './router/store'
 import common from './until/public.js'
 // import {ajax as axios} from './api/api.js'
-Vue.use(common)
+// Vue.use(common)
 // Vue.use(axios)
 // console.log(axios)
 /* eslint-disable  */

@@ -1,4 +1,4 @@
-let name: string = 'vuejs'
+/* let name: string = 'vuejs'
 console.log(name)
 enum Color {red, green, blue}
 let colorname: string = Color[2]
@@ -45,4 +45,4 @@ class Horse extends Animal {
 }
 let tom: Animal = new Horse('Tommy the Palomino')
 tom.move(349)
-export default {getters}
+export default {getters} */

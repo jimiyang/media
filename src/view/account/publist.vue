@@ -30,7 +30,7 @@
         </el-table>
     </div>
 </template>
-<script>
+<script lang="ts">
 import pubnumapi from '../../api/pubnumapi.js'
 import bus from '../../until/eventbus.js'
 // import com from '../../ts/common.js'

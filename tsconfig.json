@@ -1,0 +1,24 @@
+{
+  "exclude": [
+    "node_modules"
+  ],
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "module": "es2015",
+    "target": "es5",
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "isolatedModules": true,
+    "typeRoots": [
+      "./types",
+      "./node_modules/vue/types"
+    ],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "sourceMap": true,
+    "pretty": true
+  }
+}

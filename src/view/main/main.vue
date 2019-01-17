@@ -46,7 +46,7 @@
     </el-container>
 </template>
 <script>
-import accountArea from './account'
+import accountArea from './account.vue'
 import bus from '../../until/eventbus.js'
 export default {
   data () {

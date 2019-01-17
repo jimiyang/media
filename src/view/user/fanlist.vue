@@ -112,7 +112,7 @@
 <style lang="less" src="../../../static/less/user.less"></style>
 <script>
 import userapi from '../../api/userapi'
-import getPercent from '../../components/getPercent'
+import getPercent from '../../components/getPercent.vue'
 import areaData from '../../until/area.js'
 export default {
   data () {
